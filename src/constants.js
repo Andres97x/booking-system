@@ -10,6 +10,6 @@ export const ZONE_TABLES = {
   3: 6,
 };
 
-export const OPENING_TIME = 14;
-export const CLOSING_TIME = 22;
+export const OPENING_TIME = 10;
+export const CLOSING_TIME = 15;
 export const INTERVAL = 30; // in minutes;

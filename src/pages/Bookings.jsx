@@ -19,7 +19,7 @@ const Bookings = () => {
   const [activeTime, setActiveTime] = useState(null);
   const timesRef = useRef([]);
 
-  // console.log(bookings);
+  // console.log(timesRef.current);
 
   const onClickDay = value => {
     setBooking(prev => ({ ...prev, justDate: value }));
@@ -47,46 +47,54 @@ const Bookings = () => {
 
   const times = getTimes();
 
-  const getTakenHours = () => {
+  const getTakenTimes = () => {
     if (!booking.justDate || !booking.zone || bookings.length === 0) return;
 
-    const takenHours = bookings
+    const takenTimes = bookings
       .filter(
         completedBooking =>
           Date.parse(completedBooking.justDate) ===
             Date.parse(booking.justDate) &&
           completedBooking.zone === booking.zone
       )
-      .map(takenDates => {
+      .map(takenDate => {
         /* Assuming bookings last 1 hour (2 intervals) */
-        const chosenHour = takenDates.dateTime;
+        const chosenTime = takenDate.dateTime;
 
         // Restricting half an hour before reservation (1 interval)
-        const beforeInterval = add(chosenHour, { minutes: -INTERVAL });
+        const beforeInterval = add(chosenTime, { minutes: -INTERVAL });
 
         // Restricting an hour after reservation (2 intervals)
-        const firstInterval = add(chosenHour, { minutes: INTERVAL });
-        const secondInterval = add(chosenHour, { minutes: INTERVAL * 2 });
+        const firstInterval = add(chosenTime, { minutes: INTERVAL });
+        const secondInterval = add(chosenTime, { minutes: INTERVAL * 2 });
 
         return [
           Date.parse(beforeInterval),
-          Date.parse(chosenHour),
+          Date.parse(chosenTime),
           Date.parse(firstInterval),
           Date.parse(secondInterval),
         ];
       });
 
-    return takenHours.flat();
+    return takenTimes.flat();
   };
-  const takenHours = getTakenHours();
+  const takenTimes = getTakenTimes();
 
-  const timesEl = times?.map((time, i) => {
-    const ocurrences = takenHours?.filter(hour => hour === Date.parse(time));
+  const getOcurrences = (takenTimes, currentTime) => {
+    return takenTimes?.filter(hour => hour === Date.parse(currentTime));
+  };
+
+  const timesEl = times?.map((time, i, array) => {
+    const ocurrences = getOcurrences(takenTimes, time);
+    const ocurrencesOnNextTime = getOcurrences(takenTimes, array[i + 1]);
+    const ocurrencesAfterNextTime = getOcurrences(takenTimes, array[i + 2]);
 
     const condition =
       Date.parse(time) < Date.now() ||
-      ZONE_TABLES[booking.zone] <= ocurrences?.length;
-    // || takenHours?.includes(Date.parse(time)); // Assuming just 1 table per zone
+      ZONE_TABLES[booking.zone] <= ocurrences?.length ||
+      ZONE_TABLES[booking.zone] <= ocurrencesOnNextTime?.length ||
+      ZONE_TABLES[booking.zone] <= ocurrencesAfterNextTime?.length;
+    // || takenTimes?.includes(Date.parse(time)); // Assuming just 1 table per zone
 
     return (
       <div key={`time-${i}`} className='time'>
@@ -99,11 +107,12 @@ const Bookings = () => {
           }
           disabled={condition}
           onClick={() => {
+            if (condition) return;
             setActiveTime(timesRef.current[i]);
             setBooking(prev => ({ ...prev, dateTime: time }));
           }}
         >
-          {format(time, 'kk:mm')}
+          {format(time, 'hh:mm aaa')}
         </button>
       </div>
     );
