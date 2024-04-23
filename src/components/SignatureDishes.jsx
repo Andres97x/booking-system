@@ -1,8 +1,8 @@
-const Menu = () => {
+const SignatureDishes = () => {
   return (
-    <div className='section-menu'>
+    <div className='section-signatures'>
       <h2>Our signature dishes</h2>
-      <div className='menu-grid'>
+      <div className='signatures-grid'>
         <div>Duck breast</div>
         <div>Beef Wellington</div>
         <div>Eton Mess</div>
@@ -14,4 +14,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default SignatureDishes;

@@ -1,85 +1,3 @@
-:root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  --header-height: 8rem;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  font-size: 1.6rem;
-  background-color: #fbfada;
-}
-
-/* HEADER-HERO */
-
-.header-hero__wrapper {
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.25)
-    ),
-    url('../assets/hero-img.jpg');
-  background-size: cover;
-}
-
-/* HEADER */
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--header-height);
-  padding: 0 4rem;
-  background-color: rgba(255, 255, 255, 0);
-  font-size: 1.4rem;
-}
-
-header a:first-child {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  gap: 8rem;
-}
-
-header a:link,
-header a:visited,
-header a:hover,
-header a:active {
-  color: white;
-  color: orange;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.reservation-link {
-  background-color: rgb(148, 132, 113);
-  padding: 1rem 2rem;
-}
-
-.nav-signature {
-  font-size: 2rem;
-}
-
 /* HERO */
 
 .section-hero {
@@ -89,7 +7,7 @@ header a:active {
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  color: white;
+  color: #fbfada;
 }
 
 .section-hero h1 {
@@ -123,14 +41,14 @@ header a:active {
 
 /* MENU SECTION */
 
-.section-menu > h2 {
+.section-signatures > h2 {
   text-transform: uppercase;
   font-size: 3rem;
   text-align: center;
   padding: 4rem 0;
 }
 
-.menu-grid {
+.signatures-grid {
   display: grid;
   /* grid-template-columns: repeat(3, 1fr); */
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -138,7 +56,7 @@ header a:active {
   padding: 3rem 25rem;
 }
 
-.menu-grid > div {
+.signatures-grid > div {
   /* height: 25rem; */
   aspect-ratio: 1 / 1.1;
   object-fit: cover;
@@ -200,16 +118,4 @@ header a:active {
 
 .section-contact > div {
   /* background-color: aquamarine; */
-}
-
-/* FOOTER */
-
-footer {
-  height: 30vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  text-transform: uppercase;
-  border-top: 1px solid #12372a;
 }

@@ -86,6 +86,7 @@ const Bookings = () => {
 
   const timesEl = times?.map((time, i, array) => {
     const ocurrences = getOcurrences(takenTimes, time);
+    // Getting ocurrences for half an hour and one hour later, if some table isn't available at those times, I don't want the user to be able to book a table at this current time (collapsing times).
     const ocurrencesOnNextTime = getOcurrences(takenTimes, array[i + 1]);
     const ocurrencesAfterNextTime = getOcurrences(takenTimes, array[i + 2]);
 

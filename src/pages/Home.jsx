@@ -1,6 +1,6 @@
 import Featured from '../components/Featured';
 import HomeNews from '../components/HomeNews';
-import Menu from '../components/Menu';
+import SignatureDishes from '../components/SignatureDishes';
 import Faq from '../components/Faq';
 import BehindScenes from '../components/BehindScenes';
 import Contact from '../components/Contact';
@@ -11,7 +11,7 @@ const Home = () => {
     <>
       <Featured />
       <HomeNews />
-      <Menu />
+      <SignatureDishes />
       <Faq />
       <BehindScenes />
       <Contact />
