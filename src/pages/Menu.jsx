@@ -8,7 +8,7 @@ const Menu = () => {
       <Link
         to={category.category}
         key={`menu-category-${i}`}
-        className={`menu-category menu-${category.name.split(' ').join('-')}`}
+        className={`menu-category menu-${category.category}`}
       >
         <img src={category.image} alt={category.imageAlt} />
         <div className='category-content'>

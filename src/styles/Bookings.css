@@ -20,11 +20,7 @@
 }
 
 .calendar-container > p {
-  /* writing-mode: vertical-rl;
-  text-orientation: upright; */
-  /* grid-column: 1 / 2;
-  grid-row: 1 / -1; */
-  color: #b4cd9b;
+  color: #86a46a;
   font-weight: bold;
   font-size: 2rem;
   padding-block-start: 1rem;
@@ -235,7 +231,7 @@ abbr[title] {
       z-index: 2;
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.5);
       }
 
       /* &:not(:hover) {
@@ -246,7 +242,7 @@ abbr[title] {
 
   button.zone-selected {
     p {
-      background-color: rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.2);
     }
   }
 }

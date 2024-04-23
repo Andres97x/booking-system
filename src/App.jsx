@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Bookings from './pages/Bookings';
 import Menu from './pages/Menu';
+import MenuItems from './pages/MenuItems';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,7 +20,7 @@ const router = createBrowserRouter(
       <Route path='about' element={<About />} />
       <Route path='bookings' element={<Bookings />} />
       <Route path='menu' element={<Menu />} />
-      <Route path='menu/:category' element={<div>hola</div>} />
+      <Route path='menu/:category' element={<MenuItems />} />
     </Route>
   )
 );

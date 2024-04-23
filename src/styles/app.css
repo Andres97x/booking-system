@@ -13,11 +13,17 @@
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: rgba(18, 55, 42, 0.5) solid 2px;
+  outline-offset: 3px;
+}
+
 html {
   font-size: 62.5%;
 }
 
-body {
+body,
+button {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -72,6 +78,10 @@ header a:active {
   color: #fbfada;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+header a:focus {
+  outline: rgba(251, 250, 218, 0.5) solid 2px;
 }
 
 .reservation-link {
