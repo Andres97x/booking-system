@@ -936,3 +936,9 @@ export const extras = {
     { value: 'Mayonesa' },
   ],
 };
+
+const drinks = items.filter(item => item.category === 'bebidas');
+
+export const firstDrinkCategory = Array.from(
+  new Set(drinks.map(drink => drink.subcategory))
+)[0];

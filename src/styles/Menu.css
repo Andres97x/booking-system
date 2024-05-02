@@ -276,13 +276,14 @@ input:focus {
 
 .drinks-navbar {
   gap: 3rem;
+  /* position: sticky; */
 }
 
 .drinks-navbar button {
   border: 0;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-weight: 500;
-  padding: 1rem 0;
+  padding: 0.8rem 0;
   margin-bottom: 3.5rem;
   cursor: pointer;
   border-bottom: 2px solid rgba(73, 80, 87, 0.2);
@@ -297,4 +298,12 @@ input:focus {
 
 .drinks-navbar button.selected {
   border-bottom: 2px solid rgb(49, 54, 58);
+}
+
+.drinks-navbar button.clear-drink-category {
+  border-bottom: 2px solid transparent;
+}
+
+.drinks-navbar button.clear-drink-category:focus {
+  border-bottom: 2px solid rgba(73, 80, 87, 0.6);
 }

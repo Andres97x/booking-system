@@ -34,7 +34,7 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
         <IoCloseOutline className='pop-up-close' onClick={closeProductPopUp} />
         <div className='product-detail-content'>
           <h4>{selectedItem.nombre}</h4>
-          <p>{selectedItem.ingredientes}</p>
+          {selectedItem.ingredientes && <p>{selectedItem.ingredientes}</p>}
 
           <ProductOptions />
 

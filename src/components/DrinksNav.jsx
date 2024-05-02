@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
 
 const DrinksNav = ({ drinks, drinksCategory }) => {
   const { handleSearchParams } = useHandleSearchParams();
-  console.log(drinksCategory);
 
   const drinkCategories = Array.from(
     new Set(drinks.map(drink => drink.subcategory))
@@ -26,7 +26,19 @@ const DrinksNav = ({ drinks, drinksCategory }) => {
     );
   });
 
-  return <nav className='drinks-navbar'>{drinksNavEl}</nav>;
+  return (
+    <nav className='drinks-navbar'>
+      {drinksNavEl}
+      <button
+        className='clear-drink-category'
+        onClick={() => {
+          handleSearchParams('categoria', null);
+        }}
+      >
+        Todas
+      </button>
+    </nav>
+  );
 };
 
 export default DrinksNav;

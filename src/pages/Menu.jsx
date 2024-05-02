@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import '../styles/Menu.css';
-import { categoriesData } from '../data/menuData';
+import { categoriesData, firstDrinkCategory } from '../data/menuData';
 
 const Menu = () => {
   const categoriesEl = categoriesData.map((category, i) => {
     return (
       <Link
-        to={category.category}
+        to={
+          category.category === 'bebidas'
+            ? `${category.category}?categoria=${firstDrinkCategory}`
+            : category.category
+        }
         key={`menu-category-${i}`}
         className={`menu-category menu-${category.category}`}
       >

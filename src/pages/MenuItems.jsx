@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSearchParams, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ProductDetail from '../components/ProductDetail';
 import DrinksNav from '../components/DrinksNav';
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
@@ -20,7 +20,12 @@ const MenuItems = () => {
 
   const categoryItems = items.filter(item => item.category === params.category);
 
-  const menuItemsEl = categoryItems?.map((item, i) => {
+  const displayedItems =
+    params.category === 'bebidas' && drinksCategory
+      ? categoryItems.filter(item => item.subcategory === drinksCategory)
+      : categoryItems;
+
+  const menuItemsEl = displayedItems?.map((item, i) => {
     const priceFormatted = formatPrice(item.precio);
 
     return (
