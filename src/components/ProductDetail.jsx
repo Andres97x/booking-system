@@ -23,7 +23,6 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
 
   const closeProductPopUp = () => {
     handleSearchParams('productId', null);
-    handleSearchParams('name', null);
   };
 
   const priceFormatted = formatPrice(selectedItem.precio * productCount);
@@ -36,7 +35,10 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
           <h4>{selectedItem.nombre}</h4>
           {selectedItem.ingredientes && <p>{selectedItem.ingredientes}</p>}
 
-          <ProductOptions />
+          <ProductOptions
+            selectedItem={selectedItem}
+            categoryItems={categoryItems}
+          />
 
           <div className='product-cart-fns'>
             <div className='cart-controls'>
@@ -50,7 +52,11 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
           </div>
         </div>
         <div className='img-container'>
-          <img src={mockupImg} alt='mockup image' />
+          <img
+            src={mockupImg}
+            alt='mockup image'
+            className='product-detail-img'
+          />
         </div>
       </div>
       <div className='overlay' onClick={closeProductPopUp}></div>

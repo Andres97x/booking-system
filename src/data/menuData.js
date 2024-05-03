@@ -82,6 +82,16 @@ export const items = [
     ingredientes:
       'Arroz Arborio, trufa negra, caldo de verduras, parmesano, mantequilla',
     precio: 85000,
+    add: [
+      {
+        title: 'Agrega una bebida',
+        items: ['78', '79', '80'] /*TODO*/,
+      },
+      {
+        title: 'Adiciones',
+        items: ['105', '106', '107'] /*TODO*/,
+      },
+    ],
   },
   {
     category: 'platos-fuertes',
@@ -909,6 +919,24 @@ export const items = [
     id: '104',
     nombre: 'Limonada de Coco',
     precio: 18000,
+  },
+  {
+    category: 'adiciones',
+    id: '105',
+    nombre: 'Papas pequeñas 150gr',
+    precio: 7000,
+  },
+  {
+    category: 'adiciones',
+    id: '106',
+    nombre: 'Papas medianas 200gr',
+    precio: 9000,
+  },
+  {
+    category: 'adiciones',
+    id: '107',
+    nombre: 'Papas grandes 250gr',
+    precio: 11000,
   },
 ];
 

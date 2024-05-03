@@ -196,6 +196,7 @@
 
 .product-detail-content > p {
   font-size: 1.8rem;
+  margin-bottom: 1.5rem;
 }
 
 .product-cart-fns {
@@ -203,7 +204,7 @@
   font-size: 2rem;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  padding-top: 1rem;
 }
 
 .cart-controls {
@@ -243,7 +244,7 @@
   cursor: not-allowed;
 }
 
-.pop-up-product img {
+.product-detail-img {
   padding: 3rem;
   width: 100%;
   aspect-ratio: 1/1.5;
@@ -261,15 +262,6 @@
   justify-content: center;
   background-color: rgba(73, 80, 87, 0.3);
   backdrop-filter: blur(5px);
-}
-
-/* TODO */
-input {
-  margin: 0.4rem;
-}
-
-input:focus {
-  outline: none;
 }
 
 /* DRINKS NAVBAR */
@@ -306,4 +298,67 @@ input:focus {
 
 .drinks-navbar button.clear-drink-category:focus {
   border-bottom: 2px solid rgba(73, 80, 87, 0.6);
+}
+
+/* PRODUCT OPTIONS */
+
+.product-options {
+  overflow-y: scroll;
+}
+
+.product-add-item-header {
+  background-color: lightgray;
+  margin-bottom: 1rem;
+  border-radius: 3px;
+  margin: 1rem;
+  display: flex;
+  padding: 1rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-add-item-header svg {
+  font-size: 3rem;
+}
+
+/* .product-options h4 {
+} */
+
+.product-options-accordion {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+}
+
+.group-active .product-options-accordion {
+  grid-template-rows: 1fr;
+}
+
+.product-options-accordion > ul {
+  overflow: hidden;
+}
+
+.product-option-add {
+  display: flex;
+  align-items: center;
+}
+
+.product-option-add img {
+  width: 20%;
+  padding: 1rem;
+  object-fit: cover;
+  aspect-ratio: 1/0.6;
+}
+
+.product-option-add-content {
+  flex-grow: 1;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.product-option-add-content > p:last-child {
+  cursor: pointer;
 }

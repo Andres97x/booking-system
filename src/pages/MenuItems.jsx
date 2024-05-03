@@ -36,7 +36,6 @@ const MenuItems = () => {
         }`}
         onClick={() => {
           handleSearchParams('productId', item.id);
-          handleSearchParams('name', item.nombre);
         }}
       >
         <img src={mockupImg} alt='mockup image' />

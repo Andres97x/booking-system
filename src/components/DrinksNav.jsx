@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
 
 const DrinksNav = ({ drinks, drinksCategory }) => {
