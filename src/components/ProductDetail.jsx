@@ -8,8 +8,18 @@ import ProductOptions from '../components/ProductOptions';
 
 const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
   const [selectedItem] = categoryItems?.filter(item => item.id === productId);
+  const [productCount, setProductCount] = useState(1);
+  const [order, setOrder] = useState({
+    main: selectedItem,
+    adds: [],
+  });
 
-  const [productCount, setProductCount] = useState(0);
+  const getPrice = () => {
+    const orderSubtotal = order.main.precio;
+    const addsSubtotal = order.adds.map?.(add => add.precio).flat();
+    const allPricesArr = [...addsSubtotal, orderSubtotal];
+    return allPricesArr.reduce((prev, current) => prev + current, 0);
+  };
 
   const increaseOneProduct = () => {
     if (productCount >= 7) return;
@@ -17,7 +27,7 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
   };
 
   const decreaseOneProduct = () => {
-    if (productCount <= 0) return;
+    if (productCount <= 1) return;
     setProductCount(prev => prev - 1);
   };
 
@@ -25,7 +35,7 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
     handleSearchParams('productId', null);
   };
 
-  const priceFormatted = formatPrice(selectedItem.precio * productCount);
+  const priceFormatted = formatPrice(getPrice() * productCount);
 
   return (
     <div className='product-detail'>
@@ -34,19 +44,24 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
         <div className='product-detail-content'>
           <h4>{selectedItem.nombre}</h4>
           {selectedItem.ingredientes && <p>{selectedItem.ingredientes}</p>}
+          <p className='product-price'>{formatPrice(selectedItem.precio)}</p>
 
           <ProductOptions
             selectedItem={selectedItem}
             categoryItems={categoryItems}
+            setOrder={setOrder}
           />
 
-          <div className='product-cart-fns'>
-            <div className='cart-controls'>
+          <div className='product-detail-btns'>
+            <div className='product-controls'>
               <FiMinus onClick={decreaseOneProduct} />
               {productCount}
               <FiPlus onClick={increaseOneProduct} />
             </div>
-            <button className='cart-add' disabled={productCount <= 0}>
+            <button
+              className='product-add-to-cart'
+              disabled={productCount <= 0}
+            >
               Add {productCount > 0 ? priceFormatted : null}
             </button>
           </div>

@@ -85,7 +85,7 @@ export const items = [
     add: [
       {
         title: 'Agrega una bebida',
-        items: ['78', '79', '80'] /*TODO*/,
+        items: ['78', '79', '80', '92'] /*TODO*/,
       },
       {
         title: 'Adiciones',

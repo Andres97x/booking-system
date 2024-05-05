@@ -1,9 +1,11 @@
 import ProductAddItem from './ProductAddItem';
 
-const ProductOptions = ({ selectedItem }) => {
+const ProductOptions = ({ selectedItem, setOrder }) => {
   return (
     <div className='product-options'>
-      {selectedItem.add && <ProductAddItem selectedItem={selectedItem} />}
+      {selectedItem.add && (
+        <ProductAddItem selectedItem={selectedItem} setOrder={setOrder} />
+      )}
     </div>
   );
 };
