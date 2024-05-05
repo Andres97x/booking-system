@@ -2,11 +2,10 @@ import { useState, useRef } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
-import { formatPrice } from '../utils';
 import mockupImg from '../assets/mockup.jpg';
-import { items, extraItems } from '../data/menuData';
+import { items } from '../data/menuData';
 
-const ProductAddItem = ({ selectedItem, setOrder }) => {
+const ProductRadioOption = ({ selectedItem, setOrder }) => {
   const [activeGroup, setActiveGroup] = useState(null);
   const additionGroupBtnRef = useRef([]);
   const [itemCounts, setItemCounts] = useState({});
@@ -69,13 +68,13 @@ const ProductAddItem = ({ selectedItem, setOrder }) => {
 
     return (
       <div
-        className={`product-option product-add-item ${
+        className={`product-option product-radio-item ${
           activeGroup === additionGroupBtnRef.current[i1] &&
           additionGroupBtnRef.current[i1] !== null
             ? 'group-active'
             : ''
         }`}
-        key={`product-add-item-${i1}`}
+        key={`product-radio-item-${i1}`}
       >
         <div
           className='product-option-header'
@@ -94,33 +93,17 @@ const ProductAddItem = ({ selectedItem, setOrder }) => {
             {allAddItems?.map((item, i2) => {
               return (
                 <li
-                  key={`product-option-add-${i2}`}
+                  key={`product-option-radio-${i2}`}
                   className='product-option-type'
                 >
-                  <img src={mockupImg} alt='mockup image' />
-                  <div className='product-option-add-content'>
+                  {/* <img src={mockupImg} alt='mockup image' /> */}
+                  <div className='product-option-radio-content'>
                     <p>{item.nombre}</p>
-                    <p className='option-add-price'>
+                    {/* <p className='option-add-price'>
                       {formatPrice(item.precio).replace('$', '+')}
-                    </p>
+                    </p> */}
                   </div>
-                  <div className='product-option-add-ctrls'>
-                    <div
-                      onClick={() => {
-                        handleRemoveItem(item);
-                      }}
-                    >
-                      <FiMinus />
-                    </div>
-                    <span>{itemCounts[item.id] || 0}</span>
-                    <div
-                      onClick={() => {
-                        handleAddItem(item);
-                      }}
-                    >
-                      <FiPlus />
-                    </div>
-                  </div>
+                  <input type='radio' />
                 </li>
               );
             })}
@@ -133,4 +116,4 @@ const ProductAddItem = ({ selectedItem, setOrder }) => {
   return additionsEl;
 };
 
-export default ProductAddItem;
+export default ProductRadioOption;

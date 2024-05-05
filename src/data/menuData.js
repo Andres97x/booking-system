@@ -85,11 +85,17 @@ export const items = [
     add: [
       {
         title: 'Agrega una bebida',
-        items: ['78', '79', '80', '92'] /*TODO*/,
+        items: ['90', '79', '83', '92', '93'],
       },
       {
         title: 'Adiciones',
-        items: ['105', '106', '107'] /*TODO*/,
+        items: ['105', '106', '107', '85'],
+      },
+    ],
+    radio: [
+      {
+        title: 'Escoge la preparación',
+        options: ['1/4 raw', '2/4 medium', '3/4 cooked'],
       },
     ],
   },
@@ -920,6 +926,9 @@ export const items = [
     nombre: 'Limonada de Coco',
     precio: 18000,
   },
+];
+
+export const extraItems = [
   {
     category: 'adiciones',
     id: '105',
@@ -940,33 +949,33 @@ export const items = [
   },
 ];
 
-export const extras = {
-  preparacion: [
-    { value: '1/4 raw' },
-    { value: '2/4 medium' },
-    { value: '3/4 cooked' },
-    { value: '4/4 overcooked' },
-  ],
-
-  salsasPrincipales: [
-    { value: 'Salsa de Champiñones y Vino Tinto' },
-    { value: 'Salsa de Foie Gras y Porto' },
-    { value: 'Salsa de Trufa Negra' },
-    { value: 'Salsa de Miso y Sake' },
-    { value: 'Salsa de Saffron y Naranja' },
-    { value: 'Salsa de Cognac y Crema' },
-  ],
-
-  salsasSecundarias: [
-    { value: 'Salsa de tomate' },
-    { value: 'Salsa rosada' },
-    { value: 'Mostaza' },
-    { value: 'Mayonesa' },
-  ],
-};
-
 const drinks = items.filter(item => item.category === 'bebidas');
 
 export const firstDrinkCategory = Array.from(
   new Set(drinks.map(drink => drink.subcategory))
 )[0];
+
+// export const extras = {
+//   preparacion: [
+//     { value: '1/4 raw' },
+//     { value: '2/4 medium' },
+//     { value: '3/4 cooked' },
+//     { value: '4/4 overcooked' },
+//   ],
+
+//   salsasPrincipales: [
+//     { value: 'Salsa de Champiñones y Vino Tinto' },
+//     { value: 'Salsa de Foie Gras y Porto' },
+//     { value: 'Salsa de Trufa Negra' },
+//     { value: 'Salsa de Miso y Sake' },
+//     { value: 'Salsa de Saffron y Naranja' },
+//     { value: 'Salsa de Cognac y Crema' },
+//   ],
+
+//   salsasSecundarias: [
+//     { value: 'Salsa de tomate' },
+//     { value: 'Salsa rosada' },
+//     { value: 'Mostaza' },
+//     { value: 'Mayonesa' },
+//   ],
+// };
