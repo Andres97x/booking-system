@@ -12,7 +12,10 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
   const [order, setOrder] = useState({
     main: selectedItem,
     adds: [],
+    options: [],
   });
+
+  console.log(order);
 
   const getPrice = () => {
     const orderSubtotal = order.main.precio;

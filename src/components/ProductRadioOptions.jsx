@@ -1,70 +1,43 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
-import { FiPlus, FiMinus } from 'react-icons/fi';
 
-import mockupImg from '../assets/mockup.jpg';
-import { items } from '../data/menuData';
+// import mockupImg from '../assets/mockup.jpg';
+// import { items } from '../data/menuData';
 
-const ProductRadioOption = ({ selectedItem, setOrder }) => {
+const ProductRadioOptions = ({ selectedItem, setOrder }) => {
   const [activeGroup, setActiveGroup] = useState(null);
   const additionGroupBtnRef = useRef([]);
-  const [itemCounts, setItemCounts] = useState({});
+  const [selectedOptions, setSelectedOptions] = useState({});
+  // console.log(Object.values(selectedOptions));
 
-  // console.log(itemCounts);
-
-  const handleAddItem = item => {
-    setItemCounts(prevCounts => ({
-      ...prevCounts,
-      [item.id]: (prevCounts[item.id] || 0) + 1,
-    }));
-
-    setOrder(prevOrder => ({
-      ...prevOrder,
-      adds: [...prevOrder.adds, item],
-    }));
+  const handleOptionChange = (id, value) => {
+    setSelectedOptions(prev => ({ ...prev, [id]: value }));
   };
 
-  const handleRemoveItem = item => {
-    if (!itemCounts[item.id] || itemCounts[item.id] < 1) return;
-    setItemCounts(prevCounts => ({
-      ...prevCounts,
-      [item.id]: prevCounts[item.id] - 1,
-    }));
-
-    setOrder(prevOrder => {
-      const itemIndex = prevOrder.adds.findIndex(el => el.id === item.id);
-      return { ...prevOrder, adds: prevOrder.adds.toSpliced(itemIndex, 1) };
-    });
-  };
+  // keep 2 states in sync (selectedOptions and order). Can't place setOrder inside handleOptionChange fn because both of the setter functions are of async nature, so it's not garanteed that the selected options will be ready when setOrder runs. pd: if y try to place setOrder inside the callback of setSelected options the next error will be thrown: 'can not update a component while rendering another component'
+  useEffect(() => {
+    setOrder(prev => ({ ...prev, options: Object.values(selectedOptions) }));
+  }, [selectedOptions]);
 
   const handleGroupClick = iterator => {
     if (activeGroup === null) {
+      // there is no active group
       setActiveGroup(additionGroupBtnRef.current[iterator]);
     } else if (
       activeGroup &&
       activeGroup === additionGroupBtnRef.current[iterator]
     ) {
+      // there is an active group and I click the same active group
       setActiveGroup(null);
     } else {
+      // there is an active group but I select another group
       setActiveGroup(null);
       setActiveGroup(additionGroupBtnRef.current[iterator]);
     }
   };
 
-  const additionsEl = selectedItem.add.map((additionGroup, i1) => {
-    const addItemsId = additionGroup.items;
-
-    const addItems = items.filter(item => addItemsId.includes(item.id));
-
-    const addExtraItems = extraItems.filter(item =>
-      addItemsId.includes(item.id)
-    );
-    const addItemsCombined = [...addExtraItems, ...addItems];
-
-    // to display the option items in the order they come in addItemsId array (items data)
-    const allAddItems = addItemsId
-      .map(id => addItemsCombined.find(item => item.id === id))
-      .filter(Boolean);
+  const radiosEl = selectedItem.radio.map((radioGroup, i1) => {
+    const radioItems = radioGroup.options;
 
     return (
       <div
@@ -81,7 +54,7 @@ const ProductRadioOption = ({ selectedItem, setOrder }) => {
           ref={el => (additionGroupBtnRef.current[i1] = el)}
           onClick={() => handleGroupClick(i1)}
         >
-          <h4>{additionGroup.title}</h4>
+          <h4>{radioGroup.title}</h4>
           {activeGroup === additionGroupBtnRef.current[i1] ? (
             <MdKeyboardArrowUp />
           ) : (
@@ -90,20 +63,26 @@ const ProductRadioOption = ({ selectedItem, setOrder }) => {
         </div>
         <div className='product-options-accordion'>
           <ul>
-            {allAddItems?.map((item, i2) => {
+            {radioItems.map((item, i2) => {
               return (
                 <li
                   key={`product-option-radio-${i2}`}
-                  className='product-option-type'
+                  className='product-option-type product-option-radio'
                 >
                   {/* <img src={mockupImg} alt='mockup image' /> */}
-                  <div className='product-option-radio-content'>
-                    <p>{item.nombre}</p>
-                    {/* <p className='option-add-price'>
-                      {formatPrice(item.precio).replace('$', '+')}
-                    </p> */}
-                  </div>
-                  <input type='radio' />
+                  {/* <div className='product-option-radio-content'> */}
+                  <label htmlFor={`${radioGroup.id}-${i2}`}>{item}</label>
+                  {/* </div> */}
+                  <input
+                    type='radio'
+                    id={`${radioGroup.id}-${i2}`}
+                    name={`radio-${i1}`}
+                    value={item}
+                    checked={item === selectedOptions[radioGroup.id]}
+                    onChange={() => {
+                      handleOptionChange(radioGroup.id, item);
+                    }}
+                  />
                 </li>
               );
             })}
@@ -113,7 +92,60 @@ const ProductRadioOption = ({ selectedItem, setOrder }) => {
     );
   });
 
-  return additionsEl;
+  return radiosEl;
 };
 
-export default ProductRadioOption;
+export default ProductRadioOptions;
+
+// RadioGroup.js
+// import React, { useState } from 'react';
+
+// const RadioGroup = ({ items }) => {
+//   const [selectedItem, setSelectedItem] = useState(null);
+
+//   const handleRadioChange = (event) => {
+//     setSelectedItem(event.target.value);
+//     // Do something with the selected item
+//   };
+
+//   return (
+//     <ul>
+//       {items.map((item, index) => (
+//         <li key={index} className='product-option-type'>
+//           <label htmlFor={item.replace(' ', '_')}>{item}</label>
+//           <input
+//             type='radio'
+//             id={item.replace(' ', '_')}
+//             name="productOptions"
+//             value={item}
+//             checked={selectedItem === item}
+//             onChange={handleRadioChange}
+//           />
+//         </li>
+//       ))}
+//     </ul>
+//   );
+// };
+
+// export default RadioGroup;
+
+// ParentComponent.js
+// import React from 'react';
+// import RadioGroup from './RadioGroup';
+
+// const ParentComponent = () => {
+//   const groups = [
+//     { items: ['Option 1', 'Option 2', 'Option 3'] },
+//     { items: ['Option A', 'Option B', 'Option C'] }
+//   ];
+
+//   return (
+//     <div>
+//       {groups.map((group, index) => (
+//         <RadioGroup key={index} items={group.items} />
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default ParentComponent;

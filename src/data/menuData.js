@@ -95,7 +95,18 @@ export const items = [
     radio: [
       {
         title: 'Escoge la preparación',
+        id: 'r1',
         options: ['1/4 raw', '2/4 medium', '3/4 cooked'],
+      },
+      {
+        title: 'Acompañamiento',
+        id: 'r2',
+        options: [
+          'Puré de patatas con mantequilla y ajo.',
+          'Risotto de champiñones.',
+          'Espárragos a la parrilla con salsa holandesa.',
+          'Ensalada de rúcula y tomate con vinagreta balsámica.',
+        ],
       },
     ],
   },

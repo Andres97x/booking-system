@@ -149,11 +149,12 @@
 
 .pop-up-window {
   position: fixed;
-  top: 10%;
+  top: 2%;
   left: 50%;
   transform: translateX(-50%) translateY(0);
   width: 70vw;
-  height: 70vh;
+  /* height: 70vh; */
+  height: 95vh;
   background-color: #f1f3f5;
   border-radius: 3px;
   color: #343a40;
@@ -317,7 +318,7 @@
   border-radius: 3px;
   margin: 1rem;
   display: flex;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   align-items: center;
   justify-content: space-between;
@@ -382,4 +383,16 @@
 .product-option-add-ctrls svg {
   display: block;
   cursor: pointer;
+}
+
+/* RADIO OPTIONS */
+
+.product-option-radio {
+  justify-content: space-between;
+  margin-inline: 5rem;
+}
+
+.product-option-radio input {
+  width: 1.6rem;
+  height: 1.6rem;
 }

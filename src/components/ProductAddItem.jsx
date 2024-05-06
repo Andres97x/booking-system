@@ -55,18 +55,6 @@ const ProductAddItem = ({ selectedItem, setOrder }) => {
   const additionsEl = selectedItem.add.map((additionGroup, i1) => {
     const addItemsId = additionGroup.items;
 
-    const addItems = items.filter(item => addItemsId.includes(item.id));
-
-    const addExtraItems = extraItems.filter(item =>
-      addItemsId.includes(item.id)
-    );
-    const addItemsCombined = [...addExtraItems, ...addItems];
-
-    // to display the option items in the order they come in addItemsId array (items data)
-    const allAddItems = addItemsId
-      .map(id => addItemsCombined.find(item => item.id === id))
-      .filter(Boolean);
-
     return (
       <div
         className={`product-option product-add-item ${
@@ -91,7 +79,11 @@ const ProductAddItem = ({ selectedItem, setOrder }) => {
         </div>
         <div className='product-options-accordion'>
           <ul>
-            {allAddItems?.map((item, i2) => {
+            {addItemsId?.map((id, i2) => {
+              const item =
+                items.find(item => item.id === id) ||
+                extraItems.find(item => item.id === id);
+
               return (
                 <li
                   key={`product-option-add-${i2}`}
