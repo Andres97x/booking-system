@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import ProductOptionRadio from './ProductOptionRadio';
@@ -12,20 +12,17 @@ const ProductOptionsRadio = ({
   activeGroupId,
   handleGroupClick,
 }) => {
-  const [selectedOptions, setSelectedOptions] = useState({});
+  const selectedOptions = useRef({});
   // console.log(Object.values(selectedOptions));
+  console.log(selectedOptions.current);
 
   const handleOptionChange = (name, value) => {
-    setSelectedOptions(prev => ({ ...prev, [name]: value }));
-  };
-
-  // keep 2 states in sync (selectedOptions and order). Can't place setOrder inside handleOptionChange fn because both of the setter functions are of async nature, so it's not garanteed that the selected options will be ready when setOrder runs. pd: if y try to place setOrder inside the callback of setSelected options the next error will be thrown: 'can not update a component while rendering another component'
-  useEffect(() => {
+    selectedOptions.current = { ...selectedOptions.current, [name]: value };
     setOrder(prev => ({
       ...prev,
-      optionRadios: Object.values(selectedOptions),
+      optionRadios: Object.values(selectedOptions.current),
     }));
-  }, [selectedOptions]);
+  };
 
   const radiosEl = selectedItem.radio.map((radioGroup, i1) => {
     const radioItems = radioGroup.options;

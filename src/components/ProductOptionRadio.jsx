@@ -17,7 +17,7 @@ const ProductOptionRadio = ({
         id={`${radioGroup.id}-${i2}`}
         name={radioGroup.id}
         value={item}
-        checked={item === selectedOptions[radioGroup.id]}
+        checked={item === selectedOptions.current[radioGroup.id]}
         onChange={() => {
           handleOptionChange(radioGroup.id, item);
         }}
