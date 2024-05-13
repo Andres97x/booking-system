@@ -15,7 +15,7 @@ const ProductOptionRadio = ({
       <input
         type='radio'
         id={`${radioGroup.id}-${i2}`}
-        name={`radio-${i1}`}
+        name={radioGroup.id}
         value={item}
         checked={item === selectedOptions[radioGroup.id]}
         onChange={() => {
