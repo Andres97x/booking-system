@@ -8,37 +8,37 @@ import ProductOptions from '../components/ProductOptions';
 
 const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
   const [selectedItem] = categoryItems?.filter(item => item.id === productId);
-  const [productCount, setProductCount] = useState(1);
   const [order, setOrder] = useState({
     main: selectedItem,
-    adds: [],
-    options: [],
+    optionAdds: [],
+    optionRadios: [],
+    orderCount: 1,
   });
 
   console.log(order);
 
   const getPrice = () => {
     const orderSubtotal = order.main.precio;
-    const addsSubtotal = order.adds.map?.(add => add.precio).flat();
+    const addsSubtotal = order.optionAdds.map?.(add => add.precio).flat();
     const allPricesArr = [...addsSubtotal, orderSubtotal];
     return allPricesArr.reduce((prev, current) => prev + current, 0);
   };
 
   const increaseOneProduct = () => {
-    if (productCount >= 7) return;
-    setProductCount(prev => prev + 1);
+    if (order.orderCount >= 7) return;
+    setOrder(prev => ({ ...prev, orderCount: prev.orderCount + 1 }));
   };
 
   const decreaseOneProduct = () => {
-    if (productCount <= 1) return;
-    setProductCount(prev => prev - 1);
+    if (order.orderCount <= 1) return;
+    setOrder(prev => ({ ...prev, orderCount: prev.orderCount - 1 }));
   };
 
   const closeProductPopUp = () => {
     handleSearchParams('productId', null);
   };
 
-  const priceFormatted = formatPrice(getPrice() * productCount);
+  const priceFormatted = formatPrice(getPrice() * order.orderCount);
 
   return (
     <div className='product-detail'>
@@ -58,14 +58,14 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
           <div className='product-detail-btns'>
             <div className='product-controls'>
               <FiMinus onClick={decreaseOneProduct} />
-              {productCount}
+              {order.orderCount}
               <FiPlus onClick={increaseOneProduct} />
             </div>
             <button
               className='product-add-to-cart'
-              disabled={productCount <= 0}
+              disabled={order.orderCount <= 0}
             >
-              Add {productCount > 0 ? priceFormatted : null}
+              Add {order.orderCount > 0 ? priceFormatted : null}
             </button>
           </div>
         </div>

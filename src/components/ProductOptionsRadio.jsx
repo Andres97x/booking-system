@@ -21,7 +21,10 @@ const ProductOptionsRadio = ({
 
   // keep 2 states in sync (selectedOptions and order). Can't place setOrder inside handleOptionChange fn because both of the setter functions are of async nature, so it's not garanteed that the selected options will be ready when setOrder runs. pd: if y try to place setOrder inside the callback of setSelected options the next error will be thrown: 'can not update a component while rendering another component'
   useEffect(() => {
-    setOrder(prev => ({ ...prev, options: Object.values(selectedOptions) }));
+    setOrder(prev => ({
+      ...prev,
+      optionRadios: Object.values(selectedOptions),
+    }));
   }, [selectedOptions]);
 
   const radiosEl = selectedItem.radio.map((radioGroup, i1) => {

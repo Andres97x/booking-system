@@ -22,7 +22,7 @@ const ProductOptionsAdd = ({
 
     setOrder(prevOrder => ({
       ...prevOrder,
-      adds: [...prevOrder.adds, item],
+      optionAdds: [...prevOrder.optionAdds, item],
     }));
   };
 
@@ -34,8 +34,11 @@ const ProductOptionsAdd = ({
     }));
 
     setOrder(prevOrder => {
-      const itemIndex = prevOrder.adds.findIndex(el => el.id === item.id);
-      return { ...prevOrder, adds: prevOrder.adds.toSpliced(itemIndex, 1) };
+      const itemIndex = prevOrder.optionAdds.findIndex(el => el.id === item.id);
+      return {
+        ...prevOrder,
+        optionAdds: prevOrder.optionAdds.toSpliced(itemIndex, 1),
+      };
     });
   };
 
