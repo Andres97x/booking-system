@@ -6,7 +6,7 @@ import { formatPrice } from '../utils';
 import mockupImg from '../assets/mockup.jpg';
 import { items, extraItems } from '../data/menuData';
 
-const ProductAddItem = ({
+const ProductOptionsAdd = ({
   selectedItem,
   setOrder,
   activeGroupId,
@@ -45,10 +45,10 @@ const ProductAddItem = ({
 
     return (
       <div
-        className={`product-option product-add-item ${
+        className={`product-options-group ${
           activeGroupId === additionGroup.id ? 'group-active' : ''
         }`}
-        key={`product-add-item-${i1}`}
+        key={`product-options-add-${i1}`}
       >
         <div
           className='product-option-header'
@@ -61,7 +61,10 @@ const ProductAddItem = ({
             <MdKeyboardArrowDown />
           )}
         </div>
-        <div className='product-options-accordion'>
+        <div
+          className='product-option-accordion'
+          style={{ '--num-items': addItemsId.length || 1 }}
+        >
           <ul>
             {addItemsId?.map((id, i2) => {
               const item =
@@ -76,7 +79,7 @@ const ProductAddItem = ({
                   <img src={mockupImg} alt='mockup image' />
                   <div className='product-option-add-content'>
                     <p>{item.nombre}</p>
-                    <p className='option-add-price'>
+                    <p className='product-option-add-price'>
                       {formatPrice(item.precio).replace('$', '+')}
                     </p>
                   </div>
@@ -109,4 +112,4 @@ const ProductAddItem = ({
   return additionsEl;
 };
 
-export default ProductAddItem;
+export default ProductOptionsAdd;

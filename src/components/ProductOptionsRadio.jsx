@@ -4,7 +4,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 // import mockupImg from '../assets/mockup.jpg';
 // import { items } from '../data/menuData';
 
-const ProductRadioOptions = ({
+const ProductOptionsRadio = ({
   selectedItem,
   setOrder,
   activeGroupId,
@@ -27,10 +27,10 @@ const ProductRadioOptions = ({
 
     return (
       <div
-        className={`product-option product-radio-item ${
+        className={`product-options-group ${
           activeGroupId === radioGroup.id ? 'group-active' : ''
         }`}
-        key={`product-radio-item-${i1}`}
+        key={`product-options-radio-${i1}`}
       >
         <div
           className='product-option-header'
@@ -43,7 +43,10 @@ const ProductRadioOptions = ({
             <MdKeyboardArrowDown />
           )}
         </div>
-        <div className='product-options-accordion'>
+        <div
+          className='product-option-accordion'
+          style={{ '--num-items': radioItems.length || 1 }}
+        >
           <ul>
             {radioItems.map((item, i2) => {
               return (
@@ -77,57 +80,4 @@ const ProductRadioOptions = ({
   return radiosEl;
 };
 
-export default ProductRadioOptions;
-
-// RadioGroup.js
-// import React, { useState } from 'react';
-
-// const RadioGroup = ({ items }) => {
-//   const [selectedItem, setSelectedItem] = useState(null);
-
-//   const handleRadioChange = (event) => {
-//     setSelectedItem(event.target.value);
-//     // Do something with the selected item
-//   };
-
-//   return (
-//     <ul>
-//       {items.map((item, index) => (
-//         <li key={index} className='product-option-type'>
-//           <label htmlFor={item.replace(' ', '_')}>{item}</label>
-//           <input
-//             type='radio'
-//             id={item.replace(' ', '_')}
-//             name="productOptions"
-//             value={item}
-//             checked={selectedItem === item}
-//             onChange={handleRadioChange}
-//           />
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
-
-// export default RadioGroup;
-
-// ParentComponent.js
-// import React from 'react';
-// import RadioGroup from './RadioGroup';
-
-// const ParentComponent = () => {
-//   const groups = [
-//     { items: ['Option 1', 'Option 2', 'Option 3'] },
-//     { items: ['Option A', 'Option B', 'Option C'] }
-//   ];
-
-//   return (
-//     <div>
-//       {groups.map((group, index) => (
-//         <RadioGroup key={index} items={group.items} />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default ParentComponent;
+export default ProductOptionsRadio;

@@ -1,5 +1,5 @@
-import ProductAddItem from './ProductAddItem';
-import ProductRadioOptions from './ProductRadioOptions';
+import ProductOptionsAdd from './ProductOptionsAdd';
+import ProductOptionsRadio from './ProductOptionsRadio';
 import useHandleGroupClick from '../hooks/useHandleGroupClick';
 
 const ProductOption = ({ selectedItem, setOrder }) => {
@@ -9,7 +9,7 @@ const ProductOption = ({ selectedItem, setOrder }) => {
   return (
     <div className='product-options'>
       {selectedItem.add && (
-        <ProductAddItem
+        <ProductOptionsAdd
           selectedItem={selectedItem}
           setOrder={setOrder}
           activeGroupId={activeGroupId}
@@ -17,7 +17,7 @@ const ProductOption = ({ selectedItem, setOrder }) => {
         />
       )}
       {selectedItem.radio && (
-        <ProductRadioOptions
+        <ProductOptionsRadio
           selectedItem={selectedItem}
           setOrder={setOrder}
           activeGroupId={activeGroupId}

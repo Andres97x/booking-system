@@ -328,17 +328,18 @@
   font-size: 3rem;
 }
 
-.product-options-accordion {
+.product-option-accordion {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease-in-out;
+  transition: grid-template-rows calc(0.08s * var(--num-items)) ease-in-out;
+  /*--num-items variable comes from in-line style on node element*/
 }
 
-.group-active .product-options-accordion {
+.group-active .product-option-accordion {
   grid-template-rows: 1fr;
 }
 
-.product-options-accordion > ul {
+.product-option-accordion > ul {
   overflow: hidden;
 }
 
@@ -358,6 +359,8 @@
   border-radius: 1.3rem;
 }
 
+/* ADD OPTIONS*/
+
 .product-option-add-content {
   flex-grow: 1;
   flex-shrink: 0;
@@ -365,7 +368,7 @@
   flex-direction: column;
 }
 
-.option-add-price {
+.product-option-add-price {
   font-weight: 700;
 }
 
