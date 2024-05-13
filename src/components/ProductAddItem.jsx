@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 
@@ -6,11 +6,13 @@ import { formatPrice } from '../utils';
 import mockupImg from '../assets/mockup.jpg';
 import { items, extraItems } from '../data/menuData';
 
-const ProductAddItem = ({ selectedItem, setOrder }) => {
-  const [activeGroup, setActiveGroup] = useState(null);
-  const additionGroupBtnRef = useRef([]);
+const ProductAddItem = ({
+  selectedItem,
+  setOrder,
+  activeGroupId,
+  handleGroupClick,
+}) => {
   const [itemCounts, setItemCounts] = useState({});
-
   // console.log(itemCounts);
 
   const handleAddItem = item => {
@@ -38,40 +40,22 @@ const ProductAddItem = ({ selectedItem, setOrder }) => {
     });
   };
 
-  const handleGroupClick = iterator => {
-    if (activeGroup === null) {
-      setActiveGroup(additionGroupBtnRef.current[iterator]);
-    } else if (
-      activeGroup &&
-      activeGroup === additionGroupBtnRef.current[iterator]
-    ) {
-      setActiveGroup(null);
-    } else {
-      setActiveGroup(null);
-      setActiveGroup(additionGroupBtnRef.current[iterator]);
-    }
-  };
-
   const additionsEl = selectedItem.add.map((additionGroup, i1) => {
     const addItemsId = additionGroup.items;
 
     return (
       <div
         className={`product-option product-add-item ${
-          activeGroup === additionGroupBtnRef.current[i1] &&
-          additionGroupBtnRef.current[i1] !== null
-            ? 'group-active'
-            : ''
+          activeGroupId === additionGroup.id ? 'group-active' : ''
         }`}
         key={`product-add-item-${i1}`}
       >
         <div
           className='product-option-header'
-          ref={el => (additionGroupBtnRef.current[i1] = el)}
-          onClick={() => handleGroupClick(i1)}
+          onClick={() => handleGroupClick(additionGroup.id)}
         >
           <h4>{additionGroup.title}</h4>
-          {activeGroup === additionGroupBtnRef.current[i1] ? (
+          {activeGroupId === additionGroup.id ? (
             <MdKeyboardArrowUp />
           ) : (
             <MdKeyboardArrowDown />

@@ -15,7 +15,7 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
     options: [],
   });
 
-  console.log(order);
+  // console.log(order);
 
   const getPrice = () => {
     const orderSubtotal = order.main.precio;

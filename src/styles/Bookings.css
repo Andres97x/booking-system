@@ -169,6 +169,10 @@ abbr[title] {
 
 /* BOOKING ZONES */
 
+.booking-zones:focus {
+  outline: none !important;
+}
+
 .booking-zones {
   flex-grow: 1;
   display: grid;

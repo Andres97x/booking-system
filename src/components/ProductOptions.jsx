@@ -1,17 +1,28 @@
 import ProductAddItem from './ProductAddItem';
 import ProductRadioOptions from './ProductRadioOptions';
+import useHandleGroupClick from '../hooks/useHandleGroupClick';
 
 const ProductOption = ({ selectedItem, setOrder }) => {
-  // IMPORTANT try to refactor individual group of options inside the ProductAddItem and ProductRadioOptions component, so for every group there will be a component, and not all in the parent component, this may help to encapsulation and to handle states easier.
+  const { activeGroupId, handleGroupClick } = useHandleGroupClick();
 
   // FIXME when I select one radio option group, the product add item group doesn't neceserally closes
   return (
     <div className='product-options'>
       {selectedItem.add && (
-        <ProductAddItem selectedItem={selectedItem} setOrder={setOrder} />
+        <ProductAddItem
+          selectedItem={selectedItem}
+          setOrder={setOrder}
+          activeGroupId={activeGroupId}
+          handleGroupClick={handleGroupClick}
+        />
       )}
       {selectedItem.radio && (
-        <ProductRadioOptions selectedItem={selectedItem} setOrder={setOrder} />
+        <ProductRadioOptions
+          selectedItem={selectedItem}
+          setOrder={setOrder}
+          activeGroupId={activeGroupId}
+          handleGroupClick={handleGroupClick}
+        />
       )}
     </div>
   );

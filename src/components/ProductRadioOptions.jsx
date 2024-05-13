@@ -1,12 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 // import mockupImg from '../assets/mockup.jpg';
 // import { items } from '../data/menuData';
 
-const ProductRadioOptions = ({ selectedItem, setOrder }) => {
-  const [activeGroup, setActiveGroup] = useState(null);
-  const additionGroupBtnRef = useRef([]);
+const ProductRadioOptions = ({
+  selectedItem,
+  setOrder,
+  activeGroupId,
+  handleGroupClick,
+}) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   // console.log(Object.values(selectedOptions));
 
@@ -19,43 +22,22 @@ const ProductRadioOptions = ({ selectedItem, setOrder }) => {
     setOrder(prev => ({ ...prev, options: Object.values(selectedOptions) }));
   }, [selectedOptions]);
 
-  const handleGroupClick = iterator => {
-    if (activeGroup === null) {
-      // there is no active group
-      setActiveGroup(additionGroupBtnRef.current[iterator]);
-    } else if (
-      activeGroup &&
-      activeGroup === additionGroupBtnRef.current[iterator]
-    ) {
-      // there is an active group and I click the same active group
-      setActiveGroup(null);
-    } else {
-      // there is an active group but I select another group
-      setActiveGroup(null);
-      setActiveGroup(additionGroupBtnRef.current[iterator]);
-    }
-  };
-
   const radiosEl = selectedItem.radio.map((radioGroup, i1) => {
     const radioItems = radioGroup.options;
 
     return (
       <div
         className={`product-option product-radio-item ${
-          activeGroup === additionGroupBtnRef.current[i1] &&
-          additionGroupBtnRef.current[i1] !== null
-            ? 'group-active'
-            : ''
+          activeGroupId === radioGroup.id ? 'group-active' : ''
         }`}
         key={`product-radio-item-${i1}`}
       >
         <div
           className='product-option-header'
-          ref={el => (additionGroupBtnRef.current[i1] = el)}
-          onClick={() => handleGroupClick(i1)}
+          onClick={() => handleGroupClick(radioGroup.id)}
         >
           <h4>{radioGroup.title}</h4>
-          {activeGroup === additionGroupBtnRef.current[i1] ? (
+          {activeGroupId === radioGroup.id ? (
             <MdKeyboardArrowUp />
           ) : (
             <MdKeyboardArrowDown />

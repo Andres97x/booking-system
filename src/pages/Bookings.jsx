@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { add, format } from 'date-fns';
 import { IoArrowBack, IoArrowForward } from 'react-icons/io5';
 import {
@@ -16,10 +16,9 @@ import '../styles/Bookings.css';
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [booking, setBooking] = useState(BOOKING_INIT);
-  const [activeTime, setActiveTime] = useState(null);
-  const timesRef = useRef([]);
+  const [activeTimeId, setActiveTimeId] = useState(null);
 
-  // console.log(timesRef.current);
+  // console.log(booking);
 
   const onClickDay = value => {
     setBooking(prev => ({ ...prev, justDate: value }));
@@ -58,7 +57,7 @@ const Bookings = () => {
           completedBooking.zone === booking.zone
       )
       .map(takenDate => {
-        /* Assuming bookings last 1 hour (2 intervals) */
+        // Assuming bookings last 1 hour (2 intervals)
         const chosenTime = takenDate.dateTime;
 
         // Restricting half an hour before reservation (1 interval)
@@ -100,16 +99,11 @@ const Bookings = () => {
     return (
       <div key={`time-${i}`} className='time'>
         <button
-          ref={el => (timesRef.current[i] = el)}
-          className={
-            activeTime === timesRef.current[i] && timesRef.current[i] !== null
-              ? 'time-selected'
-              : ''
-          }
+          className={activeTimeId === i ? 'time-selected' : ''}
           disabled={condition}
           onClick={() => {
             if (condition) return;
-            setActiveTime(timesRef.current[i]);
+            setActiveTimeId(i);
             setBooking(prev => ({ ...prev, dateTime: time }));
           }}
         >
@@ -126,7 +120,7 @@ const Bookings = () => {
           className='times-nav_btn'
           onClick={() => {
             setBooking(BOOKING_INIT);
-            setActiveTime(null);
+            setActiveTimeId(null);
           }}
         >
           <IoArrowBack /> Go back

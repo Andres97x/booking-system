@@ -1,26 +1,18 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import zone1 from '../assets/zone-1.jpg';
 import zone2 from '../assets/zone-2.jpg';
 import zone3 from '../assets/zone-3.jpg';
 
 const BookingZones = ({ onClickZone }) => {
-  const [activeZone, setActiveZone] = useState(null);
-  const zone1Ref = useRef(null);
-  const zone2Ref = useRef(null);
-  const zone3Ref = useRef(null);
+  const [activeZoneId, setActiveZoneId] = useState(null);
 
   return (
     <div className='booking-zones'>
       <button
-        ref={zone1Ref}
-        className={
-          activeZone === zone1Ref.current && zone1Ref.current !== null
-            ? 'zone-selected'
-            : 'not-selected'
-        }
-        onClick={e => {
-          setActiveZone(zone1Ref.current);
+        className={activeZoneId === 0 ? 'zone-selected' : 'not-selected'}
+        onClick={() => {
+          setActiveZoneId(0);
           onClickZone(1);
         }}
       >
@@ -29,14 +21,9 @@ const BookingZones = ({ onClickZone }) => {
       </button>
 
       <button
-        ref={zone2Ref}
-        className={
-          activeZone === zone2Ref.current && zone2Ref.current !== null
-            ? 'zone-selected'
-            : 'not-selected'
-        }
-        onClick={e => {
-          setActiveZone(zone2Ref.current);
+        className={activeZoneId === 1 ? 'zone-selected' : 'not-selected'}
+        onClick={() => {
+          setActiveZoneId(1);
           onClickZone(2);
         }}
       >
@@ -45,14 +32,9 @@ const BookingZones = ({ onClickZone }) => {
       </button>
 
       <button
-        ref={zone3Ref}
-        className={
-          activeZone === zone3Ref.current && zone3Ref.current !== null
-            ? 'zone-selected'
-            : 'not-selected'
-        }
-        onClick={e => {
-          setActiveZone(zone3Ref.current);
+        className={activeZoneId === 2 ? 'zone-selected' : 'not-selected'}
+        onClick={() => {
+          setActiveZoneId(2);
           onClickZone(3);
         }}
       >
