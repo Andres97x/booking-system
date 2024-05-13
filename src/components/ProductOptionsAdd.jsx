@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
-import { FiPlus, FiMinus } from 'react-icons/fi';
 
 import { formatPrice } from '../utils';
-import mockupImg from '../assets/mockup.jpg';
 import { items, extraItems } from '../data/menuData';
+import ProductOptionAdd from './ProductOptionAdd';
 
 const ProductOptionsAdd = ({
   selectedItem,
@@ -66,43 +65,18 @@ const ProductOptionsAdd = ({
           style={{ '--num-items': addItemsId.length || 1 }}
         >
           <ul>
-            {addItemsId?.map((id, i2) => {
-              const item =
-                items.find(item => item.id === id) ||
-                extraItems.find(item => item.id === id);
-
-              return (
-                <li
-                  key={`product-option-add-${i2}`}
-                  className='product-option-type'
-                >
-                  <img src={mockupImg} alt='mockup image' />
-                  <div className='product-option-add-content'>
-                    <p>{item.nombre}</p>
-                    <p className='product-option-add-price'>
-                      {formatPrice(item.precio).replace('$', '+')}
-                    </p>
-                  </div>
-                  <div className='product-option-add-ctrls'>
-                    <div
-                      onClick={() => {
-                        handleRemoveItem(item);
-                      }}
-                    >
-                      <FiMinus />
-                    </div>
-                    <span>{itemCounts[item.id] || 0}</span>
-                    <div
-                      onClick={() => {
-                        handleAddItem(item);
-                      }}
-                    >
-                      <FiPlus />
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
+            {addItemsId?.map((id, i2) => (
+              <ProductOptionAdd
+                key={`product-option-add-${i2}`}
+                id={id}
+                items={items}
+                extraItems={extraItems}
+                formatPrice={formatPrice}
+                itemCounts={itemCounts}
+                handleAddItem={handleAddItem}
+                handleRemoveItem={handleRemoveItem}
+              />
+            ))}
           </ul>
         </div>
       </div>

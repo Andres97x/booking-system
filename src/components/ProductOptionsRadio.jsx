@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
+import ProductOptionRadio from './ProductOptionRadio';
+
 // import mockupImg from '../assets/mockup.jpg';
 // import { items } from '../data/menuData';
 
@@ -48,29 +50,17 @@ const ProductOptionsRadio = ({
           style={{ '--num-items': radioItems.length || 1 }}
         >
           <ul>
-            {radioItems.map((item, i2) => {
-              return (
-                <li
-                  key={`product-option-radio-${i2}`}
-                  className='product-option-type product-option-radio'
-                >
-                  {/* <img src={mockupImg} alt='mockup image' /> */}
-                  {/* <div className='product-option-radio-content'> */}
-                  <label htmlFor={`${radioGroup.id}-${i2}`}>{item}</label>
-                  {/* </div> */}
-                  <input
-                    type='radio'
-                    id={`${radioGroup.id}-${i2}`}
-                    name={`radio-${i1}`}
-                    value={item}
-                    checked={item === selectedOptions[radioGroup.id]}
-                    onChange={() => {
-                      handleOptionChange(radioGroup.id, item);
-                    }}
-                  />
-                </li>
-              );
-            })}
+            {radioItems.map((item, i2) => (
+              <ProductOptionRadio
+                key={`product-option-radio-${i2}`}
+                radioGroup={radioGroup}
+                i1={i1}
+                i2={i2}
+                item={item}
+                selectedOptions={selectedOptions}
+                handleOptionChange={handleOptionChange}
+              />
+            ))}
           </ul>
         </div>
       </div>

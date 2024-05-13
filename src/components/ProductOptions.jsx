@@ -5,7 +5,6 @@ import useHandleGroupClick from '../hooks/useHandleGroupClick';
 const ProductOption = ({ selectedItem, setOrder }) => {
   const { activeGroupId, handleGroupClick } = useHandleGroupClick();
 
-  // FIXME when I select one radio option group, the product add item group doesn't neceserally closes
   return (
     <div className='product-options'>
       {selectedItem.add && (
