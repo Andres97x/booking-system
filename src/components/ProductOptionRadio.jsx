@@ -5,6 +5,8 @@ const ProductOptionRadio = ({
   selectedOptions,
   handleOptionChange,
 }) => {
+  const itemId = `${radioGroup.id}-${radioGroup.title.replaceAll(' ', '-')}`;
+
   return (
     <li className='product-option-type product-option-radio'>
       {/* <img src={mockupImg} alt='mockup image' /> */}
@@ -16,9 +18,9 @@ const ProductOptionRadio = ({
         id={`${radioGroup.id}-${i2}`}
         name={radioGroup.id}
         value={item}
-        checked={item === selectedOptions.current[radioGroup.id]}
+        checked={item === selectedOptions.current[itemId]}
         onChange={() => {
-          handleOptionChange(radioGroup.id, item);
+          handleOptionChange(itemId, item);
         }}
       />
     </li>

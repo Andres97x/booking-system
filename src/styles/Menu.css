@@ -149,11 +149,12 @@
 
 .pop-up-window {
   position: fixed;
+  top: 15%;
   top: 2%;
   left: 50%;
   transform: translateX(-50%) translateY(0);
   width: 70vw;
-  /* height: 70vh; */
+  height: 70vh;
   height: 95vh;
   background-color: #f1f3f5;
   border-radius: 3px;
@@ -209,7 +210,7 @@
   font-size: 2rem;
   display: flex;
   justify-content: space-between;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 }
 
 .product-controls {

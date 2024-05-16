@@ -19,7 +19,13 @@ const ProductOptionsRadio = ({
     selectedOptions.current = { ...selectedOptions.current, [id]: value };
     setOrder(prev => ({
       ...prev,
-      optionRadios: Object.values(selectedOptions.current),
+      // transforming result object to an array of  {name, value} objects
+      optionRadios: Object.values(
+        Object.entries(selectedOptions.current).map(([name, value]) => ({
+          name: name.split('-').slice(1).join(' '),
+          value,
+        }))
+      ),
     }));
   };
 

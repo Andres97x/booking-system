@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import ProductOptionChecked from './ProductOptionChecked';
+import { transformObject } from '../utils';
 
 const ProductOptionsChecked = ({
   selectedItem,
@@ -11,26 +12,6 @@ const ProductOptionsChecked = ({
 }) => {
   const checkedOptions = useRef({});
   // console.log(checkedOptions.current);
-
-  const transformObject = obj => {
-    const result = {};
-
-    for (const key in obj) {
-      const name = key.split('-').slice(2).join(' ');
-
-      if (!result[name]) {
-        result[name] = [];
-      }
-      result[name].push(obj[key]);
-    }
-
-    return Object.entries(result)
-      .map(([name, items]) => ({
-        name,
-        items: items.filter(Boolean),
-      }))
-      .filter(obj => obj.items.length > 0);
-  };
 
   const handleOptionChange = (id, value) => {
     if (checkedOptions.current[id]) {

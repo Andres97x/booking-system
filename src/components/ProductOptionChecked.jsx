@@ -5,7 +5,7 @@ const ProductOptionChecked = ({
   checkedOptions,
   handleOptionChange,
 }) => {
-  const checkId = `${checkGroup.id}-${i2}-${checkGroup.title.replaceAll(
+  const itemId = `${checkGroup.id}-${i2}-${checkGroup.title.replaceAll(
     ' ',
     '-'
   )}`;
@@ -21,9 +21,9 @@ const ProductOptionChecked = ({
         id={`${checkGroup.id}-${i2}`}
         name={checkGroup.id}
         value={item}
-        checked={item === checkedOptions.current[checkId]}
+        checked={item === checkedOptions.current[itemId]}
         onChange={() => {
-          handleOptionChange(checkId, item);
+          handleOptionChange(itemId, item);
         }}
       />
     </li>
