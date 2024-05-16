@@ -12,10 +12,11 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
     main: selectedItem,
     optionAdds: [],
     optionRadios: [],
+    optionChecks: [],
     orderCount: 1,
   });
 
-  // console.log(order);
+  console.log(order);
 
   const getPrice = () => {
     const orderSubtotal = order.main.precio;

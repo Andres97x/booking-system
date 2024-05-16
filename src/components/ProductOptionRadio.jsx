@@ -1,6 +1,5 @@
 const ProductOptionRadio = ({
   radioGroup,
-  i1,
   i2,
   item,
   selectedOptions,

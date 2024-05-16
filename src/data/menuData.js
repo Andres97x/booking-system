@@ -111,6 +111,29 @@ export const items = [
         ],
       },
     ],
+    check: [
+      {
+        title: 'Escoge tus salsas',
+        id: 'c1',
+        options: [
+          'Salsa rosada',
+          'Salsa de tomate',
+          'Mostaza',
+          'Mayonesa',
+          'Salsa tartara',
+        ],
+      },
+      {
+        title: 'Escoge tus snacks',
+        id: 'c2',
+        options: [
+          'Papas fritas',
+          'Churrascos',
+          'Galleta integral',
+          'Pan elfico',
+        ],
+      },
+    ],
   },
   {
     category: 'platos-fuertes',

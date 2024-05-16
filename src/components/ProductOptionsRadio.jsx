@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import ProductOptionRadio from './ProductOptionRadio';
@@ -13,11 +13,10 @@ const ProductOptionsRadio = ({
   handleGroupClick,
 }) => {
   const selectedOptions = useRef({});
-  // console.log(Object.values(selectedOptions));
-  console.log(selectedOptions.current);
+  // console.log(selectedOptions.current);
 
-  const handleOptionChange = (name, value) => {
-    selectedOptions.current = { ...selectedOptions.current, [name]: value };
+  const handleOptionChange = (id, value) => {
+    selectedOptions.current = { ...selectedOptions.current, [id]: value };
     setOrder(prev => ({
       ...prev,
       optionRadios: Object.values(selectedOptions.current),
@@ -54,7 +53,6 @@ const ProductOptionsRadio = ({
               <ProductOptionRadio
                 key={`product-option-radio-${i2}`}
                 radioGroup={radioGroup}
-                i1={i1}
                 i2={i2}
                 item={item}
                 selectedOptions={selectedOptions}
