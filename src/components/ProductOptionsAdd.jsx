@@ -12,7 +12,6 @@ const ProductOptionsAdd = ({
   handleGroupClick,
 }) => {
   const [itemCounts, setItemCounts] = useState({});
-  // console.log(itemCounts);
 
   const handleAddItem = item => {
     setItemCounts(prevCounts => ({
@@ -78,6 +77,7 @@ const ProductOptionsAdd = ({
                 itemCounts={itemCounts}
                 handleAddItem={handleAddItem}
                 handleRemoveItem={handleRemoveItem}
+                additionGroup={additionGroup}
               />
             ))}
           </ul>

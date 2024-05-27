@@ -84,14 +84,22 @@ export const items = [
     precio: 85000,
     add: [
       {
+        multiple: true,
         title: 'Agrega una bebida',
         id: 'a1',
         items: ['90', '79', '83', '92', '93'],
       },
       {
+        multiple: true,
         title: 'Adiciones',
         id: 'a2',
         items: ['105', '106', '107', '85'],
+      },
+      {
+        multiple: false,
+        title: 'Agranda tu combo',
+        id: 'a3',
+        items: ['48', '60', '24'],
       },
     ],
     radio: [

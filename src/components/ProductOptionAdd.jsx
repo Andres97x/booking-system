@@ -10,6 +10,7 @@ const ProductOptionAdd = ({
   itemCounts,
   handleAddItem,
   handleRemoveItem,
+  additionGroup,
 }) => {
   const item =
     items.find(item => item.id === id) ||
@@ -25,25 +26,42 @@ const ProductOptionAdd = ({
         </p>
       </div>
       <div className='product-option-add-ctrls'>
-        <div
-          onClick={() => {
-            handleRemoveItem(item);
-          }}
-        >
-          <FiMinus
-            className={`option-remove ${itemCounts[item.id] ? '' : 'hidden'}`}
-          />
-        </div>
-        <span className={`option-count ${itemCounts[item.id] ? '' : 'hidden'}`}>
-          {itemCounts[item.id] || 0}
-        </span>
-        <div
-          onClick={() => {
-            handleAddItem(item);
-          }}
-        >
-          <FiPlus />
-        </div>
+        {additionGroup.multiple ? (
+          <>
+            <div
+              onClick={() => {
+                handleRemoveItem(item);
+              }}
+            >
+              <FiMinus
+                className={`option-remove ${
+                  itemCounts[item.id] ? '' : 'hidden'
+                }`}
+              />
+            </div>
+            <span
+              className={`option-count ${itemCounts[item.id] ? '' : 'hidden'}`}
+            >
+              {itemCounts[item.id] || 0}
+            </span>
+            <div
+              onClick={() => {
+                handleAddItem(item);
+              }}
+            >
+              <FiPlus />
+            </div>
+          </>
+        ) : (
+          <div
+            className={`single-add ${itemCounts[item.id] ? 'filled' : ''}`}
+            onClick={() => {
+              itemCounts[item.id]
+                ? handleRemoveItem(item)
+                : handleAddItem(item);
+            }}
+          ></div>
+        )}
       </div>
     </li>
   );
