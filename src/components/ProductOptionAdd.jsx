@@ -30,9 +30,13 @@ const ProductOptionAdd = ({
             handleRemoveItem(item);
           }}
         >
-          <FiMinus />
+          <FiMinus
+            className={`option-remove ${itemCounts[item.id] ? '' : 'hidden'}`}
+          />
         </div>
-        <span>{itemCounts[item.id] || 0}</span>
+        <span className={`option-count ${itemCounts[item.id] ? '' : 'hidden'}`}>
+          {itemCounts[item.id] || 0}
+        </span>
         <div
           onClick={() => {
             handleAddItem(item);

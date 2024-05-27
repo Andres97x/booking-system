@@ -48,6 +48,17 @@ input[type='radio']:checked {
   transform: scale(1.07);
 }
 
+input[type='checkbox'] {
+  accent-color: #495057;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s all linear;
+}
+
+input[type='checkbox']:checked {
+  transform: scale(1.07);
+}
+
 /* HEADER-HERO */
 
 .header-hero__wrapper {
