@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
-import { formatPrice } from '../utils';
+import { formatPrice, getGroupCount } from '../utils';
 import { items, extraItems } from '../data/menuData';
 import ProductOptionAdd from './ProductOptionAdd';
 
@@ -12,28 +12,15 @@ const ProductOptionsAdd = ({
   handleGroupClick,
 }) => {
   const [itemsCounts, setItemsCounts] = useState({});
+  // console.log(itemsCounts);
 
-  const getGroupCount = () => {
-    const result = {};
-
-    for (const [key, value] of Object.entries(itemsCounts)) {
-      const group = key.split('-')[0];
-
-      if (!result[group]) {
-        result[group] = 0;
-      }
-
-      result[group] += value;
-    }
-
-    return result;
-  };
-  const groupCount = getGroupCount();
+  const groupCount = getGroupCount(itemsCounts);
 
   const handleAddItem = (id, item, additionGroup) => {
     if (
-      additionGroup.maxItems &&
-      groupCount[additionGroup.id] >= additionGroup.maxItems
+      // limiting number of chosen adds
+      additionGroup.maxCount &&
+      groupCount[additionGroup.id] >= additionGroup.maxCount
     )
       return;
 

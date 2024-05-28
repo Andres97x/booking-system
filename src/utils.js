@@ -10,7 +10,6 @@ export const formatPrice = element => {
 
 /* transformObject fn takes an object and returns an array of objects. Categorizing adn grouping (by common group name) choosen check items inside an object that contains items property and name property ({name: str, items: str[]}) as follows :
 [{name: 'group1', items: ['selected1','selected2',...]}, {name: 'group2', items: ['selected1','selected2',...]}, ...] */
-
 export const transformObject = obj => {
   const result = {};
 
@@ -34,4 +33,26 @@ export const transformObject = obj => {
     })) // filtering out groups whose items became all unchecked (items[] becomes empty)
     .filter(obj => obj.items.length > 0);
   // the transformed object into array of objects is a suitable shape to pass to order state.
+};
+
+export const getGroupCount = (obj, type = 'add') => {
+  const result = {};
+
+  for (const [key, value] of Object.entries(obj)) {
+    const group = key.split('-')[0];
+
+    if (!result[group]) {
+      result[group] = 0;
+    }
+
+    if (type === 'add') {
+      result[group] += value;
+    }
+
+    if (type === 'checkbox') {
+      value === null ? (result[group] += 0) : (result[group] += 1);
+    }
+  }
+
+  return result;
 };

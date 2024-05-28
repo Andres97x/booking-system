@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
-import ProductOptionChecked from './ProductOptionChecked';
-import { transformObject } from '../utils';
+import ProductOptionCheck from './ProductOptionCheck';
+import { transformObject, getGroupCount } from '../utils';
 
 const ProductOptionsChecked = ({
   selectedItem,
@@ -11,14 +11,24 @@ const ProductOptionsChecked = ({
   handleGroupClick,
 }) => {
   const checkedOptions = useRef({});
-  console.log(checkedOptions.current);
+  // console.log(checkedOptions.current);
 
-  const handleOptionChange = (id, value) => {
+  const groupCount = getGroupCount(checkedOptions.current, 'checkbox');
+  // console.log(groupCount);
+
+  const handleOptionChange = (id, value, checkboxGroup) => {
     if (checkedOptions.current[id]) {
       // user selects on checked input
       checkedOptions.current = { ...checkedOptions.current, [id]: null };
     } else {
       // user selects on unchecked input
+      if (
+        // limiting number of chosen options
+        checkboxGroup.maxCount &&
+        groupCount[checkboxGroup.id] >= checkboxGroup.maxCount
+      )
+        return;
+
       checkedOptions.current = { ...checkedOptions.current, [id]: value };
     }
 
@@ -54,7 +64,7 @@ const ProductOptionsChecked = ({
         >
           <ul>
             {checkItems.map((item, i2) => (
-              <ProductOptionChecked
+              <ProductOptionCheck
                 key={`product-option-check-${i2}`}
                 checkGroup={checkGroup}
                 i2={i2}

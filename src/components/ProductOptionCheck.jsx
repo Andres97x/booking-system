@@ -1,4 +1,4 @@
-const ProductOptionChecked = ({
+const ProductOptionCheck = ({
   checkGroup,
   i2,
   item,
@@ -23,11 +23,11 @@ const ProductOptionChecked = ({
         value={item}
         checked={item === checkedOptions.current[itemId]}
         onChange={() => {
-          handleOptionChange(itemId, item);
+          handleOptionChange(itemId, item, checkGroup);
         }}
       />
     </li>
   );
 };
 
-export default ProductOptionChecked;
+export default ProductOptionCheck;
