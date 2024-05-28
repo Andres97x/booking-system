@@ -11,7 +11,7 @@ const ProductOptionsChecked = ({
   handleGroupClick,
 }) => {
   const checkedOptions = useRef({});
-  // console.log(checkedOptions.current);
+  console.log(checkedOptions.current);
 
   const handleOptionChange = (id, value) => {
     if (checkedOptions.current[id]) {

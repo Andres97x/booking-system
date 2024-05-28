@@ -6,6 +6,12 @@ import ProductOptionsChecked from './ProductOptionsCheck';
 const ProductOption = ({ selectedItem, setOrder }) => {
   const { activeGroupId, handleGroupClick } = useHandleGroupClick();
 
+  /* TODO */
+  // 1) add limit for select inputs
+  // 2) check out when there is something like radio inputs logic that need to work with add ctrl btns, for example when you are buying a combo and this combo has 2 pet drinks, then a single radio input won't meet this need because I want to be able to choose two different drinks, not the same one.
+  // 3) show a badge in each group heading showing information about the max number limit for add groups (only the ones with 'multiple' property !== null) and for select groups (when necessary)
+  // 4) show a badge in each group heading showing information about the group status (mandatory, done)
+
   return (
     <div className='product-options'>
       {selectedItem.radio && (

@@ -7,7 +7,7 @@ const ProductOptionAdd = ({
   items,
   extraItems,
   formatPrice,
-  itemCounts,
+  itemsCounts,
   handleAddItem,
   handleRemoveItem,
   additionGroup,
@@ -15,6 +15,8 @@ const ProductOptionAdd = ({
   const item =
     items.find(item => item.id === id) ||
     extraItems.find(item => item.id === id);
+
+  const combinedId = `${additionGroup.id}-${id}`;
 
   return (
     <li className='product-option-type'>
@@ -30,23 +32,25 @@ const ProductOptionAdd = ({
           <>
             <div
               onClick={() => {
-                handleRemoveItem(item);
+                handleRemoveItem(combinedId, item);
               }}
             >
               <FiMinus
                 className={`option-remove ${
-                  itemCounts[item.id] ? '' : 'hidden'
+                  itemsCounts[combinedId] ? '' : 'hidden'
                 }`}
               />
             </div>
             <span
-              className={`option-count ${itemCounts[item.id] ? '' : 'hidden'}`}
+              className={`option-count ${
+                itemsCounts[combinedId] ? '' : 'hidden'
+              }`}
             >
-              {itemCounts[item.id] || 0}
+              {itemsCounts[combinedId] || 0}
             </span>
             <div
               onClick={() => {
-                handleAddItem(item);
+                handleAddItem(combinedId, item, additionGroup);
               }}
             >
               <FiPlus />
@@ -54,11 +58,11 @@ const ProductOptionAdd = ({
           </>
         ) : (
           <div
-            className={`single-add ${itemCounts[item.id] ? 'filled' : ''}`}
+            className={`single-add ${itemsCounts[combinedId] ? 'filled' : ''}`}
             onClick={() => {
-              itemCounts[item.id]
-                ? handleRemoveItem(item)
-                : handleAddItem(item);
+              itemsCounts[combinedId]
+                ? handleRemoveItem(combinedId, item)
+                : handleAddItem(combinedId, item, additionGroup);
             }}
           ></div>
         )}

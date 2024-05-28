@@ -11,25 +11,48 @@ const ProductOptionsAdd = ({
   activeGroupId,
   handleGroupClick,
 }) => {
-  const [itemCounts, setItemCounts] = useState({});
+  const [itemsCounts, setItemsCounts] = useState({});
 
-  const handleAddItem = item => {
-    setItemCounts(prevCounts => ({
+  const getGroupCount = () => {
+    const result = {};
+
+    for (const [key, value] of Object.entries(itemsCounts)) {
+      const group = key.split('-')[0];
+
+      if (!result[group]) {
+        result[group] = 0;
+      }
+
+      result[group] += value;
+    }
+
+    return result;
+  };
+  const groupCount = getGroupCount();
+
+  const handleAddItem = (id, item, additionGroup) => {
+    if (
+      additionGroup.maxItems &&
+      groupCount[additionGroup.id] >= additionGroup.maxItems
+    )
+      return;
+
+    setItemsCounts(prevCounts => ({
       ...prevCounts,
-      [item.id]: (prevCounts[item.id] || 0) + 1,
+      [id]: (prevCounts[id] || 0) + 1,
     }));
 
     setOrder(prevOrder => ({
       ...prevOrder,
-      optionAdds: [...prevOrder.optionAdds, item],
+      optionAdds: [...prevOrder.optionAdds, item].sort((a, b) => a.id - b.id),
     }));
   };
 
-  const handleRemoveItem = item => {
-    if (!itemCounts[item.id] || itemCounts[item.id] < 1) return;
-    setItemCounts(prevCounts => ({
+  const handleRemoveItem = (id, item) => {
+    if (!itemsCounts[id] || itemsCounts[id] < 1) return;
+    setItemsCounts(prevCounts => ({
       ...prevCounts,
-      [item.id]: prevCounts[item.id] - 1,
+      [id]: prevCounts[id] - 1,
     }));
 
     setOrder(prevOrder => {
@@ -74,7 +97,7 @@ const ProductOptionsAdd = ({
                 items={items}
                 extraItems={extraItems}
                 formatPrice={formatPrice}
-                itemCounts={itemCounts}
+                itemsCounts={itemsCounts}
                 handleAddItem={handleAddItem}
                 handleRemoveItem={handleRemoveItem}
                 additionGroup={additionGroup}

@@ -87,19 +87,22 @@ export const items = [
         multiple: true,
         title: 'Agrega una bebida',
         id: 'a1',
-        items: ['90', '79', '83', '92', '93'],
+        items: ['90', '79', '83', '85'],
+        maxItems: 5,
       },
       {
         multiple: true,
         title: 'Adiciones',
         id: 'a2',
         items: ['105', '106', '107', '85'],
+        maxItems: 4,
       },
       {
         multiple: false,
         title: 'Agranda tu combo',
         id: 'a3',
         items: ['48', '60', '24'],
+        maxItems: null,
       },
     ],
     radio: [
