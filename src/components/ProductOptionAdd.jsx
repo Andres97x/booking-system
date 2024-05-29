@@ -19,53 +19,57 @@ const ProductOptionAdd = ({
   const combinedId = `${additionGroup.id}-${id}`;
 
   return (
-    <li className='product-option-type'>
-      <img src={mockupImg} alt='mockup image' />
-      <div className='product-option-add-content'>
-        <p>{item.nombre}</p>
-        <p className='product-option-add-price'>
-          {formatPrice(item.precio).replace('$', '+')}
-        </p>
-      </div>
-      <div className='product-option-add-ctrls'>
-        {additionGroup.multiple ? (
-          <>
-            <div
-              onClick={() => {
-                handleRemoveItem(combinedId, item);
-              }}
-            >
-              <FiMinus
-                className={`option-remove ${
+    <li>
+      <div className='product-option-type'>
+        <img src={mockupImg} alt='mockup image' />
+        <div className='product-option-add-content'>
+          <p>{item.nombre}</p>
+          <p className='product-option-add-price'>
+            {formatPrice(item.precio).replace('$', '+')}
+          </p>
+        </div>
+        <div className='product-option-add-ctrls'>
+          {additionGroup.multiple ? (
+            <>
+              <div
+                onClick={() => {
+                  handleRemoveItem(combinedId, item);
+                }}
+              >
+                <FiMinus
+                  className={`option-remove ${
+                    itemsCounts[combinedId] ? '' : 'hidden'
+                  }`}
+                />
+              </div>
+              <span
+                className={`option-count ${
                   itemsCounts[combinedId] ? '' : 'hidden'
                 }`}
-              />
-            </div>
-            <span
-              className={`option-count ${
-                itemsCounts[combinedId] ? '' : 'hidden'
-              }`}
-            >
-              {itemsCounts[combinedId] || 0}
-            </span>
+              >
+                {itemsCounts[combinedId] || 0}
+              </span>
+              <div
+                onClick={() => {
+                  handleAddItem(combinedId, item, additionGroup);
+                }}
+              >
+                <FiPlus />
+              </div>
+            </>
+          ) : (
             <div
+              className={`single-add ${
+                itemsCounts[combinedId] ? 'filled' : ''
+              }`}
               onClick={() => {
-                handleAddItem(combinedId, item, additionGroup);
+                itemsCounts[combinedId]
+                  ? handleRemoveItem(combinedId, item)
+                  : handleAddItem(combinedId, item, additionGroup);
               }}
-            >
-              <FiPlus />
-            </div>
-          </>
-        ) : (
-          <div
-            className={`single-add ${itemsCounts[combinedId] ? 'filled' : ''}`}
-            onClick={() => {
-              itemsCounts[combinedId]
-                ? handleRemoveItem(combinedId, item)
-                : handleAddItem(combinedId, item, additionGroup);
-            }}
-          ></div>
-        )}
+            ></div>
+          )}
+        </div>
       </div>
     </li>
   );

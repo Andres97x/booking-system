@@ -110,6 +110,7 @@ export const items = [
         title: 'Escoge la preparación',
         id: 'r1',
         options: ['1/4 raw', '2/4 medium', '3/4 cooked'],
+        mandatory: true,
       },
       {
         title: 'Acompañamiento',

@@ -44,11 +44,16 @@ const ProductOptionsRadio = ({
           onClick={() => handleGroupClick(radioGroup.id)}
         >
           <h4>{radioGroup.title}</h4>
-          {activeGroupId === radioGroup.id ? (
-            <MdKeyboardArrowUp />
-          ) : (
-            <MdKeyboardArrowDown />
-          )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            {radioGroup.mandatory && (
+              <span className='group-mandatory'>Mandatory</span>
+            )}
+            {activeGroupId === radioGroup.id ? (
+              <MdKeyboardArrowUp />
+            ) : (
+              <MdKeyboardArrowDown />
+            )}
+          </div>
         </div>
         <div
           className='product-option-accordion'
