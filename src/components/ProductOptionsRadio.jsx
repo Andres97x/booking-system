@@ -13,20 +13,43 @@ const ProductOptionsRadio = ({
   handleGroupClick,
 }) => {
   const selectedOptions = useRef({});
-  // console.log(selectedOptions.current);
 
   const handleOptionChange = (id, value) => {
     selectedOptions.current = { ...selectedOptions.current, [id]: value };
     setOrder(prev => ({
       ...prev,
       // transforming result object to an array of  {name, value} objects
-      optionRadios: Object.values(
-        Object.entries(selectedOptions.current).map(([name, value]) => ({
+      optionRadios: Object.entries(selectedOptions.current).map(
+        ([name, value]) => ({
           name: name.split('-').slice(1).join(' '),
           value,
-        }))
+        })
       ),
     }));
+  };
+
+  const getGroupStatus = obj => {
+    const groupChecked = {};
+
+    for (const key in obj) {
+      const groupName = key.split('-')[0];
+
+      if (!groupChecked[groupName]) {
+        groupChecked[groupName] = true;
+      }
+    }
+
+    return groupChecked;
+  };
+
+  const groupStatus = getGroupStatus(selectedOptions.current);
+
+  const getGroupBadge = group => {
+    return groupStatus[group.id] ? (
+      <span className='group-status done'>Listo</span>
+    ) : (
+      <span className='group-status mandatory'>Obligatorio</span>
+    );
   };
 
   const radiosEl = selectedItem.radio.map((radioGroup, i1) => {
@@ -40,14 +63,12 @@ const ProductOptionsRadio = ({
         key={`product-options-radio-${i1}`}
       >
         <div
-          className='product-option-header'
+          className='product-options-header'
           onClick={() => handleGroupClick(radioGroup.id)}
         >
           <h4>{radioGroup.title}</h4>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-            {radioGroup.mandatory && (
-              <span className='group-mandatory'>Mandatory</span>
-            )}
+          <div className='product-options-status'>
+            {radioGroup.mandatory && getGroupBadge(radioGroup)}
             {activeGroupId === radioGroup.id ? (
               <MdKeyboardArrowUp />
             ) : (
@@ -57,7 +78,7 @@ const ProductOptionsRadio = ({
         </div>
         <div
           className='product-option-accordion'
-          style={{ '--num-items': radioItems.length || 1 }}
+          style={{ '--num-options': radioItems.length || 1 }}
         >
           <ul>
             {radioItems.map((item, i2) => (

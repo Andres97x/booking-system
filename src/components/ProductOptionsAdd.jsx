@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
+import ProductOptionAdd from './ProductOptionAdd';
+import GroupBadge from './GroupBadge';
 import { formatPrice, getGroupCount } from '../utils';
 import { items, extraItems } from '../data/menuData';
-import ProductOptionAdd from './ProductOptionAdd';
 
 const ProductOptionsAdd = ({
   selectedItem,
@@ -15,12 +16,13 @@ const ProductOptionsAdd = ({
   // console.log(itemsCounts);
 
   const groupCount = getGroupCount(itemsCounts);
+  // console.log(groupCount);
 
   const handleAddItem = (id, item, additionGroup) => {
     if (
       // limiting number of chosen adds
-      additionGroup.maxCount &&
-      groupCount[additionGroup.id] >= additionGroup.maxCount
+      additionGroup.count &&
+      groupCount[additionGroup.id] >= additionGroup.count
     )
       return;
 
@@ -52,7 +54,7 @@ const ProductOptionsAdd = ({
   };
 
   const additionsEl = selectedItem.add.map((additionGroup, i1) => {
-    const addItemsId = additionGroup.items;
+    const addItemsId = additionGroup.options;
 
     return (
       <div
@@ -62,19 +64,32 @@ const ProductOptionsAdd = ({
         key={`product-options-add-${i1}`}
       >
         <div
-          className='product-option-header'
+          className='product-options-header'
           onClick={() => handleGroupClick(additionGroup.id)}
         >
-          <h4>{additionGroup.title}</h4>
-          {activeGroupId === additionGroup.id ? (
-            <MdKeyboardArrowUp />
-          ) : (
-            <MdKeyboardArrowDown />
-          )}
+          <div className='product-options-info'>
+            <h4>{additionGroup.title}</h4>
+            {/* {additionGroup.count && ( )} */}
+            <span className='group-requirements'>
+              {`Selecciona máximo
+              ${additionGroup.count || additionGroup.options.length}
+              opciones`}
+            </span>
+          </div>
+
+          <div className='product-options-status'>
+            <GroupBadge groupCount={groupCount} group={additionGroup} />
+
+            {activeGroupId === additionGroup.id ? (
+              <MdKeyboardArrowUp />
+            ) : (
+              <MdKeyboardArrowDown />
+            )}
+          </div>
         </div>
         <div
           className='product-option-accordion'
-          style={{ '--num-items': addItemsId.length || 1 }}
+          style={{ '--num-options': addItemsId.length || 1 }}
         >
           <ul>
             {addItemsId?.map((id, i2) => (

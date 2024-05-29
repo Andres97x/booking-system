@@ -87,24 +87,58 @@ export const items = [
         multiple: true,
         title: 'Agrega una bebida',
         id: 'a1',
-        items: ['90', '79', '83', '85'],
-        maxCount: 5,
+        options: ['90', '79', '83', '85'],
+        count: 5,
       },
       {
         multiple: true,
         title: 'Adiciones',
         id: 'a2',
-        items: ['105', '106', '107', '85'],
-        maxCount: 4,
+        options: ['105', '106', '107', '85'],
+        count: 4,
       },
       {
         multiple: false,
         title: 'Agranda tu combo',
         id: 'a3',
-        items: ['48', '60', '24'],
-        maxCount: null,
+        options: ['48', '60', '24'],
+        count: null,
       },
     ],
+
+    check: [
+      {
+        title: 'Escoge tus salsas',
+        id: 'c1',
+        options: [
+          'Salsa rosada',
+          'Salsa de tomate',
+          'Mostaza',
+          'Mayonesa',
+          'Salsa tartara',
+        ],
+        count: 3,
+        mandatory: true,
+      },
+      {
+        title: 'Escoge tus snacks',
+        id: 'c2',
+        options: [
+          'Papas fritas',
+          'Churrascos',
+          'Galleta integral',
+          'Pan elfico',
+        ],
+        count: 2,
+      },
+      {
+        title: 'Personaliza tu plato',
+        id: 'c3',
+        options: ['Sin cebolla', 'Sin tomates', 'Sin vegetales', 'Sin pan'],
+        count: null,
+      },
+    ],
+
     radio: [
       {
         title: 'Escoge la preparación',
@@ -121,31 +155,7 @@ export const items = [
           'Espárragos a la parrilla con salsa holandesa.',
           'Ensalada de rúcula y tomate con vinagreta balsámica.',
         ],
-      },
-    ],
-    check: [
-      {
-        title: 'Escoge tus salsas',
-        id: 'c1',
-        options: [
-          'Salsa rosada',
-          'Salsa de tomate',
-          'Mostaza',
-          'Mayonesa',
-          'Salsa tartara',
-        ],
-        maxCount: 3,
-      },
-      {
-        title: 'Escoge tus snacks',
-        id: 'c2',
-        options: [
-          'Papas fritas',
-          'Churrascos',
-          'Galleta integral',
-          'Pan elfico',
-        ],
-        maxCount: null,
+        mandatory: true,
       },
     ],
   },

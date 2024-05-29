@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import ProductOptionCheck from './ProductOptionCheck';
+import GroupBadge from './GroupBadge';
 import { transformObject, getGroupCount } from '../utils';
 
 const ProductOptionsChecked = ({
@@ -24,8 +25,8 @@ const ProductOptionsChecked = ({
       // user selects on unchecked input
       if (
         // limiting number of chosen options
-        checkboxGroup.maxCount &&
-        groupCount[checkboxGroup.id] >= checkboxGroup.maxCount
+        checkboxGroup.count &&
+        groupCount[checkboxGroup.id] >= checkboxGroup.count
       )
         return;
 
@@ -48,15 +49,29 @@ const ProductOptionsChecked = ({
         key={`product-options-check-${i1}`}
       >
         <div
-          className='product-option-header'
+          className='product-options-header'
           onClick={() => handleGroupClick(checkGroup.id)}
         >
-          <h4>{checkGroup.title}</h4>
-          {activeGroupId === checkGroup.id ? (
-            <MdKeyboardArrowUp />
-          ) : (
-            <MdKeyboardArrowDown />
-          )}
+          <div className='product-options-info'>
+            <h4>{checkGroup.title}</h4>
+            {/* {checkGroup.count && ( )} */}
+            <span className='group-requirements'>
+              {checkGroup.mandatory
+                ? `Selecciona ${checkGroup.count} opciones`
+                : `Selecciona máximo ${
+                    checkGroup.count || checkGroup.options.length
+                  } opciones`}
+            </span>
+          </div>
+          <div className='product-options-status'>
+            <GroupBadge groupCount={groupCount} group={checkGroup} />
+
+            {activeGroupId === checkGroup.id ? (
+              <MdKeyboardArrowUp />
+            ) : (
+              <MdKeyboardArrowDown />
+            )}
+          </div>
         </div>
         <div
           className='product-option-accordion'
