@@ -14,9 +14,9 @@ const ProductOptionCheck = ({
     <li>
       <div className='product-option-type product-option-check'>
         {/* <img src={mockupImg} alt='mockup image' /> */}
-        {/* <div className='product-option-radio-content'> */}
-        <label htmlFor={`${checkGroup.id}-${i2}`}>{item}</label>
-        {/* </div> */}
+        <div className='product-option-content'>
+          <label htmlFor={`${checkGroup.id}-${i2}`}>{item}</label>
+        </div>
         <input
           type='checkbox'
           id={`${checkGroup.id}-${i2}`}

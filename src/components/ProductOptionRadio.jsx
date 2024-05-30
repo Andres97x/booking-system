@@ -11,9 +11,9 @@ const ProductOptionRadio = ({
     <li>
       <div className='product-option-type product-option-radio'>
         {/* <img src={mockupImg} alt='mockup image' /> */}
-        {/* <div className='product-option-radio-content'> */}
-        <label htmlFor={`${radioGroup.id}-${i2}`}>{item}</label>
-        {/* </div> */}
+        <div className='product-option-content'>
+          <label htmlFor={`${radioGroup.id}-${i2}`}>{item}</label>
+        </div>
         <input
           type='radio'
           id={`${radioGroup.id}-${i2}`}

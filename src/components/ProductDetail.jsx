@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import { IoCloseOutline } from 'react-icons/io5';
+
+import { MAX_NUM_OF_ITEMS } from '../constants';
 import mockupImg from '../assets/mockup.jpg';
 import { formatPrice } from '../utils';
-
 import ProductOptions from '../components/ProductOptions';
 
 const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
@@ -11,12 +12,13 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
   const [order, setOrder] = useState({
     main: selectedItem,
     optionAdds: [],
+    optionRadioAdds: [],
     optionRadios: [],
     optionChecks: [],
     orderCount: 1,
   });
 
-  // console.log(order);
+  console.log(order.optionRadioAdds);
 
   const getPrice = () => {
     const orderSubtotal = order.main.precio;
@@ -26,7 +28,7 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
   };
 
   const increaseOneProduct = () => {
-    if (order.orderCount >= 7) return;
+    if (order.orderCount >= MAX_NUM_OF_ITEMS) return;
     setOrder(prev => ({ ...prev, orderCount: prev.orderCount + 1 }));
   };
 

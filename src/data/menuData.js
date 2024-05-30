@@ -158,6 +158,33 @@ export const items = [
         mandatory: true,
       },
     ],
+    radioAdd: [
+      {
+        title: 'Escoge tus bebidas',
+        id: 'ra1',
+        options: [
+          'Coca Cola',
+          'Kola Roman',
+          'Manzana',
+          'Sprite',
+          'Mountain Dew',
+        ],
+        count: 2,
+        mandatory: true,
+      },
+      {
+        title: 'Escoge tus postres',
+        id: 'ra2',
+        options: [
+          'Torta de manzana',
+          'Pudin de canela',
+          'Pai de arequipe',
+          'Muffin de papaya',
+        ],
+        count: 2,
+        mandatory: true,
+      },
+    ],
   },
   {
     category: 'platos-fuertes',

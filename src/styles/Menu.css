@@ -381,7 +381,7 @@
 }
 
 .product-option-type img {
-  width: 23%;
+  width: 20%;
   object-fit: cover;
   aspect-ratio: 1/0.6;
   border-radius: 1.3rem;
@@ -449,9 +449,16 @@
   }
 }
 
+.product-option-radio,
+.product-option-check,
+.product-option-radio-add {
+  justify-content: space-between;
+  margin-inline: 3rem;
+}
+
 /* ADD OPTIONS*/
 
-.product-option-add-content {
+.product-option-content-add {
   flex-grow: 1;
   flex-shrink: 0;
   display: flex;
@@ -530,12 +537,6 @@
 }
 
 /* RADIO OPTIONS */
-
-.product-option-radio,
-.product-option-check {
-  justify-content: space-between;
-  margin-inline: 3rem;
-}
 
 .product-option-radio label,
 .product-option-check label {

@@ -22,7 +22,7 @@ const ProductOptionAdd = ({
     <li>
       <div className='product-option-type'>
         <img src={mockupImg} alt='mockup image' />
-        <div className='product-option-add-content'>
+        <div className='product-option-content product-option-content-add'>
           <p>{item.nombre}</p>
           <p className='product-option-add-price'>
             {formatPrice(item.precio).replace('$', '+')}

@@ -75,7 +75,7 @@ const ProductOptionsChecked = ({
         </div>
         <div
           className='product-option-accordion'
-          style={{ '--num-items': checkItems.length || 1 }}
+          style={{ '--num-options': checkItems.length || 1 }}
         >
           <ul>
             {checkItems.map((item, i2) => (

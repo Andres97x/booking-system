@@ -69,7 +69,6 @@ const ProductOptionsAdd = ({
         >
           <div className='product-options-info'>
             <h4>{additionGroup.title}</h4>
-            {/* {additionGroup.count && ( )} */}
             <span className='group-requirements'>
               {`Selecciona máximo
               ${additionGroup.count || additionGroup.options.length}
