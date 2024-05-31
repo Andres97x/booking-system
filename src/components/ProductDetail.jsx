@@ -18,7 +18,7 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
     orderCount: 1,
   });
 
-  console.log(order.optionRadioAdds);
+  console.log(order);
 
   const getPrice = () => {
     const orderSubtotal = order.main.precio;

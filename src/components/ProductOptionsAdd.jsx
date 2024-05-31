@@ -11,9 +11,10 @@ const ProductOptionsAdd = ({
   setOrder,
   activeGroupId,
   handleGroupClick,
+  type,
 }) => {
   const [itemsCounts, setItemsCounts] = useState({});
-  // console.log(itemsCounts);
+  // {a1-90: 1, a1-79: 1, a2-85: 2, a2-106: 1, a3-48: 1}
 
   const groupCount = getGroupCount(itemsCounts);
   // console.log(groupCount);
@@ -31,9 +32,13 @@ const ProductOptionsAdd = ({
       [id]: (prevCounts[id] || 0) + 1,
     }));
 
+    const optionType = type === 'mandatory' ? 'optionRadioAdds' : 'optionAdds';
+
     setOrder(prevOrder => ({
       ...prevOrder,
-      optionAdds: [...prevOrder.optionAdds, item].sort((a, b) => a.id - b.id),
+      [optionType]: [...prevOrder[optionType], item].sort(
+        (a, b) => a.id - b.id
+      ),
     }));
   };
 
@@ -44,16 +49,23 @@ const ProductOptionsAdd = ({
       [id]: prevCounts[id] - 1,
     }));
 
+    const optionType = type === 'mandatory' ? 'optionRadioAdds' : 'optionAdds';
+
     setOrder(prevOrder => {
-      const itemIndex = prevOrder.optionAdds.findIndex(el => el.id === item.id);
+      const itemIndex = prevOrder[optionType].findIndex(
+        el => el.id === item.id
+      );
+
       return {
         ...prevOrder,
-        optionAdds: prevOrder.optionAdds.toSpliced(itemIndex, 1),
+        [optionType]: prevOrder[optionType].toSpliced(itemIndex, 1),
       };
     });
   };
 
-  const additionsEl = selectedItem.add.map((additionGroup, i1) => {
+  const addType = type === 'mandatory' ? 'radioAdd' : 'add';
+
+  const additionsEl = selectedItem[addType].map((additionGroup, i1) => {
     const addItemsId = additionGroup.options;
 
     return (
@@ -102,6 +114,7 @@ const ProductOptionsAdd = ({
                 handleAddItem={handleAddItem}
                 handleRemoveItem={handleRemoveItem}
                 additionGroup={additionGroup}
+                type={type}
               />
             ))}
           </ul>

@@ -1,5 +1,4 @@
 import ProductOptionsAdd from './ProductOptionsAdd';
-import ProductOptionsRadioAdd from './ProductOptionsRadioAdd';
 import ProductOptionsRadio from './ProductOptionsRadio';
 import ProductOptionsChecked from './ProductOptionsCheck';
 import useHandleGroupClick from '../hooks/useHandleGroupClick';
@@ -8,8 +7,8 @@ const ProductOption = ({ selectedItem, setOrder }) => {
   const { activeGroupId, handleGroupClick } = useHandleGroupClick();
 
   /* TODO */
-  // 1) check out when there is something like radio inputs logic that need to work with add ctrl btns, for example when you are buying a combo and this combo has 2 pet drinks, then a single radio input won't meet this need because I want to be able to choose two different drinks, not the same one.
-  // 2) Try to make ProductOptions... and ProductOption... DRY, refactor them.
+  // 1) Try to make ProductOptions... and ProductOption... DRY, refactor them.
+  // 2) Lazy load menu component I guess
 
   return (
     // Radios are multiple options with one only choice that are almost always mandatory.
@@ -31,11 +30,12 @@ const ProductOption = ({ selectedItem, setOrder }) => {
             />
           )}
           {selectedItem.radioAdd && (
-            <ProductOptionsRadioAdd
+            <ProductOptionsAdd
               selectedItem={selectedItem}
               setOrder={setOrder}
               activeGroupId={activeGroupId}
               handleGroupClick={handleGroupClick}
+              type='mandatory'
             />
           )}
           {selectedItem.check && (
@@ -52,6 +52,7 @@ const ProductOption = ({ selectedItem, setOrder }) => {
               setOrder={setOrder}
               activeGroupId={activeGroupId}
               handleGroupClick={handleGroupClick}
+              type='optional'
             />
           )}
         </div>

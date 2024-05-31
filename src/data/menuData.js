@@ -105,6 +105,24 @@ export const items = [
         count: null,
       },
     ],
+    radioAdd: [
+      {
+        multiple: true,
+        title: 'Escoge tus bebidas',
+        id: 'ra1',
+        options: ['205', '206', '207', '208', '209'],
+        count: 2,
+        mandatory: true,
+      },
+      {
+        multiple: true,
+        title: 'Escoge tus postres',
+        id: 'ra2',
+        options: ['48', '50', '51', '52'],
+        count: 2,
+        mandatory: true,
+      },
+    ],
 
     check: [
       {
@@ -155,33 +173,6 @@ export const items = [
           'Espárragos a la parrilla con salsa holandesa.',
           'Ensalada de rúcula y tomate con vinagreta balsámica.',
         ],
-        mandatory: true,
-      },
-    ],
-    radioAdd: [
-      {
-        title: 'Escoge tus bebidas',
-        id: 'ra1',
-        options: [
-          'Coca Cola',
-          'Kola Roman',
-          'Manzana',
-          'Sprite',
-          'Mountain Dew',
-        ],
-        count: 2,
-        mandatory: true,
-      },
-      {
-        title: 'Escoge tus postres',
-        id: 'ra2',
-        options: [
-          'Torta de manzana',
-          'Pudin de canela',
-          'Pai de arequipe',
-          'Muffin de papaya',
-        ],
-        count: 2,
         mandatory: true,
       },
     ],
@@ -1013,6 +1004,41 @@ export const items = [
     nombre: 'Limonada de Coco',
     precio: 18000,
   },
+  {
+    category: 'bebidas',
+    subcategory: 'gaseosas',
+    id: '205',
+    nombre: 'Coca Cola 400ml',
+    precio: 6000,
+  },
+  {
+    category: 'bebidas',
+    subcategory: 'gaseosas',
+    id: '206',
+    nombre: 'Kola Roman 400ml',
+    precio: 5500,
+  },
+  {
+    category: 'bebidas',
+    subcategory: 'gaseosas',
+    id: '207',
+    nombre: 'Manzana Postobon 400ml',
+    precio: 5500,
+  },
+  {
+    category: 'bebidas',
+    subcategory: 'gaseosas',
+    id: '208',
+    nombre: 'Sprite 400ml',
+    precio: 6000,
+  },
+  {
+    category: 'bebidas',
+    subcategory: 'gaseosas',
+    id: '209',
+    nombre: 'Mountain Dew 400ml',
+    precio: 6000,
+  },
 ];
 
 export const extraItems = [
@@ -1034,6 +1060,7 @@ export const extraItems = [
     nombre: 'Papas grandes 250gr',
     precio: 11000,
   },
+  /* TODO IMPORTANT FIXME */
 ];
 
 const drinks = items.filter(item => item.category === 'bebidas');

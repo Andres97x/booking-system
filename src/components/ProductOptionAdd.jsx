@@ -11,6 +11,7 @@ const ProductOptionAdd = ({
   handleAddItem,
   handleRemoveItem,
   additionGroup,
+  type,
 }) => {
   const item =
     items.find(item => item.id === id) ||
@@ -24,9 +25,11 @@ const ProductOptionAdd = ({
         <img src={mockupImg} alt='mockup image' />
         <div className='product-option-content product-option-content-add'>
           <p>{item.nombre}</p>
-          <p className='product-option-add-price'>
-            {formatPrice(item.precio).replace('$', '+')}
-          </p>
+          {type === 'optional' && (
+            <p className='product-option-add-price'>
+              {formatPrice(item.precio).replace('$', '+')}
+            </p>
+          )}
         </div>
         <div className='product-option-add-ctrls'>
           {additionGroup.multiple ? (
