@@ -4,6 +4,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import ProductOptionCheck from './ProductOptionCheck';
 import GroupBadge from './GroupBadge';
 import { transformObject, getGroupCount } from '../utils';
+import { items, extraItems } from '../data/menuData';
 
 const ProductOptionsChecked = ({
   selectedItem,
@@ -14,13 +15,24 @@ const ProductOptionsChecked = ({
   const checkedOptions = useRef({});
   // console.log(checkedOptions.current);
 
-  const groupCount = getGroupCount(checkedOptions.current, 'checkbox');
+  const groupCount = getGroupCount(checkedOptions.current);
   // console.log(groupCount);
 
-  const handleOptionChange = (id, value, checkboxGroup) => {
+  const handleOptionChange = (id, item, checkboxGroup) => {
     if (checkedOptions.current[id]) {
       // user selects on checked input
-      checkedOptions.current = { ...checkedOptions.current, [id]: null };
+      checkedOptions.current = { ...checkedOptions.current, [id]: 0 };
+
+      setOrder(prevOrder => {
+        const itemIndex = prevOrder.optionChecks.findIndex(
+          el => el.id === item.id
+        );
+
+        return {
+          ...prevOrder,
+          optionChecks: prevOrder.optionChecks.toSpliced(itemIndex, 1),
+        };
+      });
     } else {
       // user selects on unchecked input
       if (
@@ -30,16 +42,19 @@ const ProductOptionsChecked = ({
       )
         return;
 
-      checkedOptions.current = { ...checkedOptions.current, [id]: value };
-    }
+      checkedOptions.current = { ...checkedOptions.current, [id]: 1 };
 
-    setOrder(prev => {
-      return { ...prev, optionChecks: transformObject(checkedOptions.current) };
-    });
+      setOrder(prevOrder => {
+        return {
+          ...prevOrder,
+          optionChecks: [...prevOrder.optionChecks, item],
+        };
+      });
+    }
   };
 
   const checksEl = selectedItem.check.map((checkGroup, i1) => {
-    const checkItems = checkGroup.options;
+    const checkItemsId = checkGroup.options;
 
     return (
       <div
@@ -75,17 +90,18 @@ const ProductOptionsChecked = ({
         </div>
         <div
           className='product-option-accordion'
-          style={{ '--num-options': checkItems.length || 1 }}
+          style={{ '--num-options': checkItemsId.length || 1 }}
         >
           <ul>
-            {checkItems.map((item, i2) => (
+            {checkItemsId.map((id, i2) => (
               <ProductOptionCheck
                 key={`product-option-check-${i2}`}
-                checkGroup={checkGroup}
-                i2={i2}
-                item={item}
-                checkedOptions={checkedOptions}
+                id={id}
+                items={items}
+                extraItems={extraItems}
                 handleOptionChange={handleOptionChange}
+                checkGroup={checkGroup}
+                checkedOptions={checkedOptions}
               />
             ))}
           </ul>

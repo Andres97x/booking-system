@@ -450,10 +450,24 @@
 }
 
 .product-option-radio,
-.product-option-check,
-.product-option-radio-add {
+.product-option-check {
   justify-content: space-between;
   margin-inline: 3rem;
+}
+
+.product-option-radio:has(img),
+.product-option-check:has(img) {
+  justify-content: start;
+  margin-inline-start: 0;
+  margin-inline-end: 3rem;
+}
+
+.product-option-radio:has(img) .product-option-content,
+.product-option-check:has(img) .product-option-content {
+  flex-grow: 1;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ADD OPTIONS*/

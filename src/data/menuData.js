@@ -105,6 +105,7 @@ export const items = [
         count: null,
       },
     ],
+
     radioAdd: [
       {
         multiple: true,
@@ -128,31 +129,21 @@ export const items = [
       {
         title: 'Escoge tus salsas',
         id: 'c1',
-        options: [
-          'Salsa rosada',
-          'Salsa de tomate',
-          'Mostaza',
-          'Mayonesa',
-          'Salsa tartara',
-        ],
-        count: 3,
+        options: ['108', '109', '110', '111'],
+        count: 2,
         mandatory: true,
       },
       {
         title: 'Escoge tus snacks',
         id: 'c2',
-        options: [
-          'Papas fritas',
-          'Churrascos',
-          'Galleta integral',
-          'Pan elfico',
-        ],
+        options: ['112', '113', '114', '115'],
         count: 2,
+        mandatory: true,
       },
       {
         title: 'Personaliza tu plato',
         id: 'c3',
-        options: ['Sin cebolla', 'Sin tomates', 'Sin vegetales', 'Sin pan'],
+        options: ['116', '117', '118'],
         count: null,
       },
     ],
@@ -1060,7 +1051,72 @@ export const extraItems = [
     nombre: 'Papas grandes 250gr',
     precio: 11000,
   },
-  /* TODO IMPORTANT FIXME */
+  {
+    category: 'salsas',
+    id: '108',
+    nombre: 'Salsa BBQ',
+    precio: null,
+  },
+  {
+    category: 'salsas',
+    id: '109',
+    nombre: 'Salsa de tomate',
+    precio: null,
+  },
+  {
+    category: 'salsas',
+    id: '110',
+    nombre: 'Salsa mayonesa',
+    precio: null,
+  },
+  {
+    category: 'salsas',
+    id: '111',
+    nombre: 'Salsa agridulce',
+    precio: null,
+  },
+  {
+    category: 'snacks',
+    id: '112',
+    nombre: 'Nachos con Salsa y Guacamole (x15)',
+    precio: 6000,
+  },
+  {
+    category: 'snacks',
+    id: '113',
+    nombre: 'Palitos de Verduras con Hummus (x5)',
+    precio: 10000,
+  },
+  {
+    category: 'snacks',
+    id: '114',
+    nombre: 'Mini Empanadas (x5)',
+    precio: 8000,
+  },
+  {
+    category: 'snacks',
+    id: '115',
+    nombre: 'Brochetas de Pollo (x3)',
+    precio: 9000,
+  },
+  {
+    category: 'preparacion',
+    id: '116',
+    nombre: 'Sin cebolla',
+    precio: null,
+  },
+  {
+    category: 'preparacion',
+    id: '117',
+    nombre: 'Sin tomate',
+    precio: null,
+  },
+  {
+    category: 'preparacion',
+    id: '118',
+    nombre: 'Sin vegetales',
+    precio: null,
+  },
 ];
 
 const drinks = items.filter(item => item.category === 'bebidas');
@@ -1068,28 +1124,3 @@ const drinks = items.filter(item => item.category === 'bebidas');
 export const firstDrinkCategory = Array.from(
   new Set(drinks.map(drink => drink.subcategory))
 )[0];
-
-// export const extras = {
-//   preparacion: [
-//     { value: '1/4 raw' },
-//     { value: '2/4 medium' },
-//     { value: '3/4 cooked' },
-//     { value: '4/4 overcooked' },
-//   ],
-
-//   salsasPrincipales: [
-//     { value: 'Salsa de Champiñones y Vino Tinto' },
-//     { value: 'Salsa de Foie Gras y Porto' },
-//     { value: 'Salsa de Trufa Negra' },
-//     { value: 'Salsa de Miso y Sake' },
-//     { value: 'Salsa de Saffron y Naranja' },
-//     { value: 'Salsa de Cognac y Crema' },
-//   ],
-
-//   salsasSecundarias: [
-//     { value: 'Salsa de tomate' },
-//     { value: 'Salsa rosada' },
-//     { value: 'Mostaza' },
-//     { value: 'Mayonesa' },
-//   ],
-// };

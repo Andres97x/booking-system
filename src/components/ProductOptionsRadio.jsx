@@ -13,6 +13,7 @@ const ProductOptionsRadio = ({
   handleGroupClick,
 }) => {
   const selectedOptions = useRef({});
+  // {r1-Escoge-la-preparación: '2/4 medium', r2-Acompañamiento: 'Espárragos a la parrilla con salsa holandesa.'}
 
   const handleOptionChange = (id, value) => {
     selectedOptions.current = { ...selectedOptions.current, [id]: value };

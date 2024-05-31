@@ -1,30 +1,34 @@
+import mockupImg from '../assets/mockup.jpg';
+
 const ProductOptionCheck = ({
-  checkGroup,
-  i2,
-  item,
-  checkedOptions,
+  id,
+  items,
+  extraItems,
   handleOptionChange,
+  checkGroup,
+  checkedOptions,
 }) => {
-  const itemId = `${checkGroup.id}-${i2}-${checkGroup.title.replaceAll(
-    ' ',
-    '-'
-  )}`;
+  const item =
+    items.find(item => item.id === id) ||
+    extraItems.find(item => item.id === id);
+
+  const combinedId = `${checkGroup.id}-${id}`;
 
   return (
     <li>
       <div className='product-option-type product-option-check'>
-        {/* <img src={mockupImg} alt='mockup image' /> */}
+        <img src={mockupImg} alt='mockup image' />
         <div className='product-option-content'>
-          <label htmlFor={`${checkGroup.id}-${i2}`}>{item}</label>
+          <label htmlFor={`${checkGroup.id}-${id}`}>{item.nombre}</label>
         </div>
         <input
           type='checkbox'
-          id={`${checkGroup.id}-${i2}`}
+          id={`${checkGroup.id}-${id}`}
           name={checkGroup.id}
           value={item}
-          checked={item === checkedOptions.current[itemId]}
+          checked={checkedOptions.current[combinedId] > 0}
           onChange={() => {
-            handleOptionChange(itemId, item, checkGroup);
+            handleOptionChange(combinedId, item, checkGroup);
           }}
         />
       </div>

@@ -35,7 +35,7 @@ export const transformObject = obj => {
   // the transformed object into array of objects is a suitable shape to pass to order state.
 };
 
-export const getGroupCount = (obj, type = 'add') => {
+export const getGroupCount = obj => {
   const result = {};
 
   for (const [key, value] of Object.entries(obj)) {
@@ -45,13 +45,7 @@ export const getGroupCount = (obj, type = 'add') => {
       result[group] = 0;
     }
 
-    if (type === 'add') {
-      result[group] += value;
-    }
-
-    if (type === 'checkbox') {
-      value === null ? (result[group] += 0) : (result[group] += 1);
-    }
+    result[group] += value;
   }
 
   return result;
