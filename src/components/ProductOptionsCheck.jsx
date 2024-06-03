@@ -3,7 +3,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import ProductOptionCheck from './ProductOptionCheck';
 import GroupBadge from './GroupBadge';
-import { transformObject, getGroupCount } from '../utils';
+import { getGroupCount } from '../utils';
 import { items, extraItems } from '../data/menuData';
 
 const ProductOptionsChecked = ({
@@ -13,7 +13,6 @@ const ProductOptionsChecked = ({
   handleGroupClick,
 }) => {
   const checkedOptions = useRef({});
-  // console.log(checkedOptions.current);
 
   const groupCount = getGroupCount(checkedOptions.current);
   // console.log(groupCount);
@@ -69,7 +68,6 @@ const ProductOptionsChecked = ({
         >
           <div className='product-options-info'>
             <h4>{checkGroup.title}</h4>
-            {/* {checkGroup.count && ( )} */}
             <span className='group-requirements'>
               {checkGroup.mandatory
                 ? `Selecciona ${checkGroup.count} opciones`

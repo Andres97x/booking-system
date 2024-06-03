@@ -7,10 +7,9 @@ const ProductOption = ({ selectedItem, setOrder }) => {
   const { activeGroupId, handleGroupClick } = useHandleGroupClick();
 
   /* TODO */
-  // 1) Refactor ProductOptionsRadio (as well as its incoming data) and ProductOption... DRY, refactor them.
-  // 2) I refactored ProductOptions (add & check) to have the same strcuture, so the idea is to get rid of transformObject utility fn in the (radio) component as well and only use it for example when in the cart path.
-  // 3) Maybe refactor addItem and removeItem into a fn to be able to use it whenever I want to setOrder
-  // 4) Lazy load menu component I guess
+  // 1) Maybe refactor addItem and removeItem into a fn to be able to use it whenever I want to setOrder
+  // 2) Lazy load menu component I guess
+  // 3) Use transformObj utility function when rendering Cart component
 
   return (
     // Radios are multiple options with one only choice that are almost always mandatory.

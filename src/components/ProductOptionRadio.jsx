@@ -1,27 +1,35 @@
+import mockupImg from '../assets/mockup.jpg';
+
 const ProductOptionRadio = ({
-  radioGroup,
-  i2,
-  item,
-  selectedOptions,
+  id,
+  items,
+  extraItems,
   handleOptionChange,
+  radioGroup,
+  selectedOptions,
 }) => {
-  const itemId = `${radioGroup.id}-${radioGroup.title.replaceAll(' ', '-')}`;
+  const item =
+    items.find(item => item.id === id) ||
+    extraItems.find(item => item.id === id);
+
+  // combinedId needs to be the same for every option in a radio group, this makes sure only one value can be selected per group on the selectedOptions object.
+  const combinedId = radioGroup.id;
 
   return (
     <li>
       <div className='product-option-type product-option-radio'>
-        {/* <img src={mockupImg} alt='mockup image' /> */}
+        <img src={mockupImg} alt='mockup image' />
         <div className='product-option-content'>
-          <label htmlFor={`${radioGroup.id}-${i2}`}>{item}</label>
+          <label htmlFor={`${radioGroup.id}-${id}`}>{item.nombre}</label>
         </div>
         <input
           type='radio'
-          id={`${radioGroup.id}-${i2}`}
+          id={`${radioGroup.id}-${id}`}
           name={radioGroup.id}
           value={item}
-          checked={item === selectedOptions.current[itemId]}
+          checked={item.id === selectedOptions.current[combinedId]?.id}
           onChange={() => {
-            handleOptionChange(itemId, item);
+            handleOptionChange(combinedId, item);
           }}
         />
       </div>

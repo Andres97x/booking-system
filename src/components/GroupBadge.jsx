@@ -1,4 +1,6 @@
-const getGroupBadge = ({ groupCount, group }) => {
+const GroupBadge = ({ groupCount, group }) => {
+  // groupCount refers to the current selected or added count.
+  // group.count refers to the max count value specified for that specific group, if the group comes without an explicit group.count, then the max count will be the length of the group.
   let maxCount = group.count;
   if (!group.count) maxCount = group.options.length;
 
@@ -20,4 +22,4 @@ const getGroupBadge = ({ groupCount, group }) => {
   return <span className='group-status done'>Listo</span>;
 };
 
-export default getGroupBadge;
+export default GroupBadge;

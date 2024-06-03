@@ -3,8 +3,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 import ProductOptionRadio from './ProductOptionRadio';
 
-// import mockupImg from '../assets/mockup.jpg';
-// import { items } from '../data/menuData';
+import { items, extraItems } from '../data/menuData';
 
 const ProductOptionsRadio = ({
   selectedItem,
@@ -13,40 +12,18 @@ const ProductOptionsRadio = ({
   handleGroupClick,
 }) => {
   const selectedOptions = useRef({});
-  // {r1-Escoge-la-preparación: '2/4 medium', r2-Acompañamiento: 'Espárragos a la parrilla con salsa holandesa.'}
 
   const handleOptionChange = (id, value) => {
     selectedOptions.current = { ...selectedOptions.current, [id]: value };
+
     setOrder(prev => ({
       ...prev,
-      // transforming result object to an array of  {name, value} objects
-      optionRadios: Object.entries(selectedOptions.current).map(
-        ([name, value]) => ({
-          name: name.split('-').slice(1).join(' '),
-          value,
-        })
-      ),
+      optionRadios: [...Object.values(selectedOptions.current)],
     }));
   };
 
-  const getGroupStatus = obj => {
-    const groupChecked = {};
-
-    for (const key in obj) {
-      const groupName = key.split('-')[0];
-
-      if (!groupChecked[groupName]) {
-        groupChecked[groupName] = true;
-      }
-    }
-
-    return groupChecked;
-  };
-
-  const groupStatus = getGroupStatus(selectedOptions.current);
-
-  const getGroupBadge = group => {
-    return groupStatus[group.id] ? (
+  const getGroupBadge = (selectedOptions, groupId) => {
+    return selectedOptions[groupId] ? (
       <span className='group-status done'>Listo</span>
     ) : (
       <span className='group-status mandatory'>Obligatorio</span>
@@ -54,7 +31,7 @@ const ProductOptionsRadio = ({
   };
 
   const radiosEl = selectedItem.radio.map((radioGroup, i1) => {
-    const radioItems = radioGroup.options;
+    const radioItemsId = radioGroup.options;
 
     return (
       <div
@@ -67,9 +44,12 @@ const ProductOptionsRadio = ({
           className='product-options-header'
           onClick={() => handleGroupClick(radioGroup.id)}
         >
-          <h4>{radioGroup.title}</h4>
+          <div className='product-options-info'>
+            <h4>{radioGroup.title}</h4>
+          </div>
           <div className='product-options-status'>
-            {radioGroup.mandatory && getGroupBadge(radioGroup)}
+            {radioGroup.mandatory &&
+              getGroupBadge(selectedOptions.current, radioGroup.id)}
             {activeGroupId === radioGroup.id ? (
               <MdKeyboardArrowUp />
             ) : (
@@ -79,17 +59,18 @@ const ProductOptionsRadio = ({
         </div>
         <div
           className='product-option-accordion'
-          style={{ '--num-options': radioItems.length || 1 }}
+          style={{ '--num-options': radioItemsId.length || 1 }}
         >
           <ul>
-            {radioItems.map((item, i2) => (
+            {radioItemsId.map((id, i2) => (
               <ProductOptionRadio
                 key={`product-option-radio-${i2}`}
-                radioGroup={radioGroup}
-                i2={i2}
-                item={item}
-                selectedOptions={selectedOptions}
+                id={id}
+                items={items}
+                extraItems={extraItems}
                 handleOptionChange={handleOptionChange}
+                radioGroup={radioGroup}
+                selectedOptions={selectedOptions}
               />
             ))}
           </ul>
