@@ -403,7 +403,7 @@
 
 .group-status {
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   border: 1.5px solid #545454;
   color: #545454;
   border-radius: 3px;
@@ -413,8 +413,8 @@
 
 .group-status.mandatory {
   animation: fade-in-1 0.2s ease-in-out;
-  color: #fa5252;
-  border-color: #fa5252;
+  /* color: #fa5252;
+  border-color: #fa5252; */
 }
 
 .group-status.done {

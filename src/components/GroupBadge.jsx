@@ -8,7 +8,8 @@ const GroupBadge = ({ groupCount, group }) => {
     !group.mandatory &&
     (!groupCount[group.id] || groupCount[group.id] < maxCount)
   ) {
-    return <span className='group-status'>Opcional</span>;
+    return;
+    // <span className='group-status'>Opcional</span>;
   }
 
   // if (!group.mandatory) {
