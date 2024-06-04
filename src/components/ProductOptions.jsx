@@ -7,9 +7,7 @@ const ProductOption = ({ selectedItem, setOrder }) => {
   const { activeGroupId, handleGroupClick } = useHandleGroupClick();
 
   /* TODO */
-  // 1) Maybe refactor addItem and removeItem into a fn to be able to use it whenever I want to setOrder
-  // 2) Lazy load menu component I guess
-  // 3) Use transformObj utility function when rendering Cart component
+  // 1) Use transformObj utility function when rendering Cart component
 
   return (
     // Radios are multiple options with one only choice that are almost always mandatory.

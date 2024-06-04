@@ -8,7 +8,7 @@ export const formatPrice = element => {
     .replace(/\u00A0/g, ''); // replace $&nbsp; between the sign and the number
 };
 
-/* transformObject fn takes an object and returns an array of objects. Categorizing adn grouping (by common group name) choosen check items inside an object that contains items property and name property ({name: str, items: str[]}) as follows :
+/* transformObject fn takes an object and returns an array of objects. Categorizing and grouping (by common group name) =>({name: str, items: str[]}) as follows :
 [{name: 'group1', items: ['selected1','selected2',...]}, {name: 'group2', items: ['selected1','selected2',...]}, ...] */
 export const transformObject = obj => {
   const result = {};
