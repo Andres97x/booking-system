@@ -113,12 +113,23 @@ header a:focus {
 }
 
 .reservation-link {
-  background-color: rgb(148, 132, 113);
-  padding: 1rem 2rem;
+  /* background-color: rgb(148, 132, 113); */
+  /* padding: 1rem 2rem; */
 }
 
 .nav-signature {
   font-size: 2rem;
+}
+
+header button {
+  border: none;
+  background-color: transparent;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+header svg {
+  color: #fbfada;
 }
 
 /* FOOTER */

@@ -15,8 +15,6 @@ import Bookings from './pages/Bookings';
 import Menu from './pages/Menu';
 const MenuItemsComponent = lazy(() => import('./pages/MenuItems'));
 
-/* TODO create CART component*/
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<PageLayout />}>
