@@ -7,27 +7,19 @@ import Cart from './Cart';
 
 const PageLayout = () => {
   const { pathname } = useLocation();
-  const [cartActive, setCartActive] = useState(false);
-  console.log(cartActive);
 
   return (
     <>
       <div
         className={pathname === '/' ? `header-hero__wrapper` : 'header-wrapper'}
       >
-        <Header setCartActive={setCartActive} />
+        <Header />
         {pathname === '/' && <Hero />}
       </div>
 
       <main>
         <Outlet />
       </main>
-
-      {cartActive && (
-        <aside>
-          <Cart />
-        </aside>
-      )}
 
       <Footer />
     </>

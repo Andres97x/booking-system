@@ -15,7 +15,3 @@ export const ZONE_TABLES = {
 export const OPENING_TIME = 16;
 export const CLOSING_TIME = 22;
 export const INTERVAL = 30; // in minutes;
-
-/* MENY SYSTEM */
-
-export const MAX_NUM_OF_ITEMS = 5;

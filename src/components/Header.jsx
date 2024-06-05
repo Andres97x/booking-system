@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom';
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import { IoMdCart } from 'react-icons/io';
 
-const Header = ({ setCartActive }) => {
+const Header = () => {
   const telNumber = '555-555-555';
 
   return (
     <header>
       <a href={`tel:${telNumber}`}>
         <BsFillTelephoneFill />
-        Call {telNumber}
+        {telNumber}
       </a>
       <nav>
         <Link to='/'>Home</Link>
@@ -18,14 +17,12 @@ const Header = ({ setCartActive }) => {
           Restaurant pro
         </Link>
         <Link to='/menu'>Menú</Link>
-        <Link to='/bookings' className='reservation-link'>
-          Reservar
-        </Link>
+        <a href='/#section-contact'>Contacto</a>
       </nav>
       <div>
-        <button onClick={() => setCartActive(prev => !prev)}>
-          <IoMdCart />
-        </button>
+        <Link to='/bookings' className='reservation-link'>
+          Hacer una reserva
+        </Link>
       </div>
     </header>
   );

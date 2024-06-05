@@ -83,6 +83,15 @@ header {
   background-color: #12372a;
 }
 
+header > * {
+  flex: 0.5;
+}
+
+header > nav {
+  flex: 1;
+  justify-content: space-between;
+}
+
 .header-hero__wrapper header {
   background-color: rgba(255, 255, 255, 0);
 }
@@ -112,9 +121,15 @@ header a:focus {
   outline: rgba(251, 250, 218, 0.5) solid 2px;
 }
 
+header div:last-child {
+  display: flex;
+  align-items: center;
+}
+
 .reservation-link {
   /* background-color: rgb(148, 132, 113); */
   /* padding: 1rem 2rem; */
+  margin-left: auto;
 }
 
 .nav-signature {
