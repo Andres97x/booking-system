@@ -6,16 +6,16 @@ const Header = () => {
 
   return (
     <header>
-      <a href={`tel:${telNumber}`}>
-        <BsFillTelephoneFill />
-        {telNumber}
-      </a>
+      <div>
+        <a href={`tel:${telNumber}`}>
+          <BsFillTelephoneFill />
+          {telNumber}
+        </a>
+      </div>
       <nav>
         <Link to='/'>Home</Link>
         <Link to='/about'>Nosotros</Link>
-        <Link to='/' className='nav-signature'>
-          Restaurant pro
-        </Link>
+        <span className='nav-signature'>Éclat Étoilé</span>
         <Link to='/menu'>Menú</Link>
         <a href='/#section-contact'>Contacto</a>
       </nav>

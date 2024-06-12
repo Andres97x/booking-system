@@ -4,10 +4,18 @@ import toShareImg from '../assets/to-share.jpg';
 import makisImg from '../assets/makis.jpg';
 import tacosImg from '../assets/tacos.jpg';
 import dessertsImg from '../assets/desserts.jpg';
-import comingUpNextImg from '../assets/coming-up-next.jpg';
+import signatures from '../assets/signatures.jpg';
 import drinksImg from '../assets/drinks.jpg';
 
 export const categoriesData = [
+  {
+    category: 'signatures',
+    name: 'Signatures',
+    image: signatures,
+    imageAlt: 'Plato con arroz y comida marina',
+    description:
+      'Descubre y deleitate con nuestra linea exclusiva de platos signature, con nuestro toque único.',
+  },
   {
     category: 'platos-fuertes',
     name: 'Platos fuertes',
@@ -57,14 +65,6 @@ export const categoriesData = [
       ' Endulza tu día con nuestros deliciosos postres, perfectos para terminar tu comida con broche de oro.',
   },
   {
-    category: 'proximos-lanzamientos',
-    name: 'Proximos lanzamientos',
-    image: comingUpNextImg,
-    imageAlt: 'Plato con arroz y comida marina',
-    description:
-      ' Prepárate para emocionar tus papilas gustativas con nuestros próximos lanzamientos.',
-  },
-  {
     category: 'bebidas',
     name: 'Bebidas',
     image: drinksImg,
@@ -75,6 +75,54 @@ export const categoriesData = [
 ];
 
 export const items = [
+  {
+    category: 'signatures',
+    id: '545',
+    nombre: 'Pechuga de pato',
+    ingredientes:
+      'Pechuga de pato, sal, pimienta, aceite de oliva, ajo, tomillo fresco, romero fresco, vino tinto o vinagre balsámico (opcional, para la salsa).',
+    precio: 92000,
+  },
+  {
+    category: 'signatures',
+    id: '546',
+    nombre: 'Beef Wellington',
+    ingredientes:
+      'Filete de res (tenderloin), sal, pimienta, aceite de oliva, mostaza de Dijon, champiñones, chalotes, ajo, tomillo fresco, mantequilla, jamón serrano o prosciutto, hojaldre, yema de huevo.',
+    precio: 110000,
+  },
+  {
+    category: 'signatures',
+    id: '547',
+    nombre: 'Eton Mess',
+    ingredientes:
+      'Fresas, merengues, crema batida, azúcar, vainilla (opcional).',
+    precio: 23000,
+  },
+  {
+    category: 'signatures',
+    id: '548',
+    nombre: 'salmón braseado',
+    ingredientes:
+      'Salmón, sal, pimienta, aceite de oliva, ajo, limón, hierbas frescas (como eneldo o perejil).',
+    precio: 98000,
+  },
+  {
+    category: 'signatures',
+    id: '549',
+    nombre: 'Pizza de champiñones Chanterelle',
+    ingredientes:
+      'Champiñones, chantarelas, salsa de tomate, queso mozzarella, ajo, aceite de oliva, sal, pimienta, hierbas frescas (como albahaca o perejil).',
+    precio: 89000,
+  },
+  {
+    category: 'signatures',
+    id: '550',
+    nombre: 'Carbonara',
+    ingredientes:
+      'Espaguetis, panceta (o guanciale), huevos, queso pecorino romano, pimienta negra, sal.',
+    precio: 77000,
+  },
   {
     category: 'platos-fuertes',
     id: '1',
@@ -134,10 +182,10 @@ export const items = [
   {
     category: 'platos-fuertes',
     id: '8',
-    nombre: 'Curry de Camarones y Coco',
+    nombre: 'Beef Wellington',
     ingredientes:
-      'Camarones, leche de coco, pasta de curry rojo, cilantro, jengibre, arroz basmati',
-    precio: 78000,
+      'Filete de res (tenderloin), mostaza de Dijon, champiñones, chalotes, ajo, tomillo fresco, jamón serrano o prosciutto, hojaldre',
+    precio: 96000,
   },
   {
     category: 'platos-fuertes',
@@ -491,46 +539,6 @@ export const items = [
     ingredientes:
       'Suave y sedosa panna cotta de vainilla con una capa de coulis de frutos rojos y frutos del bosque frescos',
     precio: 30000,
-  },
-  {
-    category: 'proximos-lanzamientos',
-    id: '53',
-    nombre: 'Filete de Res Wellington',
-    ingredientes:
-      'Un filete de res tiernamente cocido al punto, envuelto en hojaldre crujiente y relleno de una mezcla de champiñones salteados, foie gras y hierbas frescas, acompañado de una reducción de vino tinto y puré de patatas trufado.',
-    precio: 85000,
-  },
-  {
-    category: 'proximos-lanzamientos',
-    id: '54',
-    nombre: 'Risotto de Langosta y Trufas',
-    ingredientes:
-      'Arroz Arborio cremoso cocido en caldo de langosta con trozos jugosos de langosta, perfumado con aceite de trufa negra y terminado con parmesano rallado y hojas de perejil fresco.',
-    precio: 92000,
-  },
-  {
-    category: 'proximos-lanzamientos',
-    id: '55',
-    nombre: 'Salmón Glaseado con Salsa de Miso',
-    ingredientes:
-      'Filete de salmón fresco glaseado con una mezcla de miso, miel y salsa de soja, asado al horno y servido sobre un lecho de arroz integral, espinacas salteadas y champiñones shiitake.',
-    precio: 75000,
-  },
-  {
-    category: 'proximos-lanzamientos',
-    id: '56',
-    nombre: 'Medallones de Solomillo con Salsa de Vino Tinto',
-    ingredientes:
-      'Medallones de solomillo de ternera perfectamente sellados y cocidos a la perfección, acompañados de una rica salsa de vino tinto con chalotas caramelizadas, acompañados de papas rosti y espárragos al vapor.',
-    precio: 89000,
-  },
-  {
-    category: 'proximos-lanzamientos',
-    id: '57',
-    nombre: 'Raviolis de Langosta con Salsa de Tomate Fresco',
-    ingredientes:
-      'Raviolis rellenos de carne de langosta y ricotta, servidos con una salsa de tomate fresco perfumada con albahaca y ajo, adornados con hojas de albahaca fresca y queso parmesano rallado.',
-    precio: 98000,
   },
   {
     category: 'bebidas',

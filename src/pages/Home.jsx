@@ -1,5 +1,5 @@
 import Featured from '../components/Featured';
-import HomeNews from '../components/HomeNews';
+import News from '../components/News';
 import SignatureDishes from '../components/SignatureDishes';
 import Faq from '../components/Faq';
 import BehindScenes from '../components/BehindScenes';
@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
       <Featured />
-      <HomeNews />
+      <News />
       <SignatureDishes />
       <Faq />
       <BehindScenes />
