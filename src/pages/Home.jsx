@@ -1,20 +1,20 @@
 import Featured from '../components/Featured';
-import News from '../components/News';
+import Services from '../components/Services';
 import SignatureDishes from '../components/SignatureDishes';
 import Faq from '../components/Faq';
-import BehindScenes from '../components/BehindScenes';
-import Contact from '../components/Contact';
+import News from '../components/News';
+import Map from '../components/Map';
 import '../styles/Home.css';
 
 const Home = () => {
   return (
     <>
       <Featured />
-      <News />
+      <Services />
       <SignatureDishes />
       <Faq />
-      <BehindScenes />
-      <Contact />
+      <News />
+      <Map />
     </>
   );
 };

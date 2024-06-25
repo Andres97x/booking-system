@@ -17,7 +17,7 @@ const Header = () => {
         <Link to='/about'>Nosotros</Link>
         <span className='nav-signature'>Éclat Étoilé</span>
         <Link to='/menu'>Menú</Link>
-        <a href='/#section-contact'>Contacto</a>
+        <a href='/'>Contacto</a>
       </nav>
       <div>
         <Link to='/bookings' className='reservation-link'>

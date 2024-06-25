@@ -1,9 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { useState } from 'react';
 import Header from './Header';
 import Hero from './Hero';
 import Footer from './Footer';
-import Cart from './Cart';
 
 const PageLayout = () => {
   const { pathname } = useLocation();
