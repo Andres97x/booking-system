@@ -9,7 +9,7 @@ const PageLayout = () => {
   return (
     <>
       <div
-        className={pathname === '/' ? `header-hero__wrapper` : 'header-wrapper'}
+        className={`header-wrapper ${pathname === '/' ? `hero-wrapper` : ''}`}
       >
         <Header />
         {pathname === '/' && <Hero />}

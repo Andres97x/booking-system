@@ -10,7 +10,6 @@ const BookingCalendar = ({ onClickDay }) => {
         next2Label={null}
         minDetail='decade'
       />
-      <p>Select a date</p>
     </div>
   );
 };

@@ -118,7 +118,7 @@ input[type='checkbox']:checked {
 
 /* HEADER-HERO */
 
-.header-hero__wrapper {
+.header-wrapper.hero-wrapper {
   background-image: linear-gradient(
       to right bottom,
       rgba(0, 0, 0, 0.3),
@@ -139,7 +139,7 @@ header {
   height: var(--header-height);
   padding: 0 4rem;
   font-size: 1.6rem;
-  background-color: var(--secondary-color);
+  background-color: var(--main-color);
 }
 
 header > * {
@@ -151,7 +151,7 @@ header > nav {
   justify-content: space-between;
 }
 
-.header-hero__wrapper header {
+.header-wrapper.hero-wrapper header {
   background-color: var(--transparent);
 }
 
@@ -171,14 +171,21 @@ header a:link,
 header a:visited,
 header a:hover,
 header a:active {
-  color: var(--main-color);
+  color: var(--font-secondary-color);
   text-decoration: none;
   text-transform: uppercase;
 }
 
-header a:focus {
-  outline: var(--main-color-half) solid 2px;
+.header-wrapper.hero-wrapper header a:link,
+.header-wrapper.hero-wrapper header a:visited,
+.header-wrapper.hero-wrapper header a:hover,
+.header-wrapper.hero-wrapper header a:active {
+  color: var(--main-color);
 }
+
+/* header a:focus {
+  outline: var(--main-color-half) solid 2px;
+} */
 
 header > div {
   display: flex;
@@ -186,9 +193,15 @@ header > div {
 }
 
 .reservation-link {
-  background-color: var(--button-main-color);
+  background-color: var(--secondary-color);
   padding: 1rem 2rem;
   margin-left: auto;
+  color: var(--main-color) !important;
+  font-weight: 600;
+}
+
+.header-wrapper.hero-wrapper .reservation-link {
+  background-color: var(--secondary-color);
   color: var(--main-color) !important;
 }
 
@@ -200,6 +213,10 @@ header > div {
   font-family: 'WindSong', cursive;
   font-weight: 400;
   font-style: normal;
+  color: var(--font-secondary-color);
+}
+
+.header-wrapper.hero-wrapper .nav-signature {
   color: var(--main-color);
 }
 
@@ -211,6 +228,10 @@ header button {
 }
 
 header svg {
+  color: var(--font-secondary-color);
+}
+
+.header-wrapper.hero-wrapper header svg {
   color: var(--main-color);
 }
 
@@ -218,7 +239,7 @@ header svg {
 .footer {
   background-color: var(--secondary-color);
   padding: 6rem 6rem 2rem 6rem;
-  border-top: 1px solid #b0b0b1;
+  border-top: 1px solid var(--font-main-color);
   position: relative;
   z-index: 100;
 }

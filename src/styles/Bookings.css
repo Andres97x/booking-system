@@ -1,26 +1,29 @@
 .bookings-container {
-  display: flex;
-  background-color: #f7dcb9;
-  padding: 15rem 10rem;
-  --calendar-main-color: #fbfada;
+  background-color: var(--main-color);
+  padding: 10rem 0;
+}
+
+.bookings-container *:focus {
+  outline-offset: -3px;
+}
+
+.bookings-container button {
+  color: var(--font-secondary-color);
+  background-color: var(--main-color);
 }
 
 /* CALENDAR */
-
 .calendar-container {
-  /* background-color: #12372a; */
-  /* height: 100%; */
   width: 100%;
   max-width: 50rem;
-  background-color: var(--calendar-main-color);
+  margin: 0 auto;
   padding: 10px;
   border-radius: 2px;
-  display: grid;
-  grid-template-rows: 1fr auto;
+  color: var(--font-secondary-color);
+  background-color: var(--main-color);
 }
 
 .calendar-container > p {
-  color: #86a46a;
   font-weight: bold;
   font-size: 2rem;
   padding-block-start: 1rem;
@@ -44,6 +47,9 @@
   .react-calendar__navigation__arrow {
     flex-grow: 0.333;
     font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:disabled {
       opacity: 0.5;
@@ -55,6 +61,7 @@
 .react-calendar__month-view__weekdays {
   text-align: center;
   padding: 2rem 0;
+  font-weight: 700;
 }
 
 /* ~~~ days label styles ~~~ */
@@ -66,15 +73,12 @@ abbr[title] {
 /* ~~~ button styles ~~~ */
 .calendar-container button {
   margin: 3px;
-  background-color: var(--calendar-main-color);
   border: 0;
   border-radius: 2px;
-  color: #12372a;
   padding: 5px 0;
-  /* height: 5rem; */
 
   &:hover {
-    background-color: #adbc9f;
+    box-shadow: inset 0 0 0 2px var(--font-secondary-color);
   }
 
   /* &:active {
@@ -93,6 +97,8 @@ abbr[title] {
 
   .react-calendar__tile {
     max-width: initial !important;
+    margin: 0;
+    padding: 0.5rem;
   }
 }
 
@@ -108,7 +114,7 @@ abbr[title] {
 }
 
 .react-calendar__month-view__days__day--weekend {
-  color: #12372a;
+  /* color: #12372a; */
 }
 
 /* ~~~ disabled tiles styles ~~~ */
@@ -118,7 +124,7 @@ abbr[title] {
 
 /* ~~~ current day styles ~~~ */
 .react-calendar__tile--now {
-  background-color: #e1e0c1 !important;
+  background-color: rgba(18, 55, 42, 0.1) !important;
 }
 
 /* .react-calendar__tile--now > abbr {
@@ -127,8 +133,8 @@ abbr[title] {
 
 /* ~~~ active day styles ~~~ */
 .react-calendar__tile--range {
-  background-color: #12372a !important;
-  color: var(--calendar-main-color) !important;
+  background-color: var(--secondary-color) !important;
+  color: var(--font-main-color) !important;
   /* border: 3px solid #12372a !important; */
 }
 
