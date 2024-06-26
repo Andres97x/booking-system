@@ -133,6 +133,7 @@
 
 .services-card__content p {
   margin-top: 0.6rem;
+  font-size: 1.4rem;
 }
 
 .services-card span:has(svg) {
