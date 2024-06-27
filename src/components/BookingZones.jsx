@@ -41,8 +41,6 @@ const BookingZones = ({ onClickZone }) => {
         <img src={zone3} alt='restaurant zone' />
         <p>Zone 3</p>
       </button>
-
-      <p>Select a zone</p>
     </div>
   );
 };

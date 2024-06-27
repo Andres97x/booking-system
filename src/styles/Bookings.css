@@ -12,15 +12,31 @@
   background-color: var(--main-color);
 }
 
+.bookings-slider {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+}
+
+.bookings-slider > div {
+  flex-shrink: 0;
+  flex-grow: 0;
+  /* width: calc(100% / 3); */
+  width: 100%;
+}
+
 /* CALENDAR */
 .calendar-container {
   width: 100%;
-  max-width: 50rem;
-  margin: 0 auto;
   padding: 10px;
   border-radius: 2px;
   color: var(--font-secondary-color);
   background-color: var(--main-color);
+}
+
+.calendar-container > div {
+  max-width: 50rem;
+  margin: 0 auto;
 }
 
 .calendar-container > p {
@@ -182,25 +198,12 @@ abbr[title] {
 .booking-zones {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: 1fr auto;
   grid-template-rows: repeat(3, 16.5rem);
   row-gap: 1rem;
   place-items: center;
   padding: 10px;
   /* background-color: var(--calendar-main-color); */
   background-color: #12372a;
-
-  > p {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    grid-column: 2 / -1;
-    grid-row: 1 / -1;
-    color: var(--calendar-main-color);
-    font-size: 2rem;
-    font-weight: bold;
-    padding-block-end: 1rem;
-    text-transform: uppercase;
-  }
 
   button {
     width: 100%;
@@ -262,7 +265,6 @@ abbr[title] {
 .times-container {
   padding: 2rem 6rem;
   background-color: #f7dcb9;
-  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;

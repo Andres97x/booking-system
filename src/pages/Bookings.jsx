@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { add, format } from 'date-fns';
-import { IoArrowBack, IoArrowForward } from 'react-icons/io5';
+
 import {
   BOOKING_INIT,
   OPENING_TIME,
@@ -8,9 +8,11 @@ import {
   INTERVAL,
   ZONE_TABLES,
 } from '../constants';
-
+import { getTimes, getTakenTimes } from '../utils';
 import BookingCalendar from '../components/BookingCalendar';
 import BookingZones from '../components/BookingZones';
+import BookingTimes from '../components/BookingTimes';
+import TimeTile from '../components/TimeTile';
 import '../styles/Bookings.css';
 
 const Bookings = () => {
@@ -28,56 +30,10 @@ const Bookings = () => {
     setBooking(prev => ({ ...prev, zone: id }));
   };
 
-  const getTimes = () => {
-    if (!booking.justDate || !booking.zone) return;
+  const times = getTimes(booking, INTERVAL, add, OPENING_TIME, CLOSING_TIME);
+  // console.log(times);
 
-    const { justDate } = booking;
-    const beginning = add(justDate, { hours: OPENING_TIME });
-    const end = add(justDate, { hours: CLOSING_TIME });
-    const interval = INTERVAL; // in minutes
-
-    const times = [];
-    for (let i = beginning; i <= end; i = add(i, { minutes: interval })) {
-      times.push(i);
-    }
-
-    return times;
-  };
-
-  const times = getTimes();
-
-  const getTakenTimes = () => {
-    if (!booking.justDate || !booking.zone || bookings.length === 0) return;
-
-    const takenTimes = bookings
-      .filter(
-        completedBooking =>
-          Date.parse(completedBooking.justDate) ===
-            Date.parse(booking.justDate) &&
-          completedBooking.zone === booking.zone
-      )
-      .map(takenDate => {
-        // Assuming bookings last 1 hour (2 intervals)
-        const chosenTime = takenDate.dateTime;
-
-        // Restricting half an hour before reservation (1 interval)
-        const beforeInterval = add(chosenTime, { minutes: -INTERVAL });
-
-        // Restricting an hour after reservation (2 intervals)
-        const firstInterval = add(chosenTime, { minutes: INTERVAL });
-        const secondInterval = add(chosenTime, { minutes: INTERVAL * 2 });
-
-        return [
-          Date.parse(beforeInterval),
-          Date.parse(chosenTime),
-          Date.parse(firstInterval),
-          Date.parse(secondInterval),
-        ];
-      });
-
-    return takenTimes.flat();
-  };
-  const takenTimes = getTakenTimes();
+  const takenTimes = getTakenTimes(booking, bookings);
 
   const getOcurrences = (takenTimes, currentTime) => {
     return takenTimes?.filter(hour => hour === Date.parse(currentTime));
@@ -97,69 +53,30 @@ const Bookings = () => {
     // || takenTimes?.includes(Date.parse(time)); // Assuming just 1 table per zone
 
     return (
-      <div key={`time-${i}`} className='time'>
-        <button
-          className={activeTimeId === i ? 'time-selected' : ''}
-          disabled={condition}
-          onClick={() => {
-            if (condition) return;
-            setActiveTimeId(i);
-            setBooking(prev => ({ ...prev, dateTime: time }));
-          }}
-        >
-          {format(time, 'hh:mm aaa')}
-        </button>
-      </div>
+      <TimeTile
+        key={`time-tile-${i}`}
+        i={i}
+        time={time}
+        activeTimeId={activeTimeId}
+        condition={condition}
+        format={format}
+        setActiveTimeId={setActiveTimeId}
+        setBooking={setBooking}
+      />
     );
   });
 
+  // const renderCondition = booking.justDate && booking.zone;
+
   return (
     <div className='bookings-container'>
-      {booking.justDate && booking.zone ? (
-        <div className='times-container'>
-          <div className='times-nav_btns'>
-            <button
-              className='times-nav_btn'
-              onClick={() => {
-                setBooking(BOOKING_INIT);
-                setActiveTimeId(null);
-              }}
-            >
-              <IoArrowBack /> Go back
-            </button>
-            <button
-              className='times-nav_btn'
-              onClick={() => {
-                if (!booking.dateTime) {
-                  alert('Please select an hour');
-                  return;
-                }
-
-                if (Date.parse(booking.dateTime) < Date.now()) {
-                  alert(
-                    'You are trying to book on a past time, please select a new hour'
-                  );
-                }
-
-                setBookings(prev => [...prev, booking]);
-                alert('Booking completed');
-                setBooking(BOOKING_INIT);
-              }}
-            >
-              Next <IoArrowForward />
-            </button>
-          </div>
-          <div className='times-flex'>{timesEl}</div>
-        </div>
-      ) : (
+      <div className='bookings-slider'>
         <BookingCalendar onClickDay={onClickDay} />
-      )}
+        <BookingZones onClickZone={onClickZone} />
+        <BookingTimes timesEl={timesEl} />
+      </div>
     </div>
   );
 };
 
 export default Bookings;
-
-{
-  /* <BookingZones onClickZone={onClickZone} /> */
-}

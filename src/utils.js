@@ -1,3 +1,5 @@
+/* <---- GENERAL ----> */
+
 export const formatPrice = element => {
   return new Intl.NumberFormat('es-CO', {
     style: 'currency',
@@ -7,6 +9,8 @@ export const formatPrice = element => {
     .split(',')[0]
     .replace(/\u00A0/g, ''); // replace $&nbsp; between the sign and the number
 };
+
+/* <---- MENU COMPONENT ----> */
 
 /* transformObject fn takes an object and returns an array of objects. Categorizing and grouping (by common group name) =>({name: str, items: str[]}) as follows :
 [{name: 'group1', items: ['selected1','selected2',...]}, {name: 'group2', items: ['selected1','selected2',...]}, ...] */
@@ -49,4 +53,53 @@ export const getGroupCount = obj => {
   }
 
   return result;
+};
+
+/* <---- BOOKINGS COMPONENT ----> */
+
+export const getTimes = (booking, interval, add, openingTime, closingTime) => {
+  // if (!booking.justDate || !booking.zone) return;
+  if (!booking.justDate) return;
+
+  const { justDate } = booking;
+  const beginning = add(justDate, { hours: openingTime });
+  const end = add(justDate, { hours: closingTime });
+
+  const times = [];
+  for (let i = beginning; i <= end; i = add(i, { minutes: interval })) {
+    times.push(i);
+  }
+
+  return times;
+};
+
+export const getTakenTimes = (booking, bookings) => {
+  if (!booking.justDate || !booking.zone || bookings.length === 0) return;
+
+  const takenTimes = bookings
+    .filter(
+      completedBooking =>
+        Date.parse(completedBooking.justDate) ===
+          Date.parse(booking.justDate) && completedBooking.zone === booking.zone
+    )
+    .map(takenDate => {
+      // Assuming bookings last 1 hour (2 intervals)
+      const chosenTime = takenDate.dateTime;
+
+      // Restricting half an hour before reservation (1 interval)
+      const beforeInterval = add(chosenTime, { minutes: -INTERVAL });
+
+      // Restricting an hour after reservation (2 intervals)
+      const firstInterval = add(chosenTime, { minutes: INTERVAL });
+      const secondInterval = add(chosenTime, { minutes: INTERVAL * 2 });
+
+      return [
+        Date.parse(beforeInterval),
+        Date.parse(chosenTime),
+        Date.parse(firstInterval),
+        Date.parse(secondInterval),
+      ];
+    });
+
+  return takenTimes.flat();
 };
