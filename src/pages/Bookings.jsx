@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { add, format } from 'date-fns';
+import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 
-// prettier-ignore
-import { BOOKING_INIT, OPENING_TIME, CLOSING_TIME, INTERVAL, ZONE_TABLES } from '../constants';
-import { getTimes, getTakenTimes } from '../utils';
+import { BOOKING_INIT } from '../constants';
 import BookingCalendar from '../components/BookingCalendar';
 import BookingZones from '../components/BookingZones';
 import BookingTimes from '../components/BookingTimes';
-import TimeTile from '../components/TimeTile';
+import BookingForm from '../components/BookingForm';
 import '../styles/Bookings.css';
 
 const Bookings = () => {
@@ -20,16 +18,49 @@ const Bookings = () => {
   const [sliderIndex, setSliderIndex] = useState(0);
   const bookingsContainerRef = useRef(null);
 
-  // console.log(booking);
+  // console.log(sliderIndex);
 
   useEffect(() => {
+    // preventing tab navigation on booking slider btns (calendar, zones and times)
     if (!bookingsContainerRef) return;
 
     const bookingBtns = bookingsContainerRef.current.querySelectorAll(
       'button:not(.tab-enabled)'
     );
     bookingBtns.forEach(btn => btn.setAttribute('tabindex', '-1'));
+
+    // enabling tab navigation only on inputs in slider and only when sliderIndex === 3 (form slider index)
+    const sliderFormInputs = bookingsContainerRef.current.querySelectorAll(
+      '.form-container input'
+    );
+
+    if (sliderIndex !== 3) {
+      sliderFormInputs.forEach(input => input.setAttribute('tabindex', '-1'));
+    } else {
+      sliderFormInputs.forEach(input => input.setAttribute('tabindex', '0'));
+    }
+
+    // preventing active styles from being applied on calendar day tiles when booking.justDate is null.
+    if (!booking.justDate) {
+      const selectedDateTile = document.querySelector(
+        '.react-calendar__tile--range'
+      );
+
+      selectedDateTile?.classList.remove('react-calendar__tile--range');
+    }
   }, [booking]);
+
+  // useEffect(() => {
+  // document.addEventListener('keydown', e => {
+  // if (e.key === 'Tab' && sliderIndex !== 3) return;
+
+  //     const slider
+  //   });
+  // }, [sliderIndex]);
+
+  const onClickMonth = () => {
+    setBooking(prev => ({ ...prev, justDate: null }));
+  };
 
   const onClickDay = value => {
     setBooking(prev => ({ ...prev, justDate: value }));
@@ -41,46 +72,15 @@ const Bookings = () => {
     setSliderIndex(2);
   };
 
-  const times = getTimes(booking, INTERVAL, add, OPENING_TIME, CLOSING_TIME);
-  // console.log(times);
-
-  const takenTimes = getTakenTimes(booking, bookings);
-
-  const getOcurrences = (takenTimes, currentTime) => {
-    return takenTimes?.filter(hour => hour === Date.parse(currentTime));
+  const onClickTime = (condition, i, time) => {
+    if (condition) return;
+    setActiveTimeId(i);
+    setBooking(prev => ({ ...prev, dateTime: time }));
+    setSliderIndex(3);
   };
-
-  const timesEl = times?.map((time, i, array) => {
-    const ocurrences = getOcurrences(takenTimes, time);
-    // Getting ocurrences for half an hour and one hour later, if some table isn't available at those times, I don't want the user to be able to book a table at this current time (collapsing times).
-    const ocurrencesOnNextTime = getOcurrences(takenTimes, array[i + 1]);
-    const ocurrencesAfterNextTime = getOcurrences(takenTimes, array[i + 2]);
-
-    const condition =
-      Date.parse(time) < Date.now() ||
-      ZONE_TABLES[booking.zone] <= ocurrences?.length ||
-      ZONE_TABLES[booking.zone] <= ocurrencesOnNextTime?.length ||
-      ZONE_TABLES[booking.zone] <= ocurrencesAfterNextTime?.length;
-    // || takenTimes?.includes(Date.parse(time)); // Assuming just 1 table per zone
-
-    return (
-      <TimeTile
-        key={`time-tile-${i}`}
-        i={i}
-        time={time}
-        activeTimeId={activeTimeId}
-        setActiveTimeId={setActiveTimeId}
-        condition={condition}
-        format={format}
-        setBooking={setBooking}
-      />
-    );
-  });
 
   // booking.justDate &&
   //   console.log(format(booking.justDate, "'Today is a' eeee", { locale: es }));
-
-  console.log(booking.zone);
 
   return (
     <div className='bookings-container' ref={bookingsContainerRef}>
@@ -98,14 +98,25 @@ const Bookings = () => {
         )}
       </div>
       <div className='bookings-slider'>
-        <BookingCalendar onClickDay={onClickDay} sliderIndex={sliderIndex} />
+        <BookingCalendar
+          onClickDay={onClickDay}
+          sliderIndex={sliderIndex}
+          onClickMonth={onClickMonth}
+        />
         <BookingZones
           onClickZone={onClickZone}
           sliderIndex={sliderIndex}
           activeZoneId={activeZoneId}
           setActiveZoneId={setActiveZoneId}
         />
-        <BookingTimes timesEl={timesEl} sliderIndex={sliderIndex} />
+        <BookingTimes
+          booking={booking}
+          bookings={bookings}
+          sliderIndex={sliderIndex}
+          activeTimeId={activeTimeId}
+          onClickTime={onClickTime}
+        />
+        <BookingForm sliderIndex={sliderIndex} />
       </div>
       <button
         className='bookings-back_btn tab-enabled'
@@ -129,6 +140,11 @@ const Bookings = () => {
             if (prev === 2) {
               setBooking(prev => ({ ...prev, zone: null, dateTime: null }));
               setActiveZoneId(null);
+              setActiveTimeId(null);
+            }
+
+            if (prev === 3) {
+              setBooking(prev => ({ ...prev, dateTime: null }));
               setActiveTimeId(null);
             }
 

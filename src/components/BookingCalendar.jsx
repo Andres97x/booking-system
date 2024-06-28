@@ -1,6 +1,6 @@
 import Calendar from 'react-calendar';
 
-const BookingCalendar = ({ onClickDay, sliderIndex }) => {
+const BookingCalendar = ({ onClickDay, sliderIndex, onClickMonth }) => {
   return (
     <div
       className='calendar-container'
@@ -8,6 +8,7 @@ const BookingCalendar = ({ onClickDay, sliderIndex }) => {
     >
       <div>
         <Calendar
+          onClickMonth={onClickMonth}
           onClickDay={onClickDay}
           minDate={new Date()}
           prev2Label={null}

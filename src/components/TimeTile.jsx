@@ -4,8 +4,7 @@ const TimeTile = ({
   activeTimeId,
   condition,
   format,
-  setActiveTimeId,
-  setBooking,
+  onClickTime,
 }) => {
   return (
     <button
@@ -13,9 +12,7 @@ const TimeTile = ({
       className={`time ${activeTimeId === i ? 'time-selected' : ''}`}
       disabled={condition}
       onClick={() => {
-        if (condition) return;
-        setActiveTimeId(i);
-        setBooking(prev => ({ ...prev, dateTime: time }));
+        onClickTime(condition, i, time);
       }}
     >
       <p>{format(time, 'hh:mm aaa')}</p>

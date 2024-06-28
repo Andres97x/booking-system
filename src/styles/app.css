@@ -116,6 +116,16 @@ input[type='checkbox']:checked {
   transform: scale(1.07);
 }
 
+/* chromium and safari */
+input[type='number']::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 /* HEADER-HERO */
 
 .header-wrapper.hero-wrapper {

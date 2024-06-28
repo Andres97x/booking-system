@@ -10,6 +10,13 @@ export const formatPrice = element => {
     .replace(/\u00A0/g, ''); // replace $&nbsp; between the sign and the number
 };
 
+export const validateNumericInput = el => {
+  el.addEventListener('beforeInput', e => {
+    let beforeValue = el.value;
+    e.target.addEventListener;
+  });
+};
+
 /* <---- MENU COMPONENT ----> */
 
 /* transformObject fn takes an object and returns an array of objects. Categorizing and grouping (by common group name) =>({name: str, items: str[]}) as follows :
