@@ -1,8 +1,11 @@
 import Calendar from 'react-calendar';
 
-const BookingCalendar = ({ onClickDay }) => {
+const BookingCalendar = ({ onClickDay, sliderIndex }) => {
   return (
-    <div className='calendar-container'>
+    <div
+      className='calendar-container'
+      style={{ transform: `translateX(${-100 * sliderIndex}%)` }}
+    >
       <div>
         <Calendar
           onClickDay={onClickDay}

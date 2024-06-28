@@ -8,19 +8,18 @@ const TimeTile = ({
   setBooking,
 }) => {
   return (
-    <div key={`time-${i}`} className='time'>
-      <button
-        className={activeTimeId === i ? 'time-selected' : ''}
-        disabled={condition}
-        onClick={() => {
-          if (condition) return;
-          setActiveTimeId(i);
-          setBooking(prev => ({ ...prev, dateTime: time }));
-        }}
-      >
-        {format(time, 'hh:mm aaa')}
-      </button>
-    </div>
+    <button
+      key={`time-${i}`}
+      className={`time ${activeTimeId === i ? 'time-selected' : ''}`}
+      disabled={condition}
+      onClick={() => {
+        if (condition) return;
+        setActiveTimeId(i);
+        setBooking(prev => ({ ...prev, dateTime: time }));
+      }}
+    >
+      <p>{format(time, 'hh:mm aaa')}</p>
+    </button>
   );
 };
 
