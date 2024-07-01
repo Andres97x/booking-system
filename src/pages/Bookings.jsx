@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { BsFillCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
+import { BsFillCaretLeftFill } from 'react-icons/bs';
 
 import { BOOKING_FORM_INIT, BOOKING_INIT } from '../constants';
 import BookingCalendar from '../components/BookingCalendar';
@@ -19,7 +19,7 @@ const Bookings = () => {
   const bookingsContainerRef = useRef(null);
   const [bookingForm, setBookingForm] = useState(BOOKING_FORM_INIT);
 
-  // console.log(bookings);
+  console.log(bookings);
 
   const onClickMonth = () => {
     setBooking(prev => ({ ...prev, justDate: null }));
@@ -94,7 +94,7 @@ const Bookings = () => {
       return;
     }
 
-    setBookings(prev => [...prev, booking]);
+    setBookings(prev => [...prev, { ...booking, ...bookingForm }]);
     alert('Reserva completada');
     setBooking(BOOKING_INIT);
     setActiveTimeId(null);
@@ -119,7 +119,7 @@ const Bookings = () => {
     );
     bookingBtns.forEach(btn => btn.setAttribute('tabindex', '-1'));
 
-    // enabling tab navigation only on inputs in slider and only when sliderIndex === 3 (form slider index)
+    // enabling tab navigation only on inputs when sliderIndex === 3 (form slider index)
     const sliderFormInputs = bookingsContainerRef.current.querySelectorAll(
       '.form-container input, select'
     );
@@ -145,12 +145,6 @@ const Bookings = () => {
 
       selectedDateTile?.classList.remove('react-calendar__tile--range');
     }
-
-    // showing the complete booking button when in last slide
-    // const completeBtn = document.querySelector('.complete-booking');
-    // if (sliderIndex === 3) {
-    // } else {
-    // }
   }, [booking]);
 
   return (
@@ -204,7 +198,9 @@ const Bookings = () => {
           <BsFillCaretLeftFill />
         </button>
         <button
-          className={`bookings-btn complete-booking tab-enabled`}
+          className={`bookings-btn complete-booking tab-enabled ${
+            sliderIndex === 3 ? '' : 'hidden'
+          }`}
           disabled={sliderIndex !== 3}
           onClick={onClickComplete}
         >
