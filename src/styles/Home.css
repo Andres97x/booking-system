@@ -176,11 +176,11 @@
 }
 
 .signatures-grid {
-  margin-top: 8rem;
+  margin-top: 5rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   /* grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr)); */
-  gap: 2rem;
+  gap: 1.3rem;
 }
 
 .signature-card {
@@ -212,7 +212,7 @@
 .signature-card img {
   display: block;
   width: 100%;
-  aspect-ratio: 1/1.1;
+  aspect-ratio: 1.1/1;
   object-fit: cover;
 }
 
@@ -221,19 +221,19 @@
 }
 
 .signature-card:nth-child(2) img {
-  object-position: 0 100%;
-}
-
-.signature-card:nth-child(3) img {
-  object-position: 0 50%;
-}
-
-.signature-card:nth-child(4) img {
   object-position: 0 90%;
 }
 
+.signature-card:nth-child(3) img {
+  object-position: 0 70%;
+}
+
+.signature-card:nth-child(4) img {
+  object-position: 0 100%;
+}
+
 .signature-card:nth-child(5) img {
-  object-position: 0 80%;
+  object-position: 0 70%;
 }
 
 .signature-card:nth-child(6) img {

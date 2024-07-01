@@ -6,10 +6,18 @@ export const BOOKING_INIT = {
   dateTime: null,
 };
 
+export const BOOKING_FORM_INIT = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  email: '',
+  size: '',
+};
+
 export const ZONE_TABLES = {
-  1: 2,
-  2: 4,
-  3: 6,
+  interior: 2,
+  exterior: 2,
+  azotea: 2,
 };
 
 export const OPENING_TIME = 16;

@@ -10,13 +10,6 @@ export const formatPrice = element => {
     .replace(/\u00A0/g, ''); // replace $&nbsp; between the sign and the number
 };
 
-export const validateNumericInput = el => {
-  el.addEventListener('beforeInput', e => {
-    let beforeValue = el.value;
-    e.target.addEventListener;
-  });
-};
-
 /* <---- MENU COMPONENT ----> */
 
 /* transformObject fn takes an object and returns an array of objects. Categorizing and grouping (by common group name) =>({name: str, items: str[]}) as follows :
@@ -80,7 +73,8 @@ export const getTimes = (booking, interval, add, openingTime, closingTime) => {
   return times;
 };
 
-export const getTakenTimes = (booking, bookings) => {
+// Function to get taken times in a specific date at some specific zone
+export const getTakenTimes = (booking, bookings, add, interval) => {
   if (!booking.justDate || !booking.zone || bookings.length === 0) return;
 
   const takenTimes = bookings
@@ -93,15 +87,12 @@ export const getTakenTimes = (booking, bookings) => {
       // Assuming bookings last 1 hour (2 intervals)
       const chosenTime = takenDate.dateTime;
 
-      // Restricting half an hour before reservation (1 interval)
-      const beforeInterval = add(chosenTime, { minutes: -INTERVAL });
-
       // Restricting an hour after reservation (2 intervals)
-      const firstInterval = add(chosenTime, { minutes: INTERVAL });
-      const secondInterval = add(chosenTime, { minutes: INTERVAL * 2 });
+      const firstInterval = add(chosenTime, { minutes: interval });
+      const secondInterval = add(chosenTime, { minutes: interval * 2 });
 
       return [
-        Date.parse(beforeInterval),
+        // Date.parse(beforeInterval), // this was leading to a bug (may need later)
         Date.parse(chosenTime),
         Date.parse(firstInterval),
         Date.parse(secondInterval),

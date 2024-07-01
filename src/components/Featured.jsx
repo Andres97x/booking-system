@@ -5,7 +5,7 @@ import featuredProfilePic from '../assets/featured-profile-pic.jpg';
 const Featured = () => {
   return (
     <div className='section section-featured'>
-      <div className='faq-container'>
+      <div className='featured-container'>
         <div className='featured-content'>
           <div>
             <h3>

@@ -37,18 +37,22 @@ html {
 }
 
 body,
-button {
+button,
+input,
+select {
   font-family: 'Open Sans', Inter, sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   font-variation-settings: 'wdth' 100;
   letter-spacing: 0.4px;
-
-  color: var(--font-main-color);
   line-height: 1.5;
-  font-weight: 400;
+}
+
+body {
+  color: var(--font-main-color);
   font-size: 1.6rem;
+  font-weight: 400;
   background-color: var(--main-color);
 }
 
@@ -268,7 +272,7 @@ header svg {
   cursor: pointer;
   border: none;
   background-color: var(--secondary-color);
-
+  color: var(--font-main-color);
   font-size: 2rem;
   text-transform: capitalize !important;
   font-size: 4rem;

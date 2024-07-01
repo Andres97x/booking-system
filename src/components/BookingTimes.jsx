@@ -15,16 +15,22 @@ const BookingTimes = ({
   const times = getTimes(booking, INTERVAL, add, OPENING_TIME, CLOSING_TIME);
   // console.log(times);
 
-  const takenTimes = getTakenTimes(booking, bookings);
+  const takenTimes = getTakenTimes(booking, bookings, add, INTERVAL);
 
+  // Ocurrences mean how many times the current looping time matches the taken times
   const getOcurrences = (takenTimes, currentTime) => {
     return takenTimes?.filter(hour => hour === Date.parse(currentTime));
   };
 
   const timesEl = times?.map((time, i, array) => {
     const ocurrences = getOcurrences(takenTimes, time);
+    // ocurrences?.forEach(stamp => console.log(new Date(stamp).toString()));
+
     // Getting ocurrences for half an hour and one hour later, if some table isn't available at those times, I don't want the user to be able to book a table at this current time (collapsing times).
+    // => this will determine wheter the current <TimeTile/> will be disabled or not depending on the ocurrences of the time that is 1 loop after.
     const ocurrencesOnNextTime = getOcurrences(takenTimes, array[i + 1]);
+
+    // => this will determine wheter the current <TimeTile/> will be disabled or not depending on the ocurrences of the time that is 2 loops after.
     const ocurrencesAfterNextTime = getOcurrences(takenTimes, array[i + 2]);
 
     const condition =
