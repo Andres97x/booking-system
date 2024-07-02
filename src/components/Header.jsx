@@ -21,7 +21,7 @@ const Header = () => {
       </nav>
       <div>
         <Link to='/bookings' className='reservation-link'>
-          Hacer una reserva
+          Reservar
         </Link>
       </div>
     </header>

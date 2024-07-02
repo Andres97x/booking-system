@@ -1,0 +1,106 @@
+.dashboard-container,
+.dashboard-container button {
+  color: var(--font-secondary-color);
+}
+
+.dashboard-container {
+  --dashboard-margin: 2rem;
+  margin: var(--dashboard-margin);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+.dashboard-sidebar {
+  grid-row: 1 / 3;
+  height: calc(100vh - var(--header-height) - (var(--dashboard-margin) * 2));
+  padding: 3rem 2rem;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-sidebar > a:link,
+.dashboard-sidebar > a:visited {
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  background-color: var(--secondary-color);
+  color: var(--font-main-color);
+  border-radius: 5px;
+  transition: all 200ms ease-in-out;
+  text-decoration: none;
+}
+
+.dashboard-sidebar > a:hover,
+.dashboard-sidebar > a:active {
+  background-color: var(--main-color);
+  color: var(--font-secondary-color);
+}
+
+.dashboard-header,
+.dashboard-main {
+  padding: 1rem;
+  margin-left: 2rem;
+  /* border-radius: 8px; */
+}
+
+.dashboard-header {
+  border-bottom: 2px solid var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-logout_btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border: 0;
+  background-color: var(--main-color);
+  font-size: 1.6rem;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  transition: all 200ms ease-in-out;
+  border-radius: 2px;
+}
+
+.dashboard-logout_btn:hover {
+  background-color: var(--secondary-color);
+  color: var(--font-main-color);
+}
+
+.dashboard-logout_btn > span {
+  letter-spacing: 0;
+}
+
+.dashboard-logout_btn > svg {
+  font-size: 2rem;
+  /* color: var(--secondary-color); */
+}
+
+.dashboard-main {
+  margin-top: 2rem;
+}
+
+.dashboard-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}

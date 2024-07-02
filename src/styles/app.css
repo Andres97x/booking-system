@@ -207,16 +207,29 @@ header > div {
 }
 
 .reservation-link {
-  background-color: var(--secondary-color);
+  background-color: var(--main-color);
+  color: var(--font-secondary-color);
   padding: 1rem 2rem;
   margin-left: auto;
-  color: var(--main-color) !important;
   font-weight: 600;
+  border: 1px solid var(--secondary-color);
+  transition: all 200ms ease-in-out;
+  /* border-radius: 5px; */
+}
+
+.reservation-link:hover {
+  background-color: var(--secondary-color);
+  color: var(--font-main-color);
 }
 
 .header-wrapper.hero-wrapper .reservation-link {
   background-color: var(--secondary-color);
-  color: var(--main-color) !important;
+  border-radius: 0;
+}
+
+.header-wrapper.hero-wrapper .reservation-link:hover {
+  background-color: var(--transparent);
+  border: 1px solid var(--main-color);
 }
 
 .nav-signature {
@@ -225,9 +238,11 @@ header > div {
   font-size: 4rem;
 
   font-family: 'WindSong', cursive;
-  font-weight: 400;
+  font-weight: 800;
   font-style: normal;
   color: var(--font-secondary-color);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .header-wrapper.hero-wrapper .nav-signature {
