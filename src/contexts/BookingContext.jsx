@@ -12,6 +12,8 @@ const BookingContextWrapper = ({ children }) => {
   const bookingsContainerRef = useRef(null);
   const [bookingForm, setBookingForm] = useState(BOOKING_FORM_INIT);
 
+  // console.log(bookings);
+
   const onClickMonth = () => {
     setBooking(prev => ({ ...prev, justDate: null }));
   };
@@ -103,7 +105,7 @@ const BookingContextWrapper = ({ children }) => {
 
   useEffect(() => {
     // preventing tab navigation on booking slider btns (calendar, zones and times)
-    if (!bookingsContainerRef) return;
+    if (!bookingsContainerRef.current) return;
 
     const bookingBtns = bookingsContainerRef.current.querySelectorAll(
       'button:not(.tab-enabled)'
@@ -137,6 +139,12 @@ const BookingContextWrapper = ({ children }) => {
       selectedDateTile?.classList.remove('react-calendar__tile--range');
     }
   }, [booking]);
+
+  useEffect(() => {
+    if (Array.isArray(bookings) && bookings.length > 0) {
+      localStorage.setItem('bookings', JSON.stringify(bookings));
+    }
+  }, [bookings]);
 
   return (
     <BookingContext.Provider

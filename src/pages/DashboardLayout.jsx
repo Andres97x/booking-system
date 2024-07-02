@@ -11,19 +11,31 @@ const DashboardLayout = () => {
     <div className='dashboard-container'>
       <div className='dashboard-grid'>
         <aside className='dashboard-sidebar'>
-          <NavLink to='notifications'>
+          <NavLink
+            to='notifications'
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
             <IoMdNotificationsOutline />
             <span>Notificaciones</span>
           </NavLink>
-          <NavLink to='bookings'>
+          <NavLink
+            to='bookings'
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
             <LuBookMarked />
             <span>Reservas</span>
           </NavLink>
-          <NavLink to='menu'>
+          <NavLink
+            to='menu'
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
             <IoRestaurantOutline />
             <span>Menú</span>
           </NavLink>
-          <NavLink to='news'>
+          <NavLink
+            to='news'
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
             <IoNewspaperOutline />
             <span>Noticias</span>
           </NavLink>

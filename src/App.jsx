@@ -18,7 +18,10 @@ import Menu from './pages/Menu';
 const MenuItemsComponent = lazy(() => import('./pages/MenuItems'));
 import DashboardLayout from './pages/DashboardLayout';
 import DashboardMessage from './components/DashboardMessage';
+import DashboardNotifications from './components/DashboardNotifications';
 import DashboardBookings from './components/DashboardBookings';
+import DashboardMenu from './components/DashboardMenu';
+import DashboardNews from './components/DashboardNews';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,7 +40,10 @@ const router = createBrowserRouter(
       />
       <Route path='dashboard' element={<DashboardLayout />}>
         <Route index element={<DashboardMessage />} />
+        <Route path='notifications' element={<DashboardNotifications />} />
         <Route path='bookings' element={<DashboardBookings />} />
+        <Route path='menu' element={<DashboardMenu />} />
+        <Route path='news' element={<DashboardNews />} />
       </Route>
     </Route>
   )
@@ -46,7 +52,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <BookingContextWrapper>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </BookingContextWrapper>
   );
 }

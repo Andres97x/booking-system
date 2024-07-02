@@ -30,8 +30,6 @@ const Bookings = () => {
     onFormChange,
   } = useContext(BookingContext);
 
-  console.log(bookings);
-
   return (
     <div className='bookings-container' ref={bookingsContainerRef}>
       <div className='bookings-info'>

@@ -17,7 +17,10 @@ const Header = () => {
         <Link to='/about'>Nosotros</Link>
         <span className='nav-signature'>Éclat Étoilé</span>
         <Link to='/menu'>Menú</Link>
-        <a href='/'>Contacto</a>
+        {/* <a href='/'>Contacto</a> */}
+        <Link className='dashboard-link' to='/dashboard'>
+          Dashboard
+        </Link>
       </nav>
       <div>
         <Link to='/bookings' className='reservation-link'>

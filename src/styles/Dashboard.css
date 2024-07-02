@@ -49,6 +49,12 @@
   color: var(--font-secondary-color);
 }
 
+.dashboard-sidebar > a:link.active,
+.dashboard-sidebar > a:visited.active {
+  background-color: var(--main-color);
+  color: var(--font-secondary-color);
+}
+
 .dashboard-header,
 .dashboard-main {
   padding: 1rem;
@@ -95,6 +101,8 @@
   margin-top: 2rem;
 }
 
+/* DASHBOARD MESSAGE */
+
 .dashboard-message {
   display: flex;
   align-items: center;
@@ -103,4 +111,30 @@
   font-size: 3rem;
   text-transform: uppercase;
   font-weight: 700;
+}
+
+/* DASHBOARD BOOKINGS */
+
+.dashboard-bookings > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 22rem));
+  gap: 2rem;
+}
+
+.booking-card {
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.booking-card > a {
+  display: block;
+}
+
+.booking-card > a:link,
+.booking-card > a:visited,
+.booking-card > a:hover,
+.booking-card > a:active {
+  color: var(--font-secondary-color);
+  /* text-decoration: none; */
 }
