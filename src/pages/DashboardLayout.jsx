@@ -40,12 +40,12 @@ const DashboardLayout = () => {
             <span>Noticias</span>
           </NavLink>
         </aside>
-        <div className='dashboard-header'>
+        {/* <div className='dashboard-header'>
           <p>Bienvenido de vuelta Andrés</p>
           <button className='dashboard-logout_btn'>
             <span>Cerrar sesión</span> <MdOutlineLogout />
           </button>
-        </div>
+        </div> */}
         <div className='dashboard-main'>{<Outlet />}</div>
       </div>
     </div>

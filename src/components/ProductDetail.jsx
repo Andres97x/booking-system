@@ -1,9 +1,6 @@
-import { useState } from 'react';
-import { FiPlus, FiMinus } from 'react-icons/fi';
-import { IoCloseOutline } from 'react-icons/io5';
-
 import mockupImg from '../assets/mockup.jpg';
 import { formatPrice } from '../utils';
+import PopUp from './PopUp';
 
 const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
   const [selectedItem] = categoryItems?.filter(item => item.id === productId);
@@ -14,8 +11,7 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
 
   return (
     <div className='product-detail'>
-      <div className='pop-up-window pop-up-product'>
-        <IoCloseOutline className='pop-up-close' onClick={closeProductPopUp} />
+      <PopUp className='pop-up-product' onCloseHandler={closeProductPopUp}>
         <div className='product-detail-content'>
           <h4>{selectedItem.nombre}</h4>
           {selectedItem.ingredientes && <p>{selectedItem.ingredientes}</p>}
@@ -28,8 +24,7 @@ const ProductDetail = ({ handleSearchParams, categoryItems, productId }) => {
             className='product-detail-img'
           />
         </div>
-      </div>
-      <div className='overlay' onClick={closeProductPopUp}></div>
+      </PopUp>
     </div>
   );
 };

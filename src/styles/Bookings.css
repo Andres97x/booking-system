@@ -427,7 +427,6 @@ abbr[title] {
 .form-container label {
   display: block;
   color: var(--secondary-color-half);
-  /* font-size: 1.4rem; */
 }
 
 .form-container input,

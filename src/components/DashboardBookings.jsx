@@ -6,7 +6,6 @@ import { es } from 'date-fns/locale';
 const DashboardBookings = () => {
   // const { bookings } = useContext(BookingContext);
   const bookingsLS = JSON.parse(localStorage.getItem('bookings'));
-  console.log(bookingsLS);
 
   const bookingCardsEl = bookingsLS?.map((booking, i) => {
     return (

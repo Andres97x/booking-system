@@ -1,9 +1,4 @@
-import {
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-} from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
 import { lazy, Suspense } from 'react';
 import './styles/app.css';
@@ -23,36 +18,37 @@ import DashboardBookings from './components/DashboardBookings';
 import DashboardMenu from './components/DashboardMenu';
 import DashboardNews from './components/DashboardNews';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path='/' element={<PageLayout />}>
-      <Route index element={<Home />} />
-      <Route path='about' element={<About />} />
-      <Route path='bookings' element={<Bookings />} />
-      <Route path='menu' element={<Menu />} />
-      <Route
-        path='menu/:category'
-        element={
-          <Suspense fallback={<h2>Loading...</h2>}>
-            <MenuItemsComponent />
-          </Suspense>
-        }
-      />
-      <Route path='dashboard' element={<DashboardLayout />}>
-        <Route index element={<DashboardMessage />} />
-        <Route path='notifications' element={<DashboardNotifications />} />
-        <Route path='bookings' element={<DashboardBookings />} />
-        <Route path='menu' element={<DashboardMenu />} />
-        <Route path='news' element={<DashboardNews />} />
-      </Route>
-    </Route>
-  )
-);
-
 function App() {
   return (
     <BookingContextWrapper>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<PageLayout />}>
+            <Route index element={<Home />} />
+            <Route path='about' element={<About />} />
+            <Route path='bookings' element={<Bookings />} />
+            <Route path='menu' element={<Menu />} />
+            <Route
+              path='menu/:category'
+              element={
+                <Suspense fallback={<h2>Loading...</h2>}>
+                  <MenuItemsComponent />
+                </Suspense>
+              }
+            />
+            <Route path='dashboard' element={<DashboardLayout />}>
+              <Route index element={<DashboardMessage />} />
+              <Route
+                path='notifications'
+                element={<DashboardNotifications />}
+              />
+              <Route path='bookings' element={<DashboardBookings />} />
+              <Route path='menu' element={<DashboardMenu />} />
+              <Route path='news' element={<DashboardNews />} />
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </BookingContextWrapper>
   );
 }
