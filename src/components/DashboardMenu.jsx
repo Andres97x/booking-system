@@ -4,31 +4,61 @@ import { db } from '../configs/firebase';
 import { IoEllipsisVertical } from 'react-icons/io5';
 
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
-import DashboardAddCategoryPopUp from './DashboardAddCategoryPopUp';
-import DashboardAddItemPopUp from './DashboardAddItemPopUp';
-import CategoryOptionsPopUP from './CategoryOptionsPopUP';
+import DashboardAddCategoryModal from './DashboardAddCategoryModal';
+import DashboardAddItemModal from './DashboardAddItemModal';
+import CategoryOptionsModal from './CategoryOptionsModal';
 
 const DashboardMenu = () => {
-  const [addCategoryPopUpActive, setAddCategoryPopUpActive] = useState(false);
-  const [categoryOptionsPopUpActive, setCategoryOptionsPopUpActive] =
-    useState(false);
-  const [addItempopUpActive, setAddItemPopUpActive] = useState(false);
   const [categoriesData, setCategoriesData] = useState([]);
   const { searchParams, handleSearchParams } = useHandleSearchParams();
 
-  console.log(categoriesData);
+  // console.log(categoriesData);
 
-  const closeItemPopUp = () => {
-    setAddItemPopUpActive(false);
-  };
+  useEffect(() => {
+    // fetching data
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, 'categories'));
 
-  const closeCategoryPopUp = () => {
-    setAddCategoryPopUpActive(false);
-  };
+      const retrievedData = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
 
-  const closeOptionPopUp = () => {
-    setCategoryOptionsPopUpActive(false);
-  };
+      setCategoriesData(retrievedData);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    // Adding event listener to open modals using event delegation, because this button may not exists when the component first mount and I hate that forwardRef syntax
+    const dashboardMenuContainer = document.querySelector('.dashboard-menu');
+
+    const handleClick = e => {
+      let modalOpener;
+      if (e.target.matches('button[data-modal]')) {
+        modalOpener = e.target;
+      } else {
+        modalOpener = e.target.closest('button[data-modal]');
+      }
+
+      if (!modalOpener) return;
+
+      const modalElement = document.getElementById(
+        `${modalOpener.dataset.modal}`
+      );
+
+      if (!modalElement) return;
+
+      modalElement.showModal();
+    };
+
+    dashboardMenuContainer.addEventListener('click', handleClick);
+
+    return () => {
+      dashboardMenuContainer.removeEventListener('click', handleClick);
+    };
+  }, []);
 
   const categoriesDataEl = categoriesData.map((category, i) => {
     return (
@@ -51,9 +81,7 @@ const DashboardMenu = () => {
           </button>
           <button
             className='dashboard-menu-see-options'
-            onClick={() => {
-              setCategoryOptionsPopUpActive(true);
-            }}
+            data-modal='modal-options'
           >
             <IoEllipsisVertical />
           </button>
@@ -62,57 +90,28 @@ const DashboardMenu = () => {
     );
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, 'categories'));
-
-      const retrievedData = querySnapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-
-      setCategoriesData(retrievedData);
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <div className='dashboard-menu'>
       <div className='dashboard-menu-bar'>
         <h3>Categorías</h3>
-        <button
-          className='dashboard-btn'
-          onClick={() => {
-            setAddCategoryPopUpActive(true);
-          }}
-        >
+        <button className='dashboard-btn' data-modal='modal-add-category'>
           Añadir categoría
         </button>
 
         <button
           className='dashboard-btn left-margin'
-          onClick={() => {
-            setAddItemPopUpActive(true);
-          }}
+          data-modal='modal-add-item'
         >
           Añadir item
         </button>
       </div>
 
-      {addCategoryPopUpActive ? (
-        <DashboardAddCategoryPopUp closePopUp={closeCategoryPopUp} />
-      ) : null}
+      <DashboardAddCategoryModal />
 
-      {addItempopUpActive ? (
-        <DashboardAddItemPopUp closePopUp={closeItemPopUp} />
-      ) : null}
+      <DashboardAddItemModal />
 
-      {categoryOptionsPopUpActive ? (
-        <CategoryOptionsPopUP closePopUp={closeOptionPopUp} />
-      ) : null}
+      <CategoryOptionsModal />
 
-      {/* <p>Categorías</p> */}
       <div className='dashboard-menu-grid'>{categoriesDataEl}</div>
     </div>
   );

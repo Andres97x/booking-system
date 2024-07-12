@@ -254,8 +254,8 @@
   font-size: 1.6rem;
 }
 
-.dashboard-category-options-popup button {
-  background-color: #fff;
+.dashboard-category-options-btns-container button {
+  background-color: #f1f3f5;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -142,9 +142,11 @@ const CarouselGroup = () => {
     calculateProgressBar(progressBarRef.current);
 
     // Recalculating progress bar items
-    window.addEventListener('resize', () => {
-      throttleProgressBar();
-    });
+    window.addEventListener('resize', throttleProgressBar);
+
+    return () => {
+      window.removeEventListener('resize', throttleProgressBar);
+    };
   }, []);
 
   return (

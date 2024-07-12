@@ -130,48 +130,92 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-/* POP-UP WINDOW */
+/* MODAL */
 
-.pop-up-window {
-  position: fixed;
+dialog {
   top: 15%;
-  /* top: 2%; */
   left: 50%;
   transform: translateX(-50%) translateY(0);
   width: 70vw;
   height: 70vh;
-  /* height: 95vh; */
   background-color: #f1f3f5;
   border-radius: 3px;
   color: #343a40;
-  z-index: 500;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px;
   padding: 2rem 4rem;
+  border: 0;
+  z-index: 500;
 }
 
-.pop-up-window .pop-up-close {
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 25%);
+  backdrop-filter: blur(5px);
+}
+
+dialog .modal-close {
+  border: 0;
+  background-color: #f1f3f5;
   position: absolute;
   top: 0;
   right: 0;
   font-size: 3.2rem;
-  margin-inline-end: 2rem;
-  margin-block-start: 2rem;
+  margin-inline-end: 1.5rem;
+  margin-block-start: 1.5rem;
   cursor: pointer;
-}
-
-.pop-up-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(73, 80, 87, 0.3);
-  backdrop-filter: blur(5px);
-  z-index: 300;
+  padding: 0.5rem;
+}
+
+dialog {
+  animation: fade-out 200ms ease-out;
+}
+
+dialog[open] {
+  animation: fade-in 200ms ease-out;
+}
+
+dialog[open]::backdrop {
+  animation: backdrop-fade-in 200ms ease-out forwards;
+}
+
+/* Animation keyframes */
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20%);
+    display: none;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    display: block;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes backdrop-fade-in {
+  0% {
+    background-color: rgb(0 0 0 / 0%);
+  }
+
+  100% {
+    background-color: rgb(0 0 0 / 25%);
+  }
 }
 
 /* HEADER-HERO */

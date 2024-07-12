@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ProductDetail from '../components/ProductDetail';
+import ProductDetailModal from '../components/ProductDetailModal';
 import DrinksNav from '../components/DrinksNav';
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
 import { items } from '../data/menuData';
@@ -13,6 +13,10 @@ const MenuItems = () => {
   const productId = searchParams.get('productId');
   const drinksCategory = searchParams.get('categoria');
   // console.log(drinksCategory);
+
+  const closeProductModal = () => {
+    handleSearchParams('productId', null);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -55,13 +59,19 @@ const MenuItems = () => {
       )}
 
       <div className='menu-items-grid'>{menuItemsEl}</div>
-      {productId ? (
-        <ProductDetail
-          handleSearchParams={handleSearchParams}
+      {/* {productId ? (
+        <ProductDetailModal
           categoryItems={categoryItems}
           productId={productId}
+          handleClose={closeProductModal}
         />
-      ) : null}
+      ) : null} */}
+
+      <ProductDetailModal
+        categoryItems={categoryItems}
+        productId={productId}
+        handleClose={closeProductModal}
+      />
     </div>
   );
 };
