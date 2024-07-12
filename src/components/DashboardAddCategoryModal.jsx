@@ -46,6 +46,15 @@ const DashboardAddCategoryModal = () => {
         imageRef: `categories/${imageUpload.name.split('.')[0] + uniqueId}`,
       });
       console.log('Document written with ID: ', docRef.id);
+
+      // Reseting input values
+
+      setAddCategoryForm({
+        categoryName: '',
+        categoryDescription: '',
+      });
+
+      setImageUpload(null);
     } catch (err) {
       console.error(err);
     }
@@ -65,6 +74,7 @@ const DashboardAddCategoryModal = () => {
             value={addCategoryForm.categoryName}
             onChange={onChangeHandler}
             required
+            autoFocus
           />
         </div>
 

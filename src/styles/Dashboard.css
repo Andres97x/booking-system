@@ -185,6 +185,10 @@
   margin-left: 2rem;
 }
 
+.dashboard-menu-note {
+  margin-top: 1rem;
+}
+
 .dashboard-menu-grid {
   margin-top: 2rem;
   display: grid;

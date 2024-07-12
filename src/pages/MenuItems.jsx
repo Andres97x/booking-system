@@ -22,6 +22,16 @@ const MenuItems = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    const productModal = document.querySelector('.product-modal');
+
+    if (productId) {
+      productModal.showModal();
+    } else {
+      productModal.close();
+    }
+  }, [productId]);
+
   const categoryItems = items.filter(item => item.category === params.category);
 
   const displayedItems =
@@ -59,13 +69,6 @@ const MenuItems = () => {
       )}
 
       <div className='menu-items-grid'>{menuItemsEl}</div>
-      {/* {productId ? (
-        <ProductDetailModal
-          categoryItems={categoryItems}
-          productId={productId}
-          handleClose={closeProductModal}
-        />
-      ) : null} */}
 
       <ProductDetailModal
         categoryItems={categoryItems}

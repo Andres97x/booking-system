@@ -8,18 +8,24 @@ const Modal = ({ children, id, handleClose, ...rest }) => {
     modalRef.current.close();
   };
 
+  const focusFirstElement = () => {
+    let firstInput = modalRef.current.querySelector('input, textarea');
+
+    if (!firstInput) return;
+
+    firstInput.focus();
+  };
+
   return (
-    <>
-      <dialog id={id} ref={modalRef} {...rest}>
-        <button
-          className='modal-close'
-          onClick={handleClose ? handleClose : closeModal}
-        >
-          <IoCloseOutline />
-        </button>
-        {children}
-      </dialog>
-    </>
+    <dialog id={id} ref={modalRef} {...rest} onAnimationEnd={focusFirstElement}>
+      {children}
+      <button
+        className='modal-close'
+        onClick={handleClose ? handleClose : closeModal}
+      >
+        <IoCloseOutline />
+      </button>
+    </dialog>
   );
 };
 

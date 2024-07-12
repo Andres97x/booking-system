@@ -54,7 +54,7 @@ export const categoriesData = [
   //   image: tacosImg,
   //   imageAlt: 'Mesa llena con varios tipos de tacos',
   //   description:
-  //     ' ¡Ven y prueba nuestros tacos, perfectos para compartir y disfrutar en buena compañía!',
+  //     '¡Ven y prueba nuestros tacos, perfectos para compartir y disfrutar en buena compañía!',
   // },
   // {
   //   category: 'postres',

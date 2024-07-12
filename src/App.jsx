@@ -5,6 +5,8 @@ import './styles/app.css';
 
 import { BookingContextWrapper } from './contexts/BookingContext';
 
+import useCloseModalOnClickOutside from './hooks/useCloseModalOnClickOutside';
+
 import PageLayout from './components/PageLayout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -19,6 +21,8 @@ import DashboardMenu from './components/DashboardMenu';
 import DashboardNews from './components/DashboardNews';
 
 function App() {
+  useCloseModalOnClickOutside();
+
   return (
     <BookingContextWrapper>
       <BrowserRouter>

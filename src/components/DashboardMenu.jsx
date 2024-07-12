@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+// prettier-ignore
+import { collection,  query, onSnapshot, orderBy } from 'firebase/firestore';
 import { db } from '../configs/firebase';
 import { IoEllipsisVertical } from 'react-icons/io5';
 
@@ -15,16 +16,20 @@ const DashboardMenu = () => {
   // console.log(categoriesData);
 
   useEffect(() => {
-    // fetching data
+    // fetching data in real-time
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, 'categories'));
+      const collectionRef = collection(db, 'categories');
 
-      const retrievedData = querySnapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+      const q = query(collectionRef, orderBy('order'));
 
-      setCategoriesData(retrievedData);
+      onSnapshot(q, querySnapshot => {
+        const retrievedData = querySnapshot.docs.map(doc => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+
+        setCategoriesData(retrievedData);
+      });
     };
 
     fetchData();
@@ -112,6 +117,9 @@ const DashboardMenu = () => {
 
       <CategoryOptionsModal />
 
+      <p className='note dashboard-menu-note'>
+        Este es el orden en el que aparecen las categorias en la página de Menú
+      </p>
       <div className='dashboard-menu-grid'>{categoriesDataEl}</div>
     </div>
   );

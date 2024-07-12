@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 
 import { storage, db } from '../configs/firebase';
-// import { categoriesData, firstDrinkCategory } from '../data/menuData';
+import { firstDrinkCategory } from '../data/menuData';
+import Spinner from '../components/Spinner';
+import ErrorMessage from '../components/ErrorMessage';
 import '../styles/Menu.css';
 
 const Menu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
-  console.log(categoriesData);
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState(null);
 
   const getGridStyle = categoriesData => {
     if (categoriesData.length === 1) {
@@ -33,8 +36,12 @@ const Menu = () => {
   useEffect(() => {
     // Fetch categories data from database
     const fetchCategoriesData = async () => {
+      const collectionRef = collection(db, 'categories');
+
+      const q = query(collectionRef, orderBy('order'));
       try {
-        const querySnapshot = await getDocs(collection(db, 'categories'));
+        setStatus('loading');
+        const querySnapshot = await getDocs(q);
 
         const retrievedData = await Promise.all(
           querySnapshot.docs.map(async doc => {
@@ -67,7 +74,9 @@ const Menu = () => {
 
         setCategoriesData(retrievedData);
       } catch (err) {
-        console.log(err);
+        setError('No se pudieron obtener los datos de la categoría');
+      } finally {
+        setStatus('idle');
       }
     };
 
@@ -75,15 +84,17 @@ const Menu = () => {
   }, []);
 
   const categoriesEl = categoriesData.map((category, i) => {
+    const pathName = category.name.split(' ').join('-').toLowerCase();
+
     return (
       <Link
         to={
-          category.category === 'bebidas'
-            ? `${category.category}?categoria=${firstDrinkCategory}`
-            : category.name.split(' ').join('-').toLowerCase()
+          pathName === 'bebidas'
+            ? `${pathName}?categoria=${firstDrinkCategory}`
+            : pathName
         }
         key={`menu-category-${i}`}
-        className={`menu-category menu-${category.category}`}
+        className='menu-category'
       >
         <img src={category.image} alt={category.imageAlt} />
         <div className='category-content'>
@@ -94,6 +105,14 @@ const Menu = () => {
     );
   });
 
+  if (status === 'loading') {
+    return <Spinner spinnerContainerClassName='categories-spinner-container' />;
+  }
+
+  if (error) {
+    return <ErrorMessage message={error} />;
+  }
+
   return (
     <div className='section-menu'>
       {categoriesData.length > 0 ? (
@@ -101,9 +120,9 @@ const Menu = () => {
           {categoriesEl}
         </div>
       ) : (
-        <p className='categories-empty'>
-          Aún no hay categorias añadidas al menú
-        </p>
+        <div className='categories-empty'>
+          <p>Aún no hay categorias añadidas al menú</p>
+        </div>
       )}
     </div>
   );
