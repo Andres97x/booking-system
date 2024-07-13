@@ -285,7 +285,7 @@
 #modal-add-category {
   width: 30%;
   height: 70%;
-  max-height: 62rem;
+  max-height: 65rem;
   padding: 4rem;
   transition: height 200ms ease-in-out;
 }
@@ -340,6 +340,7 @@
   text-transform: uppercase;
   font-weight: 600;
   transition: all 200ms ease-in-out;
+  margin-top: 1.5rem;
 }
 
 #modal-add-category form button:last-child:hover {
@@ -366,7 +367,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  gap: 2rem;
 }
 
 .category-completed-action-btns button {
@@ -377,6 +378,7 @@
   font-size: 1.6rem;
   cursor: pointer;
   transition: all 200ms ease-in-out;
+  flex-grow: 1;
 }
 
 .category-completed-action-btns button:hover {

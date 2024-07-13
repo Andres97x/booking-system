@@ -101,3 +101,22 @@ export const getTakenTimes = (booking, bookings, add, interval) => {
 
   return takenTimes.flat();
 };
+
+/* <---- DASHBOARD COMPONENT ----> */
+
+export const clickOpenModal = e => {
+  let modalOpener;
+  if (e.target.matches('button[data-modal]')) {
+    modalOpener = e.target;
+  } else {
+    modalOpener = e.target.closest('button[data-modal]');
+  }
+
+  if (!modalOpener) return;
+
+  const modalElement = document.getElementById(`${modalOpener.dataset.modal}`);
+
+  if (!modalElement) return;
+
+  modalElement.showModal();
+};
