@@ -42,17 +42,13 @@ const Menu = () => {
       try {
         setStatus('loading');
         const querySnapshot = await getDocs(q);
-
         const retrievedData = await Promise.all(
           querySnapshot.docs.map(async doc => {
             const data = doc.data();
-
             // Create a reference with an initial file path and name
             const pathReference = ref(storage, data.imageRef);
-
             try {
               const url = await getDownloadURL(pathReference);
-
               return {
                 description: data.description,
                 name: data.name,
@@ -71,7 +67,6 @@ const Menu = () => {
             }
           })
         );
-
         setCategoriesData(retrievedData);
       } catch (err) {
         setError('No se pudieron obtener los datos de la categoría');
@@ -110,7 +105,12 @@ const Menu = () => {
   }
 
   if (error) {
-    return <ErrorMessage message={error} />;
+    return (
+      <ErrorMessage
+        message={error}
+        errorContainerClassName='error-menu-container'
+      />
+    );
   }
 
   return (

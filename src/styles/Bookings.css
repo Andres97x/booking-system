@@ -432,7 +432,6 @@ abbr[title] {
 .form-container input,
 .form-container select {
   width: 100%;
-  height: 3rem;
   margin-top: 0.5rem;
   border: 2px solid var(--font-main-color);
   background-color: var(--main-color);
@@ -442,7 +441,7 @@ abbr[title] {
 }
 
 .form-container input {
-  padding: 2rem 0.8rem;
+  padding: 0.8rem;
 }
 
 .form-container select {

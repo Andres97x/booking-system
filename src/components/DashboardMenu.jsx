@@ -13,8 +13,6 @@ const DashboardMenu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const { searchParams, handleSearchParams } = useHandleSearchParams();
 
-  // console.log(categoriesData);
-
   useEffect(() => {
     // fetching data in real-time
     const fetchData = async () => {
@@ -71,7 +69,12 @@ const DashboardMenu = () => {
         className='dashboard-menu-category-card'
         key={`dashboard-menu-category-card-${i}`}
       >
-        <p>{category.name}</p>
+        <div className='category-card-header'>
+          <p className='category-card-name'>
+            {category.name[0].toUpperCase() + category.name.slice(1)}
+          </p>
+          <span className='category-card-order'>orden: {category.order}</span>
+        </div>
         <div className='category-card-options'>
           <button
             className='dashboard-menu-see-items'
@@ -111,7 +114,9 @@ const DashboardMenu = () => {
         </button>
       </div>
 
-      <DashboardAddCategoryModal />
+      <DashboardAddCategoryModal
+        categoriesLength={categoriesData.length || 0}
+      />
 
       <DashboardAddItemModal />
 

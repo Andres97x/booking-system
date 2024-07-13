@@ -192,7 +192,7 @@
 .dashboard-menu-grid {
   margin-top: 2rem;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
@@ -203,7 +203,13 @@
   min-width: 18rem;
 }
 
-.dashboard-menu-category-card > p {
+.category-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category-card-name {
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -213,6 +219,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 0.7rem;
 }
 
 .dashboard-menu-see-items {
@@ -244,6 +251,7 @@
   border: 0;
   border: 2px solid var(--main-color);
   transition: all 200ms ease-in-out;
+  transform: translateX(1rem);
 }
 
 .dashboard-menu-see-options:hover {
@@ -270,4 +278,113 @@
   margin-top: 2rem;
   display: flex;
   gap: 2rem;
+}
+
+/* MODALS */
+
+#modal-add-category {
+  width: 30%;
+  height: 70%;
+  max-height: 62rem;
+  padding: 4rem;
+  transition: height 200ms ease-in-out;
+}
+
+#modal-add-category h3 {
+  font-weight: 600;
+}
+
+#modal-add-category form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#modal-add-category label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+#modal-add-category input:not([type='file']),
+#modal-add-category input[type='file'],
+#modal-add-category textarea,
+#modal-add-category form button {
+  color: var(--font-secondary-color);
+  width: 100%;
+  padding: 0.8rem;
+  background-color: inherit;
+  border: 2px solid var(--font-main-color);
+  border-radius: 2px;
+  font-size: 1.6rem;
+}
+
+#modal-add-category input[type='file'] {
+  color: #777;
+  font-size: 1.4rem;
+}
+
+#modal-add-category input[type='file']::file-selector-button {
+  padding: 1rem 3rem 1rem 0;
+  font-size: 1.6rem;
+}
+
+#modal-add-category form button:last-child {
+  background-color: var(--secondary-color);
+  color: var(--font-main-color);
+  font-size: 1.6rem;
+  border: 2px solid var(--secondary-color);
+  padding: 1.2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 200ms ease-in-out;
+}
+
+#modal-add-category form button:last-child:hover {
+  background-color: inherit;
+  color: var(--font-secondary-color);
+}
+
+.category-completed-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category-completed-container > h3 {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.category-completed-action-btns {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.category-completed-action-btns button {
+  padding: 1rem 2.5rem;
+  background-color: inherit;
+  border: 1.5px solid var(--secondary-color);
+  border-radius: 3px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.category-completed-action-btns button:hover {
+  background-color: var(--secondary-color);
+  color: var(--font-main-color);
+}
+
+.add-category-error-message {
+  color: #402400;
+  font-weight: 600;
 }

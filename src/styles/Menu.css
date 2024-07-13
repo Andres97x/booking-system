@@ -270,6 +270,7 @@
 }
 
 .categories-spinner-container,
+.error-menu-container,
 .categories-empty {
   width: 100%;
   height: calc(100vh - var(--header-height) - var(--footer-height));

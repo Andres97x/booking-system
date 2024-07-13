@@ -70,7 +70,7 @@ export const categoriesData = [
   //   image: drinksImg,
   //   imageAlt: 'Mesero sirviendo dos bebidas',
   //   description:
-  //     'Acompaña tu comida con nuestras deliciosas bebidas y eleva tu experiencia gastronómica al siguiente nivel',
+  //     'Acompaña tu comida con nuestras deliciosas bebidas y eleva tu experiencia gastronómica al siguiente nivel.',
   // },
 ];
 
