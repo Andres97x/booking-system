@@ -1,4 +1,5 @@
 import { MdDelete, MdEdit, MdDone } from 'react-icons/md';
+import useDashboardUploadForm from '../hooks/useDashboardUploadForm';
 
 import Modal from './Modal';
 
@@ -6,7 +7,13 @@ const DashboardCategoryOptionsModal = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
-  console.log(selectedCategory);
+  const {
+    categoryForm,
+    onChangeHandler,
+    imageUpload,
+    setImageUpload,
+    clearInputValues,
+  } = useDashboardUploadForm('update');
 
   return (
     <Modal
@@ -17,40 +24,90 @@ const DashboardCategoryOptionsModal = ({
       id='modal-options'
     >
       <div>
-        <h3>Opciones de categoría</h3>
+        <h3>Editar opciones de categoría</h3>
         <h5>{selectedCategory?.name}</h5>
 
-        <div className='dashboard-edit-data-container'>
-          <div>
-            <p>Nombre: {selectedCategory?.name}</p>
-            <button>
-              <MdEdit />
-            </button>
-            <input type='text' />
+        <div className='dashboard-category-options-container'>
+          <div className='dashboard-category-option-group'>
+            <div>
+              <p>Nombre</p>
+              <button>
+                <MdEdit />
+              </button>
+            </div>
+
+            <div>
+              <div>
+                <input
+                  id='dash-add-category-name'
+                  type='text'
+                  name='categoryName'
+                  placeholder={selectedCategory?.name}
+                  value={categoryForm.categoryName}
+                  onChange={onChangeHandler}
+                  required
+                  autoFocus
+                />
+              </div>
+            </div>
           </div>
 
-          <div>
-            <p>Orden de visualización: {selectedCategory?.order}</p>
-            <button>
-              <MdEdit />
-            </button>
-            <input type='text' />
+          <div className='dashboard-category-option-group'>
+            <div>
+              <p>Orden de visualización</p>
+              <button>
+                <MdEdit />
+              </button>
+            </div>
+
+            <div>
+              <div>
+                <input type='number' placeholder={selectedCategory?.order} />
+              </div>
+            </div>
           </div>
 
-          <div>
-            <p>Descripción: {selectedCategory?.description}</p>
-            <button>
-              <MdEdit />
-            </button>
-            <input type='text' />
+          <div className='dashboard-category-option-group'>
+            <div>
+              <p>Descripción (máx 120 caracteres)</p>
+              <button>
+                <MdEdit />
+              </button>
+            </div>
+
+            <div>
+              <div>
+                <textarea
+                  id='dash-add-category-description'
+                  name='categoryDescription'
+                  rows='5'
+                  cols='33'
+                  placeholder={selectedCategory?.description}
+                  value={categoryForm.categoryDescription}
+                  onChange={onChangeHandler}
+                ></textarea>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <p>Editar imagen</p>
-            <button>
-              <MdEdit />
-            </button>
-            <input type='text' />
+          <div className='dashboard-category-option-group'>
+            <div>
+              <p>Editar imagen</p>
+              <button>
+                <MdEdit />
+              </button>
+            </div>
+
+            <div>
+              <div>
+                <input
+                  id='dash-add-category-img'
+                  type='file'
+                  accept='image/*'
+                  onChange={e => setImageUpload(e.target.files[0])}
+                />
+              </div>
+            </div>
           </div>
         </div>
 

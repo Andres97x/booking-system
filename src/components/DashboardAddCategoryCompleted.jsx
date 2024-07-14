@@ -1,13 +1,11 @@
 const DashboardAddCategoryCompleted = ({
-  addCategoryForm,
+  categoryForm,
   clearInputValues,
   setStatus,
 }) => {
   return (
     <div className='category-completed-container'>
-      <h3>
-        La categoría {addCategoryForm.categoryName} se añadió correctamente
-      </h3>
+      <h3>La categoría {categoryForm.categoryName} se añadió correctamente</h3>
 
       <div className='category-completed-action-btns'>
         <button

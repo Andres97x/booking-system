@@ -156,16 +156,6 @@
   display: block;
 }
 
-.dashboard-menu textarea {
-  font-family: 'Open Sans', Inter, sans-serif;
-  padding: 10px;
-  max-width: 100%;
-  line-height: 1.5;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 1px #999;
-}
-
 .dashboard-btn {
   padding: 0.5rem 1rem;
   border: 1px solid var(--secondary-color);
@@ -268,11 +258,14 @@
 
 /* MODALS */
 
+.dashboard-container dialog {
+  padding: 4rem;
+}
+
 #modal-add-category {
   width: 30%;
   height: 70%;
   max-height: 65rem;
-  padding: 4rem;
   transition: height 200ms ease-in-out;
 }
 
@@ -287,33 +280,10 @@
   gap: 1.5rem;
 }
 
-#modal-add-category label {
+dialog label {
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-}
-
-#modal-add-category input:not([type='file']),
-#modal-add-category input[type='file'],
-#modal-add-category textarea,
-#modal-add-category form button {
-  color: var(--font-secondary-color);
-  width: 100%;
-  padding: 0.8rem;
-  background-color: inherit;
-  border: 2px solid var(--font-main-color);
-  border-radius: 2px;
-  font-size: 1.6rem;
-}
-
-#modal-add-category input[type='file'] {
-  color: #777;
-  font-size: 1.4rem;
-}
-
-#modal-add-category input[type='file']::file-selector-button {
-  padding: 1rem 3rem 1rem 0;
-  font-size: 1.6rem;
 }
 
 #modal-add-category form button:last-child {
@@ -393,31 +363,34 @@
   font-weight: 600;
 }
 
-.dashboard-edit-data-container {
+.dashboard-category-options-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-top: 3rem;
 }
 
-.dashboard-edit-data-container > div {
-  display: grid;
+.dashboard-category-option-group {
   width: 100%;
   border-bottom: 1px solid rgba(119, 119, 119, 0.2);
   padding-bottom: 1rem;
-  grid-template-columns: 1fr auto;
-  align-items: center;
 }
 
-.dashboard-edit-data-container > div:last-child {
+.dashboard-category-option-group > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-category-option-group:last-child {
   margin-bottom: 3rem;
 }
 
-.dashboard-edit-data-container > div > p {
-  width: 80%;
+.dashboard-category-option-group p {
+  /* width: 80%; */
 }
 
-.dashboard-edit-data-container > div > button {
+.dashboard-category-option-group button {
   border: 0;
   height: fit-content;
   display: flex;
@@ -427,12 +400,25 @@
   background-color: inherit;
 }
 
-.dashboard-edit-data-container > div > input {
-  grid-column: span 2;
+.dashboard-category-option-group svg {
+  font-size: 2rem;
 }
 
-.dashboard-edit-data-container > div svg {
-  font-size: 2rem;
+.dashboard-category-option-group > div:last-child {
+  display: grid;
+  margin-top: 0.5rem;
+  font-size: 1.6rem;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 200ms ease-in-out;
+}
+
+.dashboard-category-option-group > div:last-child > div {
+  /* overflow: hidden; */
+}
+
+.dashboard-category-option-group input {
+  /* padding: 0.5rem;
+  width: 100%; */
 }
 
 .dashboard-category-options-btns-container {

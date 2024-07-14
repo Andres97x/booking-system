@@ -243,6 +243,30 @@ dialog[open]::backdrop {
   }
 }
 
+dialog input:not([type='file']),
+dialog input[type='file'],
+dialog textarea,
+dialog form button {
+  color: var(--font-secondary-color);
+  width: 100%;
+  padding: 0.8rem;
+  background-color: inherit;
+  border: 2px solid var(--font-main-color);
+  border-radius: 2px;
+  font-size: 1.6rem;
+  font-family: 'Open Sans', Inter, sans-serif;
+}
+
+dialog input[type='file'] {
+  color: #777;
+  font-size: 1.4rem;
+}
+
+dialog input[type='file']::file-selector-button {
+  padding: 1rem 3rem 1rem 0;
+  font-size: 1.6rem;
+}
+
 /* OBSERVATION NOTES ACROSS WEBSITE */
 
 .note {

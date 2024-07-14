@@ -1,5 +1,5 @@
 const DashboardCategoryForm = ({
-  addCategoryForm,
+  categoryForm,
   error,
   onChangeHandler,
   submitCategory,
@@ -16,7 +16,7 @@ const DashboardCategoryForm = ({
           id='dash-add-category-name'
           type='text'
           name='categoryName'
-          value={addCategoryForm.categoryName}
+          value={categoryForm.categoryName}
           onChange={onChangeHandler}
           required
           autoFocus
@@ -33,7 +33,7 @@ const DashboardCategoryForm = ({
           rows='5'
           cols='33'
           placeholder='Añade una breve descripción de la categoría (máximo 120 caracteres)'
-          value={addCategoryForm.categoryDescription}
+          value={categoryForm.categoryDescription}
           onChange={onChangeHandler}
         ></textarea>
       </div>

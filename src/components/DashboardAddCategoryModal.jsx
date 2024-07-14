@@ -1,27 +1,32 @@
-import useDashboardCategoryUpload from '../hooks/useDashboardCategoryUpload';
+import useDashboardUploadForm from '../hooks/useDashboardUploadForm';
+import useDashboardAddCategory from '../hooks/useDashboardAddCategory';
 import Modal from './Modal';
-import DashboardCategoryForm from './DashboardCategoryForm';
+import DashboardAddCategoryForm from './DashboardAddCategoryForm';
 import DashboardAddCategoryCompleted from './DashboardAddCategoryCompleted';
 import Spinner from './Spinner';
 
 const DashboardAddCategoryModal = ({ categoriesLength }) => {
   const {
-    addCategoryForm,
-    status,
-    error,
-    setStatus,
-    setError,
+    categoryForm,
     onChangeHandler,
-    submitCategory,
+    imageUpload,
     setImageUpload,
     clearInputValues,
-  } = useDashboardCategoryUpload(categoriesLength);
+  } = useDashboardUploadForm('add');
+
+  const { status, setStatus, error, setError, submitCategory } =
+    useDashboardAddCategory(
+      categoriesLength,
+      imageUpload,
+      categoryForm,
+      clearInputValues
+    );
 
   const displayedElement = () => {
     if (status === 'idle') {
       return (
-        <DashboardCategoryForm
-          addCategoryForm={addCategoryForm}
+        <DashboardAddCategoryForm
+          categoryForm={categoryForm}
           error={error}
           onChangeHandler={onChangeHandler}
           submitCategory={submitCategory}
@@ -33,7 +38,7 @@ const DashboardAddCategoryModal = ({ categoriesLength }) => {
     } else if (status === 'completed') {
       return (
         <DashboardAddCategoryCompleted
-          addCategoryForm={addCategoryForm}
+          categoryForm={categoryForm}
           clearInputValues={clearInputValues}
           setStatus={setStatus}
         />
