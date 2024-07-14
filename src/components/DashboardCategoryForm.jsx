@@ -1,4 +1,4 @@
-const DashboardAddCategoryForm = ({
+const DashboardCategoryForm = ({
   addCategoryForm,
   error,
   onChangeHandler,
@@ -53,4 +53,4 @@ const DashboardAddCategoryForm = ({
   );
 };
 
-export default DashboardAddCategoryForm;
+export default DashboardCategoryForm;

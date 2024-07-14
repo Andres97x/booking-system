@@ -1,6 +1,6 @@
 import { IoEllipsisVertical } from 'react-icons/io5';
 
-const DashboardCategoryCard = ({ category }) => {
+const DashboardCategoryCard = ({ category, handleCategoryClick }) => {
   return (
     <div className='dashboard-menu-category-card'>
       <div className='category-card-header'>
@@ -14,6 +14,9 @@ const DashboardCategoryCard = ({ category }) => {
         <button
           className='dashboard-menu-see-options'
           data-modal='modal-options'
+          onClick={() => {
+            handleCategoryClick(category);
+          }}
         >
           <IoEllipsisVertical />
         </button>

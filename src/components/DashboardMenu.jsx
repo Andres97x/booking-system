@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
 // prettier-ignore
-import { collection,  query, onSnapshot, orderBy } from 'firebase/firestore';
+import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 import { db } from '../configs/firebase';
 
 import DashboardAddCategoryModal from './DashboardAddCategoryModal';
 import DashboardAddItemModal from './DashboardAddItemModal';
-import CategoryOptionsModal from './CategoryOptionsModal';
+import DashboardCategoryOptionsModal from './DashboardCategoryOptionsModal';
 import DashboardCategoryCard from './DashboardCategoryCard';
 
 import { clickOpenModal } from '../utils';
 
 const DashboardMenu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleCategoryClick = category => {
+    setSelectedCategory(category);
+  };
 
   useEffect(() => {
-    // fetching data in real-time
     const fetchData = async () => {
       const collectionRef = collection(db, 'categories');
-
       const q = query(collectionRef, orderBy('order'));
 
       onSnapshot(q, querySnapshot => {
@@ -34,11 +37,7 @@ const DashboardMenu = () => {
   }, []);
 
   useEffect(() => {
-    // Adding event listener to open modals using event delegation,
-    // because this button may not exists when the component first
-    // mount and I hate that forwardRef syntax
     const dashboardMenuContainer = document.querySelector('.dashboard-menu');
-
     dashboardMenuContainer.addEventListener('click', clickOpenModal);
 
     return () => {
@@ -49,6 +48,7 @@ const DashboardMenu = () => {
   const categoriesDataEl = categoriesData.map((category, i) => (
     <DashboardCategoryCard
       category={category}
+      handleCategoryClick={handleCategoryClick}
       key={`dashboard-category-card-${i}`}
     />
   ));
@@ -80,7 +80,10 @@ const DashboardMenu = () => {
 
       <DashboardAddItemModal />
 
-      <CategoryOptionsModal />
+      <DashboardCategoryOptionsModal
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
     </div>
   );
 };

@@ -23,6 +23,16 @@ import DashboardNews from './components/DashboardNews';
 function App() {
   useCloseModalOnClickOutside();
 
+  useEffect(() => {
+    const dialogs = document.querySelectorAll('dialog');
+    // console.log(dialogs);
+
+    dialogs.forEach(dialog => {
+      console.log('closed');
+      dialog.close();
+    });
+  });
+
   return (
     <BookingContextWrapper>
       <BrowserRouter>
