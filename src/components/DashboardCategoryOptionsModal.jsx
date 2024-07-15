@@ -1,12 +1,27 @@
+import {
+  collection,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  updateDoc,
+  writeBatch,
+} from 'firebase/firestore';
+import { ref, deleteObject } from 'firebase/storage';
 import { MdDelete, MdEdit, MdDone } from 'react-icons/md';
-import useDashboardUploadForm from '../hooks/useDashboardUploadForm';
 
+import { storage, db } from '../configs/firebase';
+import useDashboardUploadForm from '../hooks/useDashboardUploadForm';
 import Modal from './Modal';
+import { useState } from 'react';
 
 const DashboardCategoryOptionsModal = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState(null);
+
   const {
     categoryForm,
     onChangeHandler,
@@ -14,6 +29,123 @@ const DashboardCategoryOptionsModal = ({
     setImageUpload,
     clearInputValues,
   } = useDashboardUploadForm('update');
+
+  // console.log(categoryForm);
+  // console.log(selectedCategory);
+
+  const updateOrder = async (collectionName, docId, newOrder, errorMessage) => {
+    const collectionRef = collection(db, collectionName);
+    const q = query(collectionRef, orderBy('order'));
+
+    try {
+      const snapshot = await getDocs(q);
+
+      const batch = writeBatch(db);
+      let currentOrder = 1;
+
+      // Loop over documents and update the order as necessary
+      snapshot.forEach(docSnap => {
+        const docRef = doc(collectionRef, docSnap.id);
+        if (docSnap.id === docId) {
+          // looping over the selectedCategory document
+          // update the document with the new order
+          batch.update(docRef, { order: Number(newOrder) });
+          // currentOrder++; /* FIXME */
+        } else {
+          // Update the other documents to keep the correct order
+          if (currentOrder === Number(newOrder)) currentOrder++;
+          batch.update(docRef, { order: currentOrder });
+          currentOrder++;
+        }
+      });
+
+      // Execute batch transaction
+      await batch.commit();
+    } catch (error) {
+      console.error(error);
+      setError(errorMessage);
+    }
+  };
+
+  const updateFile = async () => {
+    if (
+      !categoryForm.categoryName &&
+      !categoryForm.categoryDescription &&
+      !categoryForm.order &&
+      !imageUpload
+    ) {
+      setError('No hay cambios para guardar');
+      return;
+    }
+
+    const updateErrorMessage =
+      'Hubo un problema, no se ha podido actualizar la categoría';
+
+    // => user modified image
+    if (imageUpload) {
+      try {
+        // delete the current category image image in firebase/storage
+        const selectedCategoryImgRef = ref(storage, selectedCategory.imageRef);
+
+        await deleteObject(selectedCategoryImgRef);
+
+        setStatus('completed');
+
+        // Upload new image
+        const imgRef = ref(
+          storage,
+          `categories/${imageUpload.name.split('.')[0] + uniqueId}`
+        );
+
+        await uploadBytes(imgRef, imageUpload);
+      } catch (err) {
+        console.error(err);
+        setError(updateErrorMessage);
+      }
+    }
+
+    // => user modified category name
+    if (categoryForm.categoryName) {
+      // update category name field
+      const docRef = doc(db, 'categories', selectedCategory.id);
+
+      try {
+        // Set the "capital" field of the city 'DC'
+        await updateDoc(docRef, {
+          name: categoryForm.categoryName,
+        });
+      } catch (err) {
+        console.log(err);
+        setError(updateErrorMessage);
+      }
+    }
+
+    // => user modified description
+    if (categoryForm.categoryDescription) {
+      // update category description field
+      const docRef = doc(db, 'categories', selectedCategory.id);
+
+      try {
+        // Set the "capital" field of the city 'DC'
+        await updateDoc(docRef, {
+          name: categoryForm.categoryDescription,
+        });
+      } catch (err) {
+        console.log(err);
+        setError(updateErrorMessage);
+      }
+    }
+
+    // => user modified order
+    if (categoryForm.order) {
+      updateOrder(
+        'categories',
+        selectedCategory.id,
+        categoryForm.order,
+        updateErrorMessage
+      );
+    }
+  };
 
   return (
     <Modal
@@ -62,7 +194,10 @@ const DashboardCategoryOptionsModal = ({
 
             <div>
               <div>
-                <input type='number' placeholder={selectedCategory?.order} />
+                <input
+                  type='number'
+                  placeholder={`Orden actual: ${selectedCategory?.order}`}
+                />
               </div>
             </div>
           </div>
@@ -112,7 +247,7 @@ const DashboardCategoryOptionsModal = ({
         </div>
 
         <div className='dashboard-category-options-btns-container'>
-          <button className='dashboard-btn'>
+          <button className='dashboard-btn' onClick={updateFile}>
             <MdDone />
             Confirmar cambios
           </button>

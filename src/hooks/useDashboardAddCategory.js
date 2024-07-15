@@ -35,7 +35,7 @@ const useDashboardAddCategory = (
 
       await uploadBytes(imgRef, imageUpload);
 
-      // Uploading data to firebase/cloudfire database
+      // Uploading data to firebase/firestore database
       const categoriesCollectionRef = collection(db, 'categories');
 
       await addDoc(categoriesCollectionRef, {
