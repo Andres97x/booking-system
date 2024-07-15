@@ -27,11 +27,13 @@ const useDashboardAddCategory = (
 
     try {
       setStatus('loading');
+
+      const imagePath = `categories/${
+        imageUpload.name.split('.')[0] + uniqueId
+      }`;
+
       // Uploading image to firebase/storage
-      const imgRef = ref(
-        storage,
-        `categories/${imageUpload.name.split('.')[0] + uniqueId}`
-      );
+      const imgRef = ref(storage, imagePath);
 
       await uploadBytes(imgRef, imageUpload);
 
@@ -41,7 +43,7 @@ const useDashboardAddCategory = (
       await addDoc(categoriesCollectionRef, {
         name: categoryForm.categoryName,
         description: categoryForm.categoryDescription,
-        imageRef: `categories/${imageUpload.name.split('.')[0] + uniqueId}`,
+        imageRef: imagePath,
         order: categoriesLength + 1,
       });
 

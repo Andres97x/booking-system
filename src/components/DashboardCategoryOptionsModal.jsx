@@ -7,8 +7,9 @@ import {
   updateDoc,
   writeBatch,
 } from 'firebase/firestore';
-import { ref, deleteObject } from 'firebase/storage';
+import { ref, deleteObject, uploadBytes } from 'firebase/storage';
 import { MdDelete, MdEdit, MdDone } from 'react-icons/md';
+import { v4 as uuidv4 } from 'uuid';
 
 import { storage, db } from '../configs/firebase';
 import useDashboardUploadForm from '../hooks/useDashboardUploadForm';
@@ -30,9 +31,6 @@ const DashboardCategoryOptionsModal = ({
     clearInputValues,
   } = useDashboardUploadForm('update');
 
-  // console.log(categoryForm);
-  // console.log(selectedCategory);
-
   const updateOrder = async (collectionName, docId, newOrder, errorMessage) => {
     const collectionRef = collection(db, collectionName);
     const q = query(collectionRef, orderBy('order'));
@@ -50,6 +48,7 @@ const DashboardCategoryOptionsModal = ({
           // looping over the selectedCategory document
           // update the document with the new order
           batch.update(docRef, { order: Number(newOrder) });
+          console.log(`changed ${docSnap.data().name} to order: ${newOrder}`);
           // currentOrder++; /* FIXME */
         } else {
           // Update the other documents to keep the correct order
@@ -81,23 +80,31 @@ const DashboardCategoryOptionsModal = ({
     const updateErrorMessage =
       'Hubo un problema, no se ha podido actualizar la categoría';
 
+    const docRef = doc(db, 'categories', selectedCategory.id);
+
     // => user modified image
     if (imageUpload) {
+      const uniqueId = uuidv4();
+
       try {
         // delete the current category image image in firebase/storage
         const selectedCategoryImgRef = ref(storage, selectedCategory.imageRef);
 
         await deleteObject(selectedCategoryImgRef);
 
-        setStatus('completed');
+        const newImagePath = `categories/${
+          imageUpload.name.split('.')[0] + uniqueId
+        }`;
 
-        // Upload new image
-        const imgRef = ref(
-          storage,
-          `categories/${imageUpload.name.split('.')[0] + uniqueId}`
-        );
+        // upload new image
+        const imgRef = ref(storage, newImagePath);
 
         await uploadBytes(imgRef, imageUpload);
+
+        // update imageRef field for the selected category
+        await updateDoc(docRef, {
+          imageRef: newImagePath,
+        });
       } catch (err) {
         console.error(err);
         setError(updateErrorMessage);
@@ -107,10 +114,10 @@ const DashboardCategoryOptionsModal = ({
     // => user modified category name
     if (categoryForm.categoryName) {
       // update category name field
-      const docRef = doc(db, 'categories', selectedCategory.id);
+      /* FIXME */
+      // by updating the name of the category, I also have to take all the items with the previous name and update their category field to the new category name, most likely using a batch transaction
 
       try {
-        // Set the "capital" field of the city 'DC'
         await updateDoc(docRef, {
           name: categoryForm.categoryName,
         });
@@ -126,9 +133,8 @@ const DashboardCategoryOptionsModal = ({
       const docRef = doc(db, 'categories', selectedCategory.id);
 
       try {
-        // Set the "capital" field of the city 'DC'
         await updateDoc(docRef, {
-          name: categoryForm.categoryDescription,
+          description: categoryForm.categoryDescription,
         });
       } catch (err) {
         console.log(err);
@@ -141,7 +147,7 @@ const DashboardCategoryOptionsModal = ({
       updateOrder(
         'categories',
         selectedCategory.id,
-        categoryForm.order,
+        Number(categoryForm.order),
         updateErrorMessage
       );
     }
@@ -159,6 +165,7 @@ const DashboardCategoryOptionsModal = ({
         <h3>Editar opciones de categoría</h3>
         <h5>{selectedCategory?.name}</h5>
 
+        {error ? <p className='add-category-error-message'>{error}</p> : null}
         <div className='dashboard-category-options-container'>
           <div className='dashboard-category-option-group'>
             <div>
@@ -197,6 +204,8 @@ const DashboardCategoryOptionsModal = ({
                 <input
                   type='number'
                   placeholder={`Orden actual: ${selectedCategory?.order}`}
+                  onChange={onChangeHandler}
+                  name='order'
                 />
               </div>
             </div>
