@@ -61,7 +61,7 @@ const BookingForm = ({ sliderIndex, bookingForm, onFormChange }) => {
               onChange={onFormChange}
               required
             >
-              <option value='' disabled hidden>
+              <option value='' disabled hidden className='option-placeholder'>
                 Selecciona el número de personas
               </option>
               <option value='1'>1</option>

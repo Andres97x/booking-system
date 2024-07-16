@@ -5,7 +5,7 @@ const useDashboardCategoryUpload = type => {
   const [categoryForm, setCategoryForm] = useState({
     categoryName: '',
     categoryDescription: '',
-    ...(type === 'update' && { order: null }),
+    ...(type === 'update' && { order: '' }),
   });
 
   const onChangeHandler = e => {
@@ -20,6 +20,7 @@ const useDashboardCategoryUpload = type => {
     setCategoryForm({
       categoryName: '',
       categoryDescription: '',
+      ...(type === 'update' && { order: 0 }),
     });
 
     setImageUpload(null);

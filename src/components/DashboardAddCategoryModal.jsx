@@ -2,7 +2,7 @@ import useDashboardUploadForm from '../hooks/useDashboardUploadForm';
 import useDashboardAddCategory from '../hooks/useDashboardAddCategory';
 import Modal from './Modal';
 import DashboardAddCategoryForm from './DashboardAddCategoryForm';
-import DashboardAddCategoryCompleted from './DashboardAddCategoryCompleted';
+import ModalStatusCompleted from './ModalStatusCompleted';
 import Spinner from './Spinner';
 
 const DashboardAddCategoryModal = ({ categoriesLength }) => {
@@ -37,7 +37,8 @@ const DashboardAddCategoryModal = ({ categoriesLength }) => {
       return <Spinner spinnerContainerClassName='modal-spinner' />;
     } else if (status === 'completed') {
       return (
-        <DashboardAddCategoryCompleted
+        <ModalStatusCompleted
+          type='add'
           categoryForm={categoryForm}
           clearInputValues={clearInputValues}
           setStatus={setStatus}

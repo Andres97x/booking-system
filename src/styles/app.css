@@ -184,15 +184,6 @@ dialog .modal-close {
   padding: 0.5rem;
 }
 
-dialog button:focus,
-dialog button:focus-visible,
-dialog input:focus,
-dialog input:focus-visible,
-dialog textarea:focus,
-dialog textarea:focus-visible {
-  outline: 2px solid var(--secondary-color-half);
-}
-
 dialog {
   /* animation: fade-out 200ms ease-out; */
 }
@@ -246,6 +237,7 @@ dialog[open]::backdrop {
 dialog input:not([type='file']),
 dialog input[type='file'],
 dialog textarea,
+dialog select,
 dialog form button {
   color: var(--font-secondary-color);
   width: 100%;
@@ -265,6 +257,21 @@ dialog input[type='file'] {
 dialog input[type='file']::file-selector-button {
   padding: 1rem 3rem 1rem 0;
   font-size: 1.6rem;
+}
+
+dialog button:focus,
+dialog button:focus-visible,
+dialog input:focus,
+dialog input:focus-visible,
+dialog textarea:focus,
+dialog textarea:focus-visible,
+dialog select:focus,
+dialog select:focus-visible {
+  outline: 2px solid var(--secondary-color-half);
+}
+
+.option-placeholder {
+  color: #777 !important;
 }
 
 /* OBSERVATION NOTES ACROSS WEBSITE */

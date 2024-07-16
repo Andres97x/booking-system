@@ -5,7 +5,7 @@ import { db } from '../configs/firebase';
 
 import DashboardAddCategoryModal from './DashboardAddCategoryModal';
 import DashboardAddItemModal from './DashboardAddItemModal';
-import DashboardCategoryOptionsModal from './DashboardCategoryOptionsModal';
+import DashboardUpdateCategoryModal from './DashboardUpdateCategoryModal';
 import DashboardCategoryCard from './DashboardCategoryCard';
 
 import { clickOpenModal } from '../utils';
@@ -80,9 +80,10 @@ const DashboardMenu = () => {
 
       <DashboardAddItemModal />
 
-      <DashboardCategoryOptionsModal
+      <DashboardUpdateCategoryModal
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
+        categoriesLength={categoriesData.length}
       />
     </div>
   );

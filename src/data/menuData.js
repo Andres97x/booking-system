@@ -62,7 +62,7 @@ export const categoriesData = [
   //   image: dessertsImg,
   //   imageAlt: 'Una torta oscura y un postre de fresas',
   //   description:
-  //     ' Endulza tu día con nuestros deliciosos postres, perfectos para terminar tu comida con broche de oro.',
+  //     'Endulza tu día con nuestros deliciosos postres, perfectos para terminar tu comida con broche de oro.',
   // },
   // {
   //   category: 'bebidas',
