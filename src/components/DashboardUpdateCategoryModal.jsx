@@ -63,7 +63,7 @@ const DashboardUpdateCategoryModal = ({
         setError(null);
         setSelectedCategory(null);
       }}
-      id='modal-options'
+      id='modal-category-options'
     >
       {displayedElement()}
     </Modal>

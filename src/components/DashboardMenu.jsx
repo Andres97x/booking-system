@@ -3,16 +3,19 @@ import { useEffect, useState } from 'react';
 import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
 import { db } from '../configs/firebase';
 
-import DashboardAddCategoryModal from './DashboardAddCategoryModal';
-import DashboardAddItemModal from './DashboardAddItemModal';
-import DashboardUpdateCategoryModal from './DashboardUpdateCategoryModal';
 import DashboardCategoryCard from './DashboardCategoryCard';
+import DashboardAddCategoryModal from './DashboardAddCategoryModal';
+import DashboardUpdateCategoryModal from './DashboardUpdateCategoryModal';
+import DashboardDeleteCategoryModal from './DashboardDeleteCategoryModal';
+import DashboardAddItemModal from './DashboardAddItemModal';
 
 import { clickOpenModal } from '../utils';
 
 const DashboardMenu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  console.log(selectedCategory);
 
   const handleCategoryClick = category => {
     setSelectedCategory(category);
@@ -78,13 +81,15 @@ const DashboardMenu = () => {
         categoriesLength={categoriesData.length || 0}
       />
 
-      <DashboardAddItemModal />
-
       <DashboardUpdateCategoryModal
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
         categoriesLength={categoriesData.length}
       />
+
+      <DashboardDeleteCategoryModal selectedCategory={selectedCategory} />
+
+      <DashboardAddItemModal />
     </div>
   );
 };

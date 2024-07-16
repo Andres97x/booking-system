@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { MdDelete, MdEdit, MdDone } from 'react-icons/md';
+import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
 
 const DashboardUpdateCategoryForm = ({
   selectedCategory,
@@ -33,8 +32,8 @@ const DashboardUpdateCategoryForm = ({
       <h3>Editar opciones de categoría</h3>
       <h5>{selectedCategory?.name}</h5>
 
-      {error ? <p className='add-category-error-message'>{error}</p> : null}
       <div className='dashboard-category-options-container'>
+        {error ? <p className='add-category-error-message'>{error}</p> : null}
         <div className='dashboard-category-option-group'>
           <div>
             <p>Nombre</p>
@@ -117,14 +116,14 @@ const DashboardUpdateCategoryForm = ({
         </div>
       </div>
 
-      <div className='dashboard-category-options-btns-container'>
+      <div className='dashboard-action-btns-container'>
         <button className='dashboard-btn' onClick={updateFile}>
           <MdDone />
           Confirmar cambios
         </button>
         <button className='dashboard-btn'>
-          <MdDelete />
-          Eliminar categoría
+          <MdCancel />
+          Cancelar
         </button>
       </div>
     </div>

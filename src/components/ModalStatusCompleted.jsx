@@ -14,6 +14,7 @@ const ModalStatusCompleted = ({
       {type === 'add' && (
         <div className='category-completed-action-btns'>
           <button
+            className='dashboard-btn'
             onClick={() => {
               clearInputValues();
               setStatus('idle');
@@ -22,6 +23,7 @@ const ModalStatusCompleted = ({
             Añadir otra categoría
           </button>
           <button
+            className='dashboard-btn'
             onClick={e => {
               e.target.closest('dialog').close();
               setStatus('idle');
