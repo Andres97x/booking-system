@@ -1,6 +1,4 @@
-import DashboardUpdateCategoryForm from './DashboardUpdateCategoryForm';
-import { useState } from 'react';
-
+import DashboardUpdateCategoryScreen from './DashboardUpdateCategoryScreen';
 import useDashboardUploadForm from '../hooks/useDashboardUploadForm';
 import useDashboardUpdateCategory from '../hooks/useDashboardUpdateCategory';
 import Modal from './Modal';
@@ -21,12 +19,12 @@ const DashboardUpdateCategoryModal = ({
   } = useDashboardUploadForm('update');
 
   const { status, setStatus, error, setError, updateFile } =
-    useDashboardUpdateCategory(categoryForm, imageUpload, selectedCategory);
+    useDashboardUpdateCategory();
 
   const displayedElement = () => {
     if (status === 'idle') {
       return (
-        <DashboardUpdateCategoryForm
+        <DashboardUpdateCategoryScreen
           selectedCategory={selectedCategory}
           error={error}
           categoryForm={categoryForm}
@@ -34,6 +32,7 @@ const DashboardUpdateCategoryModal = ({
           categoriesLength={categoriesLength}
           updateFile={updateFile}
           setImageUpload={setImageUpload}
+          imageUpload={imageUpload}
         />
       );
     }

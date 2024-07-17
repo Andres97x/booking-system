@@ -4,18 +4,16 @@ import { collection, addDoc } from 'firebase/firestore';
 import { storage, db } from '../configs/firebase';
 import { v4 as uuidv4 } from 'uuid';
 
-const useDashboardAddCategory = (
-  categoriesLength,
-  imageUpload,
-  categoryForm,
-  clearInputValues
-) => {
+const useDashboardAddCategory = () => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
-  const submitCategory = async e => {
-    e.preventDefault();
-
+  const submitCategory = async (
+    categoriesLength,
+    imageUpload,
+    categoryForm,
+    clearInputValues
+  ) => {
     setError(null);
 
     if (!imageUpload || !categoryForm.categoryName) {

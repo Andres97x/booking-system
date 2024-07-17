@@ -1,9 +1,12 @@
-const DashboardCategoryForm = ({
+const DashboardAddCategoryScreen = ({
   categoryForm,
   error,
   onChangeHandler,
   submitCategory,
   setImageUpload,
+  categoriesLength,
+  imageUpload,
+  clearInputValues,
 }) => {
   return (
     <form>
@@ -48,9 +51,22 @@ const DashboardCategoryForm = ({
         />
       </div>
 
-      <button onClick={submitCategory}>Añadir categoría</button>
+      <button
+        onClick={e => {
+          e.preventDefault();
+
+          submitCategory(
+            categoriesLength,
+            imageUpload,
+            categoryForm,
+            clearInputValues
+          );
+        }}
+      >
+        Añadir categoría
+      </button>
     </form>
   );
 };
 
-export default DashboardCategoryForm;
+export default DashboardAddCategoryScreen;

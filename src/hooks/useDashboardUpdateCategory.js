@@ -13,11 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { storage, db } from '../configs/firebase';
 
-const useDashboardUpdateCategory = (
-  categoryForm,
-  imageUpload,
-  selectedCategory
-) => {
+const useDashboardUpdateCategory = () => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
@@ -56,7 +52,7 @@ const useDashboardUpdateCategory = (
     }
   };
 
-  const updateFile = async () => {
+  const updateFile = async (categoryForm, imageUpload, selectedCategory) => {
     setError(null);
 
     if (
@@ -122,8 +118,7 @@ const useDashboardUpdateCategory = (
         updateOrder(
           'categories',
           selectedCategory.id,
-          parseInt(categoryForm.order),
-          updateErrorMessage
+          parseInt(categoryForm.order)
         );
       }
 

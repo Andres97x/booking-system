@@ -1,6 +1,6 @@
 import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
 
-const DashboardUpdateCategoryForm = ({
+const DashboardUpdateCategoryScreen = ({
   selectedCategory,
   error,
   categoryForm,
@@ -8,6 +8,7 @@ const DashboardUpdateCategoryForm = ({
   categoriesLength,
   updateFile,
   setImageUpload,
+  imageUpload,
 }) => {
   const orderOptionsEl = (length, currentOrder) => {
     const options = [];
@@ -117,7 +118,12 @@ const DashboardUpdateCategoryForm = ({
       </div>
 
       <div className='dashboard-action-btns-container'>
-        <button className='dashboard-btn' onClick={updateFile}>
+        <button
+          className='dashboard-btn'
+          onClick={() => {
+            updateFile(categoryForm, imageUpload, selectedCategory);
+          }}
+        >
           <MdDone />
           Confirmar cambios
         </button>
@@ -130,4 +136,4 @@ const DashboardUpdateCategoryForm = ({
   );
 };
 
-export default DashboardUpdateCategoryForm;
+export default DashboardUpdateCategoryScreen;
