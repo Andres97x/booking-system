@@ -1,14 +1,21 @@
 const ModalStatusCompleted = ({
   type,
-  categoryForm,
+  categoryName,
   clearInputValues,
   setStatus,
 }) => {
+  const actionMessage = () => {
+    if (type === 'add') return 'añadió';
+    if (type === 'update') return 'actualizó';
+    if (type === 'delete') return 'eliminó';
+  };
+
+  // console.log(categoryName);
+
   return (
     <div className='category-completed-container'>
       <h3>
-        La categoría {categoryForm.categoryName} se{' '}
-        {type === 'add' ? 'añadió' : 'actualizó'} correctamente
+        La categoría {categoryName} se {actionMessage()} correctamente
       </h3>
 
       {type === 'add' && (

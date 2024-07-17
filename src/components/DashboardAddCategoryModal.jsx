@@ -39,7 +39,6 @@ const DashboardAddCategoryModal = ({ categoriesLength }) => {
       return (
         <ModalStatusCompleted
           type='add'
-          categoryForm={categoryForm}
           clearInputValues={clearInputValues}
           setStatus={setStatus}
         />

@@ -12,9 +12,6 @@ const DashboardUpdateCategoryModal = ({
   setSelectedCategory,
   categoriesLength,
 }) => {
-  const [status, setStatus] = useState('idle');
-  const [error, setError] = useState(null);
-
   const {
     categoryForm,
     onChangeHandler,
@@ -23,13 +20,8 @@ const DashboardUpdateCategoryModal = ({
     clearInputValues,
   } = useDashboardUploadForm('update');
 
-  const { updateFile } = useDashboardUpdateCategory(
-    categoryForm,
-    imageUpload,
-    selectedCategory,
-    setError,
-    setStatus
-  );
+  const { status, setStatus, error, setError, updateFile } =
+    useDashboardUpdateCategory(categoryForm, imageUpload, selectedCategory);
 
   const displayedElement = () => {
     if (status === 'idle') {
@@ -51,7 +43,12 @@ const DashboardUpdateCategoryModal = ({
     }
 
     if (status === 'completed') {
-      return <ModalStatusCompleted type='update' categoryForm={categoryForm} />;
+      return (
+        <ModalStatusCompleted
+          type='update'
+          categoryName={selectedCategory.name}
+        />
+      );
     }
   };
 

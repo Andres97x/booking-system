@@ -360,10 +360,6 @@ dialog label {
   height: 70%;
 }
 
-#modal-category-options > div {
-  height: 100%;
-}
-
 #modal-category-options h5 {
   font-size: 1.6rem;
   font-weight: 600;
@@ -436,7 +432,7 @@ dialog label {
   height: 70%;
 }
 
-#modal-delete-category > div {
+#modal-delete-category > div:not(.modal-spinner) {
   height: 100%;
   display: flex;
   flex-direction: column;

@@ -14,8 +14,6 @@ const MenuItems = () => {
   const drinksCategory = searchParams.get('categoria');
   // console.log(drinksCategory);
 
-  console.log(productId);
-
   const closeProductModal = () => {
     handleSearchParams('productId', null);
   };

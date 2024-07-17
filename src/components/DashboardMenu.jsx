@@ -15,7 +15,7 @@ const DashboardMenu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  console.log(selectedCategory);
+  // console.log(selectedCategory);
 
   const handleCategoryClick = category => {
     setSelectedCategory(category);

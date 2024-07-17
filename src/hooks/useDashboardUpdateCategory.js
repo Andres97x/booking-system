@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   collection,
   doc,
@@ -15,10 +16,11 @@ import { storage, db } from '../configs/firebase';
 const useDashboardUpdateCategory = (
   categoryForm,
   imageUpload,
-  selectedCategory,
-  setError,
-  setStatus
+  selectedCategory
 ) => {
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState(null);
+
   const updateOrder = async (collectionName, docId, newOrder) => {
     const collectionRef = collection(db, collectionName);
     const q = query(collectionRef, orderBy('order'));
@@ -128,7 +130,7 @@ const useDashboardUpdateCategory = (
       setStatus('completed');
 
       setTimeout(() => {
-        const modal = document.getElementById('modal-options');
+        const modal = document.getElementById('modal-category-options');
 
         if (modal) {
           modal.close();
@@ -140,7 +142,7 @@ const useDashboardUpdateCategory = (
     }
   };
 
-  return { updateFile };
+  return { status, setStatus, error, setError, updateFile };
 };
 
 export default useDashboardUpdateCategory;
