@@ -446,3 +446,8 @@ dialog label {
 #modal-delete-category .dashboard-action-btns-container {
   padding-bottom: 0;
 }
+
+#modal-add-item {
+  width: 30%;
+  height: 70%;
+}

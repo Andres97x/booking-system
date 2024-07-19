@@ -18,7 +18,7 @@ const DashboardAddCategoryScreen = ({
         <input
           id='dash-add-category-name'
           type='text'
-          name='categoryName'
+          name='name'
           value={categoryForm.categoryName}
           onChange={onChangeHandler}
           required
@@ -32,7 +32,7 @@ const DashboardAddCategoryScreen = ({
         </label>
         <textarea
           id='dash-add-category-description'
-          name='categoryDescription'
+          name='description'
           rows='5'
           cols='33'
           placeholder='Añade una breve descripción de la categoría (máximo 120 caracteres)'

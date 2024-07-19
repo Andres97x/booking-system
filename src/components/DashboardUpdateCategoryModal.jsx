@@ -18,6 +18,8 @@ const DashboardUpdateCategoryModal = ({
     clearInputValues,
   } = useDashboardUploadForm('update');
 
+  // console.log(Object.values(categoryForm).some(value => value));
+
   const { status, setStatus, error, setError, updateFile } =
     useDashboardUpdateCategory();
 

@@ -3,8 +3,8 @@ import { useState } from 'react';
 const useDashboardCategoryUpload = type => {
   const [imageUpload, setImageUpload] = useState(null);
   const [categoryForm, setCategoryForm] = useState({
-    categoryName: '',
-    categoryDescription: '',
+    name: '',
+    description: '',
     ...(type === 'update' && { order: '' }),
   });
 
@@ -18,8 +18,8 @@ const useDashboardCategoryUpload = type => {
 
   const clearInputValues = () => {
     setCategoryForm({
-      categoryName: '',
-      categoryDescription: '',
+      name: '',
+      description: '',
       ...(type === 'update' && { order: 0 }),
     });
 

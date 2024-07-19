@@ -4,7 +4,10 @@ import ModalStatusCompleted from './ModalStatusCompleted';
 import useDashboardDeleteCategory from '../hooks/useDashboardDeleteCategory';
 import DashboardDeleteCategoryScreen from './DashboardDeleteCategoryScreen';
 
-const DashboardDeleteCategoryModal = ({ selectedCategory }) => {
+const DashboardDeleteCategoryModal = ({
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   const { status, setStatus, error, setError, deleteCategory } =
     useDashboardDeleteCategory();
 
@@ -46,6 +49,7 @@ const DashboardDeleteCategoryModal = ({ selectedCategory }) => {
       onClose={() => {
         setStatus('idle');
         setError(null);
+        setSelectedCategory(null);
       }}
     >
       {displayedElement(status)}

@@ -17,9 +17,7 @@ const DashboardMenu = () => {
 
   // console.log(selectedCategory);
 
-  const handleCategoryClick = category => {
-    setSelectedCategory(category);
-  };
+  /* TODO disable close modal button when state is set to loading */
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +49,7 @@ const DashboardMenu = () => {
   const categoriesDataEl = categoriesData.map((category, i) => (
     <DashboardCategoryCard
       category={category}
-      handleCategoryClick={handleCategoryClick}
+      setSelectedCategory={setSelectedCategory}
       key={`dashboard-category-card-${i}`}
     />
   ));
@@ -64,12 +62,12 @@ const DashboardMenu = () => {
           Añadir categoría
         </button>
 
-        <button
+        {/* <button
           className='dashboard-btn left-margin'
           data-modal='modal-add-item'
         >
           Añadir item
-        </button>
+        </button> */}
       </div>
 
       <p className='note dashboard-menu-note'>
@@ -87,7 +85,10 @@ const DashboardMenu = () => {
         categoriesLength={categoriesData.length}
       />
 
-      <DashboardDeleteCategoryModal selectedCategory={selectedCategory} />
+      <DashboardDeleteCategoryModal
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
 
       <DashboardAddItemModal />
     </div>

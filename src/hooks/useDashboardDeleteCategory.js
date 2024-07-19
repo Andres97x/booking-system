@@ -65,6 +65,8 @@ const useDashboardDeleteCategory = () => {
       // re-order the other categories
       updateOrderAfterDeleteCategory('categories', categoriesId, order);
 
+      /* TODO delete all items linked to this category */
+
       setStatus('completed');
 
       setTimeout(() => {

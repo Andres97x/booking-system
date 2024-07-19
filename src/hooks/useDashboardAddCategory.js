@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ref, uploadBytes } from 'firebase/storage';
+import { deleteObject, ref, uploadBytes } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 import { storage, db } from '../configs/firebase';
 import { v4 as uuidv4 } from 'uuid';
@@ -16,43 +16,50 @@ const useDashboardAddCategory = () => {
   ) => {
     setError(null);
 
-    if (!imageUpload || !categoryForm.categoryName) {
+    if (!imageUpload || !categoryForm.name) {
       setError('Completa los campos obligatorios faltantes *');
       return;
     }
 
     const uniqueId = uuidv4();
+    const imagePath = `categories/${imageUpload.name.split('.')[0] + uniqueId}`;
+
+    const handleError = (error, whatFailed) => {
+      console.error(error);
+      setError(
+        `Hubo un error al subir la ${whatFailed}, la acción no fue completada`
+      );
+      setStatus('idle');
+    };
 
     try {
       setStatus('loading');
 
-      const imagePath = `categories/${
-        imageUpload.name.split('.')[0] + uniqueId
-      }`;
-
       // Uploading image to firebase/storage
       const imgRef = ref(storage, imagePath);
-
       await uploadBytes(imgRef, imageUpload);
 
-      // Uploading data to firebase/firestore database
-      const categoriesCollectionRef = collection(db, 'categories');
+      try {
+        // Uploading data to firebase/firestore database
+        const categoriesCollectionRef = collection(db, 'categories');
+        await addDoc(categoriesCollectionRef, {
+          name: categoryForm.name,
+          description: categoryForm.description,
+          imageRef: imagePath,
+          order: categoriesLength + 1,
+        });
 
-      await addDoc(categoriesCollectionRef, {
-        name: categoryForm.categoryName,
-        description: categoryForm.categoryDescription,
-        imageRef: imagePath,
-        order: categoriesLength + 1,
-      });
+        clearInputValues();
+        setStatus('completed');
+      } catch (err) {
+        // rollback uploadBytes operation - delete just added image from storage
+        deleteObject(imgRef);
+        console.log(`image rollback done, deleted image: ${imagePath}`);
 
-      clearInputValues();
-      setStatus('completed');
+        handleError(err, 'categoría');
+      }
     } catch (err) {
-      console.error(err);
-      setError(
-        'Hubo un error al subir la categoría, la acción no fue completada'
-      );
-      setStatus('idle');
+      handleError(err, 'imagen de la categoría');
     }
   };
 

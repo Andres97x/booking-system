@@ -47,7 +47,7 @@ const DashboardUpdateCategoryScreen = ({
             <input
               id='dash-add-category-name'
               type='text'
-              name='categoryName'
+              name='name'
               placeholder={selectedCategory?.name}
               value={categoryForm.categoryName}
               onChange={onChangeHandler}
@@ -88,7 +88,7 @@ const DashboardUpdateCategoryScreen = ({
           <div>
             <textarea
               id='dash-add-category-description'
-              name='categoryDescription'
+              name='description'
               rows='5'
               cols='33'
               placeholder={selectedCategory?.description}

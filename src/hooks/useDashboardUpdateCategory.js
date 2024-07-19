@@ -56,8 +56,8 @@ const useDashboardUpdateCategory = () => {
     setError(null);
 
     if (
-      !categoryForm.categoryName &&
-      !categoryForm.categoryDescription &&
+      !categoryForm.name &&
+      !categoryForm.description &&
       !categoryForm.order &&
       !imageUpload
     ) {
@@ -71,8 +71,11 @@ const useDashboardUpdateCategory = () => {
     try {
       setStatus('loading');
 
+      /* TODO refactor if statements, throw errors */
+
       // => user modified image
       const docRef = doc(db, 'categories', selectedCategory.id);
+
       if (imageUpload) {
         const uniqueId = uuidv4();
 
@@ -96,18 +99,24 @@ const useDashboardUpdateCategory = () => {
         });
       }
 
+      /* IMPORTANT REFACTOR*/
+      // => user modified data
+      // if (Object.values(categoryForm).some(value => value)) {
+      //   const modifiedInputEntries = Object.entries(categoryForm).filter(
+      //     entry => entry[1]
+      //   );
+      // }
+
       // => user modified category name
-      if (categoryForm.categoryName) {
+      if (categoryForm.name) {
         await updateDoc(docRef, {
-          name: categoryForm.categoryName,
+          name: categoryForm.name,
         });
       }
 
       // => user modified description
-      if (categoryForm.categoryDescription) {
+      if (categoryForm.description) {
         // update category description field
-        const docRef = doc(db, 'categories', selectedCategory.id);
-
         await updateDoc(docRef, {
           description: categoryForm.categoryDescription,
         });
@@ -132,6 +141,7 @@ const useDashboardUpdateCategory = () => {
         }
       }, 1200);
     } catch (err) {
+      console.error(err);
       setError(updateErrorMessage);
       setStatus('idle');
     }
