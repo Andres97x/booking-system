@@ -17,7 +17,9 @@ const DashboardMenu = () => {
 
   // console.log(selectedCategory);
 
-  /* TODO disable close modal button when state is set to loading */
+  /* TODO */
+  // disable close modal button when state is set to loading
+  // empty screen when there are no categories added in the dashboard
 
   useEffect(() => {
     const fetchData = async () => {

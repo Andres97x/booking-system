@@ -37,11 +37,12 @@ const Menu = () => {
     // Fetch categories data from database
     const fetchCategoriesData = async () => {
       const collectionRef = collection(db, 'categories');
-
       const q = query(collectionRef, orderBy('order'));
+
       try {
         setStatus('loading');
         const querySnapshot = await getDocs(q);
+
         const retrievedData = await Promise.all(
           querySnapshot.docs.map(async doc => {
             const data = doc.data();

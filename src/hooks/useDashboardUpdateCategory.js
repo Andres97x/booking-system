@@ -68,13 +68,39 @@ const useDashboardUpdateCategory = () => {
     const updateErrorMessage =
       'Hubo un problema, no se ha podido actualizar la categoría';
 
+    const docRef = doc(db, 'categories', selectedCategory.id);
+
     try {
       setStatus('loading');
 
-      /* TODO refactor if statements, throw errors */
+      // => user modified data
+      if (Object.values(categoryForm).some(value => value)) {
+        const newData = {};
+
+        const modifiedInputEntries = Object.entries(categoryForm).filter(
+          entry => entry[1]
+        );
+
+        modifiedInputEntries.forEach(([key, value]) => {
+          if (key === 'order') return;
+          newData[key] = value;
+        });
+
+        console.log(newData);
+
+        await updateDoc(docRef, { ...newData });
+      }
+
+      // => user modified order
+      if (categoryForm.order) {
+        updateOrder(
+          'categories',
+          selectedCategory.id,
+          parseInt(categoryForm.order)
+        );
+      }
 
       // => user modified image
-      const docRef = doc(db, 'categories', selectedCategory.id);
 
       if (imageUpload) {
         const uniqueId = uuidv4();
@@ -97,38 +123,6 @@ const useDashboardUpdateCategory = () => {
         await updateDoc(docRef, {
           imageRef: newImagePath,
         });
-      }
-
-      /* IMPORTANT REFACTOR*/
-      // => user modified data
-      // if (Object.values(categoryForm).some(value => value)) {
-      //   const modifiedInputEntries = Object.entries(categoryForm).filter(
-      //     entry => entry[1]
-      //   );
-      // }
-
-      // => user modified category name
-      if (categoryForm.name) {
-        await updateDoc(docRef, {
-          name: categoryForm.name,
-        });
-      }
-
-      // => user modified description
-      if (categoryForm.description) {
-        // update category description field
-        await updateDoc(docRef, {
-          description: categoryForm.categoryDescription,
-        });
-      }
-
-      // => user modified order
-      if (categoryForm.order) {
-        updateOrder(
-          'categories',
-          selectedCategory.id,
-          parseInt(categoryForm.order)
-        );
       }
 
       setStatus('completed');

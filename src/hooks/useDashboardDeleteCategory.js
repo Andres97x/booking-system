@@ -57,15 +57,15 @@ const useDashboardDeleteCategory = () => {
       // delete the data from database
       await deleteDoc(doc(db, 'categories', categoriesId));
 
-      // delete image from storage
-      const categoryImageRef = ref(storage, imageRef);
-
-      await deleteObject(categoryImageRef);
-
       // re-order the other categories
       updateOrderAfterDeleteCategory('categories', categoriesId, order);
 
       /* TODO delete all items linked to this category */
+
+      // delete image from storage
+      const categoryImageRef = ref(storage, imageRef);
+
+      await deleteObject(categoryImageRef);
 
       setStatus('completed');
 
