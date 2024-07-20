@@ -21,9 +21,6 @@ const useDashboardAddCategory = () => {
       return;
     }
 
-    const uniqueId = uuidv4();
-    const imagePath = `categories/${imageUpload.name.split('.')[0] + uniqueId}`;
-
     const handleError = (error, whatFailed) => {
       console.error(error);
       setError(
@@ -32,34 +29,42 @@ const useDashboardAddCategory = () => {
       setStatus('idle');
     };
 
+    const uniqueId = uuidv4();
+    const imagePath = `categories/${imageUpload.name.split('.')[0] + uniqueId}`;
+    const imgRef = ref(storage, imagePath);
+    let imageResponse = null;
+
     try {
       setStatus('loading');
 
       // Uploading image to firebase/storage
-      const imgRef = ref(storage, imagePath);
-      await uploadBytes(imgRef, imageUpload);
+      imageResponse = await uploadBytes(imgRef, imageUpload);
 
-      try {
-        // Uploading data to firebase/firestore database
-        const categoriesCollectionRef = collection(db, 'categories');
-        await addDoc(categoriesCollectionRef, {
-          name: categoryForm.name,
-          description: categoryForm.description,
-          imageRef: imagePath,
-          order: categoriesLength + 1,
-        });
+      // Uploading data to firebase/firestore database
+      const categoriesCollectionRef = collection(db, 'categories');
+      await addDoc(categoriesCollectionRef, {
+        name: categoryForm.name,
+        description: categoryForm.description,
+        imageRef: imagePath,
+        order: categoriesLength + 1,
+      });
 
-        clearInputValues();
-        setStatus('completed');
-      } catch (err) {
-        // rollback uploadBytes operation - delete just added image from storage
-        deleteObject(imgRef);
-        console.log(`image rollback done, deleted image: ${imagePath}`);
-
-        handleError(err, 'categoría');
-      }
+      clearInputValues();
+      setStatus('completed');
     } catch (err) {
-      handleError(err, 'imagen de la categoría');
+      handleError(err, 'categoría');
+
+      if (imageResponse) {
+        try {
+          // rollback uploadBytes operation - delete just added image from storage
+          deleteObject(imgRef);
+          console.log(`image rollback done, deleted image: ${imagePath}`);
+        } catch (err) {
+          setError(
+            'Hubo un fallo inesperado, los datos no se han subido completamente'
+          );
+        }
+      }
     }
   };
 
