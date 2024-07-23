@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import './styles/app.css';
 
 import { BookingContextWrapper } from './contexts/BookingContext';
@@ -18,6 +18,7 @@ import DashboardMessage from './components/DashboardMessage';
 import DashboardNotifications from './components/DashboardNotifications';
 import DashboardBookings from './components/DashboardBookings';
 import DashboardMenu from './components/DashboardMenu';
+// import DashboardMenuCategory from './components/DashboardMenuCategory';
 import DashboardNews from './components/DashboardNews';
 
 function App() {
@@ -48,6 +49,10 @@ function App() {
               />
               <Route path='bookings' element={<DashboardBookings />} />
               <Route path='menu' element={<DashboardMenu />} />
+              {/* <Route
+                path='menu/:category'
+                element={<DashboardMenuCategory />}
+              /> */}
               <Route path='news' element={<DashboardNews />} />
             </Route>
           </Route>

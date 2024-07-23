@@ -585,3 +585,9 @@ header svg {
   font-size: 1.8rem;
   font-weight: 600;
 }
+
+.error-message {
+  color: #402400;
+  font-weight: 600;
+  margin-top: 1rem;
+}

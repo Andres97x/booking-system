@@ -10,33 +10,45 @@ import DashboardDeleteCategoryModal from './DashboardDeleteCategoryModal';
 import DashboardAddItemModal from './DashboardAddItemModal';
 
 import { clickOpenModal } from '../utils';
+import Spinner from './Spinner';
 
 const DashboardMenu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // console.log(selectedCategory);
 
   /* TODO */
   // disable close modal button when state is set to loading
-  // empty screen when there are no categories added in the dashboard
 
   useEffect(() => {
-    const fetchData = async () => {
-      const collectionRef = collection(db, 'categories');
-      const q = query(collectionRef, orderBy('order'));
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef, orderBy('order'));
 
-      onSnapshot(q, querySnapshot => {
+    const unsubscribe = onSnapshot(
+      q,
+      querySnapshot => {
         const retrievedData = querySnapshot.docs.map(doc => ({
           ...doc.data(),
           id: doc.id,
         }));
 
         setCategoriesData(retrievedData);
-      });
-    };
+        setLoading(false);
+      },
+      error => {
+        setError(
+          'Hubo un problema al obtener los datos, por favor reporta este problema.'
+        );
+        setLoading(false);
+      }
+    );
 
-    fetchData();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {
@@ -75,7 +87,17 @@ const DashboardMenu = () => {
       <p className='note dashboard-menu-note'>
         Este es el orden en el que aparecen las categorias en la página de Menú
       </p>
-      <div className='dashboard-menu-grid'>{categoriesDataEl}</div>
+      {error && <p className='error-message'>{error}</p>}
+
+      {loading ? (
+        <Spinner spinnerContainerClassName='dashboard-menu-spinner' />
+      ) : categoriesData.length === 0 ? (
+        <p style={{ marginTop: '2rem' }}>
+          Aún no hay categorias añadidas al menú
+        </p>
+      ) : (
+        <div className='dashboard-menu-grid'>{categoriesDataEl}</div>
+      )}
 
       <DashboardAddCategoryModal
         categoriesLength={categoriesData.length || 0}
