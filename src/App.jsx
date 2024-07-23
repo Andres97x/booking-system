@@ -1,11 +1,12 @@
+import { lazy, Suspense } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
-import { lazy, Suspense } from 'react';
 import './styles/app.css';
 
 import { BookingContextWrapper } from './contexts/BookingContext';
 
 import useCloseModalOnClickOutside from './hooks/useCloseModalOnClickOutside';
+import useOpenModalOnBtnClick from './hooks/useOpenModalOnBtnClick';
 
 import PageLayout from './components/PageLayout';
 import Home from './pages/Home';
@@ -18,10 +19,12 @@ import DashboardMessage from './components/DashboardMessage';
 import DashboardNotifications from './components/DashboardNotifications';
 import DashboardBookings from './components/DashboardBookings';
 import DashboardMenu from './components/DashboardMenu';
-// import DashboardMenuCategory from './components/DashboardMenuCategory';
+import DashboardMenuCategory from './components/DashboardMenuCategory';
 import DashboardNews from './components/DashboardNews';
 
 function App() {
+  useOpenModalOnBtnClick();
+
   useCloseModalOnClickOutside();
 
   return (
@@ -49,10 +52,10 @@ function App() {
               />
               <Route path='bookings' element={<DashboardBookings />} />
               <Route path='menu' element={<DashboardMenu />} />
-              {/* <Route
+              <Route
                 path='menu/:category'
                 element={<DashboardMenuCategory />}
-              /> */}
+              />
               <Route path='news' element={<DashboardNews />} />
             </Route>
           </Route>

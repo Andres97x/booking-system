@@ -105,16 +105,16 @@ export const getTakenTimes = (booking, bookings, add, interval) => {
 /* <---- DASHBOARD COMPONENT ----> */
 
 export const clickOpenModal = e => {
-  let modalOpener;
+  let openModalBtn;
   if (e.target.matches('button[data-modal]')) {
-    modalOpener = e.target;
+    openModalBtn = e.target;
   } else {
-    modalOpener = e.target.closest('button[data-modal]');
+    openModalBtn = e.target.closest('button[data-modal]');
   }
 
-  if (!modalOpener) return;
+  if (!openModalBtn) return;
 
-  const modalElement = document.getElementById(`${modalOpener.dataset.modal}`);
+  const modalElement = document.getElementById(`${openModalBtn.dataset.modal}`);
 
   if (!modalElement) return;
 

@@ -7,9 +7,7 @@ import DashboardCategoryCard from './DashboardCategoryCard';
 import DashboardAddCategoryModal from './DashboardAddCategoryModal';
 import DashboardUpdateCategoryModal from './DashboardUpdateCategoryModal';
 import DashboardDeleteCategoryModal from './DashboardDeleteCategoryModal';
-import DashboardAddItemModal from './DashboardAddItemModal';
 
-import { clickOpenModal } from '../utils';
 import Spinner from './Spinner';
 
 const DashboardMenu = () => {
@@ -38,7 +36,7 @@ const DashboardMenu = () => {
         setCategoriesData(retrievedData);
         setLoading(false);
       },
-      error => {
+      () => {
         setError(
           'Hubo un problema al obtener los datos, por favor reporta este problema.'
         );
@@ -48,15 +46,6 @@ const DashboardMenu = () => {
 
     return () => {
       unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    const dashboardMenuContainer = document.querySelector('.dashboard-menu');
-    dashboardMenuContainer.addEventListener('click', clickOpenModal);
-
-    return () => {
-      dashboardMenuContainer.removeEventListener('click', clickOpenModal);
     };
   }, []);
 
@@ -75,13 +64,6 @@ const DashboardMenu = () => {
         <button className='dashboard-btn' data-modal='modal-add-category'>
           Añadir categoría
         </button>
-
-        {/* <button
-          className='dashboard-btn left-margin'
-          data-modal='modal-add-item'
-        >
-          Añadir item
-        </button> */}
       </div>
 
       <p className='note dashboard-menu-note'>
@@ -113,8 +95,6 @@ const DashboardMenu = () => {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-
-      <DashboardAddItemModal />
     </div>
   );
 };

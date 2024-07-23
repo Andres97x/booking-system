@@ -231,7 +231,10 @@
   margin-top: 1.5rem;
 }
 
-.dashboard-menu-see-items {
+.dashboard-menu-see-items:link,
+.dashboard-menu-see-items:visited {
+  color: inherit;
+  text-decoration: none;
   font-size: 1.4rem;
   border: 0;
   background-color: var(--main-color);
