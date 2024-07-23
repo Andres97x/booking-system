@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import { deleteObject, ref, uploadBytes } from 'firebase/storage';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { storage, db } from '../configs/firebase';
 import { v4 as uuidv4 } from 'uuid';
 
-const useDashboardAddCategory = () => {
+const useDashboardMenuAdd = type => {
+  if (!type) return;
+
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
-  const submitCategory = async (
+  const submitCategory = async ({
     categoriesLength,
     imageUpload,
-    categoryForm,
-    clearInputValues
-  ) => {
+    formData,
+    clearInputValues,
+    categoryId,
+  }) => {
     setError(null);
 
-    if (!imageUpload || !categoryForm.name) {
+    if (!imageUpload || !formData.name) {
       setError('Completa los campos obligatorios faltantes *');
       return;
     }
@@ -30,7 +33,9 @@ const useDashboardAddCategory = () => {
     };
 
     const uniqueId = uuidv4();
-    const imagePath = `categories/${imageUpload.name.split('.')[0] + uniqueId}`;
+    const imagePath = `${type === 'category' ? 'categories' : 'items'}/${
+      imageUpload.name.split('.')[0] + uniqueId
+    }`;
     const imgRef = ref(storage, imagePath);
     let imageResponse = null;
 
@@ -41,12 +46,17 @@ const useDashboardAddCategory = () => {
       imageResponse = await uploadBytes(imgRef, imageUpload);
 
       // Uploading data to firebase/firestore database
-      const categoriesCollectionRef = collection(db, 'categories');
-      await addDoc(categoriesCollectionRef, {
-        name: categoryForm.name,
-        description: categoryForm.description,
+      const collectionRef = collection(
+        db,
+        type === 'category' ? 'categories' : 'items'
+      );
+      await addDoc(collectionRef, {
+        name: formData.name,
+        description: formData.description,
         imageRef: imagePath,
-        order: categoriesLength + 1,
+        createdAt: serverTimestamp(),
+        ...(type === 'category' && { order: categoriesLength + 1 }),
+        ...(type === 'item' && { category: categoryId }),
       });
 
       clearInputValues();
@@ -71,4 +81,4 @@ const useDashboardAddCategory = () => {
   return { status, setStatus, error, setError, submitCategory };
 };
 
-export default useDashboardAddCategory;
+export default useDashboardMenuAdd;

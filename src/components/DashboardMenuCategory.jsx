@@ -1,10 +1,22 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import useDashboardMenuForm from '../hooks/useDashboardMenuForm';
+import useDashboardMenuAdd from '../hooks/useDashboardMenuAdd';
 import DashboardAddItemModal from './DashboardAddItemModal';
 
 const DashboardMenuCategory = () => {
   const { category } = useParams();
+  const {
+    formData,
+    onChangeHandler,
+    imageUpload,
+    setImageUpload,
+    clearInputValues,
+  } = useDashboardMenuForm('item', 'add');
+
+  const { status, setStatus, error, setError, submitCategory } =
+    useDashboardMenuAdd('item');
 
   if (!category) return;
 
@@ -23,7 +35,17 @@ const DashboardMenuCategory = () => {
           Añadir item
         </button>
       </div>
-      <DashboardAddItemModal />
+      <DashboardAddItemModal
+        formData={formData}
+        onChangeHandler={onChangeHandler}
+        imageUpload={imageUpload}
+        setImageUpload={setImageUpload}
+        clearInputValues={clearInputValues}
+        categoryName={categoryName}
+        submitCategory={submitCategory}
+        error={error}
+        categoryId={categoryId}
+      />
     </div>
   );
 };

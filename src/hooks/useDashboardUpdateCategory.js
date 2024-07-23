@@ -86,7 +86,7 @@ const useDashboardUpdateCategory = () => {
           newData[key] = value;
         });
 
-        console.log(newData);
+        // console.log(newData);
 
         await updateDoc(docRef, { ...newData });
       }

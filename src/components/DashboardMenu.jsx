@@ -19,6 +19,7 @@ const DashboardMenu = () => {
   // console.log(selectedCategory);
 
   /* TODO */
+  // Refactor useDashboardUpdateMenu to work with both categories and items as done with the add functionality!
   // disable close modal button when state is set to loading
 
   useEffect(() => {

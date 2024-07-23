@@ -1,5 +1,5 @@
 import DashboardUpdateCategoryScreen from './DashboardUpdateCategoryScreen';
-import useDashboardUploadForm from '../hooks/useDashboardUploadForm';
+import useDashboardMenuForm from '../hooks/useDashboardMenuForm';
 import useDashboardUpdateCategory from '../hooks/useDashboardUpdateCategory';
 import Modal from './Modal';
 import Spinner from './Spinner';
@@ -11,14 +11,12 @@ const DashboardUpdateCategoryModal = ({
   categoriesLength,
 }) => {
   const {
-    categoryForm,
+    formData,
     onChangeHandler,
     imageUpload,
     setImageUpload,
     clearInputValues,
-  } = useDashboardUploadForm('update');
-
-  // console.log(Object.values(categoryForm).some(value => value));
+  } = useDashboardMenuForm('category', 'update');
 
   const { status, setStatus, error, setError, updateFile } =
     useDashboardUpdateCategory();
@@ -29,7 +27,7 @@ const DashboardUpdateCategoryModal = ({
         <DashboardUpdateCategoryScreen
           selectedCategory={selectedCategory}
           error={error}
-          categoryForm={categoryForm}
+          formData={formData}
           onChangeHandler={onChangeHandler}
           categoriesLength={categoriesLength}
           updateFile={updateFile}

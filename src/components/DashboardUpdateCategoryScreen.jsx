@@ -3,7 +3,7 @@ import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
 const DashboardUpdateCategoryScreen = ({
   selectedCategory,
   error,
-  categoryForm,
+  formData,
   onChangeHandler,
   categoriesLength,
   updateFile,
@@ -49,7 +49,7 @@ const DashboardUpdateCategoryScreen = ({
               type='text'
               name='name'
               placeholder={selectedCategory?.name}
-              value={categoryForm.categoryName}
+              value={formData.name}
               onChange={onChangeHandler}
             />
           </div>
@@ -66,7 +66,7 @@ const DashboardUpdateCategoryScreen = ({
           <div>
             <select
               name='order'
-              value={categoryForm.order}
+              value={formData.order}
               onChange={onChangeHandler}
             >
               <option className='option-placeholder' value=''>
@@ -92,7 +92,7 @@ const DashboardUpdateCategoryScreen = ({
               rows='5'
               cols='33'
               placeholder={selectedCategory?.description}
-              value={categoryForm.categoryDescription}
+              value={formData.description}
               onChange={onChangeHandler}
             ></textarea>
           </div>
@@ -121,7 +121,7 @@ const DashboardUpdateCategoryScreen = ({
         <button
           className='dashboard-btn'
           onClick={() => {
-            updateFile(categoryForm, imageUpload, selectedCategory);
+            updateFile(formData, imageUpload, selectedCategory);
           }}
         >
           <MdDone />
