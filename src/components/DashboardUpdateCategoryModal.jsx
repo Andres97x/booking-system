@@ -44,8 +44,9 @@ const DashboardUpdateCategoryModal = ({
     if (status === 'completed') {
       return (
         <ModalStatusCompleted
-          type='update'
-          categoryName={selectedCategory.name}
+          type='category'
+          action='update'
+          passedName={selectedCategory.name}
         />
       );
     }

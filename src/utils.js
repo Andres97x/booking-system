@@ -120,3 +120,13 @@ export const clickOpenModal = e => {
 
   modalElement.showModal();
 };
+
+export const openModalOnBtnClick = () => {
+  const mainSection = document.querySelector('main');
+
+  mainSection.addEventListener('click', clickOpenModal);
+
+  return () => {
+    mainSection.removeEventListener('click', clickOpenModal);
+  };
+};

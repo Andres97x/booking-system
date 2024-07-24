@@ -1,93 +1,61 @@
+import useDashboardMenuForm from '../hooks/useDashboardMenuForm';
+import useDashboardMenuAdd from '../hooks/useDashboardMenuAdd';
 import Modal from './Modal';
+import DashboardAddItemScreen from './DashboardAddItemScreen';
+import Spinner from './Spinner';
+import ModalStatusCompleted from './ModalStatusCompleted';
 
-const DashboardAddItemModal = ({
-  formData,
-  error,
-  onChangeHandler,
-  submitCategory,
-  setImageUpload,
-  imageUpload,
-  clearInputValues,
-  categoryName,
-  categoryId,
-}) => {
-  console.log(formData);
+const DashboardAddItemModal = ({ categoryName, categoryId }) => {
+  const {
+    formData,
+    onChangeHandler,
+    imageUpload,
+    setImageUpload,
+    clearInputValues,
+  } = useDashboardMenuForm('item', 'add');
+
+  const { status, setStatus, error, setError, submitCategory } =
+    useDashboardMenuAdd('item');
+
+  const displayedElement = status => {
+    if (status === 'idle') {
+      return (
+        <DashboardAddItemScreen
+          categoryName={categoryName}
+          error={error}
+          formData={formData}
+          onChangeHandler={onChangeHandler}
+          imageUpload={imageUpload}
+          setImageUpload={setImageUpload}
+          submitCategory={submitCategory}
+          clearInputValues={clearInputValues}
+          categoryId={categoryId}
+        />
+      );
+    } else if (status === 'loading') {
+      return <Spinner />;
+    } else if (status === 'completed') {
+      return (
+        <ModalStatusCompleted
+          type='item'
+          action='add'
+          clearInputValues={clearInputValues}
+          setStatus={setStatus}
+          passedName={formData.name}
+        />
+      );
+    }
+  };
 
   return (
-    <Modal id='modal-add-item'>
-      <h3>
-        Añadir item a la categoría <br /> <span>{categoryName}</span>
-      </h3>
-
-      <form>
-        {error ? <p className='add-category-error-message'>{error}</p> : null}
-        <div>
-          <label htmlFor='dash-add-item-name'>Nombre del item *</label>
-          <input
-            id='dash-add-item-name'
-            type='text'
-            name='name'
-            value={formData.name}
-            onChange={onChangeHandler}
-            required
-            autoFocus
-          />
-        </div>
-
-        <div>
-          <label htmlFor='dash-add-item-description'>
-            Descripción del item
-          </label>
-          <textarea
-            id='dash-add-item-description'
-            name='description'
-            rows='5'
-            cols='33'
-            placeholder='Añade una breve descripción de la categoría (máximo 120 caracteres)'
-            value={formData.description}
-            onChange={onChangeHandler}
-          ></textarea>
-        </div>
-
-        <div>
-          <label htmlFor='dash-add-item-price'>Precio:</label>
-          <input
-            type='number'
-            name='price'
-            value={formData.price}
-            onChange={onChangeHandler}
-            inputMode='numeric'
-            pattern='[0-9]+'
-            id='dash-add-item-price'
-            placeholder='sin puntos ni comas (solo números)'
-          />
-        </div>
-
-        <div>
-          <label htmlFor='dash-add-category-img'>Imagen del item *</label>
-          <input
-            id='dash-add-category-img'
-            type='file'
-            accept='image/*'
-            onChange={e => setImageUpload(e.target.files[0])}
-          />
-        </div>
-
-        <button
-          onClick={e => {
-            e.preventDefault();
-
-            submitCategory({
-              categoryId,
-              imageUpload,
-              formData,
-              clearInputValues,
-            });
-          }}
-        >
-          Añadir item
-        </button>
-      </form>
+    <Modal
+      id='modal-add-item'
+      onClose={() => {
+        setError(null);
+        setStatus('idle');
+      }}
+    >
+      {displayedElement(status)}
     </Modal>
   );
 };

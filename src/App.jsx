@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
 import './styles/app.css';
@@ -23,6 +23,8 @@ import DashboardMenuCategory from './components/DashboardMenuCategory';
 import DashboardNews from './components/DashboardNews';
 
 function App() {
+  useEffect(() => {}, []);
+
   useOpenModalOnBtnClick();
 
   useCloseModalOnClickOutside();

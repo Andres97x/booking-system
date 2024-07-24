@@ -1,24 +1,28 @@
 const ModalStatusCompleted = ({
   type,
-  categoryName,
+  action,
+  passedName,
   clearInputValues,
   setStatus,
 }) => {
-  const actionMessage = () => {
-    if (type === 'add') return 'añadió';
-    if (type === 'update') return 'actualizó';
-    if (type === 'delete') return 'eliminó';
+  const actionMessage = action => {
+    if (action === 'add') {
+      return 'añadió';
+    } else if (action === 'update') {
+      return 'actualizó';
+    } else if (action === 'delete') {
+      return 'eliminó';
+    }
   };
-
-  // console.log(categoryName);
 
   return (
     <div className='category-completed-container'>
       <h3>
-        La categoría {categoryName} se {actionMessage()} correctamente
+        {type === 'category' ? 'La categoría' : 'El item'} {passedName || ''} se{' '}
+        {actionMessage()} correctamente
       </h3>
 
-      {type === 'add' && (
+      {action === 'add' && (
         <div className='category-completed-action-btns'>
           <button
             className='dashboard-btn'
@@ -27,7 +31,7 @@ const ModalStatusCompleted = ({
               setStatus('idle');
             }}
           >
-            Añadir otra categoría
+            Añadir {type === 'category' ? 'otra categoría' : 'otro item'}
           </button>
           <button
             className='dashboard-btn'

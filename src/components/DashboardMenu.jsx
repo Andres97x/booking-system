@@ -7,8 +7,8 @@ import DashboardCategoryCard from './DashboardCategoryCard';
 import DashboardAddCategoryModal from './DashboardAddCategoryModal';
 import DashboardUpdateCategoryModal from './DashboardUpdateCategoryModal';
 import DashboardDeleteCategoryModal from './DashboardDeleteCategoryModal';
-
 import Spinner from './Spinner';
+import useFetchInRealTime from '../hooks/useFetchInRealTime';
 
 const DashboardMenu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
@@ -22,33 +22,13 @@ const DashboardMenu = () => {
   // Refactor useDashboardUpdateMenu to work with both categories and items as done with the add functionality!
   // disable close modal button when state is set to loading
 
-  useEffect(() => {
-    const collectionRef = collection(db, 'categories');
-    const q = query(collectionRef, orderBy('order'));
-
-    const unsubscribe = onSnapshot(
-      q,
-      querySnapshot => {
-        const retrievedData = querySnapshot.docs.map(doc => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-
-        setCategoriesData(retrievedData);
-        setLoading(false);
-      },
-      () => {
-        setError(
-          'Hubo un problema al obtener los datos, por favor reporta este problema.'
-        );
-        setLoading(false);
-      }
-    );
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  useFetchInRealTime({
+    type: 'category',
+    fetchOrderCriteria: 'order',
+    stateSetterFn: setCategoriesData,
+    setLoading,
+    setError,
+  });
 
   const categoriesDataEl = categoriesData.map((category, i) => (
     <DashboardCategoryCard

@@ -36,8 +36,9 @@ const DashboardDeleteCategoryModal = ({
     if (status === 'completed') {
       return (
         <ModalStatusCompleted
-          type='delete'
-          categoryName={selectedCategory.name}
+          type='category'
+          action='delete'
+          passedName={selectedCategory.name}
         />
       );
     }

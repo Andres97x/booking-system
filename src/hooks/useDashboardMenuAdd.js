@@ -56,7 +56,7 @@ const useDashboardMenuAdd = type => {
         imageRef: imagePath,
         createdAt: serverTimestamp(),
         ...(type === 'category' && { order: categoriesLength + 1 }),
-        ...(type === 'item' && { category: categoryId }),
+        ...(type === 'item' && { categoryId: categoryId }),
       });
 
       clearInputValues();

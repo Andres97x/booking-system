@@ -36,7 +36,9 @@ const DashboardAddCategoryModal = ({ categoriesLength }) => {
     } else if (status === 'completed') {
       return (
         <ModalStatusCompleted
-          type='add'
+          type='category'
+          action='add'
+          passedName={formData.name}
           clearInputValues={clearInputValues}
           setStatus={setStatus}
         />
