@@ -1,6 +1,6 @@
 import DashboardUpdateCategoryScreen from './DashboardUpdateCategoryScreen';
 import useDashboardMenuForm from '../hooks/useDashboardMenuForm';
-import useDashboardUpdateCategory from '../hooks/useDashboardUpdateCategory';
+import useDashboardMenuUpdate from '../hooks/useDashboardMenuUpdate';
 import Modal from './Modal';
 import Spinner from './Spinner';
 import ModalStatusCompleted from './ModalStatusCompleted';
@@ -19,7 +19,7 @@ const DashboardUpdateCategoryModal = ({
   } = useDashboardMenuForm('category', 'update');
 
   const { status, setStatus, error, setError, updateFile } =
-    useDashboardUpdateCategory();
+    useDashboardMenuUpdate('category');
 
   const displayedElement = () => {
     if (status === 'idle') {

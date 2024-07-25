@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // prettier-ignore
-import { collection, query, onSnapshot, orderBy } from 'firebase/firestore';
-import { db } from '../configs/firebase';
 
-import DashboardCategoryCard from './DashboardCategoryCard';
+import DashboardMenuCard from './DashboardMenuCard';
 import DashboardAddCategoryModal from './DashboardAddCategoryModal';
 import DashboardUpdateCategoryModal from './DashboardUpdateCategoryModal';
 import DashboardDeleteCategoryModal from './DashboardDeleteCategoryModal';
@@ -31,9 +29,10 @@ const DashboardMenu = () => {
   });
 
   const categoriesDataEl = categoriesData.map((category, i) => (
-    <DashboardCategoryCard
-      category={category}
-      setSelectedCategory={setSelectedCategory}
+    <DashboardMenuCard
+      type='category'
+      option={category}
+      setSelectedOption={setSelectedCategory}
       key={`dashboard-category-card-${i}`}
     />
   ));

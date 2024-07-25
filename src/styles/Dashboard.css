@@ -157,10 +157,34 @@
   align-items: center;
 }
 
-.dashboard-menu-bar > h3 {
+.dashboard-menu-bar.category-bar {
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard-menu-bar a:link,
+.dashboard-menu-bar a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+.dashboard-menu-bar a:link h3 {
+  border-bottom: 2px solid transparent;
+  transition: border-color 200ms ease-in-out;
+}
+
+.dashboard-menu-bar a:hover h3 {
+  border-color: rgba(0, 27, 10, 0.2);
+}
+
+.dashboard-menu-bar h3 {
   margin-right: auto;
   font-weight: 600;
   border-bottom: 2px solid rgba(0, 27, 10, 0.2);
+}
+
+.dashboard-menu-bar svg {
+  stroke-width: 10 !important;
 }
 
 .dashboard-btn {
@@ -205,26 +229,26 @@
   gap: 1rem;
 }
 
-.dashboard-menu-category-card {
+.dashboard-menu-card {
   border: 1px solid var(--secondary-color-half);
   border-radius: 3px;
   padding: 1rem 2rem;
   min-width: 18rem;
 }
 
-.category-card-header {
+.menu-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.category-card-name {
+.menu-card-name {
   font-size: 1.6rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.category-card-options {
+.menu-card-options {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -251,13 +275,13 @@
   outline: 2px solid var(--secondary-color-half);
 }
 
-.category-card-options > div:last-child {
+.menu-card-options > div:last-child {
   display: flex;
   transform: translateX(1rem);
   gap: 0.8rem;
 }
 
-.dashboard-menu-see-category-options {
+.dashboard-menu-see-options {
   background-color: var(--main-color);
   display: flex;
   align-items: center;
@@ -271,15 +295,15 @@
   transition: all 200ms ease-in-out;
 }
 
-.dashboard-menu-see-category-options:hover {
+.dashboard-menu-see-options:hover {
   border: 2px solid var(--secondary-color-half);
 }
 
-.dashboard-menu-see-category-options:focus-visible {
+.dashboard-menu-see-options:focus-visible {
   outline: 2px solid var(--secondary-color-half);
 }
 
-.category-card-options svg {
+.menu-card-options svg {
   font-size: 2rem;
 }
 
@@ -370,12 +394,14 @@ dialog label {
   margin-top: 1rem;
 }
 
-#modal-category-options {
+#modal-category-options,
+#modal-item-options {
   width: 30%;
   height: 70%;
 }
 
-#modal-category-options h5 {
+#modal-category-options h5,
+#modal-item-options h5 {
   font-size: 1.6rem;
   font-weight: 600;
 }

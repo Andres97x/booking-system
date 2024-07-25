@@ -57,6 +57,7 @@ const useDashboardMenuAdd = type => {
         createdAt: serverTimestamp(),
         ...(type === 'category' && { order: categoriesLength + 1 }),
         ...(type === 'item' && { categoryId: categoryId }),
+        ...(type === 'item' && { price: formData.price }),
       });
 
       clearInputValues();

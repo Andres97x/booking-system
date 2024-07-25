@@ -127,7 +127,16 @@ const DashboardUpdateCategoryScreen = ({
           <MdDone />
           Confirmar cambios
         </button>
-        <button className='dashboard-btn'>
+        <button
+          className='dashboard-btn'
+          onClick={e => {
+            const modal = e.target.closest('dialog');
+
+            if (!modal) return;
+
+            modal.close();
+          }}
+        >
           <MdCancel />
           Cancelar
         </button>

@@ -13,7 +13,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { storage, db } from '../configs/firebase';
 
-const useDashboardUpdateCategory = () => {
+const useDashboardMenuUpdate = type => {
+  if (!type) return;
+
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
@@ -55,12 +57,7 @@ const useDashboardUpdateCategory = () => {
   const updateFile = async (categoryForm, imageUpload, selectedCategory) => {
     setError(null);
 
-    if (
-      !categoryForm.name &&
-      !categoryForm.description &&
-      !categoryForm.order &&
-      !imageUpload
-    ) {
+    if (Object.values(categoryForm).every(value => !value) && !imageUpload) {
       setError('No hay cambios para guardar');
       return;
     }
@@ -101,7 +98,6 @@ const useDashboardUpdateCategory = () => {
       }
 
       // => user modified image
-
       if (imageUpload) {
         const uniqueId = uuidv4();
 
@@ -144,4 +140,4 @@ const useDashboardUpdateCategory = () => {
   return { status, setStatus, error, setError, updateFile };
 };
 
-export default useDashboardUpdateCategory;
+export default useDashboardMenuUpdate;
