@@ -1,5 +1,6 @@
 .section-menu {
   padding: 6rem 14rem;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
 .menu-grid {
@@ -84,6 +85,7 @@
 
 .section-menu-items {
   padding: 6rem 14rem;
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
 .menu-items-grid {
@@ -270,6 +272,7 @@
 }
 
 .categories-spinner-container,
+.items-spinner-container,
 .error-menu-container,
 .categories-empty {
   width: 100%;

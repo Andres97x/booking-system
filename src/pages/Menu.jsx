@@ -46,12 +46,12 @@ const Menu = () => {
 
     return (
       <Link
-        to={pathName}
         // to={
         //   pathName === 'bebidas'
         //     ? `${pathName}?categoria=${firstDrinkCategory}`
         //     : pathName
         // }
+        to={pathName}
         key={`menu-category-${i}`}
         className='menu-category'
       >

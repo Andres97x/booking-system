@@ -1,20 +1,19 @@
-import mockupImg from '../assets/mockup.jpg';
 import { formatPrice } from '../utils';
 import Modal from './Modal';
 
-const ProductDetailModal = ({ categoryItems, productId, handleClose }) => {
-  const [selectedItem] = categoryItems?.filter(item => item.id === productId);
+const ProductDetailModal = ({ items, productId, handleClose }) => {
+  const [selectedItem] = items?.filter(item => item.id === productId);
 
   return (
     <Modal className='product-modal' handleClose={handleClose}>
       <div className='product-detail-content'>
-        <h4>{selectedItem?.nombre}</h4>
-        {selectedItem?.ingredientes && <p>{selectedItem?.ingredientes}</p>}
-        <p className='product-price'>{formatPrice(selectedItem?.precio)}</p>
+        <h4>{selectedItem?.name}</h4>
+        {selectedItem?.description && <p>{selectedItem?.description}</p>}
+        <p className='product-price'>{formatPrice(selectedItem?.price)}</p>
       </div>
       <div className='img-container'>
         <img
-          src={mockupImg}
+          src={selectedItem?.image}
           alt='mockup image'
           className='product-detail-img'
         />

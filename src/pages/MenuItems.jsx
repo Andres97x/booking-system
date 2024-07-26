@@ -6,6 +6,8 @@ import DrinksNav from '../components/DrinksNav';
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
 import { formatPrice } from '../utils';
 import useFetchMenu from '../hooks/useFetchMenu';
+import Spinner from '../components/Spinner';
+import ErrorMessage from '../components/ErrorMessage';
 
 const MenuItems = () => {
   const { category } = useParams();
@@ -36,20 +38,22 @@ const MenuItems = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // useEffect(() => {
-  //   const productModal = document.querySelector('.product-modal');
+  useEffect(() => {
+    const productModal = document.querySelector('.product-modal');
 
-  //   if (productId) {
-  //     productModal.showModal();
-  //   } else {
-  //     productModal.close();
-  //   }
-  // }, [productId]);
+    if (!productModal) return;
+
+    if (productId) {
+      productModal.showModal();
+    } else {
+      productModal.close();
+    }
+  }, [productId]);
 
   // const displayedItems =
-  //   params.category === 'bebidas' && drinksCategory
-  //     ? categoryItems.filter(item => item.subcategory === drinksCategory)
-  //     : categoryItems;
+  //   categoryName === 'bebidas' && drinksCategory
+  //     ? items.filter(item => item.subcategory === drinksCategory)
+  //     : items;
 
   const menuItemsEl = items.map((item, i) => {
     const priceFormatted = formatPrice(item.price);
@@ -64,7 +68,7 @@ const MenuItems = () => {
           handleSearchParams('productId', item.id);
         }}
       >
-        <img src={item.image} alt='mockup image' />
+        <img src={item.image} alt={`imagen de ${item.name}`} />
         <div className='menu-item-content'>
           <h4>{item.name}</h4>
           {item.description && <p>{item.description}</p>}
@@ -74,6 +78,19 @@ const MenuItems = () => {
     );
   });
 
+  if (status === 'loading') {
+    return <Spinner spinnerContainerClassName='items-spinner-container' />;
+  }
+
+  if (error) {
+    return (
+      <ErrorMessage
+        message={error}
+        errorContainerClassName='error-menu-container'
+      />
+    );
+  }
+
   return (
     <div className='section-menu-items'>
       {/* {params.category === 'bebidas' && (
@@ -82,11 +99,11 @@ const MenuItems = () => {
 
       <div className='menu-items-grid'>{menuItemsEl}</div>
 
-      {/* <ProductDetailModal
-        categoryItems={categoryItems}
+      <ProductDetailModal
+        items={items}
         productId={productId}
         handleClose={closeProductModal}
-      /> */}
+      />
     </div>
   );
 };
