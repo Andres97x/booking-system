@@ -8,7 +8,7 @@ import {
   where,
 } from 'firebase/firestore';
 
-const useFetchInRealTime = ({
+const useFetchMenuInRealTime = ({
   type,
   selectedCategoryId,
   fetchOrderCriteria,
@@ -59,4 +59,4 @@ const useFetchInRealTime = ({
   }, []);
 };
 
-export default useFetchInRealTime;
+export default useFetchMenuInRealTime;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import DashboardAddItemModal from './DashboardAddItemModal';
-import useFetchInRealTime from '../hooks/useFetchInRealTime';
+import useFetchMenuInRealTime from '../hooks/useFetchMenuInRealTime';
 import DashboardMenuCard from './DashboardMenuCard';
 import Spinner from './Spinner';
 import DashboardUpdateItemModal from './DashboardUpdateItemModal';
@@ -16,13 +16,11 @@ const DashboardMenuCategory = () => {
 
   if (!category) return;
 
-  // console.log(itemsData);
-
   const categoryId = category.split('-')[0];
   const categoryName = category.split('-').slice(1).join(' ');
 
   // later fetch the items based on the category ID
-  useFetchInRealTime({
+  useFetchMenuInRealTime({
     type: 'item',
     selectedCategoryId: categoryId,
     fetchOrderCriteria: 'createdAt',

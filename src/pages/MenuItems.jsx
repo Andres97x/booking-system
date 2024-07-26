@@ -1,61 +1,73 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import ProductDetailModal from '../components/ProductDetailModal';
 import DrinksNav from '../components/DrinksNav';
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
-import { items } from '../data/menuData';
 import { formatPrice } from '../utils';
-import mockupImg from '../assets/mockup.jpg';
+import useFetchMenu from '../hooks/useFetchMenu';
 
 const MenuItems = () => {
-  const params = useParams();
+  const { category } = useParams();
   const { searchParams, handleSearchParams } = useHandleSearchParams();
   const productId = searchParams.get('productId');
-  const drinksCategory = searchParams.get('categoria');
-  // console.log(drinksCategory);
+  // const drinksCategory = searchParams.get('categoria');
+
+  const [items, setItems] = useState([]);
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState(null);
+
+  const categoryId = category.split('-')[0];
+  const categoryName = category.split('-').slice(1).join(' ');
 
   const closeProductModal = () => {
     handleSearchParams('productId', null);
   };
 
+  useFetchMenu({
+    type: 'items',
+    selectedCategoryId: categoryId,
+    stateSetterFn: setItems,
+    setStatus,
+    setError,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    const productModal = document.querySelector('.product-modal');
+  // useEffect(() => {
+  //   const productModal = document.querySelector('.product-modal');
 
-    if (productId) {
-      productModal.showModal();
-    } else {
-      productModal.close();
-    }
-  }, [productId]);
+  //   if (productId) {
+  //     productModal.showModal();
+  //   } else {
+  //     productModal.close();
+  //   }
+  // }, [productId]);
 
-  const categoryItems = items.filter(item => item.category === params.category);
+  // const displayedItems =
+  //   params.category === 'bebidas' && drinksCategory
+  //     ? categoryItems.filter(item => item.subcategory === drinksCategory)
+  //     : categoryItems;
 
-  const displayedItems =
-    params.category === 'bebidas' && drinksCategory
-      ? categoryItems.filter(item => item.subcategory === drinksCategory)
-      : categoryItems;
-
-  const menuItemsEl = displayedItems?.map((item, i) => {
-    const priceFormatted = formatPrice(item.precio);
+  const menuItemsEl = items.map((item, i) => {
+    const priceFormatted = formatPrice(item.price);
 
     return (
       <button
         key={`menu-item-${i}`}
         className={`menu-item ${
-          params.category === 'bebidas' ? 'drink-item' : ''
+          categoryName === 'bebidas' ? 'drink-item' : ''
         }`}
         onClick={() => {
           handleSearchParams('productId', item.id);
         }}
       >
-        <img src={mockupImg} alt='mockup image' />
+        <img src={item.image} alt='mockup image' />
         <div className='menu-item-content'>
-          <h4>{item.nombre}</h4>
-          {item.ingredientes && <p>{item.ingredientes}</p>}
+          <h4>{item.name}</h4>
+          {item.description && <p>{item.description}</p>}
           <span>{priceFormatted}</span>
         </div>
       </button>
@@ -64,17 +76,17 @@ const MenuItems = () => {
 
   return (
     <div className='section-menu-items'>
-      {params.category === 'bebidas' && (
+      {/* {params.category === 'bebidas' && (
         <DrinksNav drinks={categoryItems} drinksCategory={drinksCategory} />
-      )}
+      )} */}
 
       <div className='menu-items-grid'>{menuItemsEl}</div>
 
-      <ProductDetailModal
+      {/* <ProductDetailModal
         categoryItems={categoryItems}
         productId={productId}
         handleClose={closeProductModal}
-      />
+      /> */}
     </div>
   );
 };

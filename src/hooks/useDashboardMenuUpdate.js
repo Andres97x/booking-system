@@ -54,7 +54,7 @@ const useDashboardMenuUpdate = type => {
     }
   };
 
-  const updateFile = async (form, imageUpload, selectedMenuType) => {
+  const updateFile = async (form, imageUpload, selectedMenuType, modalId) => {
     setError(null);
 
     if (Object.values(form).every(value => !value) && !imageUpload) {
@@ -65,7 +65,11 @@ const useDashboardMenuUpdate = type => {
     const updateErrorMessage =
       'Hubo un problema, no se ha podido actualizar la categoría';
 
-    const docRef = doc(db, 'categories', selectedMenuType.id);
+    const docRef = doc(
+      db,
+      type === 'category' ? 'categories' : 'items',
+      selectedMenuType.id
+    );
 
     try {
       setStatus('loading');
@@ -102,7 +106,7 @@ const useDashboardMenuUpdate = type => {
 
         await deleteObject(selectedCategoryImgRef);
 
-        const newImagePath = `categories/${
+        const newImagePath = `${type === 'category' ? 'categories' : 'items'}/${
           imageUpload.name.split('.')[0] + uniqueId
         }`;
 
@@ -120,7 +124,7 @@ const useDashboardMenuUpdate = type => {
       setStatus('completed');
 
       setTimeout(() => {
-        const modal = document.getElementById('modal-category-options');
+        const modal = document.getElementById(modalId);
 
         if (modal) {
           modal.close();

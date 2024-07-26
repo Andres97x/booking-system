@@ -6,7 +6,7 @@ import DashboardAddCategoryModal from './DashboardAddCategoryModal';
 import DashboardUpdateCategoryModal from './DashboardUpdateCategoryModal';
 import DashboardDeleteCategoryModal from './DashboardDeleteCategoryModal';
 import Spinner from './Spinner';
-import useFetchInRealTime from '../hooks/useFetchInRealTime';
+import useFetchMenuInRealTime from '../hooks/useFetchMenuInRealTime';
 
 const DashboardMenu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
@@ -17,10 +17,10 @@ const DashboardMenu = () => {
   // console.log(selectedCategory);
 
   /* TODO */
-  // Refactor useDashboardUpdateMenu to work with both categories and items as done with the add functionality!
+
   // disable close modal button when state is set to loading
 
-  useFetchInRealTime({
+  useFetchMenuInRealTime({
     type: 'category',
     fetchOrderCriteria: 'order',
     stateSetterFn: setCategoriesData,

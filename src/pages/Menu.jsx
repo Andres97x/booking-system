@@ -1,18 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import { ref, getDownloadURL } from 'firebase/storage';
 
-import { storage, db } from '../configs/firebase';
 import { firstDrinkCategory } from '../data/menuData';
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
 import '../styles/Menu.css';
+import useFetchMenu from '../hooks/useFetchMenu';
 
 const Menu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
+
+  useFetchMenu({
+    type: 'categories',
+    stateSetterFn: setCategoriesData,
+    setStatus,
+    setError,
+  });
 
   const getGridStyle = categoriesData => {
     if (categoriesData.length === 1) {
@@ -33,62 +38,20 @@ const Menu = () => {
     }
   };
 
-  useEffect(() => {
-    // Fetch categories data from database
-    const fetchCategoriesData = async () => {
-      const collectionRef = collection(db, 'categories');
-      const q = query(collectionRef, orderBy('order'));
-
-      try {
-        setStatus('loading');
-        const querySnapshot = await getDocs(q);
-
-        const retrievedData = await Promise.all(
-          querySnapshot.docs.map(async doc => {
-            const data = doc.data();
-            // Create a reference with an initial file path and name
-            const pathReference = ref(storage, data.imageRef);
-            try {
-              const url = await getDownloadURL(pathReference);
-              return {
-                description: data.description,
-                name: data.name,
-                id: doc.id,
-                image: url,
-              };
-            } catch (err) {
-              console.error(err);
-              // Return a fallback object if there's an error
-              return {
-                description: data.description,
-                name: data.name,
-                id: doc.id,
-                image: null,
-              };
-            }
-          })
-        );
-        setCategoriesData(retrievedData);
-      } catch (err) {
-        setError('No se pudieron obtener los datos de la categoría');
-      } finally {
-        setStatus('idle');
-      }
-    };
-
-    fetchCategoriesData();
-  }, []);
-
   const categoriesEl = categoriesData.map((category, i) => {
-    const pathName = category.name.split(' ').join('-').toLowerCase();
+    const pathName = `${category.id}-${category.name
+      .split(' ')
+      .join('-')
+      .toLowerCase()}`;
 
     return (
       <Link
-        to={
-          pathName === 'bebidas'
-            ? `${pathName}?categoria=${firstDrinkCategory}`
-            : pathName
-        }
+        to={pathName}
+        // to={
+        //   pathName === 'bebidas'
+        //     ? `${pathName}?categoria=${firstDrinkCategory}`
+        //     : pathName
+        // }
         key={`menu-category-${i}`}
         className='menu-category'
       >

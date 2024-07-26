@@ -2,6 +2,8 @@ import Modal from './Modal';
 import useDashboardMenuForm from '../hooks/useDashboardMenuForm';
 import useDashboardMenuUpdate from '../hooks/useDashboardMenuUpdate';
 import DashboardUpdateItemScreen from './DashboardUpdateItemScreen';
+import Spinner from './Spinner';
+import ModalStatusCompleted from './ModalStatusCompleted';
 
 const DashboardUpdateItemModal = ({ selectedItem, setSelectedItem }) => {
   const {
@@ -15,6 +17,34 @@ const DashboardUpdateItemModal = ({ selectedItem, setSelectedItem }) => {
   const { status, setStatus, error, setError, updateFile } =
     useDashboardMenuUpdate('item');
 
+  const displayedElement = status => {
+    if (status === 'idle') {
+      return (
+        <DashboardUpdateItemScreen
+          selectedItem={selectedItem}
+          error={error}
+          formData={formData}
+          onChangeHandler={onChangeHandler}
+          updateFile={updateFile}
+          imageUpload={imageUpload}
+          setImageUpload={setImageUpload}
+        />
+      );
+    } else if (status === 'loading') {
+      return <Spinner />;
+    } else if (status === 'completed') {
+      return (
+        <ModalStatusCompleted
+          type='item'
+          action='update'
+          passedName={selectedItem?.name}
+          clearInputValues={clearInputValues}
+          setStatus={setStatus}
+        />
+      );
+    }
+  };
+
   return (
     <Modal
       id='modal-item-options'
@@ -25,15 +55,7 @@ const DashboardUpdateItemModal = ({ selectedItem, setSelectedItem }) => {
         setSelectedItem(null);
       }}
     >
-      <DashboardUpdateItemScreen
-        selectedItem={selectedItem}
-        error={error}
-        formData={formData}
-        onChangeHandler={onChangeHandler}
-        updateFile={updateFile}
-        imageUpload={imageUpload}
-        setImageUpload={setImageUpload}
-      />
+      {displayedElement(status)}
     </Modal>
   );
 };

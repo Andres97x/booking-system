@@ -9,8 +9,6 @@ const DashboardUpdateItemScreen = ({
   imageUpload,
   setImageUpload,
 }) => {
-  console.log(formData);
-
   return (
     <div>
       <h3>Editar opciones de categoría</h3>
@@ -105,7 +103,12 @@ const DashboardUpdateItemScreen = ({
         <button
           className='dashboard-btn'
           onClick={() => {
-            updateFile(formData, imageUpload, selectedItem);
+            updateFile(
+              formData,
+              imageUpload,
+              selectedItem,
+              'modal-item-options'
+            );
           }}
         >
           <MdDone />

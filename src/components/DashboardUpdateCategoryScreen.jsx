@@ -123,7 +123,12 @@ const DashboardUpdateCategoryScreen = ({
         <button
           className='dashboard-btn'
           onClick={() => {
-            updateFile(formData, imageUpload, selectedCategory);
+            updateFile(
+              formData,
+              imageUpload,
+              selectedCategory,
+              'modal-category-options'
+            );
           }}
         >
           <MdDone />
