@@ -33,7 +33,7 @@ const useDashboardMenuUpdate = type => {
       snapshot.forEach(docSnap => {
         const docRef = doc(collectionRef, docSnap.id);
         if (docSnap.id === docId) {
-          // looping over the selectedCategory document
+          // looping over the selectedMenuType document
           // update the document with the new order
           batch.update(docRef, { order: newOrder });
 
@@ -54,10 +54,10 @@ const useDashboardMenuUpdate = type => {
     }
   };
 
-  const updateFile = async (categoryForm, imageUpload, selectedCategory) => {
+  const updateFile = async (form, imageUpload, selectedMenuType) => {
     setError(null);
 
-    if (Object.values(categoryForm).every(value => !value) && !imageUpload) {
+    if (Object.values(form).every(value => !value) && !imageUpload) {
       setError('No hay cambios para guardar');
       return;
     }
@@ -65,21 +65,21 @@ const useDashboardMenuUpdate = type => {
     const updateErrorMessage =
       'Hubo un problema, no se ha podido actualizar la categoría';
 
-    const docRef = doc(db, 'categories', selectedCategory.id);
+    const docRef = doc(db, 'categories', selectedMenuType.id);
 
     try {
       setStatus('loading');
 
       // => user modified data
-      if (Object.values(categoryForm).some(value => value)) {
+      if (Object.values(form).some(value => value)) {
         const newData = {};
 
-        const modifiedInputEntries = Object.entries(categoryForm).filter(
+        const modifiedInputEntries = Object.entries(form).filter(
           entry => entry[1]
         );
 
         modifiedInputEntries.forEach(([key, value]) => {
-          if (key === 'order') return;
+          if (type === 'category' && key === 'order') return;
           newData[key] = value;
         });
 
@@ -89,12 +89,8 @@ const useDashboardMenuUpdate = type => {
       }
 
       // => user modified order
-      if (categoryForm.order) {
-        updateOrder(
-          'categories',
-          selectedCategory.id,
-          parseInt(categoryForm.order)
-        );
+      if (form.order && type === 'category') {
+        updateOrder('categories', selectedMenuType.id, parseInt(form.order));
       }
 
       // => user modified image
@@ -102,7 +98,7 @@ const useDashboardMenuUpdate = type => {
         const uniqueId = uuidv4();
 
         // delete the current category image image in firebase/storage
-        const selectedCategoryImgRef = ref(storage, selectedCategory.imageRef);
+        const selectedCategoryImgRef = ref(storage, selectedMenuType.imageRef);
 
         await deleteObject(selectedCategoryImgRef);
 

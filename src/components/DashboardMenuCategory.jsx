@@ -68,7 +68,10 @@ const DashboardMenuCategory = () => {
         categoryId={categoryId}
       />
 
-      <DashboardUpdateItemModal />
+      <DashboardUpdateItemModal
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+      />
     </div>
   );
 };

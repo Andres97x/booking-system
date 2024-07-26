@@ -1,43 +1,26 @@
 import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
 
-const DashboardUpdateCategoryScreen = ({
-  selectedCategory,
+const DashboardUpdateItemScreen = ({
+  selectedItem,
   error,
   formData,
   onChangeHandler,
-  categoriesLength,
   updateFile,
-  setImageUpload,
   imageUpload,
+  setImageUpload,
 }) => {
-  const orderOptionsEl = (length, currentOrder) => {
-    const options = [];
-
-    for (let i = 1; i <= length; i++) {
-      if (i === currentOrder) {
-        continue;
-      }
-
-      options.push(
-        <option key={`order-number-option-${i}`} value={i}>
-          {i}
-        </option>
-      );
-    }
-
-    return options;
-  };
+  console.log(formData);
 
   return (
     <div>
       <h3>Editar opciones de categoría</h3>
-      <h5>{selectedCategory?.name}</h5>
+      <h5>{selectedItem?.name}</h5>
 
       <div className='dashboard-menu-options-container'>
         {error ? <p className='menu-error-message'>{error}</p> : null}
 
         <div className='dashboard-menu-option-group'>
-          <label htmlFor='dash-update-category-name'>
+          <label htmlFor='dash-update-item-name'>
             <p>Nombre</p>
             <span>
               <MdEdit />
@@ -46,10 +29,10 @@ const DashboardUpdateCategoryScreen = ({
 
           <div>
             <input
-              id='dash-update-category-name'
+              id='dash-update-item-name'
               type='text'
               name='name'
-              placeholder={selectedCategory?.name}
+              placeholder={selectedItem?.name}
               value={formData.name}
               onChange={onChangeHandler}
             />
@@ -57,31 +40,30 @@ const DashboardUpdateCategoryScreen = ({
         </div>
 
         <div className='dashboard-menu-option-group'>
-          <label htmlFor='dash-update-category-order'>
-            <p>Orden de visualización</p>
+          <label htmlFor='dash-update-item-price'>
+            <p>Precio (sin puntos ni comas, solo números)</p>
             <span>
               <MdEdit />
             </span>
           </label>
 
           <div>
-            <select
-              id='dash-update-category-order'
-              name='order'
-              value={formData.order}
+            <input
+              id='dash-update-item-price'
+              type='number'
+              name='price'
+              value={formData.price}
               onChange={onChangeHandler}
-            >
-              <option className='option-placeholder' value=''>
-                Orden actual {selectedCategory?.order}
-              </option>
-              {orderOptionsEl(categoriesLength, selectedCategory?.order)}
-            </select>
+              inputMode='numeric'
+              pattern='[0-9]+'
+              placeholder={`actual: ${selectedItem?.price}`}
+            />
           </div>
         </div>
 
         <div className='dashboard-menu-option-group'>
-          <label htmlFor='dash-update-category-description'>
-            <p>Descripción (máx 120 caracteres)</p>
+          <label htmlFor='dash-update-item-description'>
+            <p>Descripción</p>
             <span>
               <MdEdit />
             </span>
@@ -89,11 +71,11 @@ const DashboardUpdateCategoryScreen = ({
 
           <div>
             <textarea
-              id='dash-update-category-description'
+              id='dash-update-item-description'
               name='description'
               rows='5'
               cols='33'
-              placeholder={selectedCategory?.description}
+              placeholder={selectedItem?.description}
               value={formData.description}
               onChange={onChangeHandler}
             ></textarea>
@@ -101,7 +83,7 @@ const DashboardUpdateCategoryScreen = ({
         </div>
 
         <div className='dashboard-menu-option-group'>
-          <label htmlFor='dash-update-category-img'>
+          <label htmlFor='dash-update-menu-img'>
             <p>Editar imagen</p>
             <span>
               <MdEdit />
@@ -110,7 +92,7 @@ const DashboardUpdateCategoryScreen = ({
 
           <div>
             <input
-              id='dash-update-category-img'
+              id='dash-update-menu-img'
               type='file'
               accept='image/*'
               onChange={e => setImageUpload(e.target.files[0])}
@@ -123,7 +105,7 @@ const DashboardUpdateCategoryScreen = ({
         <button
           className='dashboard-btn'
           onClick={() => {
-            updateFile(formData, imageUpload, selectedCategory);
+            updateFile(formData, imageUpload, selectedItem);
           }}
         >
           <MdDone />
@@ -147,4 +129,4 @@ const DashboardUpdateCategoryScreen = ({
   );
 };
 
-export default DashboardUpdateCategoryScreen;
+export default DashboardUpdateItemScreen;

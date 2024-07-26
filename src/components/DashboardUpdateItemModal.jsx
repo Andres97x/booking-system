@@ -1,8 +1,9 @@
 import Modal from './Modal';
 import useDashboardMenuForm from '../hooks/useDashboardMenuForm';
-import useDashboardUpdateCategory from '../hooks/useDashboardUpdateCategory';
+import useDashboardMenuUpdate from '../hooks/useDashboardMenuUpdate';
+import DashboardUpdateItemScreen from './DashboardUpdateItemScreen';
 
-const DashboardUpdateItemModal = () => {
+const DashboardUpdateItemModal = ({ selectedItem, setSelectedItem }) => {
   const {
     formData,
     onChangeHandler,
@@ -12,9 +13,29 @@ const DashboardUpdateItemModal = () => {
   } = useDashboardMenuForm('item', 'update');
 
   const { status, setStatus, error, setError, updateFile } =
-    useDashboardUpdateCategory();
+    useDashboardMenuUpdate('item');
 
-  return <Modal id='modal-item-options'></Modal>;
+  return (
+    <Modal
+      id='modal-item-options'
+      onClose={() => {
+        clearInputValues();
+        setStatus('idle');
+        setError(null);
+        setSelectedItem(null);
+      }}
+    >
+      <DashboardUpdateItemScreen
+        selectedItem={selectedItem}
+        error={error}
+        formData={formData}
+        onChangeHandler={onChangeHandler}
+        updateFile={updateFile}
+        imageUpload={imageUpload}
+        setImageUpload={setImageUpload}
+      />
+    </Modal>
+  );
 };
 
 export default DashboardUpdateItemModal;

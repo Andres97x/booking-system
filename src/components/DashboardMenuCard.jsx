@@ -16,15 +16,17 @@ const DashboardMenuCard = ({ type, option, setSelectedOption }) => {
         )}
       </div>
       <div className='menu-card-options'>
-        <Link
-          to={`${option.id}-${option.name.toLowerCase()}`}
-          className='dashboard-menu-see-items'
-          onClick={() => {
-            setSelectedOption(option);
-          }}
-        >
-          Ver items
-        </Link>
+        {type === 'category' && (
+          <Link
+            to={`${option.id}-${option.name.toLowerCase()}`}
+            className='dashboard-menu-see-items'
+            onClick={() => {
+              setSelectedOption(option);
+            }}
+          >
+            Ver items
+          </Link>
+        )}
         <div>
           <button
             className='dashboard-menu-see-options'
