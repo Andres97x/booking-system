@@ -4,7 +4,7 @@ import { useState } from 'react';
 import DashboardMenuCard from './DashboardMenuCard';
 import DashboardAddCategoryModal from './DashboardAddCategoryModal';
 import DashboardUpdateCategoryModal from './DashboardUpdateCategoryModal';
-import DashboardDeleteCategoryModal from './DashboardDeleteCategoryModal';
+import DashboardMenuDeleteModal from './DashboardMenuDeleteModal';
 import Spinner from './Spinner';
 import useFetchMenuInRealTime from '../hooks/useFetchMenuInRealTime';
 
@@ -18,7 +18,9 @@ const DashboardMenu = () => {
 
   /* TODO */
 
-  // disable close modal button when state is set to loading
+  // disable close modal button when state is set to loading.
+  // when deleting a category also delete all items attached to it.
+  // design the subcategory system
 
   useFetchMenuInRealTime({
     type: 'category',
@@ -71,9 +73,10 @@ const DashboardMenu = () => {
         categoriesLength={categoriesData.length}
       />
 
-      <DashboardDeleteCategoryModal
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
+      <DashboardMenuDeleteModal
+        type='category'
+        selected={selectedCategory}
+        setSelected={setSelectedCategory}
       />
     </div>
   );

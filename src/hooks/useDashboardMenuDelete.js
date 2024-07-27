@@ -12,11 +12,11 @@ import { ref, deleteObject } from 'firebase/storage';
 
 import { db, storage } from '../configs/firebase';
 
-const useDashboardDeleteCategory = () => {
+const useDashboardMenuDelete = type => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
-  const updateOrderAfterDeleteCategory = async (
+  const updateOrderAfterCategoryDeletion = async (
     collectionName,
     docId,
     docOrder
@@ -49,39 +49,45 @@ const useDashboardDeleteCategory = () => {
     }
   };
 
-  const deleteCategory = async (categoriesId, imageRef, order) => {
+  const deleteSelected = async ({ id, imageRef, order }) => {
     setError(null);
 
     try {
       setStatus('loading');
       // delete the data from database
-      await deleteDoc(doc(db, 'categories', categoriesId));
+      await deleteDoc(
+        doc(db, type === 'category' ? 'categories' : 'items', id)
+      );
 
-      // re-order the other categories
-      updateOrderAfterDeleteCategory('categories', categoriesId, order);
-
-      /* TODO delete all items linked to this category */
+      // re-order the other categories (only when deleting categories)
+      if (type === 'category') {
+        updateOrderAfterCategoryDeletion('categories', id, order);
+      }
 
       // delete image from storage
-      const categoryImageRef = ref(storage, imageRef);
+      const selectedImgRef = ref(storage, imageRef);
 
-      await deleteObject(categoryImageRef);
+      await deleteObject(selectedImgRef);
 
       setStatus('completed');
 
       setTimeout(() => {
-        const modal = document.getElementById('modal-delete-category');
+        const modal = document.getElementById(`modal-delete-${type}`);
         if (!modal) return;
 
         modal.close();
       }, 1200);
     } catch (err) {
-      setError('Ocurrió un error, no se ha podido eliminar la categoría');
+      setError(
+        `Ocurrió un error, no se ha podido eliminar ${
+          type === 'category' ? 'la categoría' : 'el item'
+        }`
+      );
       setStatus('idle');
     }
   };
 
-  return { status, setStatus, error, setError, deleteCategory };
+  return { status, setStatus, error, setError, deleteSelected };
 };
 
-export default useDashboardDeleteCategory;
+export default useDashboardMenuDelete;

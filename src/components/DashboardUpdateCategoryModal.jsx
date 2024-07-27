@@ -3,7 +3,7 @@ import useDashboardMenuForm from '../hooks/useDashboardMenuForm';
 import useDashboardMenuUpdate from '../hooks/useDashboardMenuUpdate';
 import Modal from './Modal';
 import Spinner from './Spinner';
-import ModalStatusCompleted from './ModalStatusCompleted';
+import StatusCompletedScreen from './StatusCompletedScreen';
 
 const DashboardUpdateCategoryModal = ({
   selectedCategory,
@@ -43,7 +43,7 @@ const DashboardUpdateCategoryModal = ({
 
     if (status === 'completed') {
       return (
-        <ModalStatusCompleted
+        <StatusCompletedScreen
           type='category'
           action='update'
           passedName={selectedCategory.name}

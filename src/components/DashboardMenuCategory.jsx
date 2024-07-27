@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import DashboardAddItemModal from './DashboardAddItemModal';
 import useFetchMenuInRealTime from '../hooks/useFetchMenuInRealTime';
 import DashboardMenuCard from './DashboardMenuCard';
 import Spinner from './Spinner';
+import DashboardAddItemModal from './DashboardAddItemModal';
 import DashboardUpdateItemModal from './DashboardUpdateItemModal';
+import DashboardMenuDeleteModal from './DashboardMenuDeleteModal';
 
 const DashboardMenuCategory = () => {
   const { category } = useParams();
@@ -19,7 +20,6 @@ const DashboardMenuCategory = () => {
   const categoryId = category.split('-')[0];
   const categoryName = category.split('-').slice(1).join(' ');
 
-  // later fetch the items based on the category ID
   useFetchMenuInRealTime({
     type: 'item',
     selectedCategoryId: categoryId,
@@ -51,6 +51,8 @@ const DashboardMenuCategory = () => {
         </button>
       </div>
 
+      {error && <p className='error-message'>{error}</p>}
+
       {loading ? (
         <Spinner spinnerContainerClassName='dashboard-menu-spinner' />
       ) : itemsData.length === 0 ? (
@@ -69,6 +71,12 @@ const DashboardMenuCategory = () => {
       <DashboardUpdateItemModal
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
+      />
+
+      <DashboardMenuDeleteModal
+        type='item'
+        selected={selectedItem}
+        setSelected={setSelectedItem}
       />
     </div>
   );

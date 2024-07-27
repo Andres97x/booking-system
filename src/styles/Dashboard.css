@@ -467,23 +467,27 @@ dialog label {
   font-size: 2rem;
 }
 
-#modal-delete-category {
+#modal-delete-category,
+#modal-delete-item {
   width: 30%;
   height: 70%;
 }
 
-#modal-delete-category > div:not(.modal-spinner) {
+#modal-delete-category > div:not(.modal-spinner),
+#modal-delete-item > div:not(.modal-spinner) {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-#modal-delete-category > div span {
+#modal-delete-category > div span,
+#modal-delete-item > div span {
   font-weight: 600;
 }
 
-#modal-delete-category .dashboard-action-btns-container {
+#modal-delete-category .dashboard-action-btns-container,
+#modal-delete-item .dashboard-action-btns-container {
   padding-bottom: 0;
 }
 

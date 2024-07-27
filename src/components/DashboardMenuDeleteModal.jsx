@@ -1,15 +1,12 @@
 import Modal from './Modal';
 import Spinner from './Spinner';
-import ModalStatusCompleted from './ModalStatusCompleted';
-import useDashboardDeleteCategory from '../hooks/useDashboardDeleteCategory';
-import DashboardDeleteCategoryScreen from './DashboardDeleteCategoryScreen';
+import StatusCompletedScreen from './StatusCompletedScreen';
+import useDashboardMenuDelete from '../hooks/useDashboardMenuDelete';
+import DashboardMenuDeleteScreen from './DashboardMenuDeleteScreen';
 
-const DashboardDeleteCategoryModal = ({
-  selectedCategory,
-  setSelectedCategory,
-}) => {
-  const { status, setStatus, error, setError, deleteCategory } =
-    useDashboardDeleteCategory();
+const DashboardMenuDeleteModal = ({ type, selected, setSelected }) => {
+  const { status, setStatus, error, setError, deleteSelected } =
+    useDashboardMenuDelete(type);
 
   const closeModal = e => {
     const modal = e.target.closest('dialog');
@@ -20,11 +17,12 @@ const DashboardDeleteCategoryModal = ({
   const displayedElement = status => {
     if (status === 'idle') {
       return (
-        <DashboardDeleteCategoryScreen
+        <DashboardMenuDeleteScreen
+          type={type}
           error={error}
-          selectedCategory={selectedCategory}
+          selected={selected}
           closeModal={closeModal}
-          deleteCategory={deleteCategory}
+          deleteSelected={deleteSelected}
         />
       );
     }
@@ -35,10 +33,10 @@ const DashboardDeleteCategoryModal = ({
 
     if (status === 'completed') {
       return (
-        <ModalStatusCompleted
+        <StatusCompletedScreen
           type='category'
           action='delete'
-          passedName={selectedCategory.name}
+          passedName={selected.name}
         />
       );
     }
@@ -46,11 +44,11 @@ const DashboardDeleteCategoryModal = ({
 
   return (
     <Modal
-      id='modal-delete-category'
+      id={`modal-delete-${type}`}
       onClose={() => {
         setStatus('idle');
         setError(null);
-        setSelectedCategory(null);
+        setSelected(null);
       }}
     >
       {displayedElement(status)}
@@ -58,4 +56,4 @@ const DashboardDeleteCategoryModal = ({
   );
 };
 
-export default DashboardDeleteCategoryModal;
+export default DashboardMenuDeleteModal;

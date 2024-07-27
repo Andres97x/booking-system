@@ -1,4 +1,4 @@
-const ModalStatusCompleted = ({
+const StatusCompletedScreen = ({
   type,
   action,
   passedName,
@@ -19,7 +19,7 @@ const ModalStatusCompleted = ({
     <div className='category-completed-container'>
       <h3>
         {type === 'category' ? 'La categoría' : 'El item'} {passedName || ''} se{' '}
-        {actionMessage()} correctamente
+        {actionMessage(action)} correctamente
       </h3>
 
       {action === 'add' && (
@@ -49,4 +49,4 @@ const ModalStatusCompleted = ({
   );
 };
 
-export default ModalStatusCompleted;
+export default StatusCompletedScreen;

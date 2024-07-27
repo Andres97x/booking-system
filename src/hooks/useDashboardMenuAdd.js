@@ -58,6 +58,7 @@ const useDashboardMenuAdd = type => {
         ...(type === 'category' && { order: categoriesLength + 1 }),
         ...(type === 'item' && { categoryId: categoryId }),
         ...(type === 'item' && { price: formData.price }),
+        // ...(type === 'item' && { subCategory: formData.subCategory }),
       });
 
       clearInputValues();

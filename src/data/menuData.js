@@ -8,70 +8,70 @@ import signatures from '../assets/signatures.jpg';
 import drinksImg from '../assets/drinks.jpg';
 
 export const categoriesData = [
-  // {
-  //   category: 'signatures',
-  //   name: 'Signatures',
-  //   image: signatures,
-  //   imageAlt: 'Plato con arroz y comida marina',
-  //   description:
-  //     'Descubre y deleitate con nuestra linea exclusiva de platos signature, con nuestro toque único.',
-  // },
-  // {
-  //   category: 'platos-fuertes',
-  //   name: 'Platos fuertes',
-  //   image: mainCoursesImg,
-  //   imageAlt: 'Plato exquisito con arroz y langostas',
-  //   description:
-  //     'Descubre nuestras deliciosas creaciones principales, preparadas con los ingredientes más frescos y sabrosos.',
-  // },
-  // {
-  //   category: 'entradas',
-  //   name: 'Entradas',
-  //   image: appetizersImg,
-  //   imageAlt: 'Una plato de entrada exquisito',
-  //   description:
-  //     'Explora nuestras irresistibles entradas, diseñadas para deleitar tus sentidos.',
-  // },
-  // {
-  //   category: 'para-compartir',
-  //   name: 'Para compartir',
-  //   image: toShareImg,
-  //   imageAlt: 'Mesa llena de varios platos para commpartir',
-  //   description:
-  //     'Sumérgete en una experiencia gastronómica única con nuestros platos para compartir.',
-  // },
-  // {
-  //   category: 'makis',
-  //   name: 'Makis',
-  //   image: makisImg,
-  //   imageAlt: 'Varios platos con distintos tipos de makis',
-  //   description:
-  //     'Embárcate en un viaje culinario con nuestros makis artesanales.',
-  // },
-  // {
-  //   category: 'tacos',
-  //   name: 'Tacos',
-  //   image: tacosImg,
-  //   imageAlt: 'Mesa llena con varios tipos de tacos',
-  //   description:
-  //     '¡Ven y prueba nuestros tacos, perfectos para compartir y disfrutar en buena compañía!',
-  // },
-  // {
-  //   category: 'postres',
-  //   name: 'Postres',
-  //   image: dessertsImg,
-  //   imageAlt: 'Una torta oscura y un postre de fresas',
-  //   description:
-  //     'Endulza tu día con nuestros deliciosos postres, perfectos para terminar tu comida con broche de oro.',
-  // },
-  // {
-  //   category: 'bebidas',
-  //   name: 'Bebidas',
-  //   image: drinksImg,
-  //   imageAlt: 'Mesero sirviendo dos bebidas',
-  //   description:
-  //     'Acompaña tu comida con nuestras deliciosas bebidas y eleva tu experiencia gastronómica al siguiente nivel.',
-  // },
+  {
+    category: 'signatures',
+    name: 'Signatures',
+    image: signatures,
+    imageAlt: 'Plato con arroz y comida marina',
+    description:
+      'Descubre y deleitate con nuestra linea exclusiva de platos signature, con nuestro toque único.',
+  },
+  {
+    category: 'platos-fuertes',
+    name: 'Platos fuertes',
+    image: mainCoursesImg,
+    imageAlt: 'Plato exquisito con arroz y langostas',
+    description:
+      'Descubre nuestras deliciosas creaciones principales, preparadas con los ingredientes más frescos y sabrosos.',
+  },
+  {
+    category: 'entradas',
+    name: 'Entradas',
+    image: appetizersImg,
+    imageAlt: 'Una plato de entrada exquisito',
+    description:
+      'Explora nuestras irresistibles entradas, diseñadas para deleitar tus sentidos.',
+  },
+  {
+    category: 'para-compartir',
+    name: 'Para compartir',
+    image: toShareImg,
+    imageAlt: 'Mesa llena de varios platos para commpartir',
+    description:
+      'Sumérgete en una experiencia gastronómica única con nuestros platos para compartir.',
+  },
+  {
+    category: 'makis',
+    name: 'Makis',
+    image: makisImg,
+    imageAlt: 'Varios platos con distintos tipos de makis',
+    description:
+      'Embárcate en un viaje culinario con nuestros makis artesanales.',
+  },
+  {
+    category: 'tacos',
+    name: 'Tacos',
+    image: tacosImg,
+    imageAlt: 'Mesa llena con varios tipos de tacos',
+    description:
+      '¡Ven y prueba nuestros tacos, perfectos para compartir y disfrutar en buena compañía!',
+  },
+  {
+    category: 'postres',
+    name: 'Postres',
+    image: dessertsImg,
+    imageAlt: 'Una torta oscura y un postre de fresas',
+    description:
+      'Endulza tu día con nuestros deliciosos postres, perfectos para terminar tu comida con broche de oro.',
+  },
+  {
+    category: 'bebidas',
+    name: 'Bebidas',
+    image: drinksImg,
+    imageAlt: 'Mesero sirviendo dos bebidas',
+    description:
+      'Acompaña tu comida con nuestras deliciosas bebidas y eleva tu experiencia gastronómica al siguiente nivel.',
+  },
 ];
 
 export const items = [
@@ -102,7 +102,7 @@ export const items = [
   {
     category: 'signatures',
     id: '548',
-    nombre: 'salmón braseado',
+    nombre: 'Salmón braseado',
     ingredientes:
       'Salmón, sal, pimienta, aceite de oliva, ajo, limón, hierbas frescas (como eneldo o perejil).',
     precio: 98000,

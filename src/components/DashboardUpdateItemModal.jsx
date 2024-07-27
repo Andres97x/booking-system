@@ -3,7 +3,7 @@ import useDashboardMenuForm from '../hooks/useDashboardMenuForm';
 import useDashboardMenuUpdate from '../hooks/useDashboardMenuUpdate';
 import DashboardUpdateItemScreen from './DashboardUpdateItemScreen';
 import Spinner from './Spinner';
-import ModalStatusCompleted from './ModalStatusCompleted';
+import StatusCompletedScreen from './StatusCompletedScreen';
 
 const DashboardUpdateItemModal = ({ selectedItem, setSelectedItem }) => {
   const {
@@ -34,7 +34,7 @@ const DashboardUpdateItemModal = ({ selectedItem, setSelectedItem }) => {
       return <Spinner />;
     } else if (status === 'completed') {
       return (
-        <ModalStatusCompleted
+        <StatusCompletedScreen
           type='item'
           action='update'
           passedName={selectedItem?.name}

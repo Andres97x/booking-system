@@ -3,7 +3,7 @@ import useDashboardMenuAdd from '../hooks/useDashboardMenuAdd';
 import Modal from './Modal';
 import DashboardAddItemScreen from './DashboardAddItemScreen';
 import Spinner from './Spinner';
-import ModalStatusCompleted from './ModalStatusCompleted';
+import StatusCompletedScreen from './StatusCompletedScreen';
 
 const DashboardAddItemModal = ({ categoryName, categoryId }) => {
   const {
@@ -36,7 +36,7 @@ const DashboardAddItemModal = ({ categoryName, categoryId }) => {
       return <Spinner />;
     } else if (status === 'completed') {
       return (
-        <ModalStatusCompleted
+        <StatusCompletedScreen
           type='item'
           action='add'
           clearInputValues={clearInputValues}
