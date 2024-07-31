@@ -250,12 +250,12 @@
 
 /* DRINKS NAVBAR */
 
-.drinks-navbar {
+.subcategory-navbar {
   gap: 3rem;
   /* position: sticky; */
 }
 
-.drinks-navbar button {
+.subcategory-navbar button {
   font-size: 1.5rem;
   background-color: var(--main-color);
   border: 0;
@@ -270,22 +270,15 @@
   position: relative;
 }
 
-.drinks-navbar button:focus {
+.subcategory-navbar button:focus {
   border-bottom: 2px solid rgba(73, 80, 87, 0.6);
 }
 
-.drinks-navbar button.selected {
+.subcategory-navbar button.selected {
   border-bottom: 2px solid rgb(49, 54, 58);
 }
 
-.drinks-navbar button.clear-drink-category {
-  border-bottom: 2px solid transparent;
-}
-
-.drinks-navbar button.clear-drink-category:focus {
-  border-bottom: 2px solid rgba(73, 80, 87, 0.6);
-}
-
+/* MISCELLANIOUS */
 .categories-spinner-container,
 .items-spinner-container,
 .error-menu-container,

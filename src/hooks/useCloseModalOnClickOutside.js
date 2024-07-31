@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 
-const useCloseModalOnClickOutside = callbackFn => {
+const useCloseModalOnClickOutside = (selector, callbackFn) => {
   useEffect(() => {
     const mainSection = document.querySelector('main');
 
     const clickOutsideHandler = e => {
       let modal;
 
-      if (e.target.matches('dialog')) {
+      if (e.target.matches(selector)) {
         modal = e.target;
       } else {
-        modal = e.target.closest('dialog');
+        modal = e.target.closest(selector);
       }
 
       if (!modal) return;

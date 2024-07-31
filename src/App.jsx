@@ -25,7 +25,7 @@ import DashboardNews from './components/DashboardNews';
 function App() {
   useOpenModalOnBtnClick();
 
-  useCloseModalOnClickOutside(modal => {
+  useCloseModalOnClickOutside('dialog:not(.product-modal)', modal => {
     modal.close();
   });
 

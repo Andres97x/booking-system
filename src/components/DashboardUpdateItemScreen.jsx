@@ -81,6 +81,32 @@ const DashboardUpdateItemScreen = ({
         </div>
 
         <div className='dashboard-menu-option-group'>
+          <label htmlFor='dash-update-item-sub-category'>
+            <p>
+              Sub-categoría (Necesario solo si se desea un filtro adicional.)
+            </p>
+            <span>
+              <MdEdit />
+            </span>
+          </label>
+
+          <div>
+            <input
+              id='dash-update-item-sub-category'
+              type='text'
+              name='subCategory'
+              value={formData.subCategory}
+              onChange={onChangeHandler}
+              placeholder={
+                selectedItem?.subCategory
+                  ? `actual: ${selectedItem.subCategory}`
+                  : 'Actualmente este item no hace parte de una sub-categoría'
+              }
+            />
+          </div>
+        </div>
+
+        <div className='dashboard-menu-option-group'>
           <label htmlFor='dash-update-menu-img'>
             <p>Editar imagen</p>
             <span>

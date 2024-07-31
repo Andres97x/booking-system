@@ -39,14 +39,14 @@ const DashboardAddItemScreen = ({
             name='description'
             rows='5'
             cols='33'
-            placeholder='Añade una breve descripción de la categoría o los ingrendientes que contiene'
+            placeholder='Añade una breve descripción de la categoría o los ingrendientes que contiene.'
             value={formData.description}
             onChange={onChangeHandler}
           ></textarea>
         </div>
 
         <div>
-          <label htmlFor='dash-add-item-price'>Precio:</label>
+          <label htmlFor='dash-add-item-price'>Precio</label>
           <input
             type='number'
             name='price'
@@ -55,7 +55,19 @@ const DashboardAddItemScreen = ({
             inputMode='numeric'
             pattern='[0-9]+'
             id='dash-add-item-price'
-            placeholder='sin puntos ni comas (solo números)'
+            placeholder='sin puntos ni comas (solo números).'
+          />
+        </div>
+
+        <div>
+          <label htmlFor='dash-add-item-sub-category'>Sub-categoría</label>
+          <input
+            id='dash-add-item-sub-category'
+            type='text'
+            name='subCategory'
+            value={formData.subCategory}
+            onChange={onChangeHandler}
+            placeholder='Necesario solo si se desea un filtro adicional.'
           />
         </div>
 

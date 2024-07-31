@@ -18,8 +18,8 @@ const DashboardMenu = () => {
 
   /* TODO */
 
-  // disable close modal button && useCloseModalOnClickOutside when state is set to loading.
   // design the subcategory system
+  // disable close modal button && useCloseModalOnClickOutside when state is set to loading.
 
   useFetchMenuInRealTime({
     type: 'category',

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import ProductDetailModal from '../components/ProductDetailModal';
-import DrinksNav from '../components/DrinksNav';
+import SubCategoriesNav from '../components/SubCategoriesNav';
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
 import { formatPrice } from '../utils';
 import useFetchMenu from '../hooks/useFetchMenu';
@@ -14,7 +14,7 @@ const MenuItems = () => {
   const { category } = useParams();
   const { searchParams, handleSearchParams } = useHandleSearchParams();
   const productId = searchParams.get('productId');
-  // const drinksCategory = searchParams.get('categoria');
+  const subCategory = searchParams.get('sub-categoría');
 
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState('idle');
@@ -27,7 +27,7 @@ const MenuItems = () => {
     handleSearchParams('productId', null);
   };
 
-  useCloseModalOnClickOutside(closeProductModal);
+  useCloseModalOnClickOutside('dialog.product-modal', closeProductModal);
 
   useFetchMenu({
     type: 'items',
@@ -47,18 +47,18 @@ const MenuItems = () => {
     if (!productModal) return;
 
     if (productId) {
+      // console.log(productModal);
       productModal.showModal();
     } else {
       productModal.close();
     }
   }, [productId]);
 
-  // const displayedItems =
-  //   categoryName === 'bebidas' && drinksCategory
-  //     ? items.filter(item => item.subcategory === drinksCategory)
-  //     : items;
+  const displayedItems = subCategory
+    ? items.filter(item => item.subCategory === subCategory)
+    : items;
 
-  const menuItemsEl = items.map((item, i) => {
+  const menuItemsEl = displayedItems.map((item, i) => {
     const priceFormatted = formatPrice(item.price);
 
     return (
@@ -96,11 +96,11 @@ const MenuItems = () => {
 
   return (
     <div className='section-menu-items'>
-      {/* {params.category === 'bebidas' && (
-        <DrinksNav drinks={categoryItems} drinksCategory={drinksCategory} />
-      )} */}
-
       <h3>{categoryName}</h3>
+
+      {items.some(item => item.subCategory) && (
+        <SubCategoriesNav items={items} selectedSubCategory={subCategory} />
+      )}
 
       {items.length > 0 ? (
         <div className='menu-items-grid'>{menuItemsEl}</div>

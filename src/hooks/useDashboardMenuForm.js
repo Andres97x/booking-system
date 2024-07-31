@@ -6,7 +6,7 @@ const useDashboardMenuForm = (type, action) => {
     name: '',
     description: '',
     ...(type === 'category' && action === 'update' && { order: '' }),
-    ...(type === 'item' && { price: '' }),
+    ...(type === 'item' && { price: '', subCategory: '' }),
   });
 
   const onChangeHandler = e => {
@@ -22,7 +22,7 @@ const useDashboardMenuForm = (type, action) => {
       name: '',
       description: '',
       ...(type === 'category' && action === 'update' && { order: 0 }),
-      ...(type === 'item' && { price: '' }),
+      ...(type === 'item' && { price: '', subCategory: '' }),
     });
 
     setImageUpload(null);
