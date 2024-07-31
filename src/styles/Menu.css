@@ -88,6 +88,20 @@
   min-height: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
+.section-menu-items > h3 {
+  color: var(--font-secondary-color);
+  margin-bottom: 2rem;
+  font-weight: 600;
+  width: fit-content;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--font-alternative-color);
+  transform: skew(-0.06turn, -1deg);
+}
+
+.section-menu-items > p {
+  color: var(--font-secondary-color);
+}
+
 .menu-items-grid {
   display: grid;
   column-gap: 2rem;

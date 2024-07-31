@@ -97,7 +97,13 @@ const MenuItems = () => {
         <DrinksNav drinks={categoryItems} drinksCategory={drinksCategory} />
       )} */}
 
-      <div className='menu-items-grid'>{menuItemsEl}</div>
+      <h3>{categoryName}</h3>
+
+      {items.length > 0 ? (
+        <div className='menu-items-grid'>{menuItemsEl}</div>
+      ) : (
+        <p>Aún no hay items añadidos a esta categoría</p>
+      )}
 
       <ProductDetailModal
         items={items}
