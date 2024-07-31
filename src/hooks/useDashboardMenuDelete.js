@@ -7,6 +7,7 @@ import {
   query,
   deleteDoc,
   writeBatch,
+  where,
 } from 'firebase/firestore';
 import { ref, deleteObject } from 'firebase/storage';
 
@@ -49,6 +50,27 @@ const useDashboardMenuDelete = type => {
     }
   };
 
+  const deleteItemsAfterCategoryDeletion = async categoryId => {
+    const itemsCollectionRef = collection(db, 'items');
+    const q = query(itemsCollectionRef, where('categoryId', '==', categoryId));
+
+    try {
+      const snapshot = await getDocs(q);
+
+      // Delete items from just deleted category
+      const batch = writeBatch(db);
+      snapshot.forEach(docSnap => {
+        const docRef = doc(itemsCollectionRef, docSnap.id);
+        batch.delete(docRef);
+      });
+
+      // Execute batch transaction
+      await batch.commit();
+    } catch (err) {
+      throw err;
+    }
+  };
+
   const deleteSelected = async ({ id, imageRef, order }) => {
     setError(null);
 
@@ -62,6 +84,7 @@ const useDashboardMenuDelete = type => {
       // re-order the other categories (only when deleting categories)
       if (type === 'category') {
         updateOrderAfterCategoryDeletion('categories', id, order);
+        deleteItemsAfterCategoryDeletion(id);
       }
 
       // delete image from storage

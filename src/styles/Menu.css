@@ -93,10 +93,11 @@
   column-gap: 2rem;
   row-gap: 2.5rem;
   align-items: start;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
 }
 
 .menu-item {
+  /* max-width: 50rem; */
   border: none;
   background-color: var(--main-color);
   cursor: pointer;

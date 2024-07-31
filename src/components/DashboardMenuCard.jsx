@@ -10,7 +10,7 @@ const DashboardMenuCard = ({ type, option, setSelectedOption }) => {
           {option.name[0].toUpperCase() + option.name.slice(1)}
         </p>
         {type === 'category' ? (
-          <span className='menu-card-order'>orden: {option.order}</span>
+          <span className='menu-card-order'>{option.order}</span>
         ) : (
           <span className='menu-card-order'>{formatPrice(option.price)}</span>
         )}
