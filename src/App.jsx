@@ -23,11 +23,11 @@ import DashboardMenuCategory from './components/DashboardMenuCategory';
 import DashboardNews from './components/DashboardNews';
 
 function App() {
-  useEffect(() => {}, []);
-
   useOpenModalOnBtnClick();
 
-  useCloseModalOnClickOutside();
+  useCloseModalOnClickOutside(modal => {
+    modal.close();
+  });
 
   return (
     <BookingContextWrapper>

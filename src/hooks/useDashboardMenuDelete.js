@@ -57,12 +57,19 @@ const useDashboardMenuDelete = type => {
     try {
       const snapshot = await getDocs(q);
 
-      // Delete items from just deleted category
       const batch = writeBatch(db);
-      snapshot.forEach(docSnap => {
-        const docRef = doc(itemsCollectionRef, docSnap.id);
-        batch.delete(docRef);
-      });
+
+      await Promise.all(
+        snapshot.docs.map(async docSnap => {
+          // Delete items from just deleted category
+          const docRef = doc(itemsCollectionRef, docSnap.id);
+          batch.delete(docRef);
+
+          // Delete image from storage
+          const imageRef = ref(storage, docSnap.data().imageRef);
+          await deleteObject(imageRef);
+        })
+      );
 
       // Execute batch transaction
       await batch.commit();

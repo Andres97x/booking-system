@@ -10,6 +10,23 @@ export const formatPrice = element => {
     .replace(/\u00A0/g, ''); // replace $&nbsp; between the sign and the number
 };
 
+export const clickOpenModal = e => {
+  let openModalBtn;
+  if (e.target.matches('button[data-modal]')) {
+    openModalBtn = e.target;
+  } else {
+    openModalBtn = e.target.closest('button[data-modal]');
+  }
+
+  if (!openModalBtn) return;
+
+  const modalElement = document.getElementById(`${openModalBtn.dataset.modal}`);
+
+  if (!modalElement) return;
+
+  modalElement.showModal();
+};
+
 /* <---- MENU COMPONENT ----> */
 
 /* transformObject fn takes an object and returns an array of objects. Categorizing and grouping (by common group name) =>({name: str, items: str[]}) as follows :
@@ -100,33 +117,4 @@ export const getTakenTimes = (booking, bookings, add, interval) => {
     });
 
   return takenTimes.flat();
-};
-
-/* <---- DASHBOARD COMPONENT ----> */
-
-export const clickOpenModal = e => {
-  let openModalBtn;
-  if (e.target.matches('button[data-modal]')) {
-    openModalBtn = e.target;
-  } else {
-    openModalBtn = e.target.closest('button[data-modal]');
-  }
-
-  if (!openModalBtn) return;
-
-  const modalElement = document.getElementById(`${openModalBtn.dataset.modal}`);
-
-  if (!modalElement) return;
-
-  modalElement.showModal();
-};
-
-export const openModalOnBtnClick = () => {
-  const mainSection = document.querySelector('main');
-
-  mainSection.addEventListener('click', clickOpenModal);
-
-  return () => {
-    mainSection.removeEventListener('click', clickOpenModal);
-  };
 };

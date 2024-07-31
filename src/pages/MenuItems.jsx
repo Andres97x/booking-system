@@ -8,6 +8,7 @@ import { formatPrice } from '../utils';
 import useFetchMenu from '../hooks/useFetchMenu';
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
+import useCloseModalOnClickOutside from '../hooks/useCloseModalOnClickOutside';
 
 const MenuItems = () => {
   const { category } = useParams();
@@ -25,6 +26,8 @@ const MenuItems = () => {
   const closeProductModal = () => {
     handleSearchParams('productId', null);
   };
+
+  useCloseModalOnClickOutside(closeProductModal);
 
   useFetchMenu({
     type: 'items',

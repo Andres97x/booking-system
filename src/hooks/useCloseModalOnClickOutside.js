@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-const useCloseModalOnClickOutside = () => {
+const useCloseModalOnClickOutside = callbackFn => {
   useEffect(() => {
     const mainSection = document.querySelector('main');
 
-    mainSection.addEventListener('click', e => {
+    const clickOutsideHandler = e => {
       let modal;
 
       if (e.target.matches('dialog')) {
@@ -23,9 +23,15 @@ const useCloseModalOnClickOutside = () => {
         e.clientY < dialogDimensions.top ||
         e.clientY > dialogDimensions.bottom
       ) {
-        modal.close();
+        callbackFn(modal);
       }
-    });
+    };
+
+    mainSection.addEventListener('click', clickOutsideHandler);
+
+    return () => {
+      mainSection.removeEventListener('click', clickOutsideHandler);
+    };
   }, []);
 };
 
