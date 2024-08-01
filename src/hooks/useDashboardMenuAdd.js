@@ -39,6 +39,14 @@ const useDashboardMenuAdd = type => {
     const imgRef = ref(storage, imagePath);
     let imageResponse = null;
 
+    const formatSubcategory = string => {
+      return string
+        .trim()
+        .split(' ')
+        .filter(sentence => sentence)
+        .join(' ');
+    };
+
     try {
       setStatus('loading');
 
@@ -59,7 +67,7 @@ const useDashboardMenuAdd = type => {
         ...(type === 'item' && {
           categoryId: categoryId,
           price: formData.price,
-          subCategory: formData.subCategory,
+          subCategory: formatSubcategory(formData.subCategory),
         }),
       });
 

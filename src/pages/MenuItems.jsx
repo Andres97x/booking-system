@@ -14,7 +14,7 @@ const MenuItems = () => {
   const { category } = useParams();
   const { searchParams, handleSearchParams } = useHandleSearchParams();
   const productId = searchParams.get('productId');
-  const subCategory = searchParams.get('sub-categoría');
+  const subCategory = searchParams.get('sub-category');
 
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState('idle');
@@ -27,7 +27,13 @@ const MenuItems = () => {
     handleSearchParams('productId', null);
   };
 
-  useCloseModalOnClickOutside('dialog.product-modal', closeProductModal);
+  useCloseModalOnClickOutside(
+    '.product-modal',
+    () => {
+      handleSearchParams('productId', null);
+    },
+    [searchParams]
+  );
 
   useFetchMenu({
     type: 'items',
@@ -43,11 +49,9 @@ const MenuItems = () => {
 
   useEffect(() => {
     const productModal = document.querySelector('.product-modal');
-
     if (!productModal) return;
 
     if (productId) {
-      // console.log(productModal);
       productModal.showModal();
     } else {
       productModal.close();

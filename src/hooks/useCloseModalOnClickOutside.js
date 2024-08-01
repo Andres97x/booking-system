@@ -1,17 +1,9 @@
 import { useEffect } from 'react';
 
-const useCloseModalOnClickOutside = (selector, callbackFn) => {
+const useCloseModalOnClickOutside = (selector, callbackFn, dependenciesArr) => {
   useEffect(() => {
-    const mainSection = document.querySelector('main');
-
     const clickOutsideHandler = e => {
-      let modal;
-
-      if (e.target.matches(selector)) {
-        modal = e.target;
-      } else {
-        modal = e.target.closest(selector);
-      }
+      const modal = e.target.closest(selector);
 
       if (!modal) return;
 
@@ -27,12 +19,12 @@ const useCloseModalOnClickOutside = (selector, callbackFn) => {
       }
     };
 
-    mainSection.addEventListener('click', clickOutsideHandler);
+    document.addEventListener('click', clickOutsideHandler);
 
     return () => {
-      mainSection.removeEventListener('click', clickOutsideHandler);
+      document.removeEventListener('click', clickOutsideHandler);
     };
-  }, []);
+  }, dependenciesArr);
 };
 
 export default useCloseModalOnClickOutside;

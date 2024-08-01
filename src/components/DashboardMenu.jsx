@@ -18,7 +18,7 @@ const DashboardMenu = () => {
 
   /* TODO */
 
-  // design the subcategory system
+  // Add suggested subcategory names in the itemUpdateScreen
   // disable close modal button && useCloseModalOnClickOutside when state is set to loading.
 
   useFetchMenuInRealTime({

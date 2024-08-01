@@ -62,6 +62,14 @@ const useDashboardMenuUpdate = type => {
       return;
     }
 
+    const formatSubcategory = string => {
+      return string
+        .trim()
+        .split(' ')
+        .filter(sentence => sentence)
+        .join(' ');
+    };
+
     const updateErrorMessage =
       'Hubo un problema, no se ha podido actualizar la categoría';
 
@@ -84,7 +92,12 @@ const useDashboardMenuUpdate = type => {
 
         modifiedInputEntries.forEach(([key, value]) => {
           if (type === 'category' && key === 'order') return;
-          newData[key] = value;
+
+          if (type === 'item' && key === 'subCategory') {
+            newData[key] = formatSubcategory(value);
+          } else {
+            newData[key] = value;
+          }
         });
 
         // console.log(newData);

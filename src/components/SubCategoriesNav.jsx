@@ -9,6 +9,8 @@ const SubCategoriesNav = ({ items, selectedSubCategory }) => {
     )
   );
 
+  console.log(subCategories);
+
   const subCategoriesEl = subCategories.map((subCategory, i) => {
     const subCategoryName = subCategory[0].toUpperCase() + subCategory.slice(1);
 
@@ -16,7 +18,7 @@ const SubCategoriesNav = ({ items, selectedSubCategory }) => {
       <button
         key={`sub-category-${i}`}
         onClick={() => {
-          handleSearchParams('sub-categoría', subCategory);
+          handleSearchParams('sub-category', subCategory);
         }}
         className={`sub-category-btn ${
           selectedSubCategory === subCategory ? 'selected' : ''
@@ -32,7 +34,7 @@ const SubCategoriesNav = ({ items, selectedSubCategory }) => {
       <button
         className={`sub-category-btn ${!selectedSubCategory ? 'selected' : ''}`}
         onClick={() => {
-          handleSearchParams('sub-categoría', null);
+          handleSearchParams('sub-category', null);
         }}
       >
         Todas

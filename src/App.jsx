@@ -25,9 +25,13 @@ import DashboardNews from './components/DashboardNews';
 function App() {
   useOpenModalOnBtnClick();
 
-  useCloseModalOnClickOutside('dialog:not(.product-modal)', modal => {
-    modal.close();
-  });
+  useCloseModalOnClickOutside(
+    'dialog:not(.product-modal)',
+    modal => {
+      modal.close();
+    },
+    []
+  );
 
   return (
     <BookingContextWrapper>
