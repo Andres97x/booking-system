@@ -44,7 +44,8 @@ const useDashboardMenuAdd = type => {
         .trim()
         .split(' ')
         .filter(sentence => sentence)
-        .join(' ');
+        .join(' ')
+        .toLowerCase();
     };
 
     try {

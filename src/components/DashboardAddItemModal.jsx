@@ -5,13 +5,17 @@ import DashboardAddItemScreen from './DashboardAddItemScreen';
 import Spinner from './Spinner';
 import StatusCompletedScreen from './StatusCompletedScreen';
 
-const DashboardAddItemModal = ({ categoryName, categoryId }) => {
+const DashboardAddItemModal = ({ categoryName, categoryId, subCategories }) => {
   const {
     formData,
     onChangeHandler,
+    onChangeSubCategoryHandler,
+    onOptionClick,
     imageUpload,
     setImageUpload,
     clearInputValues,
+    filteredOptions,
+    highlightMatch,
   } = useDashboardMenuForm('item', 'add');
 
   const { status, setStatus, error, setError, submitCategory } =
@@ -25,11 +29,15 @@ const DashboardAddItemModal = ({ categoryName, categoryId }) => {
           error={error}
           formData={formData}
           onChangeHandler={onChangeHandler}
+          onChangeSubCategoryHandler={onChangeSubCategoryHandler}
+          onOptionClick={onOptionClick}
           imageUpload={imageUpload}
           setImageUpload={setImageUpload}
           submitCategory={submitCategory}
           clearInputValues={clearInputValues}
           categoryId={categoryId}
+          filteredOptions={filteredOptions}
+          subCategories={subCategories}
         />
       );
     } else if (status === 'loading') {

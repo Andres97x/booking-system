@@ -29,6 +29,12 @@ const DashboardMenuCategory = () => {
     setError,
   });
 
+  const subCategories = Array.from(
+    new Set(
+      itemsData.filter(item => item.subCategory).map(item => item.subCategory)
+    )
+  );
+
   const itemsDataEl = itemsData.map((item, i) => (
     <DashboardMenuCard
       type='item'
@@ -66,11 +72,13 @@ const DashboardMenuCategory = () => {
       <DashboardAddItemModal
         categoryName={categoryName}
         categoryId={categoryId}
+        subCategories={subCategories}
       />
 
       <DashboardUpdateItemModal
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
+        subCategories={subCategories}
       />
 
       <DashboardMenuDeleteModal

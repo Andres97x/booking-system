@@ -18,7 +18,8 @@ const DashboardMenu = () => {
 
   /* TODO */
 
-  // Add suggested subcategory names in the itemUpdateScreen
+  // fixed productDetail modal not showing when refreshing page
+  // add a functionality to delete subcategory from updateItemScreen/Modal
   // disable close modal button && useCloseModalOnClickOutside when state is set to loading.
 
   useFetchMenuInRealTime({

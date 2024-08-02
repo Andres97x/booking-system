@@ -429,7 +429,7 @@ dialog label {
   font-size: 1.6rem;
 }
 
-.dashboard-menu-option-group span {
+.dashboard-menu-option-group span:has(svg) {
   height: fit-content;
   display: flex;
   align-items: center;

@@ -32,7 +32,7 @@ const MenuItems = () => {
     () => {
       handleSearchParams('productId', null);
     },
-    [searchParams]
+    [productId]
   );
 
   useFetchMenu({
@@ -68,9 +68,7 @@ const MenuItems = () => {
     return (
       <button
         key={`menu-item-${i}`}
-        className={`menu-item ${
-          categoryName === 'bebidas' ? 'drink-item' : ''
-        }`}
+        className='menu-item'
         onClick={() => {
           handleSearchParams('productId', item.id);
         }}

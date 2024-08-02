@@ -591,3 +591,23 @@ header svg {
   font-weight: 600;
   margin-top: 1rem;
 }
+
+/* MISCELLANIOUS */
+
+.filtered-options-ul {
+  border: 1px solid #ccc;
+  margin-top: 1px;
+  list-style: none;
+  max-height: 120px;
+  overflow-y: scroll;
+}
+
+.filtered-options-ul li {
+  cursor: pointer;
+  padding: 5px;
+  transition: all 150ms ease-in-out;
+}
+
+.filtered-options-ul li:hover {
+  background-color: #ddd;
+}

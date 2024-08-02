@@ -9,8 +9,6 @@ const SubCategoriesNav = ({ items, selectedSubCategory }) => {
     )
   );
 
-  console.log(subCategories);
-
   const subCategoriesEl = subCategories.map((subCategory, i) => {
     const subCategoryName = subCategory[0].toUpperCase() + subCategory.slice(1);
 

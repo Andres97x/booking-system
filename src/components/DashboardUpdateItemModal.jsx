@@ -5,13 +5,20 @@ import DashboardUpdateItemScreen from './DashboardUpdateItemScreen';
 import Spinner from './Spinner';
 import StatusCompletedScreen from './StatusCompletedScreen';
 
-const DashboardUpdateItemModal = ({ selectedItem, setSelectedItem }) => {
+const DashboardUpdateItemModal = ({
+  selectedItem,
+  setSelectedItem,
+  subCategories,
+}) => {
   const {
     formData,
     onChangeHandler,
+    onChangeSubCategoryHandler,
+    onOptionClick,
     imageUpload,
     setImageUpload,
     clearInputValues,
+    filteredOptions,
   } = useDashboardMenuForm('item', 'update');
 
   const { status, setStatus, error, setError, updateFile } =
@@ -25,9 +32,13 @@ const DashboardUpdateItemModal = ({ selectedItem, setSelectedItem }) => {
           error={error}
           formData={formData}
           onChangeHandler={onChangeHandler}
+          onChangeSubCategoryHandler={onChangeSubCategoryHandler}
+          onOptionClick={onOptionClick}
           updateFile={updateFile}
           imageUpload={imageUpload}
           setImageUpload={setImageUpload}
+          filteredOptions={filteredOptions}
+          subCategories={subCategories}
         />
       );
     } else if (status === 'loading') {

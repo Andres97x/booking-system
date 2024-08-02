@@ -1,14 +1,21 @@
 import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
+import FilteredOptions from './FilteredOptions';
 
 const DashboardUpdateItemScreen = ({
   selectedItem,
   error,
   formData,
   onChangeHandler,
+  onChangeSubCategoryHandler,
+  onOptionClick,
   updateFile,
   imageUpload,
   setImageUpload,
+  filteredOptions,
+  subCategories,
 }) => {
+  console.log(formData);
+
   return (
     <div>
       <h3>Editar opciones de categoría</h3>
@@ -96,13 +103,23 @@ const DashboardUpdateItemScreen = ({
               type='text'
               name='subCategory'
               value={formData.subCategory}
-              onChange={onChangeHandler}
+              onChange={e => {
+                onChangeSubCategoryHandler(e, subCategories);
+              }}
               placeholder={
                 selectedItem?.subCategory
                   ? `actual: ${selectedItem.subCategory}`
                   : 'Actualmente este item no hace parte de una sub-categoría'
               }
+              autoComplete='off'
             />
+            {filteredOptions.length > 0 && (
+              <FilteredOptions
+                filteredOptions={filteredOptions}
+                onOptionClick={onOptionClick}
+                query={formData.subCategory}
+              />
+            )}
           </div>
         </div>
 

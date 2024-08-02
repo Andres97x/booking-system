@@ -1,13 +1,19 @@
+import FilteredOptions from './FilteredOptions';
+
 const DashboardAddItemScreen = ({
   categoryName,
   error,
   formData,
   onChangeHandler,
+  onChangeSubCategoryHandler,
+  onOptionClick,
   imageUpload,
   setImageUpload,
   submitCategory,
   clearInputValues,
   categoryId,
+  filteredOptions,
+  subCategories,
 }) => {
   return (
     <>
@@ -66,9 +72,20 @@ const DashboardAddItemScreen = ({
             type='text'
             name='subCategory'
             value={formData.subCategory}
-            onChange={onChangeHandler}
+            onChange={e => {
+              onChangeSubCategoryHandler(e, subCategories);
+            }}
             placeholder='Necesario solo si se desea un filtro adicional.'
+            autoComplete='off'
           />
+
+          {filteredOptions.length > 0 && (
+            <FilteredOptions
+              filteredOptions={filteredOptions}
+              onOptionClick={onOptionClick}
+              query={formData.subCategory}
+            />
+          )}
         </div>
 
         <div>
