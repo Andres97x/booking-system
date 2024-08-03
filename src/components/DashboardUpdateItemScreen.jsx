@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
 import FilteredOptions from './FilteredOptions';
 
@@ -13,7 +14,14 @@ const DashboardUpdateItemScreen = ({
   setImageUpload,
   filteredOptions,
   subCategories,
+  setFormData,
 }) => {
+  useEffect(() => {
+    if (!selectedItem) return;
+
+    setFormData(prev => ({ ...prev, subCategory: selectedItem.subCategory }));
+  }, [selectedItem]);
+
   return (
     <div>
       <h3>Editar opciones de categoría</h3>
@@ -87,13 +95,31 @@ const DashboardUpdateItemScreen = ({
 
         <div className='dashboard-menu-option-group'>
           <label htmlFor='dash-update-item-sub-category'>
-            <p>
-              Sub-categoría (Necesario solo si se desea un filtro adicional.)
-            </p>
+            <p>Sub-categoría</p>
             <span>
               <MdEdit />
             </span>
           </label>
+
+          <p
+            style={{
+              fontSize: '1.4rem',
+              color: selectedItem?.subCategory
+                ? 'var(--font-secondary-color)'
+                : '#402400',
+            }}
+          >
+            {selectedItem?.subCategory ? (
+              <>
+                Actualmente hace parte de la subcategoría{' '}
+                <span style={{ fontWeight: 'bold' }}>
+                  {selectedItem.subCategory}
+                </span>
+              </>
+            ) : (
+              'Actualmente no hace parte de alguna subcategoría'
+            )}
+          </p>
 
           <div>
             <input
@@ -104,11 +130,7 @@ const DashboardUpdateItemScreen = ({
               onChange={e => {
                 onChangeSubCategoryHandler(e, subCategories);
               }}
-              placeholder={
-                selectedItem?.subCategory
-                  ? `actual: ${selectedItem.subCategory}`
-                  : 'Actualmente este item no hace parte de una sub-categoría'
-              }
+              placeholder='Necesario solo si se desea un filtro adicional.'
               autoComplete='off'
             />
             {filteredOptions.length > 0 && (

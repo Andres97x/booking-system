@@ -19,6 +19,7 @@ const DashboardUpdateItemModal = ({
     setImageUpload,
     clearInputValues,
     filteredOptions,
+    setFormData,
   } = useDashboardMenuForm('item', 'update');
 
   const { status, setStatus, error, setError, updateFile } =
@@ -39,6 +40,7 @@ const DashboardUpdateItemModal = ({
           setImageUpload={setImageUpload}
           filteredOptions={filteredOptions}
           subCategories={subCategories}
+          setFormData={setFormData}
         />
       );
     } else if (status === 'loading') {

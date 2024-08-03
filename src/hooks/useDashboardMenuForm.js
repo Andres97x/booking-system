@@ -57,6 +57,7 @@ const useDashboardMenuForm = (type, action) => {
     setImageUpload,
     clearInputValues,
     filteredOptions,
+    setFormData,
   };
 };
 

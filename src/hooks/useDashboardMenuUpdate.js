@@ -33,7 +33,7 @@ const useDashboardMenuUpdate = type => {
       snapshot.forEach(docSnap => {
         const docRef = doc(collectionRef, docSnap.id);
         if (docSnap.id === docId) {
-          // looping over the selectedMenuType document
+          // looping over the selected document
           // update the document with the new order
           batch.update(docRef, { order: newOrder });
 
@@ -54,10 +54,20 @@ const useDashboardMenuUpdate = type => {
     }
   };
 
-  const updateFile = async (form, imageUpload, selectedMenuType, modalId) => {
+  const updateFile = async (form, imageUpload, selected, modalId) => {
     setError(null);
 
-    if (Object.values(form).every(value => !value) && !imageUpload) {
+    const checkableInputValues = Object.entries(form)
+      .filter(entry => entry[0] !== 'subCategory')
+      .map(entry => entry[1]);
+
+    // console.log(checkableInputValues);
+
+    if (
+      checkableInputValues.every(value => !value) &&
+      !imageUpload &&
+      selected.subCategory === form.subCategory
+    ) {
       setError('No hay cambios para guardar');
       return;
     }
@@ -76,19 +86,26 @@ const useDashboardMenuUpdate = type => {
     const docRef = doc(
       db,
       type === 'category' ? 'categories' : 'items',
-      selectedMenuType.id
+      selected.id
     );
 
     try {
       setStatus('loading');
 
       // => user modified data
-      if (Object.values(form).some(value => value)) {
+      if (
+        checkableInputValues.some(value => value) ||
+        selected.subCategory !== form.subCategory
+      ) {
         const newData = {};
 
-        const modifiedInputEntries = Object.entries(form).filter(
-          entry => entry[1]
-        );
+        const modifiedInputEntries = Object.entries(form).filter(entry => {
+          if (entry[0] === 'subCategory' && entry[1] === '') {
+            return true;
+          } else {
+            return entry[1];
+          }
+        });
 
         modifiedInputEntries.forEach(([key, value]) => {
           if (type === 'category' && key === 'order') return;
@@ -107,7 +124,7 @@ const useDashboardMenuUpdate = type => {
 
       // => user modified order
       if (form.order && type === 'category') {
-        updateOrder('categories', selectedMenuType.id, parseInt(form.order));
+        updateOrder('categories', selected.id, parseInt(form.order));
       }
 
       // => user modified image
@@ -115,7 +132,7 @@ const useDashboardMenuUpdate = type => {
         const uniqueId = uuidv4();
 
         // delete the current category image image in firebase/storage
-        const selectedCategoryImgRef = ref(storage, selectedMenuType.imageRef);
+        const selectedCategoryImgRef = ref(storage, selected.imageRef);
 
         await deleteObject(selectedCategoryImgRef);
 
