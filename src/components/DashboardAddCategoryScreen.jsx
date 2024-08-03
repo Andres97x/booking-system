@@ -2,11 +2,10 @@ const DashboardAddCategoryScreen = ({
   formData,
   error,
   onChangeHandler,
-  submitCategory,
+  submitData,
   setImageUpload,
   categoriesLength,
   imageUpload,
-  clearInputValues,
 }) => {
   return (
     <div>
@@ -59,11 +58,10 @@ const DashboardAddCategoryScreen = ({
           onClick={e => {
             e.preventDefault();
 
-            submitCategory({
+            submitData({
               categoriesLength,
               imageUpload,
               formData,
-              clearInputValues,
             });
           }}
         >

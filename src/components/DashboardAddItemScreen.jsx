@@ -9,8 +9,7 @@ const DashboardAddItemScreen = ({
   onOptionClick,
   imageUpload,
   setImageUpload,
-  submitCategory,
-  clearInputValues,
+  submitData,
   categoryId,
   filteredOptions,
   subCategories,
@@ -102,11 +101,10 @@ const DashboardAddItemScreen = ({
           onClick={e => {
             e.preventDefault();
 
-            submitCategory({
+            submitData({
               categoryId,
               imageUpload,
               formData,
-              clearInputValues,
             });
           }}
         >

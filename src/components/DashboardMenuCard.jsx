@@ -4,15 +4,15 @@ import { formatPrice } from '../utils';
 
 const DashboardMenuCard = ({ type, option, setSelectedOption }) => {
   return (
-    <div className='dashboard-menu-card'>
+    <div
+      className={`dashboard-menu-card ${type === 'item' ? 'item-card' : ''}`}
+    >
       <div className='menu-card-header'>
         <p className='menu-card-name'>
           {option.name[0].toUpperCase() + option.name.slice(1)}
         </p>
-        {type === 'category' ? (
+        {type === 'category' && (
           <span className='menu-card-order'>{option.order}</span>
-        ) : (
-          <span className='menu-card-order'>{formatPrice(option.price)}</span>
         )}
       </div>
       <div className='menu-card-options'>

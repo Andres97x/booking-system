@@ -14,7 +14,7 @@ const DashboardAddCategoryModal = ({ categoriesLength }) => {
     clearInputValues,
   } = useDashboardMenuForm('category', 'add');
 
-  const { status, setStatus, error, setError, submitCategory } =
+  const { status, setStatus, error, setError, submitData } =
     useDashboardMenuAdd('category');
 
   const displayedElement = () => {
@@ -24,11 +24,10 @@ const DashboardAddCategoryModal = ({ categoriesLength }) => {
           formData={formData}
           error={error}
           onChangeHandler={onChangeHandler}
-          submitCategory={submitCategory}
+          submitData={submitData}
           setImageUpload={setImageUpload}
           categoriesLength={categoriesLength}
           imageUpload={imageUpload}
-          clearInputValues={clearInputValues}
         />
       );
     } else if (status === 'loading') {

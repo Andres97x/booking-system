@@ -18,7 +18,7 @@ const DashboardAddItemModal = ({ categoryName, categoryId, subCategories }) => {
     highlightMatch,
   } = useDashboardMenuForm('item', 'add');
 
-  const { status, setStatus, error, setError, submitCategory } =
+  const { status, setStatus, error, setError, submitData } =
     useDashboardMenuAdd('item');
 
   const displayedElement = status => {
@@ -33,8 +33,7 @@ const DashboardAddItemModal = ({ categoryName, categoryId, subCategories }) => {
           onOptionClick={onOptionClick}
           imageUpload={imageUpload}
           setImageUpload={setImageUpload}
-          submitCategory={submitCategory}
-          clearInputValues={clearInputValues}
+          submitData={submitData}
           categoryId={categoryId}
           filteredOptions={filteredOptions}
           subCategories={subCategories}

@@ -46,7 +46,7 @@ const DashboardUpdateCategoryModal = ({
         <StatusCompletedScreen
           type='category'
           action='update'
-          passedName={selectedCategory.name}
+          passedName={selectedCategory?.name}
         />
       );
     }

@@ -1,3 +1,5 @@
+import { FaCheckCircle } from 'react-icons/fa';
+
 const StatusCompletedScreen = ({
   type,
   action,
@@ -17,10 +19,10 @@ const StatusCompletedScreen = ({
 
   return (
     <div className='category-completed-container'>
-      <h3>
-        {type === 'category' ? 'La categoría' : 'El item'} {passedName || ''} se{' '}
-        {actionMessage(action)} correctamente
-      </h3>
+      <FaCheckCircle />
+      <h4>
+        {passedName || ''} se {actionMessage(action)} correctamente.
+      </h4>
 
       {action === 'add' && (
         <div className='category-completed-action-btns'>

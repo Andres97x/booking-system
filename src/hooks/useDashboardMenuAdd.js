@@ -10,11 +10,10 @@ const useDashboardMenuAdd = type => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
-  const submitCategory = async ({
+  const submitData = async ({
     categoriesLength,
     imageUpload,
     formData,
-    clearInputValues,
     categoryId,
   }) => {
     setError(null);
@@ -72,8 +71,8 @@ const useDashboardMenuAdd = type => {
         }),
       });
 
-      clearInputValues();
       setStatus('completed');
+      // clearInputValues();
     } catch (err) {
       handleError(err, 'categoría');
 
@@ -91,7 +90,7 @@ const useDashboardMenuAdd = type => {
     }
   };
 
-  return { status, setStatus, error, setError, submitCategory };
+  return { status, setStatus, error, setError, submitData };
 };
 
 export default useDashboardMenuAdd;

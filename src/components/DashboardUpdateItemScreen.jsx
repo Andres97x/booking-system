@@ -14,8 +14,6 @@ const DashboardUpdateItemScreen = ({
   filteredOptions,
   subCategories,
 }) => {
-  console.log(formData);
-
   return (
     <div>
       <h3>Editar opciones de categoría</h3>
