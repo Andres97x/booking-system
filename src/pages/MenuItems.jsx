@@ -27,13 +27,7 @@ const MenuItems = () => {
     handleSearchParams('productId', null);
   };
 
-  useCloseModalOnClickOutside(
-    '.product-modal',
-    () => {
-      handleSearchParams('productId', null);
-    },
-    [productId]
-  );
+  useCloseModalOnClickOutside('.product-modal', closeProductModal, [productId]);
 
   useFetchMenu({
     type: 'items',
@@ -46,17 +40,6 @@ const MenuItems = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    const productModal = document.querySelector('.product-modal');
-    if (!productModal) return;
-
-    if (productId) {
-      productModal.showModal();
-    } else {
-      productModal.close();
-    }
-  }, [productId]);
 
   const displayedItems = subCategory
     ? items.filter(item => item.subCategory === subCategory)

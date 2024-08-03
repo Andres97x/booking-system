@@ -19,10 +19,10 @@ const useCloseModalOnClickOutside = (selector, callbackFn, dependenciesArr) => {
       }
     };
 
-    document.addEventListener('click', clickOutsideHandler);
+    document.addEventListener('mousedown', clickOutsideHandler);
 
     return () => {
-      document.removeEventListener('click', clickOutsideHandler);
+      document.removeEventListener('mousedown', clickOutsideHandler);
     };
   }, dependenciesArr);
 };

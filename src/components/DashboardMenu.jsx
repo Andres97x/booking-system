@@ -14,13 +14,11 @@ const DashboardMenu = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // console.log(selectedCategory);
-
   /* TODO */
 
-  // fixed productDetail modal not showing when refreshing page
   // add a functionality to delete subcategory from updateItemScreen/Modal
   // disable close modal button && useCloseModalOnClickOutside when state is set to loading.
+  // back button for menuitems into menu categories
 
   useFetchMenuInRealTime({
     type: 'category',
