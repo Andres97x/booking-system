@@ -16,7 +16,7 @@ const DashboardMenu = () => {
 
   /* TODO */
 
-  // add a functionality to delete subcategory from updateItemScreen/Modal
+  // pass data to firebase with their actual types
   // disable close modal button && useCloseModalOnClickOutside when state is set to loading.
   // back button for menuitems into menu categories
 

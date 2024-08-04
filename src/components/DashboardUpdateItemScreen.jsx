@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
 import FilteredOptions from './FilteredOptions';
+import { formatPrice } from '../utils';
 
 const DashboardUpdateItemScreen = ({
   selectedItem,
@@ -43,7 +44,7 @@ const DashboardUpdateItemScreen = ({
               id='dash-update-item-name'
               type='text'
               name='name'
-              placeholder={selectedItem?.name}
+              placeholder={`Actual: ${selectedItem?.name}`}
               value={formData.name}
               onChange={onChangeHandler}
             />
@@ -67,7 +68,11 @@ const DashboardUpdateItemScreen = ({
               onChange={onChangeHandler}
               inputMode='numeric'
               pattern='[0-9]+'
-              placeholder={`actual: ${selectedItem?.price}`}
+              placeholder={
+                selectedItem?.price
+                  ? `Actual: ${formatPrice(selectedItem.price)}`
+                  : 'Actualmente este item no tiene precio'
+              }
             />
           </div>
         </div>
@@ -86,7 +91,10 @@ const DashboardUpdateItemScreen = ({
               name='description'
               rows='5'
               cols='33'
-              placeholder={selectedItem?.description}
+              placeholder={
+                selectedItem?.description ||
+                'Actualmente este item no tiene descripción'
+              }
               value={formData.description}
               onChange={onChangeHandler}
             ></textarea>
