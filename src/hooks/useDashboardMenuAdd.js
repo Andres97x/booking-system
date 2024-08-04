@@ -60,14 +60,16 @@ const useDashboardMenuAdd = type => {
       );
       await addDoc(collectionRef, {
         name: formData.name,
-        description: formData.description,
+        description: formData.description || null,
         imageRef: imagePath,
         createdAt: serverTimestamp(),
         ...(type === 'category' && { order: categoriesLength + 1 }),
         ...(type === 'item' && {
           categoryId: categoryId,
-          price: formData.price,
-          subCategory: formatSubcategory(formData.subCategory),
+          price: formData.price ? parseInt(formData.price) : null,
+          subCategory: formData.subCategory
+            ? formatSubcategory(formData.subCategory)
+            : null,
         }),
       });
 

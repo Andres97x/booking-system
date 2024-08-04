@@ -16,6 +16,7 @@ const DashboardUpdateCategoryModal = ({
     imageUpload,
     setImageUpload,
     clearInputValues,
+    setFormData,
   } = useDashboardMenuForm('category', 'update');
 
   const { status, setStatus, error, setError, updateFile } =
@@ -33,6 +34,7 @@ const DashboardUpdateCategoryModal = ({
           updateFile={updateFile}
           setImageUpload={setImageUpload}
           imageUpload={imageUpload}
+          setFormData={setFormData}
         />
       );
     }

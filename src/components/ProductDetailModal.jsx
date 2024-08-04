@@ -23,7 +23,9 @@ const ProductDetailModal = ({ items, productId, handleClose }) => {
       <div className='product-detail-content'>
         <h4>{selectedItem.name}</h4>
         {selectedItem.description && <p>{selectedItem.description}</p>}
-        <p className='product-price'>{formatPrice(selectedItem.price)}</p>
+        {selectedItem.price && (
+          <p className='product-price'>{formatPrice(selectedItem.price)}</p>
+        )}
       </div>
       <div className='img-container'>
         <img

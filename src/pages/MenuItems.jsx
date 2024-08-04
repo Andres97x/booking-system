@@ -46,8 +46,6 @@ const MenuItems = () => {
     : items;
 
   const menuItemsEl = displayedItems.map((item, i) => {
-    const priceFormatted = formatPrice(item.price);
-
     return (
       <button
         key={`menu-item-${i}`}
@@ -60,7 +58,7 @@ const MenuItems = () => {
         <div className='menu-item-content'>
           <h4>{item.name}</h4>
           {item.description && <p>{item.description}</p>}
-          <span>{priceFormatted}</span>
+          {item.price && <span>{formatPrice(item.price)}</span>}
         </div>
       </button>
     );

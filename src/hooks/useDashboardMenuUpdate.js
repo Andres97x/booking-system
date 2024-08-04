@@ -57,18 +57,16 @@ const useDashboardMenuUpdate = type => {
   const updateFile = async (form, imageUpload, selected, modalId) => {
     setError(null);
 
-    const checkableInputValues = Object.entries(form)
-      .filter(entry => entry[0] !== 'subCategory')
-      .map(entry => entry[1]);
-
-    // console.log(checkableInputValues);
-
     if (
-      checkableInputValues.every(value => !value) &&
-      !imageUpload &&
-      selected.subCategory === form.subCategory
+      Object.entries(form).every(([key, value]) => value === selected[key]) &&
+      !imageUpload
     ) {
       setError('No hay cambios para guardar');
+      return;
+    }
+
+    if (!form.name) {
+      setError('El campo "nombre" no puede quedar vacío');
       return;
     }
 
@@ -94,26 +92,21 @@ const useDashboardMenuUpdate = type => {
 
       // => user modified data
       if (
-        checkableInputValues.some(value => value) ||
-        selected.subCategory !== form.subCategory
+        Object.entries(form).some(([key, value]) => value !== selected[key])
       ) {
         const newData = {};
 
-        const modifiedInputEntries = Object.entries(form).filter(entry => {
-          if (entry[0] === 'subCategory' && entry[1] === '') {
-            return true;
-          } else {
-            return entry[1];
-          }
-        });
+        const modifiedInputEntries = Object.entries(form).filter(
+          ([key, value]) => value !== selected[key]
+        );
 
         modifiedInputEntries.forEach(([key, value]) => {
           if (type === 'category' && key === 'order') return;
 
           if (type === 'item' && key === 'subCategory') {
-            newData[key] = formatSubcategory(value);
+            newData[key] = value ? formatSubcategory(value) : null;
           } else {
-            newData[key] = value;
+            newData[key] = value || null;
           }
         });
 

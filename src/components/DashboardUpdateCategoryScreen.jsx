@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
 
 const DashboardUpdateCategoryScreen = ({
@@ -9,7 +10,25 @@ const DashboardUpdateCategoryScreen = ({
   updateFile,
   setImageUpload,
   imageUpload,
+  setFormData,
 }) => {
+  useEffect(() => {
+    if (!selectedCategory) return;
+
+    const exceptions = ['createdAt', 'id', 'imageRef'];
+
+    const incomingData = Object.fromEntries(
+      Object.entries(selectedCategory)
+        .filter(([key]) => !exceptions.includes(key))
+        .map(([key, value]) => [key, value || ''])
+    );
+
+    setFormData(prev => ({
+      ...prev,
+      ...incomingData,
+    }));
+  }, [selectedCategory]);
+
   const orderOptionsEl = (length, currentOrder) => {
     const options = [];
 
@@ -33,10 +52,14 @@ const DashboardUpdateCategoryScreen = ({
       <h3>Editar opciones de categoría</h3>
       <h5>{selectedCategory?.name}</h5>
 
-      <div className='dashboard-menu-options-container'>
+      <div>
         {error ? <p className='menu-error-message'>{error}</p> : null}
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            formData.name !== selectedCategory?.name ? 'update-detected' : ''
+          }`}
+        >
           <label htmlFor='dash-update-category-name'>
             <p>Nombre</p>
             <span>
@@ -56,7 +79,13 @@ const DashboardUpdateCategoryScreen = ({
           </div>
         </div>
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            parseInt(formData.order) !== parseInt(selectedCategory?.order)
+              ? 'update-detected'
+              : ''
+          }`}
+        >
           <label htmlFor='dash-update-category-order'>
             <p>Orden de visualización</p>
             <span>
@@ -71,7 +100,10 @@ const DashboardUpdateCategoryScreen = ({
               value={formData.order}
               onChange={onChangeHandler}
             >
-              <option className='option-placeholder' value=''>
+              <option
+                className='option-placeholder'
+                value={selectedCategory?.order}
+              >
                 Actual: {selectedCategory?.order}
               </option>
               {orderOptionsEl(categoriesLength, selectedCategory?.order)}
@@ -79,13 +111,26 @@ const DashboardUpdateCategoryScreen = ({
           </div>
         </div>
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            formData.description !== selectedCategory?.description
+              ? 'update-detected'
+              : ''
+          }`}
+        >
           <label htmlFor='dash-update-category-description'>
             <p>Descripción (máx 120 caracteres)</p>
             <span>
               <MdEdit />
             </span>
           </label>
+
+          {selectedCategory?.description && (
+            <p className='warning-message'>
+              Al dejar este campo vacío se eliminará la descripción de la
+              categoría
+            </p>
+          )}
 
           <div>
             <textarea
@@ -96,7 +141,7 @@ const DashboardUpdateCategoryScreen = ({
               placeholder={
                 selectedCategory?.description
                   ? `Actual: ${selectedCategory.description}`
-                  : 'Actualmente este item no tiene descripción'
+                  : 'Actualmente esta categoría no tiene descripción'
               }
               value={formData.description}
               onChange={onChangeHandler}
@@ -104,7 +149,11 @@ const DashboardUpdateCategoryScreen = ({
           </div>
         </div>
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            imageUpload ? 'update-detected' : ''
+          }`}
+        >
           <label htmlFor='dash-update-category-img'>
             <p>Editar imagen</p>
             <span>

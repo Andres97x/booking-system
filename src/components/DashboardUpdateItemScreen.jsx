@@ -20,7 +20,18 @@ const DashboardUpdateItemScreen = ({
   useEffect(() => {
     if (!selectedItem) return;
 
-    setFormData(prev => ({ ...prev, subCategory: selectedItem.subCategory }));
+    const exceptions = ['createdAt', 'id', 'categoryId', 'imageRef'];
+
+    const incomingData = Object.fromEntries(
+      Object.entries(selectedItem)
+        .filter(([key]) => !exceptions.includes(key))
+        .map(([key, value]) => [key, value || ''])
+    );
+
+    setFormData(prev => ({
+      ...prev,
+      ...incomingData,
+    }));
   }, [selectedItem]);
 
   return (
@@ -31,7 +42,11 @@ const DashboardUpdateItemScreen = ({
       <div className='dashboard-menu-options-container'>
         {error ? <p className='menu-error-message'>{error}</p> : null}
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            formData.name !== selectedItem?.name ? 'update-detected' : ''
+          }`}
+        >
           <label htmlFor='dash-update-item-name'>
             <p>Nombre</p>
             <span>
@@ -51,13 +66,25 @@ const DashboardUpdateItemScreen = ({
           </div>
         </div>
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            parseInt(formData.price) !== parseInt(selectedItem?.price)
+              ? 'update-detected'
+              : ''
+          }`}
+        >
           <label htmlFor='dash-update-item-price'>
             <p>Precio (sin puntos ni comas, solo números)</p>
             <span>
               <MdEdit />
             </span>
           </label>
+
+          {selectedItem?.price && (
+            <p className='warning-message'>
+              Al dejar este campo vacío se eliminará el precio del item
+            </p>
+          )}
 
           <div>
             <input
@@ -77,13 +104,25 @@ const DashboardUpdateItemScreen = ({
           </div>
         </div>
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            formData.description !== selectedItem?.description
+              ? 'update-detected'
+              : ''
+          }`}
+        >
           <label htmlFor='dash-update-item-description'>
             <p>Descripción</p>
             <span>
               <MdEdit />
             </span>
           </label>
+
+          {selectedItem?.description && (
+            <p className='warning-message'>
+              Al dejar este campo vacío se eliminará la descripción del item
+            </p>
+          )}
 
           <div>
             <textarea
@@ -102,7 +141,13 @@ const DashboardUpdateItemScreen = ({
           </div>
         </div>
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            formData.subCategory !== selectedItem?.subCategory
+              ? 'update-detected'
+              : ''
+          }`}
+        >
           <label htmlFor='dash-update-item-sub-category'>
             <p>Sub-categoría</p>
             <span>
@@ -110,25 +155,11 @@ const DashboardUpdateItemScreen = ({
             </span>
           </label>
 
-          <p
-            style={{
-              fontSize: '1.4rem',
-              color: selectedItem?.subCategory
-                ? 'var(--font-secondary-color)'
-                : '#402400',
-            }}
-          >
-            {selectedItem?.subCategory ? (
-              <>
-                Actualmente hace parte de la subcategoría{' '}
-                <span style={{ fontWeight: 'bold' }}>
-                  {selectedItem.subCategory}
-                </span>
-              </>
-            ) : (
-              'Actualmente no hace parte de alguna subcategoría'
-            )}
-          </p>
+          {selectedItem?.subCategory && (
+            <p className='warning-message'>
+              Al dejar este campo vacío se eliminará la subcategoría del item
+            </p>
+          )}
 
           <div>
             <input
@@ -139,7 +170,11 @@ const DashboardUpdateItemScreen = ({
               onChange={e => {
                 onChangeSubCategoryHandler(e, subCategories);
               }}
-              placeholder='Necesario solo si se desea un filtro adicional.'
+              placeholder={
+                !selectedItem?.subCategory
+                  ? 'Actualmente este item no tiene subcategoría'
+                  : ''
+              }
               autoComplete='off'
             />
             {filteredOptions.length > 0 && (
@@ -152,7 +187,11 @@ const DashboardUpdateItemScreen = ({
           </div>
         </div>
 
-        <div className='dashboard-menu-option-group'>
+        <div
+          className={`dashboard-menu-option-group ${
+            imageUpload ? 'update-detected' : ''
+          }`}
+        >
           <label htmlFor='dash-update-menu-img'>
             <p>Editar imagen</p>
             <span>
