@@ -92,8 +92,9 @@ const DashboardUpdateItemScreen = ({
               rows='5'
               cols='33'
               placeholder={
-                selectedItem?.description ||
-                'Actualmente este item no tiene descripción'
+                selectedItem?.description
+                  ? `Actual: ${selectedItem.description}`
+                  : 'Actualmente este item no tiene descripción'
               }
               value={formData.description}
               onChange={onChangeHandler}

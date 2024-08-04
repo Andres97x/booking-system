@@ -49,7 +49,7 @@ const DashboardUpdateCategoryScreen = ({
               id='dash-update-category-name'
               type='text'
               name='name'
-              placeholder={selectedCategory?.name}
+              placeholder={`Actual: ${selectedCategory?.name}`}
               value={formData.name}
               onChange={onChangeHandler}
             />
@@ -72,7 +72,7 @@ const DashboardUpdateCategoryScreen = ({
               onChange={onChangeHandler}
             >
               <option className='option-placeholder' value=''>
-                Orden actual {selectedCategory?.order}
+                Actual: {selectedCategory?.order}
               </option>
               {orderOptionsEl(categoriesLength, selectedCategory?.order)}
             </select>
@@ -93,7 +93,11 @@ const DashboardUpdateCategoryScreen = ({
               name='description'
               rows='5'
               cols='33'
-              placeholder={selectedCategory?.description}
+              placeholder={
+                selectedCategory?.description
+                  ? `Actual: ${selectedCategory.description}`
+                  : 'Actualmente este item no tiene descripción'
+              }
               value={formData.description}
               onChange={onChangeHandler}
             ></textarea>

@@ -36,7 +36,7 @@ const DashboardMenuDeleteModal = ({ type, selected, setSelected }) => {
         <StatusCompletedScreen
           type='category'
           action='delete'
-          passedName={selected.name}
+          passedName={selected?.name}
         />
       );
     }

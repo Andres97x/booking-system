@@ -507,6 +507,11 @@ dialog label {
   font-weight: 600;
 }
 
+#modal-delete-category .category-completed-container,
+#modal-delete-item .category-completed-container {
+  justify-content: center !important;
+}
+
 #modal-delete-category .dashboard-action-btns-container,
 #modal-delete-item .dashboard-action-btns-container {
   padding-bottom: 0;
