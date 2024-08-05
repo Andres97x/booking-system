@@ -113,7 +113,8 @@ const DashboardUpdateCategoryScreen = ({
 
         <div
           className={`dashboard-menu-option-group ${
-            formData.description !== selectedCategory?.description
+            formData.description !== selectedCategory?.description &&
+            formData.description !== ''
               ? 'update-detected'
               : ''
           }`}

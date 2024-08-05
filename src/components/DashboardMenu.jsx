@@ -16,7 +16,6 @@ const DashboardMenu = () => {
 
   /* TODO */
 
-  // solve upgrade-detected class bug when null !== ''
   // disable close modal button && useCloseModalOnClickOutside when state is set to loading.
   // back button for menuitems into menu categories
 

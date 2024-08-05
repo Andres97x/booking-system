@@ -68,7 +68,8 @@ const DashboardUpdateItemScreen = ({
 
         <div
           className={`dashboard-menu-option-group ${
-            parseInt(formData.price) !== parseInt(selectedItem?.price)
+            parseInt(formData.price) !== parseInt(selectedItem?.price) &&
+            formData.price !== ''
               ? 'update-detected'
               : ''
           }`}
@@ -106,7 +107,8 @@ const DashboardUpdateItemScreen = ({
 
         <div
           className={`dashboard-menu-option-group ${
-            formData.description !== selectedItem?.description
+            formData.description !== selectedItem?.description &&
+            formData.description !== ''
               ? 'update-detected'
               : ''
           }`}
@@ -143,7 +145,8 @@ const DashboardUpdateItemScreen = ({
 
         <div
           className={`dashboard-menu-option-group ${
-            formData.subCategory !== selectedItem?.subCategory
+            formData.subCategory !== selectedItem?.subCategory &&
+            formData.subCategory !== ''
               ? 'update-detected'
               : ''
           }`}
