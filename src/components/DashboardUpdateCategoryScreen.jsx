@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
 import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
+import { updateDetectedCondition } from '../utils';
+import useSetUpdateFormFromIncomingData from '../hooks/useSetUpdateFormFromIncomingData';
 
 const DashboardUpdateCategoryScreen = ({
   selectedCategory,
@@ -12,22 +13,11 @@ const DashboardUpdateCategoryScreen = ({
   imageUpload,
   setFormData,
 }) => {
-  useEffect(() => {
-    if (!selectedCategory) return;
-
-    const exceptions = ['createdAt', 'id', 'imageRef'];
-
-    const incomingData = Object.fromEntries(
-      Object.entries(selectedCategory)
-        .filter(([key]) => !exceptions.includes(key))
-        .map(([key, value]) => [key, value || ''])
-    );
-
-    setFormData(prev => ({
-      ...prev,
-      ...incomingData,
-    }));
-  }, [selectedCategory]);
+  useSetUpdateFormFromIncomingData(
+    selectedCategory,
+    ['createdAt', 'id', 'imageRef'],
+    setFormData
+  );
 
   const orderOptionsEl = (length, currentOrder) => {
     const options = [];
@@ -56,9 +46,12 @@ const DashboardUpdateCategoryScreen = ({
         {error ? <p className='menu-error-message'>{error}</p> : null}
 
         <div
-          className={`dashboard-menu-option-group ${
-            formData.name !== selectedCategory?.name ? 'update-detected' : ''
-          }`}
+          className={`dashboard-menu-option-group ${updateDetectedCondition(
+            selectedCategory,
+            formData,
+            'name',
+            'string'
+          )}`}
         >
           <label htmlFor='dash-update-category-name'>
             <p>Nombre</p>
@@ -80,11 +73,12 @@ const DashboardUpdateCategoryScreen = ({
         </div>
 
         <div
-          className={`dashboard-menu-option-group ${
-            parseInt(formData.order) !== parseInt(selectedCategory?.order)
-              ? 'update-detected'
-              : ''
-          }`}
+          className={`dashboard-menu-option-group ${updateDetectedCondition(
+            selectedCategory,
+            formData,
+            'order',
+            'number'
+          )}`}
         >
           <label htmlFor='dash-update-category-order'>
             <p>Orden de visualización</p>
@@ -112,12 +106,12 @@ const DashboardUpdateCategoryScreen = ({
         </div>
 
         <div
-          className={`dashboard-menu-option-group ${
-            formData.description !== selectedCategory?.description &&
-            formData.description !== ''
-              ? 'update-detected'
-              : ''
-          }`}
+          className={`dashboard-menu-option-group ${updateDetectedCondition(
+            selectedCategory,
+            formData,
+            'description',
+            'string'
+          )}`}
         >
           <label htmlFor='dash-update-category-description'>
             <p>Descripción (máx 120 caracteres)</p>

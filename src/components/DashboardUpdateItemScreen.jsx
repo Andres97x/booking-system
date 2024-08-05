@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { MdEdit, MdDone, MdCancel } from 'react-icons/md';
 import FilteredOptions from './FilteredOptions';
-import { formatPrice } from '../utils';
+import { formatPrice, updateDetectedCondition } from '../utils';
+import useSetUpdateFormFromIncomingData from '../hooks/useSetUpdateFormFromIncomingData';
 
 const DashboardUpdateItemScreen = ({
   selectedItem,
@@ -17,22 +17,11 @@ const DashboardUpdateItemScreen = ({
   subCategories,
   setFormData,
 }) => {
-  useEffect(() => {
-    if (!selectedItem) return;
-
-    const exceptions = ['createdAt', 'id', 'categoryId', 'imageRef'];
-
-    const incomingData = Object.fromEntries(
-      Object.entries(selectedItem)
-        .filter(([key]) => !exceptions.includes(key))
-        .map(([key, value]) => [key, value || ''])
-    );
-
-    setFormData(prev => ({
-      ...prev,
-      ...incomingData,
-    }));
-  }, [selectedItem]);
+  useSetUpdateFormFromIncomingData(
+    selectedItem,
+    ['createdAt', 'id', 'categoryId', 'imageRef'],
+    setFormData
+  );
 
   return (
     <div>
@@ -43,9 +32,12 @@ const DashboardUpdateItemScreen = ({
         {error ? <p className='menu-error-message'>{error}</p> : null}
 
         <div
-          className={`dashboard-menu-option-group ${
-            formData.name !== selectedItem?.name ? 'update-detected' : ''
-          }`}
+          className={`dashboard-menu-option-group ${updateDetectedCondition(
+            selectedItem,
+            formData,
+            'name',
+            'string'
+          )}`}
         >
           <label htmlFor='dash-update-item-name'>
             <p>Nombre</p>
@@ -67,12 +59,12 @@ const DashboardUpdateItemScreen = ({
         </div>
 
         <div
-          className={`dashboard-menu-option-group ${
-            parseInt(formData.price) !== parseInt(selectedItem?.price) &&
-            formData.price !== ''
-              ? 'update-detected'
-              : ''
-          }`}
+          className={`dashboard-menu-option-group ${updateDetectedCondition(
+            selectedItem,
+            formData,
+            'price',
+            'number'
+          )}`}
         >
           <label htmlFor='dash-update-item-price'>
             <p>Precio (sin puntos ni comas, solo números)</p>
@@ -106,12 +98,12 @@ const DashboardUpdateItemScreen = ({
         </div>
 
         <div
-          className={`dashboard-menu-option-group ${
-            formData.description !== selectedItem?.description &&
-            formData.description !== ''
-              ? 'update-detected'
-              : ''
-          }`}
+          className={`dashboard-menu-option-group ${updateDetectedCondition(
+            selectedItem,
+            formData,
+            'description',
+            'string'
+          )}`}
         >
           <label htmlFor='dash-update-item-description'>
             <p>Descripción</p>
@@ -144,12 +136,12 @@ const DashboardUpdateItemScreen = ({
         </div>
 
         <div
-          className={`dashboard-menu-option-group ${
-            formData.subCategory !== selectedItem?.subCategory &&
-            formData.subCategory !== ''
-              ? 'update-detected'
-              : ''
-          }`}
+          className={`dashboard-menu-option-group ${updateDetectedCondition(
+            selectedItem,
+            formData,
+            'subCategory',
+            'string'
+          )}`}
         >
           <label htmlFor='dash-update-item-sub-category'>
             <p>Sub-categoría</p>

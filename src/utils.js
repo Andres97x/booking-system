@@ -118,3 +118,20 @@ export const getTakenTimes = (booking, bookings, add, interval) => {
 
   return takenTimes.flat();
 };
+
+/* <---- DASHBOARD COMPONENT ----> */
+
+export const updateDetectedCondition = (selected, formData, option, type) => {
+  if (!selected) return;
+
+  const formValue =
+    type === 'number' ? parseInt(formData[option]) : formData[option];
+
+  const selectedItemValue =
+    type === 'number' ? parseInt(selected[option]) : selected[option];
+
+  return (formValue !== selectedItemValue && formData[option] !== '') ||
+    (formData[option] === '' && selected[option] !== null)
+    ? 'update-detected'
+    : '';
+};

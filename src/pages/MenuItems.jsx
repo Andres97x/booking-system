@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { IoArrowBack } from 'react-icons/io5';
 
 import ProductDetailModal from '../components/ProductDetailModal';
 import SubCategoriesNav from '../components/SubCategoriesNav';
@@ -79,6 +80,12 @@ const MenuItems = () => {
 
   return (
     <div className='section-menu-items'>
+      <Link className='back-to-menu-btn' to='..' relative='path'>
+        <div className='back-to-menu-btn_svg-container'>
+          <IoArrowBack />
+        </div>
+      </Link>
+
       <h3>{categoryName}</h3>
 
       {items.some(item => item.subCategory) && (

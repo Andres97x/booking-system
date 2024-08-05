@@ -14,11 +14,6 @@ const DashboardMenu = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  /* TODO */
-
-  // disable close modal button && useCloseModalOnClickOutside when state is set to loading.
-  // back button for menuitems into menu categories
-
   useFetchMenuInRealTime({
     type: 'category',
     fetchOrderCriteria: 'order',

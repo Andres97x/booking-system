@@ -50,6 +50,7 @@ const DashboardMenuDeleteModal = ({ type, selected, setSelected }) => {
         setError(null);
         setSelected(null);
       }}
+      status={status}
     >
       {displayedElement(status)}
     </Modal>

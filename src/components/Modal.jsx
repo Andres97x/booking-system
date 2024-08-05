@@ -2,7 +2,7 @@ import { useRef, forwardRef } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 
 const Modal = forwardRef(
-  ({ children, id, handleClose, ...rest }, forwardedRef) => {
+  ({ children, id, handleClose, status, ...rest }, forwardedRef) => {
     const internalRef = useRef(null);
     const ref = forwardedRef || internalRef;
 
@@ -25,7 +25,12 @@ const Modal = forwardRef(
     return (
       <dialog id={id} ref={ref} {...rest} onAnimationEnd={focusFirstElement}>
         {children}
-        <button className='modal-close' onClick={handleClose || closeModal}>
+        <button
+          className='modal-close'
+          onClick={handleClose || closeModal}
+          disabled={status === 'loading'}
+          style={{ display: status === 'loading' ? 'none' : 'flex' }}
+        >
           <IoCloseOutline />
         </button>
       </dialog>

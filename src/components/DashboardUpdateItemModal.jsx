@@ -67,6 +67,7 @@ const DashboardUpdateItemModal = ({
         setError(null);
         setSelectedItem(null);
       }}
+      status={status}
     >
       {displayedElement(status)}
     </Modal>

@@ -56,13 +56,14 @@ const DashboardUpdateCategoryModal = ({
 
   return (
     <Modal
+      id='modal-category-options'
       onClose={() => {
         clearInputValues();
         setStatus('idle');
         setError(null);
         setSelectedCategory(null);
       }}
-      id='modal-category-options'
+      status={status}
     >
       {displayedElement()}
     </Modal>

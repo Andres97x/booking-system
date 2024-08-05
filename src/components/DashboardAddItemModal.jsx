@@ -61,6 +61,7 @@ const DashboardAddItemModal = ({ categoryName, categoryId, subCategories }) => {
         setError(null);
         setStatus('idle');
       }}
+      status={status}
     >
       {displayedElement(status)}
     </Modal>
