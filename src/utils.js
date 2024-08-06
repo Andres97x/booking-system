@@ -75,7 +75,6 @@ export const getGroupCount = obj => {
 /* <---- BOOKINGS COMPONENT ----> */
 
 export const getTimes = (booking, interval, add, openingTime, closingTime) => {
-  // if (!booking.justDate || !booking.zone) return;
   if (!booking.justDate) return;
 
   const { justDate } = booking;
@@ -94,15 +93,16 @@ export const getTimes = (booking, interval, add, openingTime, closingTime) => {
 export const getTakenTimes = (booking, bookings, add, interval) => {
   if (!booking.justDate || !booking.zone || bookings.length === 0) return;
 
+  // toMillis() and toDate() methods come from firebase to convert a firebase Timestamp object into a epoch or a javascript Date object
   const takenTimes = bookings
     .filter(
       completedBooking =>
-        Date.parse(completedBooking.justDate) ===
-          Date.parse(booking.justDate) && completedBooking.zone === booking.zone
+        completedBooking.justDate.toMillis() === Date.parse(booking.justDate) &&
+        completedBooking.zone === booking.zone
     )
     .map(takenDate => {
       // Assuming bookings last 1 hour (2 intervals)
-      const chosenTime = takenDate.dateTime;
+      const chosenTime = takenDate.dateTime.toDate();
 
       // Restricting an hour after reservation (2 intervals)
       const firstInterval = add(chosenTime, { minutes: interval });

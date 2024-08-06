@@ -1,4 +1,8 @@
 import { createContext, useState, useEffect, useRef } from 'react';
+// prettier-ignore
+import { collection, addDoc, serverTimestamp, query, where, onSnapshot } from 'firebase/firestore';
+
+import { db } from '../configs/firebase';
 import { BOOKING_FORM_INIT, BOOKING_INIT } from '../constants';
 
 const BookingContext = createContext(null);
@@ -11,6 +15,37 @@ const BookingContextWrapper = ({ children }) => {
   const [sliderIndex, setSliderIndex] = useState(0);
   const bookingsContainerRef = useRef(null);
   const [bookingForm, setBookingForm] = useState(BOOKING_FORM_INIT);
+  const [status, setStatus] = useState('idle');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // console.log(bookings);
+
+  useEffect(() => {
+    // fetch bookings
+    const collectionRef = collection(db, 'bookings');
+    const unsubscribe = onSnapshot(
+      collectionRef,
+      querySnapshot => {
+        const retrievedData = querySnapshot.docs.map(doc => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+
+        setBookings(retrievedData);
+        setLoading(false);
+      },
+      error => {
+        console.error(error);
+        setError(
+          'Hubo un problema al obtener los datos, por favor reporta este fallo.'
+        );
+        setLoading(false);
+      }
+    );
+
+    return () => unsubscribe;
+  }, []);
 
   // console.log(bookings);
 
@@ -66,7 +101,7 @@ const BookingContextWrapper = ({ children }) => {
     });
   };
 
-  const onClickComplete = () => {
+  const onClickComplete = async () => {
     if (!booking.dateTime) {
       alert('Please select an hour');
       return;
@@ -87,18 +122,29 @@ const BookingContextWrapper = ({ children }) => {
       return;
     }
 
-    setBookings(prev => [...prev, { ...booking, ...bookingForm }]);
-    alert('Reserva completada');
-    setBooking(BOOKING_INIT);
-    setActiveTimeId(null);
-    setActiveZoneId(null);
-    setSliderIndex(0);
-    setBookingForm(BOOKING_FORM_INIT);
+    try {
+      await addDoc(collection(db, 'bookings'), {
+        ...booking,
+        ...bookingForm,
+        createdAt: serverTimestamp(),
+      });
+
+      alert('Reserva completada');
+      setBooking(BOOKING_INIT);
+      setActiveTimeId(null);
+      setActiveZoneId(null);
+      setSliderIndex(0);
+      setBookingForm(BOOKING_FORM_INIT);
+    } catch (err) {
+      console.log(err);
+      setError(
+        'Hubo un problema al realizar la reserva, por favor reporta este fallo'
+      );
+    }
   };
 
   const onFormChange = e => {
-    const name = e.target.name;
-    const value = e.target.value;
+    const { name, value } = e.target;
 
     setBookingForm(prev => ({ ...prev, [name]: value }));
   };
@@ -140,17 +186,10 @@ const BookingContextWrapper = ({ children }) => {
     }
   }, [booking]);
 
-  useEffect(() => {
-    if (Array.isArray(bookings) && bookings.length > 0) {
-      localStorage.setItem('bookings', JSON.stringify(bookings));
-    }
-  }, [bookings]);
-
   return (
     <BookingContext.Provider
       value={{
         bookings,
-        setBookings,
         booking,
         setBooking,
         activeTimeId,

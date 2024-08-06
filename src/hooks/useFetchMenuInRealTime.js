@@ -53,9 +53,7 @@ const useFetchMenuInRealTime = ({
       }
     );
 
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe;
   }, []);
 };
 
