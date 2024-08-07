@@ -1,21 +1,52 @@
+import { useEffect, useState } from 'react';
 import { add, format } from 'date-fns';
+// prettier-ignore
+import { collection, query, where, getDocs, Timestamp } from 'firebase/firestore';
+import { db } from '../configs/firebase';
 
 // prettier-ignore
 import { OPENING_TIME, CLOSING_TIME, INTERVAL, ZONE_TABLES } from '../constants';
 import { getTimes, getTakenTimes } from '../utils';
 import TimeTile from './TimeTile';
 
-const BookingTimes = ({
-  booking,
-  bookings,
-  sliderIndex,
-  activeTimeId,
-  onClickTime,
-}) => {
+const BookingTimes = ({ booking, sliderIndex, activeTimeId, onClickTime }) => {
+  const [bookingsOnThisDayAndZone, setBookingsOnThisDayAndZone] = useState([]);
+
+  useEffect(() => {
+    if (!booking.justDate || !booking.zone) return;
+
+    const fetchBookings = async () => {
+      const q = query(
+        collection(db, 'bookings'),
+        where('zone', '==', booking.zone),
+        where('justDate', '==', Timestamp.fromDate(booking.justDate))
+      );
+
+      try {
+        const querySnapshot = await getDocs(q);
+
+        const retrievedData = querySnapshot.docs.map(doc => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+
+        setBookingsOnThisDayAndZone(retrievedData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchBookings();
+  }, [booking]);
+
   const times = getTimes(booking, INTERVAL, add, OPENING_TIME, CLOSING_TIME);
   // console.log(times);
 
-  const takenTimes = getTakenTimes(booking, bookings, add, INTERVAL);
+  const takenTimes = getTakenTimes(
+    booking,
+    bookingsOnThisDayAndZone,
+    add,
+    INTERVAL
+  );
 
   // Ocurrences mean how many times the current looping time matches the taken times
   const getOcurrences = (takenTimes, currentTime) => {
@@ -34,7 +65,7 @@ const BookingTimes = ({
     const ocurrencesAfterNextTime = getOcurrences(takenTimes, array[i + 2]);
 
     const condition =
-      Date.parse(time) < Date.now() ||
+      Timestamp.fromDate(time) < Timestamp.now() ||
       ZONE_TABLES[booking.zone] <= ocurrences?.length ||
       ZONE_TABLES[booking.zone] <= ocurrencesOnNextTime?.length ||
       ZONE_TABLES[booking.zone] <= ocurrencesAfterNextTime?.length;

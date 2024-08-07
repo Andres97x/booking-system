@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useRef } from 'react';
 // prettier-ignore
-import { collection, addDoc, serverTimestamp, query, where, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, Timestamp} from 'firebase/firestore';
 
 import { db } from '../configs/firebase';
 import { BOOKING_FORM_INIT, BOOKING_INIT } from '../constants';
@@ -8,44 +8,13 @@ import { BOOKING_FORM_INIT, BOOKING_INIT } from '../constants';
 const BookingContext = createContext(null);
 
 const BookingContextWrapper = ({ children }) => {
-  const [bookings, setBookings] = useState([]);
   const [booking, setBooking] = useState(BOOKING_INIT);
   const [activeTimeId, setActiveTimeId] = useState(null);
   const [activeZoneId, setActiveZoneId] = useState(null);
   const [sliderIndex, setSliderIndex] = useState(0);
   const bookingsContainerRef = useRef(null);
   const [bookingForm, setBookingForm] = useState(BOOKING_FORM_INIT);
-  const [status, setStatus] = useState('idle');
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // console.log(bookings);
-
-  useEffect(() => {
-    // fetch bookings
-    const collectionRef = collection(db, 'bookings');
-    const unsubscribe = onSnapshot(
-      collectionRef,
-      querySnapshot => {
-        const retrievedData = querySnapshot.docs.map(doc => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-
-        setBookings(retrievedData);
-        setLoading(false);
-      },
-      error => {
-        console.error(error);
-        setError(
-          'Hubo un problema al obtener los datos, por favor reporta este fallo.'
-        );
-        setLoading(false);
-      }
-    );
-
-    return () => unsubscribe;
-  }, []);
 
   // console.log(bookings);
 
@@ -115,7 +84,7 @@ const BookingContextWrapper = ({ children }) => {
       return;
     }
 
-    if (Date.parse(booking.dateTime) < Date.now()) {
+    if (Timestamp.fromDate(booking.dateTime) < Timestamp.now()) {
       alert(
         'Estás seleccionando una hora que ya pasó, intenta seleccionar una nueva'
       );
@@ -189,7 +158,6 @@ const BookingContextWrapper = ({ children }) => {
   return (
     <BookingContext.Provider
       value={{
-        bookings,
         booking,
         setBooking,
         activeTimeId,

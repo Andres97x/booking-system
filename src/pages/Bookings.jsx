@@ -13,7 +13,6 @@ import '../styles/Bookings.css';
 
 const Bookings = () => {
   const {
-    bookings,
     booking,
     activeTimeId,
     activeZoneId,
@@ -29,8 +28,6 @@ const Bookings = () => {
     onClickComplete,
     onFormChange,
   } = useContext(BookingContext);
-
-  console.log(bookings);
 
   return (
     <div className='bookings-container' ref={bookingsContainerRef}>
@@ -61,7 +58,6 @@ const Bookings = () => {
         />
         <BookingTimes
           booking={booking}
-          bookings={bookings}
           sliderIndex={sliderIndex}
           activeTimeId={activeTimeId}
           onClickTime={onClickTime}
