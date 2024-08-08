@@ -14,9 +14,21 @@ const BookingContextWrapper = ({ children }) => {
   const [sliderIndex, setSliderIndex] = useState(0);
   const bookingsContainerRef = useRef(null);
   const [bookingForm, setBookingForm] = useState(BOOKING_FORM_INIT);
-  const [error, setError] = useState(null);
+  const [submittedBookingId, setSubmittedBookingId] = useState(null);
+  const [submitStatus, setSubmitStatus] = useState('idle');
+  const [submitError, setSubmitError] = useState(null);
+  const [timesStatus, setTimesStatus] = useState('idle');
+  const [timesError, setTimesError] = useState(null);
 
   // console.log(bookings);
+  const resetBooking = () => {
+    setBooking(BOOKING_INIT);
+    setActiveTimeId(null);
+    setActiveZoneId(null);
+    setSliderIndex(0);
+    setBookingForm(BOOKING_FORM_INIT);
+    setSubmitStatus('idle');
+  };
 
   const onClickMonth = () => {
     setBooking(prev => ({ ...prev, justDate: null }));
@@ -72,7 +84,7 @@ const BookingContextWrapper = ({ children }) => {
 
   const onClickComplete = async () => {
     if (!booking.dateTime) {
-      alert('Please select an hour');
+      setSubmitError('Por favor selecciona una hora');
       return;
     }
 
@@ -80,34 +92,37 @@ const BookingContextWrapper = ({ children }) => {
       !Object.values(booking).every(option => option) ||
       !Object.values(bookingForm).every(option => option)
     ) {
-      alert('Completa las opciones faltantes');
+      setSubmitError('Por favor completa los campos faltantes.');
       return;
     }
 
     if (Timestamp.fromDate(booking.dateTime) < Timestamp.now()) {
-      alert(
-        'Estás seleccionando una hora que ya pasó, intenta seleccionar una nueva'
+      setSubmitError(
+        'Estás seleccionando una hora que ya pasó, selecciona una hora válida.'
       );
       return;
     }
 
+    setSubmitError(null);
+
     try {
-      await addDoc(collection(db, 'bookings'), {
+      setSubmitStatus('loading');
+
+      const docRef = await addDoc(collection(db, 'bookings'), {
         ...booking,
         ...bookingForm,
         createdAt: serverTimestamp(),
       });
 
-      alert('Reserva completada');
-      setBooking(BOOKING_INIT);
-      setActiveTimeId(null);
-      setActiveZoneId(null);
-      setSliderIndex(0);
-      setBookingForm(BOOKING_FORM_INIT);
+      setSubmittedBookingId(docRef.id);
+
+      setSubmitStatus('completed');
+
+      // resetBooking();
     } catch (err) {
       console.log(err);
       setError(
-        'Hubo un problema al realizar la reserva, por favor reporta este fallo'
+        'Hubo un problema al realizar la reserva, por favor reporta este fallo.'
       );
     }
   };
@@ -176,6 +191,14 @@ const BookingContextWrapper = ({ children }) => {
         onClickBack,
         onClickComplete,
         onFormChange,
+        submitStatus,
+        submitError,
+        submittedBookingId,
+        resetBooking,
+        timesStatus,
+        setTimesStatus,
+        timesError,
+        setTimesError,
       }}
     >
       {children}

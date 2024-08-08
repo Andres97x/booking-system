@@ -1,6 +1,11 @@
+import { useContext } from 'react';
 import Calendar from 'react-calendar';
 
-const BookingCalendar = ({ onClickDay, sliderIndex, onClickMonth }) => {
+import { BookingContext } from '../contexts/BookingContext';
+
+const BookingCalendar = () => {
+  const { onClickDay, sliderIndex, onClickMonth } = useContext(BookingContext);
+
   return (
     <div
       className='calendar-container'

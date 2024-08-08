@@ -14,79 +14,62 @@ import '../styles/Bookings.css';
 const Bookings = () => {
   const {
     booking,
-    activeTimeId,
-    activeZoneId,
-    setActiveZoneId,
-    sliderIndex,
     bookingsContainerRef,
-    bookingForm,
-    onClickMonth,
-    onClickDay,
-    onClickZone,
-    onClickTime,
+    sliderIndex,
     onClickBack,
     onClickComplete,
-    onFormChange,
+    submitStatus,
+    timesStatus,
   } = useContext(BookingContext);
 
   return (
     <div className='bookings-container' ref={bookingsContainerRef}>
       <div className='bookings-info'>
-        {booking.justDate && (
+        {booking.justDate && submitStatus !== 'completed' && (
           <p>
             {`${format(booking.justDate, "eeee d 'de' MMMM',' y", {
               locale: es,
             })}`}
           </p>
         )}
-        {booking.zone && <p>en la zona {booking.zone} </p>}
-        {booking.dateTime && (
+        {booking.zone && submitStatus !== 'completed' && (
+          <p>en la zona {booking.zone} </p>
+        )}
+        {booking.dateTime && submitStatus !== 'completed' && (
           <p>- a las {format(booking.dateTime, 'hh:mm aaa')}</p>
         )}
       </div>
       <div className='bookings-slider'>
-        <BookingCalendar
-          onClickDay={onClickDay}
-          sliderIndex={sliderIndex}
-          onClickMonth={onClickMonth}
-        />
-        <BookingZones
-          onClickZone={onClickZone}
-          sliderIndex={sliderIndex}
-          activeZoneId={activeZoneId}
-          setActiveZoneId={setActiveZoneId}
-        />
-        <BookingTimes
-          booking={booking}
-          sliderIndex={sliderIndex}
-          activeTimeId={activeTimeId}
-          onClickTime={onClickTime}
-        />
-        <BookingForm
-          sliderIndex={sliderIndex}
-          bookingForm={bookingForm}
-          onFormChange={onFormChange}
-        />
+        <BookingCalendar />
+        <BookingZones />
+        <BookingTimes />
+        <BookingForm />
       </div>
       <div className='bookings-ctrl_btns'>
-        <button
-          className={`bookings-btn bookings-back_btn tab-enabled ${
-            !booking.justDate ? 'hidden' : ''
-          }`}
-          disabled={sliderIndex <= 0}
-          onClick={onClickBack}
-        >
-          <BsFillCaretLeftFill />
-        </button>
-        <button
-          className={`bookings-btn complete-booking tab-enabled ${
-            sliderIndex === 3 ? '' : 'hidden'
-          }`}
-          disabled={sliderIndex !== 3}
-          onClick={onClickComplete}
-        >
-          Completar reserva
-        </button>
+        {timesStatus === 'loading' ||
+        submitStatus === 'loading' ||
+        submitStatus === 'completed' ? null : (
+          <>
+            <button
+              className={`bookings-btn bookings-back_btn tab-enabled ${
+                !booking.justDate ? 'hidden' : ''
+              }`}
+              disabled={sliderIndex <= 0}
+              onClick={onClickBack}
+            >
+              <BsFillCaretLeftFill />
+            </button>
+            <button
+              className={`bookings-btn complete-booking tab-enabled ${
+                sliderIndex === 3 ? '' : 'hidden'
+              }`}
+              disabled={sliderIndex !== 3}
+              onClick={onClickComplete}
+            >
+              Completar reserva
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

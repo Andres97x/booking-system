@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { add, format } from 'date-fns';
 // prettier-ignore
 import { collection, query, where, getDocs, Timestamp } from 'firebase/firestore';
@@ -8,8 +8,21 @@ import { db } from '../configs/firebase';
 import { OPENING_TIME, CLOSING_TIME, INTERVAL, ZONE_TABLES } from '../constants';
 import { getTimes, getTakenTimes } from '../utils';
 import TimeTile from './TimeTile';
+import Spinner from './Spinner';
+import { BookingContext } from '../contexts/BookingContext';
 
-const BookingTimes = ({ booking, sliderIndex, activeTimeId, onClickTime }) => {
+const BookingTimes = () => {
+  const {
+    booking,
+    sliderIndex,
+    activeTimeId,
+    onClickTime,
+    timesStatus,
+    setTimesStatus,
+    timesError,
+    setTimesError,
+  } = useContext(BookingContext);
+
   const [bookingsOnThisDayAndZone, setBookingsOnThisDayAndZone] = useState([]);
 
   useEffect(() => {
@@ -23,6 +36,7 @@ const BookingTimes = ({ booking, sliderIndex, activeTimeId, onClickTime }) => {
       );
 
       try {
+        setTimesStatus('loading');
         const querySnapshot = await getDocs(q);
 
         const retrievedData = querySnapshot.docs.map(doc => ({
@@ -33,6 +47,11 @@ const BookingTimes = ({ booking, sliderIndex, activeTimeId, onClickTime }) => {
         setBookingsOnThisDayAndZone(retrievedData);
       } catch (err) {
         console.error(err);
+        setTimesError(
+          'No se pudo obtener la disponibilidad de las mesas, por favor reporta este fallo.'
+        );
+      } finally {
+        setTimesStatus('idle');
       }
     };
     fetchBookings();
@@ -89,7 +108,15 @@ const BookingTimes = ({ booking, sliderIndex, activeTimeId, onClickTime }) => {
       className='times-container'
       style={{ transform: `translateX(${-100 * sliderIndex}%)` }}
     >
-      <div className='times-grid'>{timesEl}</div>
+      {timesError ? (
+        <div className='times-error-container'>
+          <p>{timesError}</p>
+        </div>
+      ) : timesStatus === 'loading' ? (
+        <Spinner />
+      ) : (
+        <div className='times-grid'>{timesEl}</div>
+      )}
     </div>
   );
 };
