@@ -55,27 +55,29 @@ const BookingContextWrapper = ({ children }) => {
     setSliderIndex(prev => {
       if (prev <= 0) return;
 
-      if (prev === 1) {
-        setBooking(prev => ({ ...prev, justDate: null, zone: null }));
+      switch (prev) {
+        case 1:
+          setBooking(prev => ({ ...prev, justDate: null, zone: null }));
 
-        const selectedDateTile = e.target
-          .closest('.bookings-container')
-          .querySelector('.react-calendar__tile--range');
+          const selectedDateTile = e.target
+            .closest('.bookings-container')
+            .querySelector('.react-calendar__tile--range');
 
-        selectedDateTile?.classList.remove('react-calendar__tile--range');
+          selectedDateTile?.classList.remove('react-calendar__tile--range');
 
-        setActiveZoneId(null);
-      }
+          setActiveZoneId(null);
+          break;
 
-      if (prev === 2) {
-        setBooking(prev => ({ ...prev, zone: null, dateTime: null }));
-        setActiveZoneId(null);
-        setActiveTimeId(null);
-      }
+        case 2:
+          setBooking(prev => ({ ...prev, zone: null, dateTime: null }));
+          setActiveZoneId(null);
+          setActiveTimeId(null);
+          break;
 
-      if (prev === 3) {
-        setBooking(prev => ({ ...prev, dateTime: null }));
-        setActiveTimeId(null);
+        case 3:
+          setBooking(prev => ({ ...prev, dateTime: null }));
+          setActiveTimeId(null);
+          break;
       }
 
       return prev - 1;
