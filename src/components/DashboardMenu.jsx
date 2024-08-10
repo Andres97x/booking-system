@@ -46,7 +46,7 @@ const DashboardMenu = () => {
       {error && <p className='error-message'>{error}</p>}
 
       {loading ? (
-        <Spinner spinnerContainerClassName='dashboard-menu-spinner' />
+        <Spinner spinnerContainerClassName='dashboard-main-spinner' />
       ) : categoriesData.length === 0 ? (
         <p style={{ marginTop: '2rem' }}>
           Aún no hay categorias añadidas al menú

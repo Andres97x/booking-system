@@ -10,6 +10,18 @@ export const formatPrice = element => {
     .replace(/\u00A0/g, ''); // replace $&nbsp; between the sign and the number
 };
 
+export const capitalizeDate = date => {
+  const words = date.split(' ');
+
+  return words
+    .map(word =>
+      word && word !== 'de'
+        ? word.charAt(0).toUpperCase() + word.slice(1)
+        : word
+    )
+    .join(' ');
+};
+
 export const clickOpenModal = e => {
   let openModalBtn;
   if (e.target.matches('button[data-modal]')) {
