@@ -35,17 +35,23 @@ const DashboardMenu = () => {
     <div className='dashboard-menu'>
       <div className='dashboard-menu-bar'>
         <h3>Categorías</h3>
-        <button className='dashboard-btn' data-modal='modal-add-category'>
-          Añadir categoría
-        </button>
+        {!error && (
+          <button className='dashboard-btn' data-modal='modal-add-category'>
+            Añadir categoría
+          </button>
+        )}
       </div>
 
-      <p className='note dashboard-menu-note'>
-        Este es el orden en el que aparecen las categorias en la página de Menú
-      </p>
-      {error && <p className='error-message'>{error}</p>}
+      {!error && (
+        <p className='note dashboard-menu-note'>
+          Este es el orden en el que aparecen las categorias en la página de
+          Menú
+        </p>
+      )}
 
-      {loading ? (
+      {error ? (
+        <p className='error-message'>{error}</p>
+      ) : loading ? (
         <Spinner spinnerContainerClassName='dashboard-main-spinner' />
       ) : categoriesData.length === 0 ? (
         <p style={{ marginTop: '2rem' }}>

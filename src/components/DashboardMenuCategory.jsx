@@ -52,14 +52,16 @@ const DashboardMenuCategory = () => {
         </Link>
         <span>&gt;</span>
         <h3> {categoryName}</h3>
-        <button className='dashboard-btn' data-modal='modal-add-item'>
-          Añadir item
-        </button>
+        {!error && (
+          <button className='dashboard-btn' data-modal='modal-add-item'>
+            Añadir item
+          </button>
+        )}
       </div>
 
-      {error && <p className='error-message'>{error}</p>}
-
-      {loading ? (
+      {error ? (
+        <p className='error-message'>{error}</p>
+      ) : loading ? (
         <Spinner spinnerContainerClassName='dashboard-menu-spinner' />
       ) : itemsData.length === 0 ? (
         <p style={{ marginTop: '2rem' }}>

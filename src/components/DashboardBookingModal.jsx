@@ -8,9 +8,7 @@ import DashboardBookingScreen from './DashboardBookingScreen';
 
 const DashboardBookingModal = ({ selectedBooking }) => {
   const [status, setStatus] = useState('idle');
-  const [error, setError] = useState(
-    'Ocurrió un error y no se ha podido eliminar la reserva'
-  );
+  const [error, setError] = useState(null);
   const modalRef = useRef(null);
 
   const deleteBooking = async id => {

@@ -13,6 +13,10 @@ const DashboardBookingScreen = ({ selectedBooking, error, deleteBooking }) => {
       )}
       <div className='booking-modal-info-container'>
         <div>
+          <span>ID:</span>
+          <p>{selectedBooking?.id}</p>
+        </div>
+        <div>
           <span>Nombre:</span>
           <p>
             {selectedBooking?.firstName} {selectedBooking?.lastName}

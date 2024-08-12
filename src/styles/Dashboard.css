@@ -199,9 +199,19 @@
   color: var(--font-main-color);
 }
 
+.card-date-filter.past-date {
+  border-color: #212529;
+}
+
+.card-date-filter.past-date:hover,
+.card-date-filter.selected.past-date {
+  background-color: #212529;
+  opacity: 0.8;
+}
+
 #booking-modal {
   width: 30vw;
-  height: 50vh;
+  height: fit-content;
 }
 
 #booking-modal h5 {
