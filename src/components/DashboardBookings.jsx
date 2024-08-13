@@ -7,14 +7,13 @@ import {
   where,
   Timestamp,
 } from 'firebase/firestore';
-import { isToday, isThisWeek, isThisMonth } from 'date-fns';
-import { IoIosSearch } from 'react-icons/io';
+import { isToday, isThisWeek, isThisMonth, isSameDay } from 'date-fns';
 
 import { db } from '../configs/firebase';
 import DashboardBookingModal from './DashboardBookingModal';
 import Spinner from './Spinner';
 import DashboardBookingCard from './DashboardBookingCard';
-import DashboardBookingFilterBtn from './DashboardBookingFilterBtn';
+import DashboardBookingsHeader from './DashboardBookingsHeader';
 
 const DashboardBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -25,11 +24,11 @@ const DashboardBookings = () => {
   const fetchKey = useMemo(() => {
     return bookingDateFilter === 'Pasados' ? 'Pasados' : 'Vigentes';
   }, [bookingDateFilter]);
-  const [searchInput, setSearchInput] = useState('');
+  const [inputData, setInputData] = useState({ id: '', date: '' });
 
   const handleChange = e => {
-    const { value } = e.target;
-    setSearchInput(value);
+    const { name, value } = e.target;
+    setInputData(prev => ({ ...prev, [name]: value }));
   };
 
   useEffect(() => {
@@ -64,39 +63,57 @@ const DashboardBookings = () => {
     return unsubscribe;
   }, [fetchKey]);
 
+  useEffect(() => {
+    setInputData(prev => ({ ...prev, date: '' }));
+  }, [bookingDateFilter]);
+
   const filterBookings = booking => {
-    switch (bookingDateFilter) {
-      case 'Hoy':
-        return isToday(booking.justDate.toMillis());
-      case 'Esta semana':
-        return isThisWeek(booking.justDate.toMillis());
-      case 'Este mes':
-        return isThisMonth(booking.justDate.toMillis());
-      case 'Todos':
-      case 'Pasados':
-      default:
-        return true;
+    // Check if the booking date matches the input date filter
+    const matchesDateFilter =
+      bookingDateFilter === 'Hoy'
+        ? isToday(booking.justDate.toMillis())
+        : bookingDateFilter === 'Esta semana'
+        ? isThisWeek(booking.justDate.toMillis())
+        : bookingDateFilter === 'Este mes'
+        ? isThisMonth(booking.justDate.toMillis())
+        : bookingDateFilter === 'Pasados'
+        ? booking.justDate.toMillis() <= Timestamp.now().toMillis()
+        : true;
+
+    // If both inputData.date and inputData.id are set by its filters
+    if (inputData.date && inputData.id) {
+      return (
+        matchesDateFilter &&
+        matchesDateFilter &&
+        isSameDay(
+          booking.justDate.toDate(),
+          new Date(`${inputData.date}T00:00:00`)
+        ) &&
+        booking.id.toLowerCase().startsWith(inputData.id.toLowerCase())
+      );
     }
-  };
 
-  const renderFilters = () => {
-    const filters = ['Hoy', 'Esta semana', 'Este mes', 'Todos', 'Pasados'];
+    // If inputData.date is set, filter by it
+    if (inputData.date) {
+      return (
+        matchesDateFilter &&
+        isSameDay(
+          booking.justDate.toDate(),
+          new Date(`${inputData.date}T00:00:00`)
+        )
+      );
+    }
 
-    const filterClassName = date => {
-      let className = 'card-date-filter';
-      date === bookingDateFilter && (className += ' selected');
-      date === 'Pasados' && (className += ' past-date');
-      return className;
-    };
+    // If inputData.date is not set, but inputData.id is set, filter by ID
+    if (inputData.id) {
+      return (
+        matchesDateFilter &&
+        booking.id.toLowerCase().startsWith(inputData.id.toLowerCase())
+      );
+    }
 
-    return filters.map((date, i) => (
-      <DashboardBookingFilterBtn
-        key={`booking-card-date-${i}`}
-        date={date}
-        filterClassName={filterClassName}
-        setBookingDateFilter={setBookingDateFilter}
-      />
-    ));
+    // If neither inputData.date nor inputData.id is set, apply the date filter
+    return matchesDateFilter;
   };
 
   const renderBookingsEmptyMessage = () => {
@@ -112,13 +129,7 @@ const DashboardBookings = () => {
   };
 
   const renderBookingCards = () => {
-    let displayedBookings = bookings.filter(filterBookings);
-
-    if (searchInput) {
-      displayedBookings = displayedBookings.filter(booking =>
-        booking.id.toLowerCase().startsWith(searchInput.toLowerCase())
-      );
-    }
+    const displayedBookings = bookings.filter(filterBookings);
 
     if (loading) {
       return <Spinner spinnerContainerClassName='dashboard-main-spinner' />;
@@ -127,8 +138,8 @@ const DashboardBookings = () => {
     } else if (displayedBookings.length === 0) {
       return (
         <p style={{ fontWeight: '500' }}>{`${renderBookingsEmptyMessage()} ${
-          searchInput && 'con este ID'
-        }`}</p>
+          inputData.id && 'con este ID'
+        } ${inputData.date && 'para la fecha establecida'}.`}</p>
       );
     } else {
       return (
@@ -147,27 +158,13 @@ const DashboardBookings = () => {
 
   return (
     <div className='dashboard-bookings'>
-      <div className='dashboard-bookings-header'>
-        <div style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
-          <h3>Reservas</h3>
-          <div className='dashboard-bookings-input-container'>
-            <div className='dashboard-bookings-input-container_svg-container'>
-              <IoIosSearch />
-            </div>
-            <input
-              type='search'
-              id='booking-id-input'
-              placeholder='Búsqueda por ID'
-              value={searchInput}
-              onChange={handleChange}
-              className={searchInput ? 'active' : ''}
-            />
-          </div>
-        </div>
-        {!error && (
-          <div className='date-filters-container'>{renderFilters()}</div>
-        )}
-      </div>
+      <DashboardBookingsHeader
+        error={error}
+        inputData={inputData}
+        handleChange={handleChange}
+        bookingDateFilter={bookingDateFilter}
+        setBookingDateFilter={setBookingDateFilter}
+      />
 
       {renderBookingCards()}
       <DashboardBookingModal selectedBooking={selectedBooking} />

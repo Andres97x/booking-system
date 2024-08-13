@@ -219,14 +219,14 @@
   margin-bottom: 1.8rem;
 }
 
-.dashboard-bookings-input-container {
+.search-id-input-container {
   display: flex;
   gap: 2rem;
   align-items: center;
   position: relative;
 }
 
-.dashboard-bookings-input-container input {
+.search-id-input-container input {
   background-color: inherit;
   border: 1.5px solid var(--secondary-color);
   padding: 0.5rem;
@@ -237,26 +237,26 @@
   font-size: 1.6rem;
 }
 
-.dashboard-bookings-input-container input::placeholder {
+.search-id-input-container input::placeholder {
   opacity: 0;
 }
 
-.dashboard-bookings-input-container input:focus {
+.search-id-input-container input:focus {
   padding-left: 3.2rem;
   width: 25rem;
   outline: none;
 }
 
-.dashboard-bookings-input-container input.active {
+.search-id-input-container input.active {
   width: 25rem;
   padding-left: 3.2rem;
 }
 
-.dashboard-bookings-input-container input:focus::placeholder {
+.search-id-input-container input:focus::placeholder {
   opacity: 1;
 }
 
-.dashboard-bookings-input-container_svg-container {
+.search-id-input-container_svg-container {
   position: absolute;
   left: 0;
   top: 0;
@@ -266,7 +266,7 @@
   pointer-events: none;
 }
 
-.dashboard-bookings-input-container_svg-container svg {
+.search-id-input-container_svg-container svg {
   width: 100%;
   height: 100%;
 }
@@ -284,6 +284,18 @@ input[type='search']::-ms-clear {
 
 input[type='search']::-moz-clear {
   display: none;
+}
+
+.date-input-container {
+}
+
+.date-input-container input {
+  background-color: inherit;
+  border: 1.5px solid var(--secondary-color);
+  border-radius: 3px;
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  width: 13.5rem;
 }
 
 .booking-modal-info-container {
@@ -442,7 +454,6 @@ input[type='search']::-moz-clear {
 .menu-card-options {
   display: flex;
   align-items: center;
-  margin-top: 1.5rem;
 }
 
 .dashboard-menu-see-items:link,
