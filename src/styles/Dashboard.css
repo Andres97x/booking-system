@@ -247,6 +247,11 @@
   outline: none;
 }
 
+.dashboard-bookings-input-container input.active {
+  width: 25rem;
+  padding-left: 3.2rem;
+}
+
 .dashboard-bookings-input-container input:focus::placeholder {
   opacity: 1;
 }

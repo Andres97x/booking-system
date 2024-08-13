@@ -101,7 +101,7 @@ const DashboardBookings = () => {
 
   const renderBookingsEmptyMessage = () => {
     const messages = {
-      Hoy: 'No hay reservas para hoy',
+      Hoy: `No hay reservas para hoy`,
       'Esta semana': 'No hay reservas para esta semana',
       'Este mes': 'No hay reservas para este mes',
       Todos: 'No hay reservas registradas',
@@ -112,11 +112,13 @@ const DashboardBookings = () => {
   };
 
   const renderBookingCards = () => {
-    const displayedBookings = bookings.filter(filterBookings);
+    let displayedBookings = bookings.filter(filterBookings);
 
-    // if (searchInput) {
-    //   displayedBookings;
-    // }
+    if (searchInput) {
+      displayedBookings = displayedBookings.filter(booking =>
+        booking.id.toLowerCase().startsWith(searchInput.toLowerCase())
+      );
+    }
 
     if (loading) {
       return <Spinner spinnerContainerClassName='dashboard-main-spinner' />;
@@ -124,7 +126,9 @@ const DashboardBookings = () => {
       return <p className='error-message'>{error}</p>;
     } else if (displayedBookings.length === 0) {
       return (
-        <p style={{ fontWeight: '500' }}>{renderBookingsEmptyMessage()}</p>
+        <p style={{ fontWeight: '500' }}>{`${renderBookingsEmptyMessage()} ${
+          searchInput && 'con este ID'
+        }`}</p>
       );
     } else {
       return (
@@ -156,6 +160,7 @@ const DashboardBookings = () => {
               placeholder='Búsqueda por ID'
               value={searchInput}
               onChange={handleChange}
+              className={searchInput ? 'active' : ''}
             />
           </div>
         </div>
