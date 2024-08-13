@@ -219,6 +219,68 @@
   margin-bottom: 1.8rem;
 }
 
+.dashboard-bookings-input-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  position: relative;
+}
+
+.dashboard-bookings-input-container input {
+  background-color: inherit;
+  border: 1.5px solid var(--secondary-color);
+  padding: 0.5rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 100000px;
+  transition: all 180ms ease-in-out;
+  font-size: 1.6rem;
+}
+
+.dashboard-bookings-input-container input::placeholder {
+  opacity: 0;
+}
+
+.dashboard-bookings-input-container input:focus {
+  padding-left: 3.2rem;
+  width: 25rem;
+  outline: none;
+}
+
+.dashboard-bookings-input-container input:focus::placeholder {
+  opacity: 1;
+}
+
+.dashboard-bookings-input-container_svg-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  transform: translateX(30%) translateY(30%);
+  pointer-events: none;
+}
+
+.dashboard-bookings-input-container_svg-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type='search']::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type='search']::-moz-clear {
+  display: none;
+}
+
 .booking-modal-info-container {
   display: flex;
   flex-direction: column;

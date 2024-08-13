@@ -8,6 +8,7 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { isToday, isThisWeek, isThisMonth } from 'date-fns';
+import { IoIosSearch } from 'react-icons/io';
 
 import { db } from '../configs/firebase';
 import DashboardBookingModal from './DashboardBookingModal';
@@ -24,6 +25,12 @@ const DashboardBookings = () => {
   const fetchKey = useMemo(() => {
     return bookingDateFilter === 'Pasados' ? 'Pasados' : 'Vigentes';
   }, [bookingDateFilter]);
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleChange = e => {
+    const { value } = e.target;
+    setSearchInput(value);
+  };
 
   useEffect(() => {
     // fetch bookings in real-time
@@ -107,6 +114,10 @@ const DashboardBookings = () => {
   const renderBookingCards = () => {
     const displayedBookings = bookings.filter(filterBookings);
 
+    // if (searchInput) {
+    //   displayedBookings;
+    // }
+
     if (loading) {
       return <Spinner spinnerContainerClassName='dashboard-main-spinner' />;
     } else if (error) {
@@ -133,11 +144,26 @@ const DashboardBookings = () => {
   return (
     <div className='dashboard-bookings'>
       <div className='dashboard-bookings-header'>
-        <h3>Reservas</h3>
+        <div style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
+          <h3>Reservas</h3>
+          <div className='dashboard-bookings-input-container'>
+            <div className='dashboard-bookings-input-container_svg-container'>
+              <IoIosSearch />
+            </div>
+            <input
+              type='search'
+              id='booking-id-input'
+              placeholder='Búsqueda por ID'
+              value={searchInput}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
         {!error && (
           <div className='date-filters-container'>{renderFilters()}</div>
         )}
       </div>
+
       {renderBookingCards()}
       <DashboardBookingModal selectedBooking={selectedBooking} />
     </div>
