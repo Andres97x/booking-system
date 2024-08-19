@@ -120,15 +120,15 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-size: 3rem;
-  text-transform: uppercase;
-  font-weight: 700;
+  font-size: 2.5rem;
 }
 
 /* DASHBOARD BOOKINGS */
 
 .dashboard-bookings {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboard-bookings-header {
@@ -148,6 +148,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
   gap: 1rem;
+  margin-bottom: 5rem;
 }
 
 .booking-card {
@@ -208,6 +209,23 @@
   background-color: #212529;
   opacity: 0.8;
 }
+
+.bookings-ctrl_btns.dashboard-ctrl {
+  width: 30rem;
+  margin-top: auto;
+}
+
+.bookings-ctrl_btns.dashboard-ctrl button:disabled {
+  opacity: 0.5;
+}
+
+.bookings-ctrl_btns.dashboard-ctrl.ctrls-hidden {
+  opacity: 0;
+  pointer-events: 0;
+  visibility: none;
+}
+
+/*BOOKING MODAL*/
 
 #booking-modal {
   width: 30vw;

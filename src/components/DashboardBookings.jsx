@@ -8,12 +8,14 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { isToday, isThisWeek, isThisMonth, isSameDay } from 'date-fns';
+import { BsFillCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 
 import { db } from '../configs/firebase';
 import DashboardBookingModal from './DashboardBookingModal';
 import Spinner from './Spinner';
 import DashboardBookingCard from './DashboardBookingCard';
 import DashboardBookingsHeader from './DashboardBookingsHeader';
+import { bookingsResultsPerPage } from '../constants';
 
 const DashboardBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -25,6 +27,8 @@ const DashboardBookings = () => {
     return bookingDateFilter === 'Pasados' ? 'Pasados' : 'Vigentes';
   }, [bookingDateFilter]);
   const [inputData, setInputData] = useState({ id: '', date: '' });
+  const [pageIndex, setPageIndex] = useState(1);
+  const [displayedBookingsNumber, setDisplayedBookingsNumber] = useState(null);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -68,6 +72,8 @@ const DashboardBookings = () => {
   }, [bookingDateFilter]);
 
   const filterBookings = booking => {
+    if (!booking) return;
+
     // Check if the booking date matches the input date filter
     const matchesDateFilter =
       bookingDateFilter === 'Hoy'
@@ -128,8 +134,21 @@ const DashboardBookings = () => {
     return messages[bookingDateFilter];
   };
 
+  const filteredBookings = bookings.filter(filterBookings);
+
+  const getSearchResultsPage = function (dataArr, page) {
+    const start = (page - 1) * bookingsResultsPerPage;
+    const finish = page * bookingsResultsPerPage;
+
+    return dataArr.slice(start, finish);
+  };
+
+  useEffect(() => {
+    setPageIndex(1);
+  }, [bookingDateFilter]);
+
   const renderBookingCards = () => {
-    const displayedBookings = bookings.filter(filterBookings);
+    const displayedBookings = getSearchResultsPage(filteredBookings, pageIndex);
 
     if (loading) {
       return <Spinner spinnerContainerClassName='dashboard-main-spinner' />;
@@ -156,6 +175,22 @@ const DashboardBookings = () => {
     }
   };
 
+  const goToNextPage = () => {
+    setPageIndex(prev => {
+      if (prev >= Math.ceil(filteredBookings.length / bookingsResultsPerPage))
+        return;
+
+      return prev + 1;
+    });
+  };
+
+  const goToPreviousPage = () => {
+    setPageIndex(prev => {
+      if (prev <= 1) return;
+      return prev - 1;
+    });
+  };
+
   return (
     <div className='dashboard-bookings'>
       <DashboardBookingsHeader
@@ -167,6 +202,41 @@ const DashboardBookings = () => {
       />
 
       {renderBookingCards()}
+
+      <div
+        className={`bookings-ctrl_btns dashboard-ctrl ${
+          filteredBookings.length <= bookingsResultsPerPage
+            ? 'ctrls-hidden'
+            : ''
+        }`}
+      >
+        <button
+          className='bookings-btn bookings-back_btn'
+          onClick={goToPreviousPage}
+          disabled={pageIndex === 1}
+        >
+          <BsFillCaretLeftFill />
+        </button>
+
+        <div>
+          <span>{pageIndex}</span>/
+          <span>
+            {Math.ceil(filteredBookings.length / bookingsResultsPerPage)}
+          </span>
+        </div>
+
+        <button
+          className='bookings-btn bookings-back_btn'
+          onClick={goToNextPage}
+          disabled={
+            pageIndex ===
+            Math.ceil(filteredBookings.length / bookingsResultsPerPage)
+          }
+        >
+          <BsFillCaretRightFill />
+        </button>
+      </div>
+
       <DashboardBookingModal selectedBooking={selectedBooking} />
     </div>
   );
