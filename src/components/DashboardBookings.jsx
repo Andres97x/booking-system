@@ -8,13 +8,13 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { isToday, isThisWeek, isThisMonth, isSameDay } from 'date-fns';
-import { BsFillCaretLeftFill, BsFillCaretRightFill } from 'react-icons/bs';
 
 import { db } from '../configs/firebase';
 import DashboardBookingModal from './DashboardBookingModal';
 import Spinner from './Spinner';
 import DashboardBookingCard from './DashboardBookingCard';
 import DashboardBookingsHeader from './DashboardBookingsHeader';
+import DashboardBookingPaginationCtrls from './DashboardBookingPaginationCtrls';
 import { bookingsResultsPerPage } from '../constants';
 
 const DashboardBookings = () => {
@@ -28,7 +28,6 @@ const DashboardBookings = () => {
   }, [bookingDateFilter]);
   const [inputData, setInputData] = useState({ id: '', date: '' });
   const [pageIndex, setPageIndex] = useState(1);
-  const [displayedBookingsNumber, setDisplayedBookingsNumber] = useState(null);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -175,22 +174,6 @@ const DashboardBookings = () => {
     }
   };
 
-  const goToNextPage = () => {
-    setPageIndex(prev => {
-      if (prev >= Math.ceil(filteredBookings.length / bookingsResultsPerPage))
-        return;
-
-      return prev + 1;
-    });
-  };
-
-  const goToPreviousPage = () => {
-    setPageIndex(prev => {
-      if (prev <= 1) return;
-      return prev - 1;
-    });
-  };
-
   return (
     <div className='dashboard-bookings'>
       <DashboardBookingsHeader
@@ -203,39 +186,12 @@ const DashboardBookings = () => {
 
       {renderBookingCards()}
 
-      <div
-        className={`bookings-ctrl_btns dashboard-ctrl ${
-          filteredBookings.length <= bookingsResultsPerPage
-            ? 'ctrls-hidden'
-            : ''
-        }`}
-      >
-        <button
-          className='bookings-btn bookings-back_btn'
-          onClick={goToPreviousPage}
-          disabled={pageIndex === 1}
-        >
-          <BsFillCaretLeftFill />
-        </button>
-
-        <div>
-          <span>{pageIndex}</span>/
-          <span>
-            {Math.ceil(filteredBookings.length / bookingsResultsPerPage)}
-          </span>
-        </div>
-
-        <button
-          className='bookings-btn bookings-back_btn'
-          onClick={goToNextPage}
-          disabled={
-            pageIndex ===
-            Math.ceil(filteredBookings.length / bookingsResultsPerPage)
-          }
-        >
-          <BsFillCaretRightFill />
-        </button>
-      </div>
+      <DashboardBookingPaginationCtrls
+        filteredBookings={filterBookings}
+        bookingsResultsPerPage={bookingsResultsPerPage}
+        pageIndex={pageIndex}
+        setPageIndex={setPageIndex}
+      />
 
       <DashboardBookingModal selectedBooking={selectedBooking} />
     </div>

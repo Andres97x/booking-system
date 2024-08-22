@@ -1,12 +1,12 @@
 import CarouselGroup from './CarouselGroup';
 import '../styles/CarouselGroup.css';
 
-const News = () => {
+const Gallery = () => {
   return (
     <div className='section section-news'>
       <div className='news-container'>
         <div>
-          <h5>Noticias del Paladar Refinado</h5>
+          <h5>Galería del Paladar Refinado</h5>
           <h2>Nuestras noticias y eventos</h2>
         </div>
       </div>
@@ -17,4 +17,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default Gallery;

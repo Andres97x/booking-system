@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 
 const Header = () => {
@@ -13,19 +13,39 @@ const Header = () => {
         </a>
       </div>
       <nav>
-        <Link to='/'>Home</Link>
-        <Link to='/about'>Nosotros</Link>
+        <NavLink
+          to='/'
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to='/about'
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
+          Nosotros
+        </NavLink>
         <span className='nav-signature'>Éclat Étoilé</span>
-        <Link to='/menu'>Menú</Link>
+        <NavLink
+          to='/menu'
+          className={({ isActive }) => (isActive ? 'active' : '')}
+        >
+          Menú
+        </NavLink>
         {/* <a href='/'>Contacto</a> */}
-        <Link className='dashboard-link' to='/dashboard'>
+        <NavLink
+          to='/dashboard'
+          className={({ isActive }) =>
+            `dashboard-link ${isActive ? 'active' : ''}`
+          }
+        >
           Dashboard
-        </Link>
+        </NavLink>
       </nav>
       <div>
-        <Link to='/bookings' className='reservation-link'>
+        <NavLink to='/bookings' className='reservation-link'>
           Reservar
-        </Link>
+        </NavLink>
       </div>
     </header>
   );

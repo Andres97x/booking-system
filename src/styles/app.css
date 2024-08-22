@@ -351,6 +351,19 @@ header a:active {
   text-transform: uppercase;
 }
 
+header a:link:not(.reservation-link) {
+  border-bottom: 2px solid rgba(255, 255, 255, 0);
+  transition: all 180ms ease-in-out;
+}
+
+header a:link:hover {
+  border-color: rgba(18, 55, 42, 0.5);
+}
+
+header a:link.active {
+  border-color: var(--font-secondary-color);
+}
+
 .header-wrapper.hero-wrapper header a:link,
 .header-wrapper.hero-wrapper header a:visited,
 .header-wrapper.hero-wrapper header a:hover,
@@ -358,9 +371,13 @@ header a:active {
   color: var(--main-color);
 }
 
-/* header a:focus {
-  outline: var(--main-color-half) solid 2px;
-} */
+.header-wrapper.hero-wrapper header a:link:hover {
+  border-color: rgba(242, 237, 233, 0.8);
+}
+
+.header-wrapper.hero-wrapper header a:link.active {
+  border-color: var(--main-color);
+}
 
 header > div {
   display: flex;
@@ -375,7 +392,6 @@ header > div {
   font-weight: 600;
   border: 1px solid var(--secondary-color);
   transition: all 200ms ease-in-out;
-  /* border-radius: 5px; */
 }
 
 .reservation-link:hover {

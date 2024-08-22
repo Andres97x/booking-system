@@ -79,12 +79,25 @@
   width: calc(100% / var(--items-per-screen));
   padding: var(--image-gap);
   border-radius: 0.5rem;
+  position: relative;
 }
 
 .row .slider img {
   width: 100%;
-  aspect-ratio: 21/9;
+  aspect-ratio: 20/9;
   object-fit: cover;
+  display: block;
+}
+
+.row .slider-card_content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0.5rem;
+  margin-left: calc(var(--image-gap));
+  padding: 0.7rem 1.2rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
 }
 
 .row .slider-card_content > span {
