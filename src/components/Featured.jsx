@@ -1,6 +1,6 @@
-import featured1 from '../assets/featured-1.jpg';
-import featured2 from '../assets/featured-2.jpg';
-import featuredProfilePic from '../assets/featured-profile-pic.jpg';
+import featured1 from '../assets/featured-1.webp';
+import featured2 from '../assets/featured-2.webp';
+import featuredProfilePic from '../assets/featured-profile-pic.webp';
 
 const Featured = () => {
   return (

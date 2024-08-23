@@ -1,6 +1,6 @@
-import flavors1 from '../assets/flavors-1.jpg';
-import flavors2 from '../assets/flavors-2.jpg';
-import flavors3 from '../assets/flavors-3.jpg';
+import flavors1 from '../assets/flavors-1.webp';
+import flavors2 from '../assets/flavors-2.webp';
+import flavors3 from '../assets/flavors-3.webp';
 
 import { IoRestaurant } from 'react-icons/io5';
 import { FaBowlFood } from 'react-icons/fa6';

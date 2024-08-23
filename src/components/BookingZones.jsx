@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
 import { BookingContext } from '../contexts/BookingContext';
-import zone1 from '../assets/zone-1.jpg';
-import zone2 from '../assets/zone-2.jpg';
-import zone3 from '../assets/zone-3.jpg';
+import zone1 from '../assets/zone-1.webp';
+import zone2 from '../assets/zone-2.webp';
+import zone3 from '../assets/zone-3.webp';
 
 const BookingZones = () => {
   const { onClickZone, sliderIndex, activeZoneId, setActiveZoneId } =

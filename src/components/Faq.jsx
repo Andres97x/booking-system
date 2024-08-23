@@ -2,8 +2,8 @@ import useHandleGroupClick from '../hooks/useHandleGroupClick';
 
 import FaqGroup from './FaqGroup';
 import faqData from '../data/faqData';
-import faq1 from '../assets/faq-1.jpg';
-import faq2 from '../assets/faq-2.jpg';
+import faq1 from '../assets/faq-1.webp';
+import faq2 from '../assets/faq-2.webp';
 
 const Faq = () => {
   const { activeGroupId, handleGroupClick } = useHandleGroupClick();

@@ -1,9 +1,9 @@
-import duckBreast from '../assets/duck-breast.jpg';
-import beefWellington from '../assets/beef-wellington.jpg';
-import etonMess from '../assets/eton-mess.jpg';
-import searedSalmon from '../assets/seared-salmon.jpg';
-import chanterelle from '../assets/chanterelle-mushroom-pizza.jpg';
-import carbonara from '../assets/carbonara.jpg';
+import duckBreast from '../assets/duck-breast.webp';
+import beefWellington from '../assets/beef-wellington.webp';
+import etonMess from '../assets/eton-mess.webp';
+import searedSalmon from '../assets/seared-salmon.webp';
+import chanterelle from '../assets/chanterelle-mushroom-pizza.webp';
+import carbonara from '../assets/carbonara.webp';
 
 export const signatures = [
   {

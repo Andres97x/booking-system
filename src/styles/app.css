@@ -294,12 +294,20 @@ dialog textarea::placeholder {
 /* HEADER-HERO */
 
 .header-wrapper.hero-wrapper {
+  /* fallback */
+  background: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.4)
+    ),
+    #ebeaef;
+
   background-image: linear-gradient(
       to right bottom,
       rgba(0, 0, 0, 0.3),
       rgba(0, 0, 0, 0.4)
     ),
-    url('../assets/hero-img.jpg');
+    url('../assets/hero-img.webp');
   background-size: cover;
 
   background-position: 0 25%;

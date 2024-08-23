@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { firstDrinkCategory } from '../data/menuData';
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
 import '../styles/Menu.css';
@@ -45,16 +44,7 @@ const Menu = () => {
       .toLowerCase()}`;
 
     return (
-      <Link
-        // to={
-        //   pathName === 'bebidas'
-        //     ? `${pathName}?categoria=${firstDrinkCategory}`
-        //     : pathName
-        // }
-        to={pathName}
-        key={`menu-category-${i}`}
-        className='menu-category'
-      >
+      <Link to={pathName} key={`menu-category-${i}`} className='menu-category'>
         <img src={category.image} alt={category.imageAlt} />
         <div className='category-content'>
           <h3 className='catergory-title'>{category.name}</h3>
