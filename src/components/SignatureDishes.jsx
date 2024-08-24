@@ -5,6 +5,7 @@ const SignatureDishes = () => {
     return (
       <div key={`signature-${i}`} className='signature-card'>
         <div className='signature-img__container'>
+          <div className='signature-img-overlay'></div>
           <img
             data-src={signature.dataImg}
             src={signature.img}
