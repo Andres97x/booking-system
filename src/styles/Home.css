@@ -96,7 +96,7 @@
   top: 50%;
   left: -25%;
   transform: translate(20%, -50%);
-  max-width: 40%;
+  width: 40%;
   z-index: 20;
 }
 
@@ -134,7 +134,7 @@
 }
 
 .services-card img {
-  max-width: 100%;
+  width: 100%;
   aspect-ratio: 2/1;
   object-fit: cover;
 }
@@ -365,12 +365,12 @@
   top: 50%;
   left: -22%;
   transform: translate(20%, -50%);
-  max-width: 46%;
+  width: 46%;
   z-index: 20;
 }
 
 .faq-images > img:last-child {
-  max-width: 107%;
+  width: 100%;
   aspect-ratio: 1/1;
 }
 

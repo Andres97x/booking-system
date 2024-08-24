@@ -33,7 +33,7 @@ const useFetchMenu = ({
 
         const retrievedData = await Promise.all(
           querySnapshot.docs.map(async doc => {
-            // Create a reference with an initial file path and name
+            // Get the image reference
             const pathReference = ref(storage, doc.data().imageRef);
             try {
               const url = await getDownloadURL(pathReference);

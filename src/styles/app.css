@@ -657,3 +657,11 @@ header svg {
 .update-detected input[type='file']::file-selector-button {
   background-color: #d3f9d8 !important;
 }
+
+.blurred-transition {
+  transition: all 150ms ease-in-out;
+}
+
+.blurred {
+  filter: blur(5px);
+}

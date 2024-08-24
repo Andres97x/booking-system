@@ -1,50 +1,56 @@
-import duckBreast from '../assets/duck-breast.webp';
-import beefWellington from '../assets/beef-wellington.webp';
-import etonMess from '../assets/eton-mess.webp';
-import searedSalmon from '../assets/seared-salmon.webp';
-import chanterelle from '../assets/chanterelle-mushroom-pizza.webp';
-import carbonara from '../assets/carbonara.webp';
+import duckBreastLow from '../assets/duck-breast-low.webp';
+import beefWellingtonLow from '../assets/beef-wellington-low.webp';
+import etonMessLow from '../assets/eton-mess-low.webp';
+import searedSalmonLow from '../assets/seared-salmon-low.webp';
+import chanterelleLow from '../assets/chanterelle-mushroom-pizza-low.webp';
+import carbonaraLow from '../assets/carbonara-low.webp';
 
 export const signatures = [
   {
     name: 'Pechuga de pato',
     description:
       'con zanahorias al vapor y reducción de vino tinto y arándanos',
-    img: duckBreast,
+    img: duckBreastLow,
     imgAlt: 'Plato de pechuga de pato',
+    dataImg: 'duck-breast.webp',
   },
   {
     name: 'Beef Wellington',
     description:
       'jugoso lomo de ternera, duxelles especiales y prosciutto envuelto en masa',
-    img: beefWellington,
+    img: beefWellingtonLow,
     imgAlt: 'Plato Beef Wellington',
+    dataImg: 'beef-wellington.webp',
   },
   {
     name: 'Eton Mess',
     description: 'merengue triturado combinado, crema batida y bayas frescas',
-    img: etonMess,
+    img: etonMessLow,
     imgAlt: 'Plato de postre Eton Mess',
+    dataImg: 'eton-mess.webp',
   },
   {
     name: 'salmón braseado',
     description:
       'salmon perfectamente braseado, acompañado de una ligera ensalada de hinojo y naranja',
-    img: searedSalmon,
+    img: searedSalmonLow,
     imgAlt: 'Plato de salmón braseado',
+    dataImg: 'seared-salmon.webp',
   },
   {
     name: 'Pizza de champiñones Chanterelle',
     description:
       'pizza gourmet de champiñones y chantarelles con una salsa de tomate especiada, queso de cabra desmenuzado y rúcula fresca',
-    img: chanterelle,
+    img: chanterelleLow,
     imgAlt: 'Pizza de champiñones Chanterelle',
+    dataImg: 'chanterelle-mushroom-pizza.webp',
   },
   {
     name: 'Carbonara',
     description:
       'Carbonara auténtica con espaguetis, guanciale, yema de huevo, queso pecorino romano y pimienta negra',
-    img: carbonara,
+    img: carbonaraLow,
     imgAlt: 'Plato Carbonara',
+    dataImg: 'carbonara.webp',
   },
 ];

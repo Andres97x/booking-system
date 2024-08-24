@@ -2,8 +2,8 @@ import useHandleGroupClick from '../hooks/useHandleGroupClick';
 
 import FaqGroup from './FaqGroup';
 import faqData from '../data/faqData';
-import faq1 from '../assets/faq-1.webp';
-import faq2 from '../assets/faq-2.webp';
+import faq1Low from '../assets/faq-1-low.webp';
+import faq2Low from '../assets/faq-2-low.webp';
 
 const Faq = () => {
   const { activeGroupId, handleGroupClick } = useHandleGroupClick();
@@ -35,8 +35,16 @@ const Faq = () => {
         </div>
 
         <div className='faq-images'>
-          <img src={faq2} alt='Plato elegante de un restaurante' />
-          <img src={faq1} alt='Plato elegante de un restaurante' />
+          <img
+            data-src='faq-2.webp'
+            src={faq2Low}
+            alt='Plato elegante de un restaurante'
+          />
+          <img
+            data-src='faq-1.webp'
+            src={faq1Low}
+            alt='Plato elegante de un restaurante'
+          />
         </div>
       </div>
     </div>

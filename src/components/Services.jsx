@@ -1,6 +1,7 @@
-import flavors1 from '../assets/flavors-1.webp';
-import flavors2 from '../assets/flavors-2.webp';
-import flavors3 from '../assets/flavors-3.webp';
+// import flavors1 from '../assets/flavors-1.webp';
+import flavors1Low from '../assets/flavors-1-low.webp';
+import flavors2Low from '../assets/flavors-2-low.webp';
+import flavors3Low from '../assets/flavors-3-low.webp';
 
 import { IoRestaurant } from 'react-icons/io5';
 import { FaBowlFood } from 'react-icons/fa6';
@@ -16,7 +17,11 @@ const News = () => {
         </div>
         <div className='services-grid'>
           <div className='services-card'>
-            <img src={flavors1} alt='Chef sosteniendo un plato exquisito' />
+            <img
+              data-src='flavors-1.webp'
+              src={flavors1Low}
+              alt='Chef sosteniendo un plato exquisito'
+            />
             <div className='services-card__content'>
               <div>
                 <span>
@@ -33,7 +38,11 @@ const News = () => {
             </div>
           </div>
           <div className='services-card'>
-            <img src={flavors2} alt='Chef sosteniendo un plato exquisito' />
+            <img
+              data-src='flavors-2.webp'
+              src={flavors2Low}
+              alt='Chef sosteniendo un plato exquisito'
+            />
             <div className='services-card__content'>
               <div>
                 <span>
@@ -51,7 +60,11 @@ const News = () => {
             </div>
           </div>
           <div className='services-card'>
-            <img src={flavors3} alt='Chef sosteniendo un plato exquisito' />
+            <img
+              data-src='flavors-3.webp'
+              src={flavors3Low}
+              alt='Chef sosteniendo un plato exquisito'
+            />
             <div className='services-card__content'>
               <div>
                 <span>

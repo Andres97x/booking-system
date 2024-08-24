@@ -1,5 +1,5 @@
-import featured1 from '../assets/featured-1.webp';
-import featured2 from '../assets/featured-2.webp';
+import featured1Low from '../assets/featured-1-low.webp';
+import featured2Low from '../assets/featured-2-low.webp';
 import featuredProfilePic from '../assets/featured-profile-pic.webp';
 
 const Featured = () => {
@@ -30,8 +30,16 @@ const Featured = () => {
           </div>
         </div>
         <div className='featured-images'>
-          <img src={featured1} alt='Plato elegante de un restaurante' />
-          <img src={featured2} alt='Plato elegante de un restaurante' />
+          <img
+            data-src='featured-1.webp'
+            src={featured1Low}
+            alt='Plato elegante de un restaurante'
+          />
+          <img
+            data-src='featured-2.webp'
+            src={featured2Low}
+            alt='Plato elegante de un restaurante'
+          />
         </div>
       </div>
     </div>
