@@ -1,5 +1,4 @@
 import CarouselGroup from './CarouselGroup';
-import '../styles/CarouselGroup.css';
 
 const Gallery = () => {
   return (

@@ -10,8 +10,7 @@ const Featured = () => {
           <div>
             <h3>
               Nuestros chefs galardonados transforman ingredientes frescos en
-              obras maestras culinarias, ofreciendo una experiencia gastronómica
-              de primer nivel que deleita todos los sentidos.
+              obras maestras culinarias.
             </h3>
             <div className='featured-content__quote'>
               <img
@@ -21,8 +20,7 @@ const Featured = () => {
               <blockquote>
                 <p>
                   Nuestros chefs, maestros en su arte, fusionan creatividad y
-                  precisión para ofrecer una experiencia culinaria inigualable,
-                  elevando cada plato a una obra de arte gastronómica.
+                  precisión para ofrecer una experiencia culinaria inigualable.
                 </p>
                 <cite> John Doe</cite>
               </blockquote>

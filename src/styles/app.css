@@ -421,6 +421,7 @@ header > div {
   font-size: 2rem;
   text-transform: capitalize !important;
   font-size: 4rem;
+  width: max-content;
 
   font-family: 'WindSong', cursive;
   font-weight: 800;

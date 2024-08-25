@@ -9,7 +9,6 @@ import BookingCalendar from '../components/BookingCalendar';
 import BookingZones from '../components/BookingZones';
 import BookingTimes from '../components/BookingTimes';
 import BookingForm from '../components/BookingForm';
-import '../styles/Bookings.css';
 
 const Bookings = () => {
   const {

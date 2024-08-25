@@ -27,13 +27,12 @@
   display: flex;
   gap: 2rem;
   padding-inline: 4rem;
-  margin-top: 3rem;
+  margin: 5rem 0;
 }
 
 .about-redirection-btns a:link,
 .about-redirection-btns a:visited {
   border: 1px solid var(--font-secondary-color);
-  background-color: 0;
   font-size: 1.8rem;
   background-color: var(--secondary-color);
   color: var(--font-main-color);

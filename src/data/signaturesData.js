@@ -40,7 +40,7 @@ export const signatures = [
   {
     name: 'Pizza de champiñones Chanterelle',
     description:
-      'pizza gourmet de champiñones y chantarelles con una salsa de tomate especiada, queso de cabra desmenuzado y rúcula fresca',
+      'pizza gourmet con una salsa de tomate especiada, queso de cabra desmenuzado y rúcula fresca',
     img: chanterelleLow,
     imgAlt: 'Pizza de champiñones Chanterelle',
     dataImg: 'chanterelle-mushroom-pizza.webp',

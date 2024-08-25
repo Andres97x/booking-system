@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
-import '../styles/Menu.css';
 import useFetchMenu from '../hooks/useFetchMenu';
 
 const Menu = () => {

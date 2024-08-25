@@ -1,0 +1,100 @@
+/* Queries */
+
+@media (max-width: 1332px) {
+  html {
+    font-size: 60%;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+  }
+
+  .featured-container {
+    width: 90%;
+  }
+
+  .featured-content > div {
+    width: 75%;
+    margin: 0;
+  }
+
+  .featured-images {
+    flex: 0.7;
+  }
+
+  .services-container {
+    width: 90%;
+    padding: 0 6rem;
+  }
+
+  .services-card span:has(svg) {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+
+  .services-card svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .services-card__content {
+    gap: 1rem;
+  }
+
+  header > div:first-child {
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+  }
+
+  header > div:last-child {
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+  }
+
+  .header-wrapper header > div:first-child,
+  .header-wrapper header > div:last-child {
+    display: none;
+  }
+
+  .header-wrapper.hero-wrapper header > div:first-child,
+  .header-wrapper.hero-wrapper header > div:last-child {
+    display: block !important;
+  }
+
+  .signatures-container {
+    padding: 0 8rem;
+  }
+
+  .signatures-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .signature-card img {
+    aspect-ratio: 1.5/1;
+  }
+
+  .faq-container {
+    width: 80%;
+  }
+
+  .faq-content > div {
+    width: 75%;
+  }
+
+  .faq-content__groups {
+    margin-top: 3rem;
+  }
+
+  .faq-group__header h4 {
+    font-size: 1.2rem;
+  }
+
+  .faq-images {
+    flex: 0.6;
+  }
+}
+
+@media (max-width: 1000px) {
+}

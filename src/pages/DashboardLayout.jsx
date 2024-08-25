@@ -2,8 +2,6 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { LuBookMarked } from 'react-icons/lu';
 import { IoRestaurantOutline } from 'react-icons/io5';
 
-import '../styles/Dashboard.css';
-
 const DashboardLayout = () => {
   return (
     <div className='dashboard-container'>

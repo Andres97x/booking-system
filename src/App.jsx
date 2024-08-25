@@ -1,7 +1,12 @@
-import { lazy, Suspense } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
 import './styles/app.css';
+import './styles/Home.css';
+import './styles/CarouselGroup.css';
+import './styles/Bookings.css';
+import './styles/Menu.css';
+import './styles/Dashboard.css';
+import './styles/queries.css';
 
 import { BookingContextWrapper } from './contexts/BookingContext';
 
@@ -13,14 +18,13 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Bookings from './pages/Bookings';
 import Menu from './pages/Menu';
-const MenuItemsComponent = lazy(() => import('./pages/MenuItems'));
+import MenuItemsComponent from './pages/MenuItems';
 import DashboardLayout from './pages/DashboardLayout';
 import DashboardMessage from './components/DashboardMessage';
 import DashboardNotifications from './components/DashboardNotifications';
 import DashboardBookings from './components/DashboardBookings';
 import DashboardMenu from './components/DashboardMenu';
 import DashboardMenuCategory from './components/DashboardMenuCategory';
-import DashboardNews from './components/DashboardNews';
 
 function App() {
   useOpenModalOnBtnClick();
@@ -42,14 +46,7 @@ function App() {
             <Route path='about' element={<About />} />
             <Route path='bookings' element={<Bookings />} />
             <Route path='menu' element={<Menu />} />
-            <Route
-              path='menu/:category'
-              element={
-                <Suspense fallback={<h2>Loading...</h2>}>
-                  <MenuItemsComponent />
-                </Suspense>
-              }
-            />
+            <Route path='menu/:category' element={<MenuItemsComponent />} />
             <Route path='dashboard' element={<DashboardLayout />}>
               <Route index element={<DashboardMessage />} />
               <Route
@@ -62,7 +59,6 @@ function App() {
                 path='menu/:category'
                 element={<DashboardMenuCategory />}
               />
-              <Route path='news' element={<DashboardNews />} />
             </Route>
           </Route>
         </Routes>
