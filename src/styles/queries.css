@@ -1,12 +1,28 @@
 /* Queries */
 
-@media (max-width: 1332px) {
+@media (max-width: 1440px) {
   html {
     font-size: 60%;
   }
 
+  h2 {
+    font-size: 3rem;
+  }
+
   h3 {
     font-size: 1.8rem;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+
+  header {
+    padding: 0 10rem;
+  }
+
+  .section-hero > h1 {
+    font-size: 8rem;
   }
 
   .featured-container {
@@ -94,7 +110,85 @@
   .faq-images {
     flex: 0.6;
   }
+
+  .news-container {
+    width: 90%;
+    padding: 0 6rem;
+  }
 }
 
 @media (max-width: 1000px) {
+  html {
+    font-size: 58%;
+  }
+
+  header {
+    padding: 0 4rem;
+  }
+
+  header > nav {
+    gap: 4rem;
+  }
+
+  .nav-signature {
+    font-size: 3.5rem;
+  }
+
+  .section-hero > h1 {
+    font-size: 7rem;
+  }
+
+  .section-hero > p {
+    font-size: 1.6rem;
+  }
+
+  .section-featured {
+    padding-inline: 6rem;
+  }
+
+  .services-container {
+    width: 95%;
+    padding: 0 4rem;
+  }
+
+  .services-grid {
+    gap: 1.5rem;
+  }
+
+  .services-card__content {
+    flex-direction: column-reverse;
+    height: 100%;
+    justify-content: start;
+  }
+
+  .services-card__content > div:first-child {
+    margin-top: auto;
+  }
+
+  .services-card__content > div:last-child {
+    margin-bottom: 1rem;
+  }
+
+  .signatures-container {
+    padding: 0 4rem;
+  }
+
+  .signature-card__content > span {
+    font-size: 2.2rem;
+  }
+
+  .signature-card__content > p:last-child {
+    font-size: 1.2rem;
+  }
+
+  .signature-card img {
+    aspect-ratio: 1 / 1;
+  }
+
+  .faq-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 815px) {
 }

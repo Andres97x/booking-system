@@ -146,6 +146,10 @@
   opacity: 1;
 }
 
+.row .handle:active .text {
+  font-size: 10rem;
+}
+
 .row .container:hover .text {
   opacity: 1;
 }
@@ -179,5 +183,24 @@
   .row .handle:active,
   .row .handle:focus-visible {
     background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .row .handle:hover .text {
+    font-size: 8rem;
+  }
+
+  .row .handle:active .text,
+  .row .handle:focus-visible .text {
+    font-size: 10rem;
+  }
+}
+
+@media (width <= 900px) {
+  .row .slider {
+    --items-per-screen: 2;
+  }
+
+  .row .slider img {
+    aspect-ratio: 18/9;
   }
 }

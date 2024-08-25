@@ -53,10 +53,6 @@
   margin: 0 auto;
 }
 
-.featured-content h3 {
-  letter-spacing: 0.5px;
-}
-
 .featured-content__quote {
   display: flex;
   margin-top: 3rem;
@@ -131,6 +127,8 @@
 
 .services-card {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .services-card img {
@@ -216,7 +214,7 @@
   width: 100%;
   height: 100%;
   transition: all 200ms ease-in-out;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   filter: blur(1px);
 }
 
