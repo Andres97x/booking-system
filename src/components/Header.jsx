@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { HiBars3 } from 'react-icons/hi2';
-import { IoMdClose } from 'react-icons/io';
+import Modal from './Modal';
 
 const Header = () => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -25,12 +25,50 @@ const Header = () => {
     return pages[formattedPage];
   };
 
-  const openMobileNav = () => {
-    setIsMobileNavOpen(true);
-  };
+  const renderNav = () => {
+    const closeMobileNav = e => {
+      const mobileNavModal = e.target.closest('dialog#mobile-nav');
 
-  const closeMobileNav = () => {
-    setIsMobileNavOpen(false);
+      if (!mobileNavModal) return;
+
+      mobileNavModal.close();
+    };
+
+    return (
+      <nav>
+        <NavLink
+          to='/'
+          className={({ isActive }) => (isActive ? 'active' : '')}
+          onClick={closeMobileNav}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to='/about'
+          className={({ isActive }) => (isActive ? 'active' : '')}
+          onClick={closeMobileNav}
+        >
+          Nosotros
+        </NavLink>
+        <span className='nav-signature'>Éclat Étoilé</span>
+        <NavLink
+          to='/menu'
+          className={({ isActive }) => (isActive ? 'active' : '')}
+          onClick={closeMobileNav}
+        >
+          Menú
+        </NavLink>
+        <NavLink
+          to='/dashboard'
+          className={({ isActive }) =>
+            `dashboard-link ${isActive ? 'active' : ''}`
+          }
+          onClick={closeMobileNav}
+        >
+          Dashboard
+        </NavLink>
+      </nav>
+    );
   };
 
   return (
@@ -42,35 +80,7 @@ const Header = () => {
         </a>
       </div>
 
-      <nav>
-        <NavLink
-          to='/'
-          className={({ isActive }) => (isActive ? 'active' : '')}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to='/about'
-          className={({ isActive }) => (isActive ? 'active' : '')}
-        >
-          Nosotros
-        </NavLink>
-        <span className='nav-signature'>Éclat Étoilé</span>
-        <NavLink
-          to='/menu'
-          className={({ isActive }) => (isActive ? 'active' : '')}
-        >
-          Menú
-        </NavLink>
-        <NavLink
-          to='/dashboard'
-          className={({ isActive }) =>
-            `dashboard-link ${isActive ? 'active' : ''}`
-          }
-        >
-          Dashboard
-        </NavLink>
-      </nav>
+      {renderNav()}
 
       <div>
         <NavLink to='/bookings' className='reservation-link'>
@@ -80,16 +90,12 @@ const Header = () => {
 
       <div className='mobile-header'>
         <p>{currentPage(pathname)}</p>
-        <button className='open-mobile-nav-btn' onClick={openMobileNav}>
+        <button className='open-mobile-nav-btn' data-modal='mobile-nav'>
           <HiBars3 />
         </button>
       </div>
 
-      <div className='mobile-nav-overlay'></div>
-
-      <button className='close-mobile-nav-btn' onClick={closeMobileNav}>
-        {<IoMdClose />}
-      </button>
+      <Modal id='mobile-nav'>{renderNav()}</Modal>
     </header>
   );
 };
