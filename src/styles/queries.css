@@ -63,19 +63,19 @@
     left: 40px;
   }
 
-  header > div:last-child {
+  header > div:has(a.reservation-link) {
     position: absolute;
     bottom: 20px;
     right: 40px;
   }
 
   .header-wrapper header > div:first-child,
-  .header-wrapper header > div:last-child {
+  .header-wrapper header > div:has(a.reservation-link) {
     display: none;
   }
 
   .header-wrapper.hero-wrapper header > div:first-child,
-  .header-wrapper.hero-wrapper header > div:last-child {
+  .header-wrapper.hero-wrapper header > div:has(a.reservation-link) {
     display: block !important;
   }
 
@@ -191,4 +191,53 @@
 }
 
 @media (max-width: 815px) {
+  .mobile-header {
+    display: block;
+    flex: unset;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mobile-header > p {
+    color: var(--main-color);
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--main-color);
+  }
+
+  .open-mobile-nav-btn {
+    cursor: pointer;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .open-mobile-nav-btn svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  header nav {
+    display: none;
+  }
+
+  header.mobile-nav-open nav {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+  }
+
+  .mobile-nav-open .mobile-nav-overlay {
+    display: block;
+  }
+
+  .mobile-nav-open .close-mobile-nav-btn {
+    display: block;
+  }
 }

@@ -338,7 +338,7 @@ header > nav {
   background-color: var(--transparent);
 }
 
-header a:first-child {
+header > div:first-child a {
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -392,16 +392,6 @@ header > div {
   align-items: center;
 }
 
-.reservation-link {
-  background-color: var(--main-color);
-  color: var(--font-secondary-color);
-  padding: 1rem 2rem;
-  margin-left: auto;
-  font-weight: 600;
-  border: 1px solid var(--secondary-color);
-  transition: all 200ms ease-in-out;
-}
-
 .reservation-link:hover {
   background-color: var(--secondary-color);
   color: var(--font-main-color);
@@ -448,6 +438,41 @@ header svg {
 
 .header-wrapper.hero-wrapper header svg {
   color: var(--main-color);
+}
+
+.mobile-header {
+  display: none;
+}
+
+.close-mobile-nav-btn {
+  display: none;
+  font-size: 4rem;
+  position: fixed;
+  right: 4rem;
+  top: 2.3rem;
+  color: var(--main-color);
+  z-index: 10000;
+}
+
+.reservation-link {
+  background-color: var(--main-color);
+  color: var(--font-secondary-color);
+  padding: 1rem 2rem;
+  margin-left: auto;
+  font-weight: 600;
+  border: 1px solid var(--secondary-color);
+  transition: all 200ms ease-in-out;
+}
+
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary-color);
+  z-index: 1000;
 }
 
 /* FOOTER */
