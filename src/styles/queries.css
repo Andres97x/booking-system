@@ -103,10 +103,6 @@
     margin-top: 3rem;
   }
 
-  .faq-group__header h4 {
-    font-size: 1.2rem;
-  }
-
   .faq-images {
     flex: 0.6;
   }
@@ -177,10 +173,6 @@
     font-size: 2.2rem;
   }
 
-  .signature-card__content > p:last-child {
-    font-size: 1.2rem;
-  }
-
   .signature-card img {
     aspect-ratio: 1 / 1;
   }
@@ -197,10 +189,13 @@
 
   h2 {
     font-size: 2.8rem;
+    letter-spacing: 1px;
+    word-spacing: -0.5px;
   }
 
   h3 {
     font-size: 1.6rem;
+    font-weight: 600;
   }
 
   .mobile-header {
@@ -349,6 +344,10 @@
     gap: 1rem;
   }
 
+  .signature-card:hover .signature-img-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
   .faq-container {
     width: 85%;
   }
@@ -369,10 +368,6 @@
 @media (max-width: 660px) {
   html {
     font-size: 52.5%;
-  }
-
-  .header-wrapper.hero-wrapper {
-    /* background-position: center; */
   }
 
   .section-hero > h1 {
@@ -454,6 +449,10 @@
     width: 100%;
   }
 
+  .faq-content__group p {
+    font-size: 1.6rem;
+  }
+
   .faq-images > img:first-child {
     display: none;
   }
@@ -474,6 +473,11 @@
 
   .section-hero > h1 {
     font-size: 6rem;
+  }
+
+  .header-wrapper.hero-wrapper {
+    background-position: 30%;
+    background-repeat: no-repeat;
   }
 
   .section-hero > p {
@@ -550,10 +554,106 @@
   }
 
   .signature-card__content > p:last-child {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .map {
     padding-bottom: 40%;
+  }
+}
+
+@media (max-width: 437px) {
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h5 {
+    font-weight: 700;
+  }
+
+  header {
+    padding: 0 2rem;
+  }
+
+  .header-wrapper.hero-wrapper .mobile-header > p {
+    font-size: 2.2rem;
+  }
+
+  .open-mobile-nav-btn {
+    width: 4.3rem;
+    height: 4.3rem;
+  }
+
+  .section-hero {
+    padding: 0 2rem;
+    align-items: start;
+  }
+
+  .section-hero > p {
+    width: 58%;
+  }
+
+  header > div:first-child {
+    left: 2rem;
+  }
+
+  header > div:has(a.reservation-link) {
+    right: 2rem;
+  }
+
+  .featured-content {
+    padding-inline: 4rem;
+  }
+
+  .featured-content__quote {
+    width: 100%;
+  }
+
+  .services-container {
+    width: 100%;
+  }
+
+  .services-card img {
+    width: 100%;
+  }
+
+  .services-card__content {
+    margin-top: 1rem;
+  }
+
+  .services-card__content p {
+    font-size: 1.6rem;
+  }
+
+  .signatures-container {
+    padding: 0 2rem;
+  }
+
+  .signature-card img {
+    aspect-ratio: 1/ 0.6;
+  }
+
+  .signature-card__content > span {
+    font-size: 1.8rem;
+  }
+
+  .signature-card__content > p:last-child {
+    font-family: 'Open Sans', Inter, sans-serif;
+    line-height: 1.8;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .faq-images > img:last-child {
+    aspect-ratio: 5/1;
+  }
+
+  .section-news {
+    padding: 15rem 0;
+  }
+
+  .news-container {
+    width: 100%;
+    padding: 0 4rem;
   }
 }

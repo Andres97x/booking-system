@@ -232,3 +232,22 @@
     border-radius: 50%;
   }
 }
+
+@media (width < 660px) {
+  .row {
+    --handle-size: 6rem;
+  }
+
+  .row .slider img {
+    aspect-ratio: 12/9;
+  }
+
+  .row .progress-bar {
+    gap: 0.5rem;
+  }
+
+  .row .bar-item {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+}
