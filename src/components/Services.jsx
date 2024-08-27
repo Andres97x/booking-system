@@ -17,11 +17,13 @@ const News = () => {
         </div>
         <div className='services-grid'>
           <div className='services-card'>
-            <img
-              data-src='flavors-1.webp'
-              src={flavors1Low}
-              alt='Chef sosteniendo un plato exquisito'
-            />
+            <div>
+              <img
+                data-src='flavors-1.webp'
+                src={flavors1Low}
+                alt='Chef sosteniendo un plato exquisito'
+              />
+            </div>
             <div className='services-card__content'>
               <div>
                 <span>
@@ -38,11 +40,13 @@ const News = () => {
             </div>
           </div>
           <div className='services-card'>
-            <img
-              data-src='flavors-2.webp'
-              src={flavors2Low}
-              alt='Chef sosteniendo un plato exquisito'
-            />
+            <div>
+              <img
+                data-src='flavors-2.webp'
+                src={flavors2Low}
+                alt='Chef sosteniendo un plato exquisito'
+              />
+            </div>
             <div className='services-card__content'>
               <div>
                 <span>
@@ -60,11 +64,13 @@ const News = () => {
             </div>
           </div>
           <div className='services-card'>
-            <img
-              data-src='flavors-3.webp'
-              src={flavors3Low}
-              alt='Chef sosteniendo un plato exquisito'
-            />
+            <div>
+              <img
+                data-src='flavors-3.webp'
+                src={flavors3Low}
+                alt='Chef sosteniendo un plato exquisito'
+              />
+            </div>
             <div className='services-card__content'>
               <div>
                 <span>

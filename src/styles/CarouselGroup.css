@@ -18,12 +18,12 @@
 
 .row .progress-bar {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.25rem;
   opacity: 0;
   transition: opacity 250ms ease-in-out;
 
   margin-left: auto;
-  margin-bottom: 1rem;
 }
 
 .row:hover .progress-bar {
@@ -40,6 +40,7 @@
   border-radius: 0.1rem;
   background-color: rgba(194, 194, 163, 0.3);
   transition: all 0s ease-in-out;
+  margin-bottom: 1rem;
 }
 
 .row .bar-item.active {
@@ -195,12 +196,39 @@
   }
 }
 
-@media (width <= 900px) {
+@media (width < 900px) {
   .row .slider {
     --items-per-screen: 2;
   }
 
   .row .slider img {
     aspect-ratio: 18/9;
+  }
+}
+
+@media (width < 815px) {
+  .row .slider img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (width < 660px) {
+  .row .slider {
+    --items-per-screen: 1;
+  }
+
+  .row .slider img {
+    aspect-ratio: 21/9;
+  }
+
+  .row .progress-bar {
+    gap: 0.7rem;
+  }
+
+  .row .bar-item {
+    width: 1.1rem;
+    height: 1.1rem;
+
+    border-radius: 50%;
   }
 }

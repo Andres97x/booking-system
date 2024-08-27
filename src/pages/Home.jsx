@@ -6,9 +6,6 @@ import Gallery from '../components/Gallery';
 import Map from '../components/Map';
 import useLazyLoadImages from '../hooks/useLazyLoadImages';
 
-// TODO
-// cache images in useLazyLoadImages hook
-
 const Home = () => {
   useLazyLoadImages();
 

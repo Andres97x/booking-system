@@ -5,7 +5,6 @@ import { HiBars3 } from 'react-icons/hi2';
 import Modal from './Modal';
 
 const Header = () => {
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const telNumber = '555-555-555';
   const { pathname } = useLocation();
 
@@ -72,7 +71,7 @@ const Header = () => {
   };
 
   return (
-    <header className={isMobileNavOpen ? 'mobile-nav-open' : ''}>
+    <header>
       <div>
         <a href={`tel:${telNumber}`}>
           <BsFillTelephoneFill />
@@ -90,6 +89,7 @@ const Header = () => {
 
       <div className='mobile-header'>
         <p>{currentPage(pathname)}</p>
+        <span className='nav-signature'>Éclat Étoilé</span>
         <button className='open-mobile-nav-btn' data-modal='mobile-nav'>
           <HiBars3 />
         </button>

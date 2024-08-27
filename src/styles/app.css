@@ -143,6 +143,7 @@ input[type='number']::-webkit-inner-spin-button {
 
 /* firefox */
 input[type='number'] {
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 
@@ -184,9 +185,9 @@ dialog .modal-close {
   padding: 0.5rem;
 }
 
-dialog {
-  /* animation: fade-out 200ms ease-out; */
-}
+/* dialog {
+  animation: fade-out 200ms ease-out;
+} */
 
 dialog[open] {
   animation: fade-in 200ms ease-out;
@@ -310,7 +311,7 @@ dialog textarea::placeholder {
     url('../assets/hero-img.webp');
   background-size: cover;
 
-  background-position: 0 25%;
+  background-position: center;
 }
 
 /* HEADER */
@@ -433,7 +434,7 @@ header button {
 }
 
 header svg {
-  color: var(--font-secondary-color);
+  color: var(--secondary-color);
 }
 
 .header-wrapper.hero-wrapper header svg {
