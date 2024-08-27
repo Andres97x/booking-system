@@ -473,6 +473,7 @@
 
   .section-hero > h1 {
     font-size: 6rem;
+    width: 80%;
   }
 
   .header-wrapper.hero-wrapper {
@@ -586,6 +587,7 @@
 
   .section-hero {
     padding: 0 2rem;
+    padding-top: 9rem;
     align-items: start;
   }
 

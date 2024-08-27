@@ -25,6 +25,7 @@ import DashboardNotifications from './components/DashboardNotifications';
 import DashboardBookings from './components/DashboardBookings';
 import DashboardMenu from './components/DashboardMenu';
 import DashboardMenuCategory from './components/DashboardMenuCategory';
+import { useEffect } from 'react';
 
 function App() {
   useOpenModalOnBtnClick();
@@ -36,6 +37,36 @@ function App() {
     },
     []
   );
+
+  useEffect(() => {
+    // show/hide navbar
+    let lastScrollTop = 0;
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      let scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        if (header) header.style.top = '-9rem';
+      } else {
+        if (header) header.style.top = '0';
+      }
+      lastScrollTop = scrollTop;
+
+      // // navbar transparency
+      // if (window.scrollY > 300) {
+      //   if (header) header.style.backgroundColor = 'rgba(51, 51, 51)';
+      // } else {
+      //   if (header) header.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+      // }
+
+      // navbar transparency
+      if (window.scrollY > 300) {
+        if (header) header.style.backgroundColor = 'rgba(51, 51, 51)';
+      } else {
+        if (header) header.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+      }
+    });
+  }, []);
 
   return (
     <BookingContextWrapper>

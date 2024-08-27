@@ -1,7 +1,8 @@
 /* HERO */
 
 .section-hero {
-  height: calc(100dvh - var(--header-height));
+  height: 100dvh;
+  padding-top: 9rem; /* because of fixed navbar */
   display: flex;
   flex-direction: column;
   align-items: center;
