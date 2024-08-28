@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { HiBars3 } from 'react-icons/hi2';
 import Modal from './Modal';
 
-const Header = () => {
-  const telNumber = '555-555-555';
+const Header = ({ telNumber }) => {
   const { pathname } = useLocation();
 
   const currentPage = pathname => {
@@ -24,7 +22,7 @@ const Header = () => {
     return pages[formattedPage];
   };
 
-  const renderNav = () => {
+  const renderNav = linkFor => {
     const closeMobileNav = e => {
       const mobileNavModal = e.target.closest('dialog#mobile-nav');
 
@@ -66,6 +64,18 @@ const Header = () => {
         >
           Dashboard
         </NavLink>
+
+        {linkFor === 'mobile' && (
+          <NavLink
+            to='/bookings'
+            className={({ isActive }) =>
+              `dashboard-link ${isActive ? 'active' : ''}`
+            }
+            onClick={closeMobileNav}
+          >
+            Reservas
+          </NavLink>
+        )}
       </nav>
     );
   };
@@ -95,7 +105,7 @@ const Header = () => {
         </button>
       </div>
 
-      <Modal id='mobile-nav'>{renderNav()}</Modal>
+      <Modal id='mobile-nav'>{renderNav('mobile')}</Modal>
     </header>
   );
 };

@@ -1,17 +1,19 @@
 .section-about {
+  margin-top: var(--header-height); /* to compensate fixed header */
   color: var(--font-secondary-color);
   min-height: calc(100vh - var(--header-height));
 }
 
 .about-img-container {
   width: 100%;
-  margin-top: 5rem;
+  padding-top: 5rem;
 }
 
 .about-img-container img {
   width: 100%;
   aspect-ratio: 5/1;
   object-fit: cover;
+  display: block;
 }
 
 .about-content {

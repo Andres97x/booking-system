@@ -7,7 +7,7 @@ import useFetchMenu from '../hooks/useFetchMenu';
 
 const Menu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
-  const [status, setStatus] = useState('idle');
+  const [status, setStatus] = useState('loading');
   const [error, setError] = useState(null);
 
   useFetchMenu({

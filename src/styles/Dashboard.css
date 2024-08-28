@@ -15,6 +15,9 @@
 .dashboard-container {
   --dashboard-margin: 2rem;
   margin: var(--dashboard-margin);
+  margin-top: calc(
+    var(--dashboard-margin) + var(--header-height)
+  ); /* to compensate fixed header */
 }
 
 .dashboard-grid {

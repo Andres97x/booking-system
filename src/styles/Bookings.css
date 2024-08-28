@@ -1,4 +1,5 @@
 .bookings-container {
+  margin-top: var(--header-height); /* to compensate fixed header */
   background-color: var(--main-color);
   padding: 10rem 0;
 }

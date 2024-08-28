@@ -38,34 +38,50 @@ function App() {
     []
   );
 
+  /*TODO move to Header component and use useRef to handle elements, also make appropiate if statements*/
   useEffect(() => {
     // show/hide navbar
     let lastScrollTop = 0;
     const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
+    if (!header) return;
+
+    const dynamicNavbar = () => {
+      const currentPageText = document.querySelector('.mobile-header > p');
+
       let scrollTop = window.scrollY || document.documentElement.scrollTop;
 
       if (scrollTop > lastScrollTop) {
-        if (header) header.style.top = '-9rem';
+        // scrolling down
+        header.style.top = '-9rem';
+
+        header.style.boxShadow = '0 0 0 0 rgba(0,0,0,0)';
       } else {
-        if (header) header.style.top = '0';
+        // scrolling up
+        header.style.top = '0';
+
+        if (window.scrollY > 40) {
+          header.style.boxShadow = '0 1.5px 0 0 #7a6b07';
+        } else {
+          header.style.boxShadow = '0 0 0 0 rgba(0,0,0,0)';
+        }
       }
       lastScrollTop = scrollTop;
 
-      // // navbar transparency
-      // if (window.scrollY > 300) {
-      //   if (header) header.style.backgroundColor = 'rgba(51, 51, 51)';
-      // } else {
-      //   if (header) header.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-      // }
-
       // navbar transparency
-      if (window.scrollY > 300) {
-        if (header) header.style.backgroundColor = 'rgba(51, 51, 51)';
+      if (window.scrollY > 50) {
+        header.style.backgroundColor = 'var(--secondary-color)';
+        currentPageText.style.color = 'var(--main-color)';
       } else {
-        if (header) header.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        header.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+        currentPageText.style.color = 'var(--secondary-color)';
       }
-    });
+    };
+
+    window.addEventListener('scroll', dynamicNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', dynamicNavbar);
+    };
   }, []);
 
   return (

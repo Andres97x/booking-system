@@ -25,6 +25,12 @@
     font-size: 8rem;
   }
 
+  .header-wrapper.hero-wrapper .util-links-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+
   .featured-container {
     width: 90%;
   }
@@ -72,11 +78,6 @@
   .header-wrapper header > div:first-child,
   .header-wrapper header > div:has(a.reservation-link) {
     display: none;
-  }
-
-  .header-wrapper.hero-wrapper header > div:first-child,
-  .header-wrapper.hero-wrapper header > div:has(a.reservation-link) {
-    display: block !important;
   }
 
   .signatures-container {
@@ -310,6 +311,10 @@
 
   #mobile-nav .modal-close svg {
     color: var(--main-color);
+  }
+
+  .util-links-container > div:last-child {
+    display: none;
   }
 
   .section-featured {
@@ -563,7 +568,7 @@
   }
 }
 
-@media (max-width: 437px) {
+@media (max-width: 459px) {
   h2 {
     font-size: 2.5rem;
   }
@@ -576,8 +581,9 @@
     padding: 0 2rem;
   }
 
-  .header-wrapper.hero-wrapper .mobile-header > p {
-    font-size: 2.2rem;
+  .header-wrapper.hero-wrapper .mobile-header > p,
+  .header-wrapper .mobile-header > p {
+    font-size: 2rem;
   }
 
   .open-mobile-nav-btn {
