@@ -1,6 +1,9 @@
 import { useLocation, NavLink } from 'react-router-dom';
+import { useRef } from 'react';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { HiBars3 } from 'react-icons/hi2';
+
+import useNavbarEffect from '../hooks/useNavbarEffect';
 import Modal from './Modal';
 
 const Header = ({ telNumber }) => {
@@ -80,8 +83,10 @@ const Header = ({ telNumber }) => {
     );
   };
 
+  const headerRef = useNavbarEffect();
+
   return (
-    <header>
+    <header ref={headerRef}>
       <div>
         <a href={`tel:${telNumber}`}>
           <BsFillTelephoneFill />

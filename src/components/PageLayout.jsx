@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 
@@ -8,10 +8,18 @@ import Footer from './Footer';
 
 const PageLayout = () => {
   const { pathname } = useLocation();
+  const isFirstRender = useRef(true);
+  const prevPathname = useRef(pathname);
   const telNumber = '555-555-555';
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else if (prevPathname.current !== pathname) {
+      window.scrollTo(0, 0);
+    }
+
+    prevPathname.current = pathname;
   }, [pathname]);
 
   return (

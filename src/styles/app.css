@@ -131,7 +131,8 @@ header {
   width: 100%;
   position: fixed;
   top: 0;
-  transition: all 180ms linear, box-shadow 100ms linear;
+  transition: top 180ms linear, background-color 150ms linear,
+    box-shadow 100ms linear;
 
   z-index: 120;
 }
@@ -204,17 +205,31 @@ header > div {
   align-items: center;
 }
 
-.reservation-link:hover {
+.header-wrapper .reservation-link:link,
+.header-wrapper .reservation-link:visited {
+  background-color: var(--main-color);
+  color: var(--font-secondary-color);
+  padding: 1rem 2rem;
+  margin-left: auto;
+  font-weight: 600;
+  border: 1px solid var(--secondary-color);
+  transition: all 200ms ease-in-out;
+}
+
+.header-wrapper .reservation-link:hover,
+.header-wrapper .reservation-link:active {
   background-color: var(--secondary-color);
   color: var(--font-main-color);
 }
 
-.header-wrapper.hero-wrapper .reservation-link {
+.header-wrapper.hero-wrapper .reservation-link:link,
+.header-wrapper.hero-wrapper .reservation-link:visited {
   background-color: var(--secondary-color);
   border-radius: 0;
 }
 
-.header-wrapper.hero-wrapper .reservation-link:hover {
+.header-wrapper.hero-wrapper .reservation-link:hover,
+.header-wrapper.hero-wrapper .reservation-link:active {
   background-color: var(--transparent);
   border: 1px solid var(--main-color);
 }
@@ -252,14 +267,53 @@ header svg {
   color: var(--main-color);
 }
 
-.reservation-link {
-  background-color: var(--main-color);
-  color: var(--font-secondary-color);
-  padding: 1rem 2rem;
-  margin-left: auto;
-  font-weight: 600;
-  border: 1px solid var(--secondary-color);
-  transition: all 200ms ease-in-out;
+header.navbar-hidden {
+  top: -9rem;
+}
+
+header.navbar-scrolled,
+.header-wrapper.hero-wrapper header.navbar-scrolled,
+.header-wrapper header.navbar-scrolled .reservation-link:link,
+.header-wrapper header.navbar-scrolled .reservation-link:visited {
+  background-color: var(--secondary-color);
+}
+
+header.navbar-scrolled .mobile-header > p,
+.header-wrapper.hero-wrapper header.navbar-scrolled .mobile-header > p,
+.header-wrapper.hero-wrapper header.navbar-scrolled .reservation-link,
+.header-wrapper header.navbar-scrolled .reservation-link:link,
+.header-wrapper header.navbar-scrolled .reservation-link:visited {
+  color: var(--font-main-color);
+  border-color: var(--font-main-color);
+}
+
+.header-wrapper.hero-wrapper header.navbar-scrolled .nav-signature,
+header.navbar-scrolled .nav-signature,
+.header-wrapper header.navbar-scrolled a:visited,
+header.navbar-scrolled a:link:not(.reservation-link),
+.header-wrapper.hero-wrapper header.navbar-scrolled svg,
+header.navbar-scrolled svg {
+  color: var(--font-main-color);
+}
+
+.header-wrapper.hero-wrapper header.navbar-scrolled a:link.active:hover {
+  border-color: var(--font-main-color);
+}
+
+.header-wrapper.hero-wrapper header.navbar-scrolled a:link:hover,
+header.navbar-scrolled a:link:not(.reservation-link):hover {
+  border-color: rgba(194, 194, 163, 0.5);
+}
+
+.header-wrapper.hero-wrapper header.navbar-scrolled .reservation-link:hover,
+.header-wrapper header.navbar-scrolled .reservation-link:hover {
+  border-color: inherit;
+  background-color: var(--font-main-color);
+  color: var(--secondary-color);
+}
+
+header.navbar-shadow {
+  box-shadow: 0 0.5px 0 0 var(--font-main-color);
 }
 
 .mobile-header {

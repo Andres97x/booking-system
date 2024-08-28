@@ -299,7 +299,7 @@
 
   #mobile-nav nav a,
   #mobile-nav nav span {
-    color: var(--main-color);
+    color: var(--font-main-color);
   }
 
   #mobile-nav .modal-close {
@@ -589,6 +589,10 @@
   .open-mobile-nav-btn {
     width: 4.3rem;
     height: 4.3rem;
+  }
+
+  #mobile-nav nav a {
+    font-size: 2rem;
   }
 
   .section-hero {

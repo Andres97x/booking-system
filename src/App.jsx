@@ -25,7 +25,6 @@ import DashboardNotifications from './components/DashboardNotifications';
 import DashboardBookings from './components/DashboardBookings';
 import DashboardMenu from './components/DashboardMenu';
 import DashboardMenuCategory from './components/DashboardMenuCategory';
-import { useEffect } from 'react';
 
 function App() {
   useOpenModalOnBtnClick();
@@ -37,52 +36,6 @@ function App() {
     },
     []
   );
-
-  /*TODO move to Header component and use useRef to handle elements, also make appropiate if statements*/
-  useEffect(() => {
-    // show/hide navbar
-    let lastScrollTop = 0;
-    const header = document.querySelector('header');
-    if (!header) return;
-
-    const dynamicNavbar = () => {
-      const currentPageText = document.querySelector('.mobile-header > p');
-
-      let scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-      if (scrollTop > lastScrollTop) {
-        // scrolling down
-        header.style.top = '-9rem';
-
-        header.style.boxShadow = '0 0 0 0 rgba(0,0,0,0)';
-      } else {
-        // scrolling up
-        header.style.top = '0';
-
-        if (window.scrollY > 40) {
-          header.style.boxShadow = '0 1.5px 0 0 #7a6b07';
-        } else {
-          header.style.boxShadow = '0 0 0 0 rgba(0,0,0,0)';
-        }
-      }
-      lastScrollTop = scrollTop;
-
-      // navbar transparency
-      if (window.scrollY > 50) {
-        header.style.backgroundColor = 'var(--secondary-color)';
-        currentPageText.style.color = 'var(--main-color)';
-      } else {
-        header.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        currentPageText.style.color = 'var(--secondary-color)';
-      }
-    };
-
-    window.addEventListener('scroll', dynamicNavbar);
-
-    return () => {
-      window.removeEventListener('scroll', dynamicNavbar);
-    };
-  }, []);
 
   return (
     <BookingContextWrapper>
