@@ -141,6 +141,11 @@ header > * {
   flex: 0.5;
 }
 
+header > div {
+  display: flex;
+  align-items: center;
+}
+
 header > nav {
   flex: 1;
   justify-content: space-between;
@@ -163,10 +168,21 @@ nav {
   gap: 8rem;
 }
 
-.header-wrapper a:link,
-.header-wrapper a:visited,
-.header-wrapper a:hover,
-.header-wrapper a:active {
+header button {
+  border: none;
+  background-color: transparent;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+header svg {
+  color: var(--secondary-color);
+}
+
+header a:link,
+header a:visited,
+header a:hover,
+header a:active {
   color: var(--font-secondary-color);
   text-decoration: none;
   text-transform: uppercase;
@@ -177,61 +193,31 @@ header a:link:not(.reservation-link) {
   transition: all 180ms ease-in-out;
 }
 
-header a:link:hover {
+.header-wrapper header a:hover {
   border-color: rgba(18, 55, 42, 0.5);
 }
 
-header a:link.active {
+.header-wrapper header a.navlink-active {
   border-color: var(--font-secondary-color);
 }
 
-.header-wrapper.hero-wrapper a:link,
-.header-wrapper.hero-wrapper a:visited,
-.header-wrapper.hero-wrapper a:hover,
-.header-wrapper.hero-wrapper a:active {
-  color: var(--main-color);
-}
-
-.header-wrapper.hero-wrapper header a:link:hover {
-  border-color: rgba(242, 237, 233, 0.8);
-}
-
-.header-wrapper.hero-wrapper header a:link.active {
-  border-color: var(--main-color);
-}
-
-header > div {
-  display: flex;
-  align-items: center;
-}
-
-.header-wrapper .reservation-link:link,
-.header-wrapper .reservation-link:visited {
+.reservation-link:link,
+.reservation-link:visited {
   background-color: var(--main-color);
-  color: var(--font-secondary-color);
+  color: var(--secondary-color);
   padding: 1rem 2rem;
   margin-left: auto;
   font-weight: 600;
   border: 1px solid var(--secondary-color);
   transition: all 200ms ease-in-out;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
-.header-wrapper .reservation-link:hover,
-.header-wrapper .reservation-link:active {
+.reservation-link:hover,
+.reservation-link:active {
   background-color: var(--secondary-color);
   color: var(--font-main-color);
-}
-
-.header-wrapper.hero-wrapper .reservation-link:link,
-.header-wrapper.hero-wrapper .reservation-link:visited {
-  background-color: var(--secondary-color);
-  border-radius: 0;
-}
-
-.header-wrapper.hero-wrapper .reservation-link:hover,
-.header-wrapper.hero-wrapper .reservation-link:active {
-  background-color: var(--transparent);
-  border: 1px solid var(--main-color);
 }
 
 .nav-signature {
@@ -248,66 +234,74 @@ header > div {
   -webkit-user-select: none;
 }
 
-.header-wrapper.hero-wrapper .nav-signature {
+.header-wrapper.hero-wrapper a:link,
+.header-wrapper.hero-wrapper a:visited,
+.header-wrapper.hero-wrapper a:hover,
+.header-wrapper.hero-wrapper a:active {
   color: var(--main-color);
 }
 
-header button {
-  border: none;
-  background-color: transparent;
-  font-size: 2.5rem;
-  cursor: pointer;
+.header-wrapper.hero-wrapper header a:hover {
+  border-color: rgba(242, 237, 233, 0.8);
 }
 
-header svg {
-  color: var(--secondary-color);
+.header-wrapper.hero-wrapper header a.navlink-active {
+  border-color: var(--main-color);
+}
+
+.header-wrapper.hero-wrapper .reservation-link:link,
+.header-wrapper.hero-wrapper .reservation-link:visited {
+  background-color: var(--secondary-color);
+  border-radius: 0;
+}
+
+.header-wrapper.hero-wrapper .reservation-link:hover,
+.header-wrapper.hero-wrapper .reservation-link:active {
+  background-color: var(--transparent);
+  border-color: var(--main-color);
+}
+
+.header-wrapper.hero-wrapper .nav-signature {
+  color: var(--main-color);
 }
 
 .header-wrapper.hero-wrapper header svg {
   color: var(--main-color);
 }
 
+/* ---------------------------------------------- */
+/* DYNAMIC HEADER STYLES */
+
 header.navbar-hidden {
   top: -9rem;
 }
 
-header.navbar-scrolled,
-.header-wrapper.hero-wrapper header.navbar-scrolled,
-.header-wrapper header.navbar-scrolled .reservation-link:link,
-.header-wrapper header.navbar-scrolled .reservation-link:visited {
+.header-wrapper.hero-wrapper header.navbar-scrolled {
   background-color: var(--secondary-color);
 }
 
-header.navbar-scrolled .mobile-header > p,
-.header-wrapper.hero-wrapper header.navbar-scrolled .mobile-header > p,
-.header-wrapper.hero-wrapper header.navbar-scrolled .reservation-link,
-.header-wrapper header.navbar-scrolled .reservation-link:link,
-.header-wrapper header.navbar-scrolled .reservation-link:visited {
-  color: var(--font-main-color);
-  border-color: var(--font-main-color);
-}
-
 .header-wrapper.hero-wrapper header.navbar-scrolled .nav-signature,
-header.navbar-scrolled .nav-signature,
-.header-wrapper header.navbar-scrolled a:visited,
-header.navbar-scrolled a:link:not(.reservation-link),
+.header-wrapper.hero-wrapper header.navbar-scrolled a,
 .header-wrapper.hero-wrapper header.navbar-scrolled svg,
-header.navbar-scrolled svg {
+.mobile-header button {
   color: var(--font-main-color);
 }
 
-.header-wrapper.hero-wrapper header.navbar-scrolled a:link.active:hover {
+.header-wrapper.hero-wrapper header.navbar-scrolled a.navlink-active {
   border-color: var(--font-main-color);
 }
 
-.header-wrapper.hero-wrapper header.navbar-scrolled a:link:hover,
-header.navbar-scrolled a:link:not(.reservation-link):hover {
+.header-wrapper.hero-wrapper header.navbar-scrolled a:hover,
+.header-wrapper.hero-wrapper header.navbar-scrolled .reservation-link {
   border-color: rgba(194, 194, 163, 0.5);
 }
 
-.header-wrapper.hero-wrapper header.navbar-scrolled .reservation-link:hover,
-.header-wrapper header.navbar-scrolled .reservation-link:hover {
-  border-color: inherit;
+.header-wrapper.hero-wrapper header.navbar-scrolled .mobile-header > p {
+  color: var(--font-main-color);
+  border-color: var(--font-main-color);
+}
+
+.header-wrapper.hero-wrapper header.navbar-scrolled .reservation-link:hover {
   background-color: var(--font-main-color);
   color: var(--secondary-color);
 }
@@ -315,6 +309,9 @@ header.navbar-scrolled a:link:not(.reservation-link):hover {
 header.navbar-shadow {
   box-shadow: 0 0.5px 0 0 var(--font-main-color);
 }
+
+/* ---------------------------------------------- */
+/* MOBILE HEADER */
 
 .mobile-header {
   display: none;
@@ -327,6 +324,18 @@ header.navbar-shadow {
   left: 0;
   bottom: 4rem;
   width: 100%;
+}
+
+#mobile-nav a:hover {
+  border-color: rgba(194, 194, 163, 0.5);
+}
+
+#mobile-nav a.navlink-active {
+  border-color: var(--font-main-color);
+}
+
+#mobile-nav svg {
+  color: var(--font-main-color);
 }
 
 /* FOOTER */
@@ -397,7 +406,7 @@ header.navbar-shadow {
   font-size: 1.4rem;
   color: rgba(194, 194, 163, 0.8);
   line-height: 1.6;
-  margin-top: 2rem;
+  margin: 2rem 0;
   width: 100%;
 }
 

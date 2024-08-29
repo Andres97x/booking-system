@@ -38,10 +38,6 @@ const MenuItems = () => {
     setError,
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const displayedItems = subCategory
     ? items.filter(item => item.subCategory === subCategory)
     : items;

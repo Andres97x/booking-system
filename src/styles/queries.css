@@ -310,7 +310,7 @@
   }
 
   #mobile-nav .modal-close svg {
-    color: var(--main-color);
+    color: var(--font-main-color);
   }
 
   .util-links-container > div:last-child {

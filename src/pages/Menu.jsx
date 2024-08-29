@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Spinner from '../components/Spinner';
@@ -17,24 +17,12 @@ const Menu = () => {
     setError,
   });
 
-  const getGridStyle = categoriesData => {
-    if (categoriesData.length === 1) {
-      return {
-        '--row-span-first-category': '1',
-        '--aspect-ratio-first-category': '1 / 0.45',
-      };
-    } else if (categoriesData.length < 5) {
-      return {
-        '--row-span-first-category': '1',
-        '--aspect-ratio-first-category': '1 / 0.5',
-      };
-    } else {
-      return {
-        '--row-span-first-category': '2',
-        '--aspect-ratio-first-category': '1 / 1.01',
-      };
-    }
-  };
+  const firstCategoryDimmensions =
+    categoriesData.length <= 1
+      ? 'small-size'
+      : categoriesData.length < 5
+      ? 'medium-size'
+      : 'big-size';
 
   const categoriesEl = categoriesData.map((category, i) => {
     const pathName = `${category.id}-${category.name
@@ -69,7 +57,7 @@ const Menu = () => {
   return (
     <div className='section-menu'>
       {categoriesData.length > 0 ? (
-        <div className='menu-grid' style={getGridStyle(categoriesData)}>
+        <div className={`menu-grid first-category-${firstCategoryDimmensions}`}>
           {categoriesEl}
         </div>
       ) : (

@@ -1,0 +1,33 @@
+@media (max-width: 1000px) {
+  .about-img-container {
+    width: 90%;
+  }
+
+  .about-content {
+    width: 80%;
+  }
+}
+
+@media (max-width: 660px) {
+  .about-img-container img {
+    aspect-ratio: 3.5/1;
+  }
+
+  .about-content h2 {
+    font-size: 2.5rem;
+  }
+
+  .about-content {
+    width: 85%;
+  }
+}
+
+@media (max-width: 459px) {
+  .about-img-container {
+    width: 95%;
+  }
+
+  .about-content {
+    width: 95%;
+  }
+}

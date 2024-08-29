@@ -2,11 +2,13 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
 import './styles/app.css';
 import './styles/Home.css';
+import './styles/About.css';
 import './styles/CarouselGroup.css';
 import './styles/Bookings.css';
 import './styles/Menu.css';
 import './styles/Dashboard.css';
 import './styles/queries.css';
+import './styles/queriesAbout.css';
 
 import { BookingContextWrapper } from './contexts/BookingContext';
 

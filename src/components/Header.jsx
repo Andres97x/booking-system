@@ -38,14 +38,14 @@ const Header = ({ telNumber }) => {
       <nav>
         <NavLink
           to='/'
-          className={({ isActive }) => (isActive ? 'active' : '')}
+          className={({ isActive }) => (isActive ? 'navlink-active' : '')}
           onClick={closeMobileNav}
         >
           Home
         </NavLink>
         <NavLink
           to='/about'
-          className={({ isActive }) => (isActive ? 'active' : '')}
+          className={({ isActive }) => (isActive ? 'navlink-active' : '')}
           onClick={closeMobileNav}
         >
           Nosotros
@@ -53,7 +53,7 @@ const Header = ({ telNumber }) => {
         <span className='nav-signature'>Éclat Étoilé</span>
         <NavLink
           to='/menu'
-          className={({ isActive }) => (isActive ? 'active' : '')}
+          className={({ isActive }) => (isActive ? 'navlink-active' : '')}
           onClick={closeMobileNav}
         >
           Menú
@@ -61,7 +61,7 @@ const Header = ({ telNumber }) => {
         <NavLink
           to='/dashboard'
           className={({ isActive }) =>
-            `dashboard-link ${isActive ? 'active' : ''}`
+            `dashboard-link ${isActive ? 'navlink-active' : ''}`
           }
           onClick={closeMobileNav}
         >
@@ -72,7 +72,7 @@ const Header = ({ telNumber }) => {
           <NavLink
             to='/bookings'
             className={({ isActive }) =>
-              `dashboard-link ${isActive ? 'active' : ''}`
+              `dashboard-link ${isActive ? 'navlink-active' : ''}`
             }
             onClick={closeMobileNav}
           >
