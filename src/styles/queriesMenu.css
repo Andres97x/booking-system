@@ -1,0 +1,123 @@
+@media (width <= 1722px) {
+  .menu-grid.first-category-big-size {
+    --aspect-ratio-first-category: 1 / 1.21;
+  }
+
+  .menu-grid.first-category-medium-size {
+    --aspect-ratio-first-category: 1 / 0.6;
+  }
+
+  .menu-category img {
+    aspect-ratio: 1/0.6;
+  }
+}
+
+@media (width<= 1283px) {
+  .section-menu {
+    padding: 8rem;
+  }
+
+  .menu-grid.first-category-big-size {
+    --aspect-ratio-first-category: 1 / 1.51;
+  }
+
+  .menu-grid.first-category-medium-size {
+    --aspect-ratio-first-category: 1 / 0.75;
+  }
+
+  .menu-category img {
+    aspect-ratio: 1/0.75;
+  }
+}
+
+@media (width<= 1182px) {
+  .menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .menu-grid.first-category-big-size {
+    --aspect-ratio-first-category: 1 / 1.01;
+  }
+
+  .menu-grid.first-category-medium-size {
+    --aspect-ratio-first-category: 1 / 0.5;
+  }
+
+  .menu-category img {
+    aspect-ratio: 1/0.5;
+  }
+}
+
+@media (width<= 1000px) {
+  .menu-grid.first-category-big-size {
+    --aspect-ratio-first-category: 1 / 1.21;
+  }
+
+  .menu-grid.first-category-medium-size {
+    --aspect-ratio-first-category: 1 / 0.6;
+  }
+
+  .menu-category img {
+    aspect-ratio: 1/0.6;
+  }
+}
+
+@media (width<= 815px) {
+  .section-menu {
+    padding: 6rem;
+  }
+
+  .menu-grid.first-category-big-size {
+    --aspect-ratio-first-category: 1 / 1.51;
+  }
+
+  .menu-grid.first-category-medium-size {
+    --aspect-ratio-first-category: 1 / 0.75;
+  }
+
+  .menu-category img {
+    aspect-ratio: 1/0.75;
+  }
+}
+
+@media (width<= 660px) {
+  .section-menu {
+    padding: 6rem 4rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menu-grid.first-category-big-size {
+    --row-span-first-category: 1;
+  }
+
+  .menu-grid.first-category-big-size,
+  .menu-grid.first-category-medium-size {
+    --aspect-ratio-first-category: 1 / 0.55;
+  }
+
+  .menu-category img {
+    aspect-ratio: 1/0.55;
+  }
+
+  .category-content > p {
+    width: 50%;
+  }
+}
+
+@media (width<= 545px) {
+  .menu-grid.first-category-small-size {
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    --aspect-ratio-first-category: 1/0.7;
+  }
+
+  .category-content > p {
+    width: 100%;
+  }
+
+  .categories-spinner-container {
+    height: calc(100vh - 0.5px - var(--footer-height));
+  }
+}

@@ -9,6 +9,7 @@ import './styles/Menu.css';
 import './styles/Dashboard.css';
 import './styles/queries.css';
 import './styles/queriesAbout.css';
+import './styles/queriesMenu.css';
 
 import { BookingContextWrapper } from './contexts/BookingContext';
 
