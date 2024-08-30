@@ -117,7 +117,7 @@
 .section-menu-items > h3 {
   display: inline-block;
   color: var(--font-secondary-color);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   font-weight: 600;
   width: fit-content;
   padding: 0.5rem 1.5rem;
@@ -134,7 +134,7 @@
   column-gap: 2rem;
   row-gap: 2.5rem;
   align-items: start;
-  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
 }
 
 .menu-item {
@@ -271,7 +271,6 @@
 .product-detail-img {
   padding: 3rem;
   width: 100%;
-  aspect-ratio: 1/1.5;
   object-fit: cover;
 }
 

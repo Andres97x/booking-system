@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { MdOutlineDelete, MdEdit } from 'react-icons/md';
-import { formatPrice } from '../utils';
 
 const DashboardMenuCard = ({ type, option, setSelectedOption }) => {
   return (

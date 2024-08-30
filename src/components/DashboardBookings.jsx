@@ -6,7 +6,10 @@ import {
   orderBy,
   where,
   Timestamp,
+  doc,
+  deleteDoc,
 } from 'firebase/firestore';
+
 import { isToday, isThisWeek, isThisMonth, isSameDay } from 'date-fns';
 
 import { db } from '../configs/firebase';
@@ -21,13 +24,61 @@ const DashboardBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [bookingDateFilter, setBookingDateFilter] = useState('Hoy');
   const [selectedBooking, setSelectedBooking] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const fetchKey = useMemo(() => {
     return bookingDateFilter === 'Pasados' ? 'Pasados' : 'Vigentes';
   }, [bookingDateFilter]);
+
   const [inputData, setInputData] = useState({ id: '', date: '' });
   const [pageIndex, setPageIndex] = useState(1);
+
+  const [selectedBookings, setSelectedBookings] = useState([]);
+  const selectedBookingsId = selectedBookings.map(booking => booking.id);
+  const areAllBookingsSelected = () => {
+    if (selectedBookingsId.length === 0) return false;
+
+    return displayedBookings.every(booking =>
+      selectedBookingsId.includes(booking.id)
+    );
+  };
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  /* TODO implement multiple booking deletion */
+  // const deleteSelectedBookings = async selectedBookings => {
+  //   const bookingsCollectionRef = collection(db, 'bookings');
+
+  //   console.log(selectedBookings);
+  // };
+
+  const handleCartSelect = clickedBooking => {
+    // check if this booking has already been selected
+    const isBookingSelected = selectedBookings.find(
+      booking => booking.id === clickedBooking.id
+    );
+
+    // if so delete it from selected bookings
+    if (isBookingSelected) {
+      setSelectedBookings(prev =>
+        prev.filter(booking => booking.id !== clickedBooking.id)
+      );
+    } else {
+      // if not add it to selected bookings
+      setSelectedBookings(prev => {
+        return [...prev, clickedBooking];
+      });
+    }
+  };
+
+  const handleSelectAllBookings = currentDisplayedBookings => {
+    if (displayedBookings.length === 0) return;
+
+    if (areAllBookingsSelected() === true) {
+      setSelectedBookings([]);
+    } else {
+      setSelectedBookings(currentDisplayedBookings);
+    }
+  };
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -68,6 +119,7 @@ const DashboardBookings = () => {
 
   useEffect(() => {
     setInputData(prev => ({ ...prev, date: '' }));
+    setSelectedBookings([]);
   }, [bookingDateFilter]);
 
   const filterBookings = booking => {
@@ -88,7 +140,6 @@ const DashboardBookings = () => {
     // If both inputData.date and inputData.id are set by its filters
     if (inputData.date && inputData.id) {
       return (
-        matchesDateFilter &&
         matchesDateFilter &&
         isSameDay(
           booking.justDate.toDate(),
@@ -146,9 +197,9 @@ const DashboardBookings = () => {
     setPageIndex(1);
   }, [bookingDateFilter]);
 
-  const renderBookingCards = () => {
-    const displayedBookings = getSearchResultsPage(filteredBookings, pageIndex);
+  const displayedBookings = getSearchResultsPage(filteredBookings, pageIndex);
 
+  const renderBookingCards = () => {
     if (loading) {
       return <Spinner spinnerContainerClassName='dashboard-main-spinner' />;
     } else if (error) {
@@ -167,6 +218,8 @@ const DashboardBookings = () => {
               key={`booking-card-${i}`}
               booking={booking}
               setSelectedBooking={setSelectedBooking}
+              handleCartSelect={handleCartSelect}
+              selectedBookings={selectedBookings}
             />
           ))}
         </div>
@@ -182,6 +235,10 @@ const DashboardBookings = () => {
         handleChange={handleChange}
         bookingDateFilter={bookingDateFilter}
         setBookingDateFilter={setBookingDateFilter}
+        selectedBookings={selectedBookings}
+        displayedBookings={displayedBookings}
+        handleSelectAllBookings={handleSelectAllBookings}
+        areAllBookingsSelected={areAllBookingsSelected}
       />
 
       {renderBookingCards()}

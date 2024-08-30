@@ -147,6 +147,55 @@
   width: max-content;
 }
 
+.booking-cards-select-options {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.select-all-bookings-option {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--font-secondary-color);
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-all-bookings-option svg {
+  width: 80%;
+  height: 80%;
+  color: var(--main-color);
+}
+
+.select-all-bookings-option.selected {
+  background-color: var(--secondary-color);
+}
+
+.instant-popup {
+  position: absolute;
+  bottom: -3rem;
+  left: -2rem;
+  font-size: 1.3rem;
+  background-color: #444;
+  color: var(--main-color);
+  padding: 0.3rem 0.8rem;
+  border-radius: 3px;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: all 150ms ease-in-out;
+}
+
+.select-all-bookings-option:hover .instant-popup {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
 .dashboard-bookings-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
@@ -161,10 +210,37 @@
   cursor: pointer;
   background-color: inherit;
   text-align: start;
+  position: relative;
 }
 
 .booking-card p {
+  margin-top: 0.3rem;
   font-size: 1.4rem;
+  width: 85%;
+}
+
+.booking-card-select {
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--secondary-color);
+  border-radius: 3px;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking-card-select svg {
+  width: 80%;
+  height: 80%;
+  color: var(--main-color);
+}
+
+.booking-card-select.selected {
+  background-color: var(--secondary-color);
 }
 
 .booking-card > a {

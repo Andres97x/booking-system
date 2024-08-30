@@ -1,5 +1,6 @@
 import { IoIosSearch } from 'react-icons/io';
 import { Timestamp } from 'firebase/firestore';
+import { FaCheck } from 'react-icons/fa6';
 
 import DashboardBookingFilterBtn from './DashboardBookingFilterBtn';
 
@@ -9,6 +10,10 @@ const DashboardBookingsHeader = ({
   handleChange,
   bookingDateFilter,
   setBookingDateFilter,
+  selectedBookings,
+  displayedBookings,
+  handleSelectAllBookings,
+  areAllBookingsSelected,
 }) => {
   const renderFilters = () => {
     const filters = ['Hoy', 'Esta semana', 'Este mes', 'Todos', 'Pasados'];
@@ -69,6 +74,23 @@ const DashboardBookingsHeader = ({
               />
             </div>
           )}
+
+        <div className='booking-cards-select-options'>
+          <div
+            className={`select-all-bookings-option ${
+              areAllBookingsSelected() ? 'selected' : ''
+            }`}
+            onClick={() => {
+              handleSelectAllBookings(displayedBookings);
+            }}
+          >
+            <p className='instant-popup'>Seleccionar</p>
+            <FaCheck />
+          </div>
+          {selectedBookings.length >= 1 && (
+            <div>{selectedBookings.length} seleccionados</div>
+          )}
+        </div>
       </div>
       {!error && (
         <div className='date-filters-container'>{renderFilters()}</div>
