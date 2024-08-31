@@ -1,8 +1,12 @@
-import { IoIosSearch } from 'react-icons/io';
+import { useRef } from 'react';
 import { Timestamp } from 'firebase/firestore';
+import { MdCancel, MdOutlineDelete } from 'react-icons/md';
+import { IoIosSearch } from 'react-icons/io';
 import { FaCheck } from 'react-icons/fa6';
 
 import DashboardBookingFilterBtn from './DashboardBookingFilterBtn';
+import Modal from './Modal';
+import Spinner from './Spinner';
 
 const DashboardBookingsHeader = ({
   error,
@@ -14,7 +18,12 @@ const DashboardBookingsHeader = ({
   displayedBookings,
   handleSelectAllBookings,
   areAllBookingsSelected,
+  deleteSelectedBookings,
+  deleteBookingsStatus,
+  deleteBookingsError,
 }) => {
+  const modalDeleteBookingsRef = useRef(null);
+
   const renderFilters = () => {
     const filters = ['Hoy', 'Esta semana', 'Este mes', 'Todos', 'Pasados'];
 
@@ -45,7 +54,7 @@ const DashboardBookingsHeader = ({
       <div style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
         <h3>Reservas</h3>
         {!error && (
-          <div className='search-id-input-container'>
+          <div className='search-id-input-container instant-popup-container'>
             <div className='search-id-input-container_svg-container'>
               <IoIosSearch />
             </div>
@@ -58,12 +67,13 @@ const DashboardBookingsHeader = ({
               onChange={handleChange}
               className={inputData.id ? 'active' : ''}
             />
+            <p className='instant-popup'>Buscar por ID</p>
           </div>
         )}
 
         {(bookingDateFilter === 'Todos' || bookingDateFilter === 'Pasados') &&
           !error && (
-            <div className='date-input-container'>
+            <div className='date-input-container instant-popup-container'>
               <input
                 type='date'
                 name='date'
@@ -72,23 +82,86 @@ const DashboardBookingsHeader = ({
                 min={bookingDateFilter === 'Todos' ? getLimitDate() : null}
                 max={bookingDateFilter === 'Pasados' ? getLimitDate() : null}
               />
+              <p className='instant-popup' style={{ left: '0' }}>
+                Elegir una fecha
+              </p>
             </div>
           )}
 
         <div className='booking-cards-select-options'>
           <div
-            className={`select-all-bookings-option ${
+            className={`select-all-bookings-option instant-popup-container ${
               areAllBookingsSelected() ? 'selected' : ''
             }`}
             onClick={() => {
               handleSelectAllBookings(displayedBookings);
             }}
           >
-            <p className='instant-popup'>Seleccionar</p>
+            <p className='instant-popup' style={{ bottom: '-3.2rem' }}>
+              Seleccionar
+            </p>
             <FaCheck />
           </div>
           {selectedBookings.length >= 1 && (
-            <div>{selectedBookings.length} seleccionados</div>
+            <>
+              <p className='bookings-selected-number'>
+                {selectedBookings.length}
+                {selectedBookings.length === 1
+                  ? ' seleccionado'
+                  : ' seleccionados'}
+              </p>
+              <button
+                className='delete-selected-bookings-btn'
+                data-modal='modal-delete-bookings'
+                onClick={() => {}}
+              >
+                <MdOutlineDelete />
+              </button>
+              <Modal id='modal-delete-bookings' ref={modalDeleteBookingsRef}>
+                {deleteBookingsStatus === 'idle' ? (
+                  <div>
+                    <p>
+                      Estás seguro que quieres eliminar las reservas
+                      seleccionadas?
+                    </p>
+                    {deleteBookingsError && (
+                      <span className='error-message'>
+                        {deleteBookingsError}
+                      </span>
+                    )}
+                    <div className='modal-delete-bookings-btns'>
+                      <button
+                        className='delete-btn'
+                        onClick={() => {
+                          deleteSelectedBookings(
+                            selectedBookings,
+                            modalDeleteBookingsRef
+                          );
+                        }}
+                      >
+                        <MdOutlineDelete />
+                        Eliminar
+                      </button>
+                      <button
+                        className='cancel-btn'
+                        onClick={() => {
+                          modalDeleteBookingsRef.current.close();
+                        }}
+                      >
+                        <MdCancel />
+                        Cancelar
+                      </button>
+                    </div>
+                  </div>
+                ) : deleteBookingsStatus === 'loading' ? (
+                  <Spinner spinnerContainerClassName='modal-delete-bookings-spinner' />
+                ) : (
+                  <p className='modal-delete-bookings-success'>
+                    Se elimaron las reservas seleccionadas
+                  </p>
+                )}
+              </Modal>
+            </>
           )}
         </div>
       </div>

@@ -8,6 +8,7 @@ import {
   Timestamp,
   doc,
   deleteDoc,
+  writeBatch,
 } from 'firebase/firestore';
 
 import { isToday, isThisWeek, isThisMonth, isSameDay } from 'date-fns';
@@ -33,6 +34,8 @@ const DashboardBookings = () => {
 
   const [selectedBookings, setSelectedBookings] = useState([]);
   const selectedBookingsId = selectedBookings.map(booking => booking.id);
+  const [deleteBookingsStatus, setDeleteBookingsStatus] = useState('idle');
+  const [deleteBookingsError, setDeleteBookingsError] = useState(null);
   const areAllBookingsSelected = () => {
     if (selectedBookingsId.length === 0) return false;
 
@@ -44,12 +47,33 @@ const DashboardBookings = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  /* TODO implement multiple booking deletion */
-  // const deleteSelectedBookings = async selectedBookings => {
-  //   const bookingsCollectionRef = collection(db, 'bookings');
+  const deleteSelectedBookings = async (selectedBookings, modalRef) => {
+    const bookingsCollectionRef = collection(db, 'bookings');
 
-  //   console.log(selectedBookings);
-  // };
+    const batch = writeBatch(db);
+
+    selectedBookings.forEach(booking => {
+      batch.delete(doc(bookingsCollectionRef, booking.id));
+    });
+
+    try {
+      setDeleteBookingsStatus('loading');
+      await batch.commit();
+      setDeleteBookingsStatus('completed');
+
+      setTimeout(() => {
+        if (!modalRef.current) return;
+        modalRef.current.close();
+        setSelectedBookings([]);
+        setDeleteBookingsStatus('idle');
+      }, 1200);
+    } catch (err) {
+      setDeleteBookingsError(
+        'Hubo un error al intentar eliminar las reservas seleccionadas, por favor reporta este fallo'
+      );
+      setDeleteBookingsStatus('idle');
+    }
+  };
 
   const handleCartSelect = clickedBooking => {
     // check if this booking has already been selected
@@ -118,8 +142,12 @@ const DashboardBookings = () => {
   }, [fetchKey]);
 
   useEffect(() => {
-    setInputData(prev => ({ ...prev, date: '' }));
     setSelectedBookings([]);
+  }, [bookingDateFilter, inputData]);
+
+  useEffect(() => {
+    setInputData(prev => ({ ...prev, date: '' }));
+    setPageIndex(1);
   }, [bookingDateFilter]);
 
   const filterBookings = booking => {
@@ -193,10 +221,6 @@ const DashboardBookings = () => {
     return dataArr.slice(start, finish);
   };
 
-  useEffect(() => {
-    setPageIndex(1);
-  }, [bookingDateFilter]);
-
   const displayedBookings = getSearchResultsPage(filteredBookings, pageIndex);
 
   const renderBookingCards = () => {
@@ -239,6 +263,9 @@ const DashboardBookings = () => {
         displayedBookings={displayedBookings}
         handleSelectAllBookings={handleSelectAllBookings}
         areAllBookingsSelected={areAllBookingsSelected}
+        deleteSelectedBookings={deleteSelectedBookings}
+        deleteBookingsStatus={deleteBookingsStatus}
+        deleteBookingsError={deleteBookingsError}
       />
 
       {renderBookingCards()}
