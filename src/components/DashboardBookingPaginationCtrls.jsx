@@ -24,15 +24,11 @@ const DashboardBookingPaginationCtrls = ({
 
   return (
     <div
-      className={`bookings-ctrl_btns dashboard-ctrl ${
+      className={`pagination_btns-container dashboard-bookings-pagination ${
         filteredBookings.length <= bookingsResultsPerPage ? 'ctrls-hidden' : ''
       }`}
     >
-      <button
-        className='bookings-btn bookings-back_btn'
-        onClick={goToPreviousPage}
-        disabled={pageIndex === 1}
-      >
+      <button onClick={goToPreviousPage} disabled={pageIndex === 1}>
         <BsFillCaretLeftFill />
       </button>
 
@@ -44,7 +40,6 @@ const DashboardBookingPaginationCtrls = ({
       </div>
 
       <button
-        className='bookings-btn bookings-back_btn'
         onClick={goToNextPage}
         disabled={
           pageIndex ===

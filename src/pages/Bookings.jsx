@@ -44,22 +44,20 @@ const Bookings = () => {
         <BookingTimes />
         <BookingForm />
       </div>
-      <div className='bookings-ctrl_btns'>
+      <div className='pagination_btns-container booking-pagination'>
         {timesStatus === 'loading' ||
         submitStatus === 'loading' ||
         submitStatus === 'completed' ? null : (
           <>
             <button
-              className={`bookings-btn bookings-back_btn tab-enabled ${
-                !booking.justDate ? 'hidden' : ''
-              }`}
+              className={`tab-enabled ${!booking.justDate ? 'hidden' : ''}`}
               disabled={sliderIndex <= 0}
               onClick={onClickBack}
             >
               <BsFillCaretLeftFill />
             </button>
             <button
-              className={`bookings-btn complete-booking tab-enabled ${
+              className={`complete-booking tab-enabled ${
                 sliderIndex === 3 ? '' : 'hidden'
               }`}
               disabled={sliderIndex !== 3}

@@ -753,3 +753,39 @@ dialog textarea::placeholder {
 .blurred {
   filter: blur(5px);
 }
+
+/* PAGINATION */
+.pagination_btns-container {
+  display: flex;
+  max-width: 50rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 3rem;
+  min-height: 5rem;
+}
+
+.pagination_btns-container button {
+  width: 5rem;
+  height: 5rem;
+  font-size: 2rem;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  color: var(--font-secondary-color);
+  border: 1.5px solid var(--font-secondary-color);
+  cursor: pointer;
+  transition: all 180ms ease-in-out;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination_btns-container button:hover,
+.pagination_btns-container button:focus-visible {
+  font-size: 2.5rem;
+}
+
+.pagination_btns-container button:disabled:hover {
+  font-size: 2rem;
+}

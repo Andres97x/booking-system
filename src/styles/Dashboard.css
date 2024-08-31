@@ -374,16 +374,16 @@
   opacity: 0.8;
 }
 
-.bookings-ctrl_btns.dashboard-ctrl {
+.dashboard-bookings-pagination {
   width: 30rem;
   margin-top: auto;
 }
 
-.bookings-ctrl_btns.dashboard-ctrl button:disabled {
+.dashboard-bookings-pagination button:disabled {
   opacity: 0.5;
 }
 
-.bookings-ctrl_btns.dashboard-ctrl.ctrls-hidden {
+.dashboard-bookings-pagination.ctrls-hidden {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
