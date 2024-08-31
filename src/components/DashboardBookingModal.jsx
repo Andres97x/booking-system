@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react';
-import Modal from './Modal';
+import { MdCancel, MdOutlineDelete } from 'react-icons/md';
 import { doc, deleteDoc } from 'firebase/firestore';
+
 import { db } from '../configs/firebase';
 
+import Modal from './Modal';
 import Spinner from './Spinner';
 import DashboardBookingScreen from './DashboardBookingScreen';
 
@@ -34,8 +36,34 @@ const DashboardBookingModal = ({ selectedBooking }) => {
         <DashboardBookingScreen
           selectedBooking={selectedBooking}
           error={error}
-          deleteBooking={deleteBooking}
+          setStatus={setStatus}
         />
+      );
+    } else if (status === 'confirmation') {
+      return (
+        <div>
+          <p>Seguro quieres eliminar esta reserva?</p>
+          <div className='modal-delete-bookings-btns'>
+            <button
+              className='delete-btn'
+              onClick={() => {
+                deleteBooking(selectedBooking.id);
+              }}
+            >
+              <MdOutlineDelete />
+              Eliminar
+            </button>
+            <button
+              className='cancel-btn'
+              onClick={() => {
+                setStatus('idle');
+              }}
+            >
+              <MdCancel />
+              Cancelar
+            </button>
+          </div>
+        </div>
       );
     } else if (status === 'loading') {
       return <Spinner />;

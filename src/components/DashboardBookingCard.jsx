@@ -1,6 +1,6 @@
+import { useRef } from 'react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { useRef } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 
 import { capitalizeDate } from '../utils';
@@ -53,11 +53,3 @@ const DashboardBookingCard = ({
 };
 
 export default DashboardBookingCard;
-
-// ${Boolean(
-//   selectedBookings.find(
-//     currentBooking => currentBooking.id === booking.id
-//   )
-//     ? 'selected'
-//     : ''
-// )}

@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { capitalizeDate } from '../utils';
 
-const DashboardBookingScreen = ({ selectedBooking, error, deleteBooking }) => {
+const DashboardBookingScreen = ({ selectedBooking, error, setStatus }) => {
   return (
     <>
       <h5>Información de la reserva</h5>
@@ -68,7 +68,7 @@ const DashboardBookingScreen = ({ selectedBooking, error, deleteBooking }) => {
       <button
         className='delete-booking-btn'
         onClick={() => {
-          deleteBooking(selectedBooking.id);
+          setStatus('confirmation');
         }}
       >
         Eliminar reserva
