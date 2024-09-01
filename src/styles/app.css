@@ -754,6 +754,11 @@ dialog textarea::placeholder {
   filter: blur(5px);
 }
 
+.flex-aux {
+  display: flex;
+  align-items: center;
+}
+
 /* PAGINATION */
 .pagination_btns-container {
   display: flex;

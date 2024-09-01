@@ -566,6 +566,14 @@
   .map {
     padding-bottom: 40%;
   }
+
+  .footer {
+    padding: 2rem;
+  }
+
+  .copy {
+    width: fit-content;
+  }
 }
 
 @media (max-width: 459px) {

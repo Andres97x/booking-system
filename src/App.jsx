@@ -10,6 +10,7 @@ import './styles/Dashboard.css';
 import './styles/queries.css';
 import './styles/queriesAbout.css';
 import './styles/queriesMenu.css';
+import './styles/queriesDashboard.css';
 
 import { BookingContextWrapper } from './contexts/BookingContext';
 

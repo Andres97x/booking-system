@@ -5,6 +5,7 @@ const DashboardBookingPaginationCtrls = ({
   bookingsResultsPerPage,
   pageIndex,
   setPageIndex,
+  loading,
 }) => {
   const goToNextPage = () => {
     setPageIndex(prev => {
@@ -25,7 +26,9 @@ const DashboardBookingPaginationCtrls = ({
   return (
     <div
       className={`pagination_btns-container dashboard-bookings-pagination ${
-        filteredBookings.length <= bookingsResultsPerPage ? 'ctrls-hidden' : ''
+        filteredBookings.length <= bookingsResultsPerPage || loading
+          ? 'ctrls-hidden'
+          : ''
       }`}
     >
       <button onClick={goToPreviousPage} disabled={pageIndex === 1}>

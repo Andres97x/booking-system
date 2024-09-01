@@ -23,7 +23,3 @@ export const ZONE_TABLES = {
 export const OPENING_TIME = 16;
 export const CLOSING_TIME = 22;
 export const INTERVAL = 30; // in minutes;
-
-/* DASHBOARD BOOKINGS */
-
-export const bookingsResultsPerPage = 40;

@@ -7,7 +7,6 @@ import {
   where,
   Timestamp,
   doc,
-  deleteDoc,
   writeBatch,
 } from 'firebase/firestore';
 
@@ -19,7 +18,6 @@ import Spinner from './Spinner';
 import DashboardBookingCard from './DashboardBookingCard';
 import DashboardBookingsHeader from './DashboardBookingsHeader';
 import DashboardBookingPaginationCtrls from './DashboardBookingPaginationCtrls';
-import { bookingsResultsPerPage } from '../constants';
 
 const DashboardBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -150,6 +148,20 @@ const DashboardBookings = () => {
     setPageIndex(1);
   }, [bookingDateFilter]);
 
+  const [viewportWidth, setViewPortWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleViewportWidth = () => {
+      setViewPortWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleViewportWidth);
+
+    return () => {
+      window.removeEventListener('resize', handleViewportWidth);
+    };
+  }, []);
+
   const filterBookings = booking => {
     if (!booking) return;
 
@@ -212,11 +224,37 @@ const DashboardBookings = () => {
     return messages[bookingDateFilter];
   };
 
-  const filteredBookings = bookings.filter(filterBookings);
+  /// TEMPORARY
+  const placeholderBookings = [];
+
+  for (let i = 0; i < 40; i++) {
+    if (bookings.length === 0) return;
+    placeholderBookings.push(bookings[0]);
+  }
+  ///
+
+  const bookingsResultsPerPage = () => {
+    let resultsPerPageByScreenSize = 30;
+    if (viewportWidth <= 1283) {
+      resultsPerPageByScreenSize = 20;
+    }
+
+    if (viewportWidth <= 1000) {
+      resultsPerPageByScreenSize = 15;
+    }
+
+    return resultsPerPageByScreenSize;
+  };
+
+  const resultsPerPage = bookingsResultsPerPage();
+
+  console.log(resultsPerPage);
+
+  const filteredBookings = placeholderBookings.filter(filterBookings);
 
   const getSearchResultsPage = function (dataArr, page) {
-    const start = (page - 1) * bookingsResultsPerPage;
-    const finish = page * bookingsResultsPerPage;
+    const start = (page - 1) * resultsPerPage;
+    const finish = page * resultsPerPage;
 
     return dataArr.slice(start, finish);
   };
@@ -271,10 +309,11 @@ const DashboardBookings = () => {
       {renderBookingCards()}
 
       <DashboardBookingPaginationCtrls
-        filteredBookings={filterBookings}
-        bookingsResultsPerPage={bookingsResultsPerPage}
+        filteredBookings={filteredBookings}
+        bookingsResultsPerPage={resultsPerPage}
         pageIndex={pageIndex}
         setPageIndex={setPageIndex}
+        loading={loading}
       />
 
       <DashboardBookingModal selectedBooking={selectedBooking} />
