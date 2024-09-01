@@ -122,7 +122,7 @@
   width: fit-content;
   padding: 0.5rem 1.5rem;
   background-color: var(--font-alternative-color);
-  transform: skew(-0.06turn, -1deg);
+  transform: skew(-0.03turn, -0.1deg);
 }
 
 .section-menu-items > p {
@@ -194,7 +194,7 @@
 }
 
 .product-detail-content {
-  flex-basis: 60%;
+  flex-basis: 50%;
   flex-grow: 0;
   flex-shrink: 0;
   align-self: start;
@@ -203,10 +203,20 @@
   height: 100%;
 }
 
-.img-container {
-  flex-basis: 40%;
+.product-detail-img-container {
+  flex-basis: 50%;
   flex-grow: 0;
   flex-shrink: 0;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-detail-img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/2;
 }
 
 .product-detail-content > h4 {
@@ -268,27 +278,24 @@
   cursor: not-allowed;
 }
 
-.product-detail-img {
-  padding: 3rem;
-  width: 100%;
-  object-fit: cover;
-}
-
 /* DRINKS NAVBAR */
 
 .subcategory-navbar {
   gap: 3rem;
-  /* position: sticky; */
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+  row-gap: 1rem;
 }
 
 .subcategory-navbar button {
+  width: max-content;
   font-size: 1.5rem;
   background-color: var(--main-color);
   border: 0;
   text-transform: capitalize;
   font-weight: 500;
   padding: 0.8rem 0;
-  margin-bottom: 3.5rem;
+
   cursor: pointer;
   border-bottom: 2px solid rgba(73, 80, 87, 0.2);
   transition: border-bottom 0.2s ease-in-out;

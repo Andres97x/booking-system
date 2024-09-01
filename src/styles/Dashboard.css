@@ -29,7 +29,7 @@
   min-height: calc(
     100vh - var(--header-height) - (var(--dashboard-margin) * 2)
   );
-  padding: 3rem 2rem;
+  padding: 3rem;
   background-color: var(--secondary-color);
   border-radius: 8px;
 

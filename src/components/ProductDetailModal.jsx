@@ -27,7 +27,7 @@ const ProductDetailModal = ({ items, productId, handleClose }) => {
           <p className='product-price'>{formatPrice(selectedItem.price)}</p>
         )}
       </div>
-      <div className='img-container'>
+      <div className='product-detail-img-container'>
         <img
           src={selectedItem.image}
           alt='mockup image'
