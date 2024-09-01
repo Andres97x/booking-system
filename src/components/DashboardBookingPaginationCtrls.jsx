@@ -7,6 +7,8 @@ const DashboardBookingPaginationCtrls = ({
   setPageIndex,
   loading,
 }) => {
+  /* TODO scroll to top when changing page */
+
   const goToNextPage = () => {
     setPageIndex(prev => {
       if (prev >= Math.ceil(filteredBookings.length / bookingsResultsPerPage))

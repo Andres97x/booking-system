@@ -135,16 +135,19 @@
 }
 
 .dashboard-bookings-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 2.5rem;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .dashboard-bookings-header_inputs {
   display: flex;
   gap: 2rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .dashboard-bookings h3 {
@@ -348,6 +351,7 @@
 .date-filters-container {
   display: flex;
   gap: 1rem;
+  margin-left: auto;
 }
 
 .card-date-filter {
@@ -390,9 +394,7 @@
 }
 
 .dashboard-bookings-pagination.ctrls-hidden {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
+  display: none;
 }
 
 /*BOOKING MODAL*/

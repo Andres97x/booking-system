@@ -21,6 +21,7 @@ const DashboardBookingsHeader = ({
   deleteSelectedBookings,
   deleteBookingsStatus,
   deleteBookingsError,
+  loading,
 }) => {
   const modalDeleteBookingsRef = useRef(null);
 
@@ -51,8 +52,13 @@ const DashboardBookingsHeader = ({
 
   return (
     <div className='dashboard-bookings-header'>
-      <div style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
-        <h3>Reservas</h3>
+      <h3>Reservas</h3>
+
+      {!error && (
+        <div className='date-filters-container'>{renderFilters()}</div>
+      )}
+
+      {!loading && (
         <div className='dashboard-bookings-header_inputs'>
           {!error && (
             <div className='search-id-input-container instant-popup-container'>
@@ -163,9 +169,6 @@ const DashboardBookingsHeader = ({
             )}
           </div>
         </div>
-      </div>
-      {!error && (
-        <div className='date-filters-container'>{renderFilters()}</div>
       )}
     </div>
   );

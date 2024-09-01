@@ -20,6 +20,7 @@ import DashboardBookingsHeader from './DashboardBookingsHeader';
 import DashboardBookingPaginationCtrls from './DashboardBookingPaginationCtrls';
 
 const DashboardBookings = () => {
+  const [viewportWidth, setViewPortWidth] = useState(window.innerWidth);
   const [bookings, setBookings] = useState([]);
   const [bookingDateFilter, setBookingDateFilter] = useState('Hoy');
   const [selectedBooking, setSelectedBooking] = useState(null);
@@ -148,8 +149,6 @@ const DashboardBookings = () => {
     setPageIndex(1);
   }, [bookingDateFilter]);
 
-  const [viewportWidth, setViewPortWidth] = useState(window.innerWidth);
-
   useEffect(() => {
     const handleViewportWidth = () => {
       setViewPortWidth(window.innerWidth);
@@ -224,15 +223,6 @@ const DashboardBookings = () => {
     return messages[bookingDateFilter];
   };
 
-  /// TEMPORARY
-  const placeholderBookings = [];
-
-  for (let i = 0; i < 40; i++) {
-    if (bookings.length === 0) return;
-    placeholderBookings.push(bookings[0]);
-  }
-  ///
-
   const bookingsResultsPerPage = () => {
     let resultsPerPageByScreenSize = 30;
     if (viewportWidth <= 1283) {
@@ -243,14 +233,16 @@ const DashboardBookings = () => {
       resultsPerPageByScreenSize = 15;
     }
 
+    if (viewportWidth <= 545) {
+      resultsPerPageByScreenSize = 10;
+    }
+
     return resultsPerPageByScreenSize;
   };
 
   const resultsPerPage = bookingsResultsPerPage();
 
-  console.log(resultsPerPage);
-
-  const filteredBookings = placeholderBookings.filter(filterBookings);
+  const filteredBookings = bookings.filter(filterBookings);
 
   const getSearchResultsPage = function (dataArr, page) {
     const start = (page - 1) * resultsPerPage;
@@ -304,6 +296,7 @@ const DashboardBookings = () => {
         deleteSelectedBookings={deleteSelectedBookings}
         deleteBookingsStatus={deleteBookingsStatus}
         deleteBookingsError={deleteBookingsError}
+        loading={loading}
       />
 
       {renderBookingCards()}
@@ -322,3 +315,11 @@ const DashboardBookings = () => {
 };
 
 export default DashboardBookings;
+
+/// TEMPORARY
+// const placeholderBookings = [];
+// for (let i = 0; i < 40; i++) {
+//   if (bookings.length === 0) return;
+//   placeholderBookings.push(bookings[0]);
+// }
+///
