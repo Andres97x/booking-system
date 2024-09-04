@@ -1,16 +1,39 @@
 @media (max-width: 1440px) {
-  .dashboard-bookings-header h3 {
-    font-size: 2rem;
-  }
-}
-
-@media (max-width: 1440px) {
   .dashboard-bookings-header {
     grid-template-columns: 1fr;
   }
 
+  .dashboard-bookings-header h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .booking-card h5 {
+    font-size: 1.4rem;
+  }
+
+  .booking-card p {
+    font-size: 1.6rem;
+  }
+
   .date-filters-container {
     margin-left: unset;
+  }
+
+  #booking-modal {
+    width: 35vw;
+  }
+}
+
+@media (max-width: 1182px) {
+  #booking-modal {
+    width: 45vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  #booking-modal {
+    width: 65vw;
   }
 }
 
@@ -26,6 +49,15 @@
     flex-direction: row;
     margin-bottom: 2rem;
     padding: 1rem;
+  }
+
+  .dashboard-sidebar > a svg,
+  .dashboard-sidebar > a span {
+    font-size: 1.8rem;
+  }
+
+  .dashboard-bookings-header h3 {
+    justify-self: center;
   }
 
   .dashboard-main {
@@ -51,16 +83,17 @@
     row-gap: 2rem;
   }
 
-  .dashboard-bookings-header_inputs {
-    margin-top: 1rem;
+  .dashboard-bookings-header_inputs.three-columns {
+    grid-template-columns: repeat(2, max-content);
+    row-gap: 2rem;
+  }
+
+  .dashboard-bookings-header_inputs.three-columns .date-input-container {
+    border-right: none;
   }
 
   .search-id-input-container input::placeholder {
     opacity: 1;
-  }
-
-  .booking-card h5 {
-    font-size: 1.4rem;
   }
 
   .select-all-bookings-option {
@@ -82,20 +115,45 @@
     display: none;
   }
 
-  .booking-card p {
-    font-size: 1.4rem;
+  .booking-card h5 {
+    font-size: 1.6rem;
+    font-weight: 600;
   }
 
   .booking-card-select {
     width: 2.2rem;
     height: 2.2rem;
   }
+
+  #booking-modal {
+    width: 80vw;
+  }
+
+  #booking-modal h5,
+  #booking-modal span,
+  #booking-modal p,
+  #booking-modal .delete-booking-btn,
+  .modal-delete-bookings-btns button {
+    font-size: 1.8rem;
+  }
 }
 
 @media (max-width: 545px) {
+  .card-date-filter {
+    padding: 0.5rem 0.8rem;
+  }
+
   .date-input-container input {
     padding: 0.2rem;
     font-size: 1.4rem;
+  }
+
+  #booking-modal {
+    width: 100vw;
+    max-width: unset;
+    top: unset;
+    bottom: 0;
+    height: 70vh;
   }
 }
 
@@ -103,6 +161,37 @@
   .dashboard-sidebar a {
     flex: 1;
     justify-content: center !important;
+  }
+
+  .date-filters-container {
+    flex-wrap: wrap;
+  }
+
+  .dashboard-bookings-header_inputs.three-columns {
+    grid-template-columns: max-content max-content;
+    row-gap: 1.5rem;
+    padding-inline: 0;
+
+    width: max-content;
+    padding-top: 2rem;
+    border-top: 2px solid #bbb;
+  }
+
+  .dashboard-bookings-header_inputs.three-columns > *:first-child {
+    grid-column: 1/-1;
+    border-right: none;
+  }
+
+  .dashboard-bookings-header_inputs.three-columns > *:nth-child(2) {
+    border-right: 2px solid #bbb;
+  }
+
+  .dashboard-bookings-header_inputs.three-columns > *:last-child {
+    min-width: 12.8rem;
+  }
+
+  .booking-cards-select-options::before {
+    content: 'Sel.';
   }
 
   .dashboard-main {
@@ -113,11 +202,30 @@
     grid-template-columns: 1fr;
   }
 
-  .date-filters-container {
-    flex-wrap: wrap;
-  }
-
   .booking-card {
     padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 385px) {
+  .dashboard-bookings-header_inputs {
+    width: max-content;
+    padding-top: 2rem;
+    border-top: 2px solid #bbb;
+    grid-template-columns: max-content;
+    row-gap: 1.5rem;
+  }
+
+  .dashboard-bookings-header_inputs > *:first-child {
+    border-right: none;
+  }
+
+  .booking-cards-select-options::before {
+    content: 'Seleccionar';
+  }
+
+  .dashboard-bookings-header_inputs.three-columns
+    .booking-cards-select-options::before {
+    content: 'Sel.';
   }
 }

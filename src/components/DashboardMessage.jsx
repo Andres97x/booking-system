@@ -12,7 +12,8 @@ const DashboardMessage = () => {
 
   return (
     <div className='dashboard-message'>
-      <p>{getMessage()}, bienvenido al dashboard</p>
+      <p>{getMessage()}</p>
+      <p>Bienvenido al dashboard.</p>
     </div>
   );
 };

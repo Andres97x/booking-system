@@ -472,10 +472,6 @@
 }
 
 @media (max-width: 545px) {
-  html {
-    font-size: 50%;
-  }
-
   .section-hero > h1 {
     font-size: 6rem;
     width: 80%;

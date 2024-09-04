@@ -124,6 +124,7 @@
   justify-content: center;
   height: 100%;
   font-size: 2.5rem;
+  flex-direction: column;
 }
 
 /* DASHBOARD BOOKINGS */
@@ -140,14 +141,36 @@
   row-gap: 2.5rem;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 3.2rem;
 }
 
 .dashboard-bookings-header_inputs {
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  /* gap: 2rem; */
   align-items: center;
-  flex-wrap: wrap;
+}
+
+.dashboard-bookings-header_inputs.three-columns {
+  grid-template-columns: repeat(3, max-content);
+}
+
+.booking-cards-select-options::before {
+  content: 'Seleccionar';
+  color: #888;
+}
+
+.dashboard-bookings-header_inputs > * {
+  border-right: 2px solid #bbb;
+  padding-inline: 1rem;
+}
+
+.dashboard-bookings-header_inputs > *:first-child {
+  padding-inline-start: 0;
+}
+
+.dashboard-bookings-header_inputs > *:last-child {
+  border-right: none;
 }
 
 .dashboard-bookings h3 {
@@ -303,14 +326,23 @@
   padding: 1rem;
   cursor: pointer;
   background-color: inherit;
-  text-align: start;
   position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+}
+
+.booking-card h5 {
+  text-align: start;
 }
 
 .booking-card p {
   margin-top: 0.3rem;
   font-size: 1.4rem;
   width: 85%;
+  text-align: start;
 }
 
 .booking-card-select {
@@ -481,11 +513,12 @@ input[type='search']::-moz-clear {
 }
 
 .date-input-container input {
+  color: #888;
   background-color: inherit;
   border: 1.5px solid var(--secondary-color);
   border-radius: 3px;
-  padding: 0.5rem;
-  font-size: 1.3rem;
+  padding: 0.3rem;
+  font-size: 1.4rem;
   width: 13.5rem;
 }
 
