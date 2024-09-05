@@ -35,11 +35,6 @@ const DashboardMenu = () => {
     <div className='dashboard-menu'>
       <div className='dashboard-menu-bar'>
         <h3>Categorías</h3>
-        {!error && (
-          <button className='dashboard-btn' data-modal='modal-add-category'>
-            Añadir categoría
-          </button>
-        )}
       </div>
 
       {!error && (
@@ -54,11 +49,18 @@ const DashboardMenu = () => {
       ) : loading ? (
         <Spinner spinnerContainerClassName='dashboard-main-spinner' />
       ) : categoriesData.length === 0 ? (
-        <p style={{ marginTop: '2rem' }}>
-          Aún no hay categorias añadidas al menú
-        </p>
+        <>
+          <p style={{ marginTop: '2rem' }}>
+            Aún no hay categorias añadidas al menú
+          </p>
+          <button data-modal='modal-add-category' className='large'>
+            +
+          </button>
+        </>
       ) : (
-        <div className='dashboard-menu-grid'>{categoriesDataEl}</div>
+        <div className='dashboard-categories-grid'>
+          {categoriesDataEl} <button data-modal='modal-add-category'>+</button>
+        </div>
       )}
 
       <DashboardAddCategoryModal

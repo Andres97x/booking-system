@@ -29,7 +29,7 @@ const DashboardMenuCard = ({ type, option, setSelectedOption }) => {
         <div>
           <button
             className='dashboard-menu-see-options'
-            data-modal={`modal-${type}-options`}
+            data-modal={`modal-update-${type}`}
             onClick={() => {
               setSelectedOption(option);
             }}

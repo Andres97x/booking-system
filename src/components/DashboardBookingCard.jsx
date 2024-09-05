@@ -32,7 +32,7 @@ const DashboardBookingCard = ({
       </h5>
       <p>
         {capitalizeDate(
-          format(booking.justDate.toDate(), "EEE d 'de' MMMM',' y", {
+          format(booking.justDate.toDate(), "EE'.' d 'de' MMMM',' y", {
             locale: es,
           })
         )}{' '}

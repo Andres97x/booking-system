@@ -16,9 +16,8 @@ const DashboardAddItemScreen = ({
 }) => {
   return (
     <>
-      <h3>
-        Añadir item a la categoría <br /> <span>{categoryName}</span>
-      </h3>
+      <h3>Añadir item a la categoría</h3>
+      <h5>{categoryName}</h5>
 
       <form>
         {error ? <p className='add-category-error-message'>{error}</p> : null}

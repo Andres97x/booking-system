@@ -29,10 +29,6 @@ const DashboardMenuDeleteScreen = ({
       </div>
 
       <div className='dashboard-action-btns-container'>
-        <button className='dashboard-btn' onClick={closeModal}>
-          <MdCancel />
-          Cancelar
-        </button>
         <button
           className='dashboard-btn warning'
           onClick={() => {
@@ -44,7 +40,11 @@ const DashboardMenuDeleteScreen = ({
           }}
         >
           <MdOutlineDelete />
-          Eliminar {type === 'category' ? 'categoría' : 'item'}
+          Eliminar
+        </button>
+        <button className='dashboard-btn' onClick={closeModal}>
+          <MdCancel />
+          Cancelar
         </button>
       </div>
     </div>

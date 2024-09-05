@@ -1,0 +1,149 @@
+@media (max-width: 1440px) {
+  .dashboard-menu-bar h3 {
+    font-size: 2rem;
+  }
+
+  .dashboard-menu-see-items:link,
+  .dashboard-menu-see-items:visited {
+    font-size: 1.6rem;
+  }
+
+  #modal-add-category,
+  #modal-update-category,
+  #modal-delete-category,
+  #modal-add-item,
+  #modal-update-item,
+  #modal-delete-item {
+    width: 40%;
+  }
+}
+
+@media (max-width: 1283px) {
+  .menu-card-options > div:last-child {
+    gap: 0.3rem;
+  }
+}
+
+@media (max-width: 1182px) {
+  .dashboard-categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #modal-add-category,
+  #modal-update-category,
+  #modal-delete-category,
+  #modal-add-item,
+  #modal-update-item,
+  #modal-delete-item {
+    width: 50%;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #modal-add-category,
+  #modal-update-category,
+  #modal-delete-category,
+  #modal-add-item,
+  #modal-update-item,
+  #modal-delete-item {
+    width: 67%;
+  }
+}
+
+@media (max-width: 815px) {
+  .dashboard-menu-note {
+    font-size: 1.4rem;
+  }
+
+  .dashboard-categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .menu-card-options svg {
+    font-size: 2.2rem;
+  }
+
+  .dashboard-menu-see-items:link,
+  .dashboard-menu-see-items:visited {
+    border-bottom: 1.5px solid var(--secondary-color-half);
+  }
+
+  #modal-add-category h3,
+  #modal-delete-category h3,
+  .dashboard-action-btns-container .dashboard-btn,
+  .dashboard-main dialog form button:last-child,
+  #modal-delete-item h3 {
+    font-size: 1.8rem;
+  }
+
+  #modal-update-category h5 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .warning-message {
+    font-size: 1.6rem;
+  }
+
+  dialog label {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 660px) {
+  .dashboard-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menu-card-name {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  #modal-add-category,
+  #modal-update-category,
+  #modal-delete-category,
+  #modal-add-item,
+  #modal-update-item,
+  #modal-delete-item {
+    width: 85%;
+  }
+}
+
+@media (max-width: 459px) {
+  .dashboard-categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-card-options > div:last-child {
+    gap: 1.5rem;
+  }
+
+  .menu-card-options svg {
+    font-size: 2.5rem;
+  }
+
+  .dashboard-container dialog {
+    padding: 3rem;
+  }
+
+  #modal-add-category,
+  #modal-update-category,
+  #modal-delete-category,
+  #modal-add-item,
+  #modal-update-item,
+  #modal-delete-item {
+    max-width: unset;
+    width: 100%;
+    top: unset;
+    bottom: 0;
+  }
+
+  dialog textarea {
+    height: 18rem;
+  }
+}

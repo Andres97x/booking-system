@@ -10,7 +10,8 @@ import './styles/Dashboard.css';
 import './styles/queries.css';
 import './styles/queriesAbout.css';
 import './styles/queriesMenu.css';
-import './styles/queriesDashboard.css';
+import './styles/queriesDashboardBookings.css';
+import './styles/queriesDashboardMenu.css';
 
 import { BookingContextWrapper } from './contexts/BookingContext';
 
@@ -28,7 +29,7 @@ import DashboardMessage from './components/DashboardMessage';
 import DashboardNotifications from './components/DashboardNotifications';
 import DashboardBookings from './components/DashboardBookings';
 import DashboardMenu from './components/DashboardMenu';
-import DashboardMenuCategory from './components/DashboardMenuCategory';
+import DashboardMenuItems from './components/DashboardMenuItems';
 
 function App() {
   useOpenModalOnBtnClick();
@@ -59,10 +60,7 @@ function App() {
               />
               <Route path='bookings' element={<DashboardBookings />} />
               <Route path='menu' element={<DashboardMenu />} />
-              <Route
-                path='menu/:category'
-                element={<DashboardMenuCategory />}
-              />
+              <Route path='menu/:category' element={<DashboardMenuItems />} />
             </Route>
           </Route>
         </Routes>

@@ -60,7 +60,7 @@ const DashboardUpdateItemModal = ({
 
   return (
     <Modal
-      id='modal-item-options'
+      id='modal-update-item'
       onClose={() => {
         clearInputValues();
         setStatus('idle');

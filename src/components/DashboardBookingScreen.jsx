@@ -2,7 +2,12 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { capitalizeDate } from '../utils';
 
-const DashboardBookingScreen = ({ selectedBooking, error, setStatus }) => {
+const DashboardBookingScreen = ({
+  selectedBooking,
+  error,
+  setStatus,
+  viewportWidth,
+}) => {
   return (
     <>
       <h5>Información de la reserva</h5>
@@ -29,7 +34,9 @@ const DashboardBookingScreen = ({ selectedBooking, error, setStatus }) => {
               {capitalizeDate(
                 format(
                   selectedBooking.justDate.toDate(),
-                  "EEEE d 'de' MMMM',' y",
+                  viewportWidth <= 385
+                    ? "EE'.' d 'de' MMMM',' y"
+                    : "EEEE d 'de' MMMM',' y",
                   {
                     locale: es,
                   }

@@ -8,7 +8,7 @@ import Modal from './Modal';
 import Spinner from './Spinner';
 import DashboardBookingScreen from './DashboardBookingScreen';
 
-const DashboardBookingModal = ({ selectedBooking }) => {
+const DashboardBookingModal = ({ selectedBooking, viewportWidth }) => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
   const modalRef = useRef(null);
@@ -37,6 +37,7 @@ const DashboardBookingModal = ({ selectedBooking }) => {
           selectedBooking={selectedBooking}
           error={error}
           setStatus={setStatus}
+          viewportWidth={viewportWidth}
         />
       );
     } else if (status === 'confirmation') {

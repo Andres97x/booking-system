@@ -567,7 +567,7 @@ dialog input[type='file'],
 dialog textarea,
 dialog select,
 dialog form button {
-  color: var(--font-secondary-color);
+  color: #343a40;
   width: 100%;
   padding: 0.8rem;
   background-color: inherit;
@@ -695,6 +695,8 @@ dialog textarea::placeholder {
 
 .modal-spinner {
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 /* ERROR COMPONENT */
@@ -717,6 +719,8 @@ dialog textarea::placeholder {
 .warning-message {
   font-size: 1.4rem;
   color: #402400;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 /* MISCELLANIOUS */

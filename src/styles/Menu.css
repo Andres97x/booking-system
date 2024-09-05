@@ -45,7 +45,6 @@
 }
 
 .menu-category {
-  /* border: 4px solid hotpink; */
   background-color: var(--main-color);
   display: grid;
   position: relative;
@@ -75,6 +74,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1rem;
   margin: 0.5rem;
   padding: 1rem;
   color: var(--main-color);
@@ -82,7 +82,7 @@
 
 .category-content > h3 {
   text-transform: uppercase;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
 }
 
 .menu-category > * {

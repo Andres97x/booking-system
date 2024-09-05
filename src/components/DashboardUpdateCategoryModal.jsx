@@ -56,7 +56,7 @@ const DashboardUpdateCategoryModal = ({
 
   return (
     <Modal
-      id='modal-category-options'
+      id='modal-update-category'
       onClose={() => {
         clearInputValues();
         setStatus('idle');

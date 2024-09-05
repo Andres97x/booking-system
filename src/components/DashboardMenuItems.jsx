@@ -8,7 +8,7 @@ import DashboardAddItemModal from './DashboardAddItemModal';
 import DashboardUpdateItemModal from './DashboardUpdateItemModal';
 import DashboardMenuDeleteModal from './DashboardMenuDeleteModal';
 
-const DashboardMenuCategory = () => {
+const DashboardMenuItems = () => {
   const { category } = useParams();
   const [itemsData, setItemsData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -45,30 +45,32 @@ const DashboardMenuCategory = () => {
   ));
 
   return (
-    <div className='dashboard-menu-category'>
+    <div className='dashboard-menu-items'>
       <div className='dashboard-menu-bar category-bar'>
         <Link to='/dashboard/menu'>
           <h3>Categorías</h3>
         </Link>
         <span>&gt;</span>
         <h3> {categoryName}</h3>
-        {!error && (
-          <button className='dashboard-btn' data-modal='modal-add-item'>
-            Añadir item
-          </button>
-        )}
       </div>
 
       {error ? (
         <p className='error-message'>{error}</p>
       ) : loading ? (
-        <Spinner spinnerContainerClassName='dashboard-menu-spinner' />
+        <Spinner spinnerContainerClassName='dashboard-main-spinner' />
       ) : itemsData.length === 0 ? (
-        <p style={{ marginTop: '2rem' }}>
-          Aún no hay items añadidos a esta categoría
-        </p>
+        <>
+          <p style={{ marginTop: '2rem' }}>
+            Aún no hay items añadidos a esta categoría
+          </p>
+          <button data-modal='modal-add-item' className='large'>
+            +
+          </button>
+        </>
       ) : (
-        <div className='dashboard-menu-grid'>{itemsDataEl}</div>
+        <div className='dashboard-items-grid'>
+          {itemsDataEl} <button data-modal='modal-add-item'>+</button>
+        </div>
       )}
 
       <DashboardAddItemModal
@@ -92,4 +94,4 @@ const DashboardMenuCategory = () => {
   );
 };
 
-export default DashboardMenuCategory;
+export default DashboardMenuItems;

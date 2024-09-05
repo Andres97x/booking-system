@@ -218,7 +218,7 @@ const DashboardUpdateItemScreen = ({
           }}
         >
           <MdDone />
-          Confirmar cambios
+          Confirmar
         </button>
         <button
           className='dashboard-btn'

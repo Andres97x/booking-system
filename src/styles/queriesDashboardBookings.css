@@ -4,16 +4,11 @@
   }
 
   .dashboard-bookings-header h3 {
-    font-size: 2.2rem;
-    margin-bottom: 1.2rem;
+    font-size: 2rem;
   }
 
   .booking-card h5 {
     font-size: 1.4rem;
-  }
-
-  .booking-card p {
-    font-size: 1.6rem;
   }
 
   .date-filters-container {
@@ -56,10 +51,6 @@
     font-size: 1.8rem;
   }
 
-  .dashboard-bookings-header h3 {
-    justify-self: center;
-  }
-
   .dashboard-main {
     min-height: calc(
       100vh - var(--header-height) - var(--dashboard-margin) * 2 -
@@ -69,9 +60,9 @@
     padding: 1rem 3rem;
   }
 
-  .dashboard-bookings-grid {
+  /* .dashboard-bookings-grid {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  }
+  } */
 }
 
 @media (max-width: 660px) {
@@ -133,7 +124,9 @@
   #booking-modal span,
   #booking-modal p,
   #booking-modal .delete-booking-btn,
-  .modal-delete-bookings-btns button {
+  .modal-delete-bookings-btns button,
+  #modal-delete-bookings p,
+  #modal-delete-bookings button:not(.modal-close) {
     font-size: 1.8rem;
   }
 }
@@ -148,12 +141,14 @@
     font-size: 1.4rem;
   }
 
-  #booking-modal {
+  #booking-modal,
+  #modal-delete-bookings {
     width: 100vw;
     max-width: unset;
     top: unset;
     bottom: 0;
-    height: 70vh;
+    height: fit-content;
+    max-height: 70vh;
   }
 }
 
@@ -204,6 +199,11 @@
 
   .booking-card {
     padding: 2rem 1rem;
+  }
+
+  .booking-card-select {
+    bottom: 50%;
+    transform: translateY(50%);
   }
 }
 

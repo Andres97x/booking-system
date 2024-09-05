@@ -315,7 +315,7 @@
 
 .dashboard-bookings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
   gap: 1rem;
   margin-bottom: 5rem;
 }
@@ -635,24 +635,31 @@ input[type='search']::-moz-clear {
   margin-top: 1rem;
 }
 
-.dashboard-menu-grid {
+.dashboard-categories-grid {
   margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
+.dashboard-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
 .dashboard-menu-card {
   border: 1px solid var(--secondary-color-half);
   border-radius: 3px;
   padding: 1rem 2rem;
-  min-width: 18rem;
   display: grid;
+  row-gap: 0.5rem;
 }
 
 .dashboard-menu-card.item-card {
   grid-template-columns: 1fr auto;
-  padding: 1.5rem 3rem;
+  padding: 1rem 1.5rem;
 }
 
 .dashboard-menu-card.item-card .menu-card-options {
@@ -733,6 +740,38 @@ input[type='search']::-moz-clear {
   font-size: 2rem;
 }
 
+button[data-modal='modal-add-category'],
+button[data-modal='modal-add-item'] {
+  padding: 1rem 2rem;
+  font-size: 4rem;
+  color: var(--font-secondary-color);
+  background-color: inherit;
+  border: 1px solid var(--secondary-color-half);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+}
+
+button[data-modal='modal-add-item'] {
+  line-height: 0.9;
+}
+
+button[data-modal='modal-add-category'].large,
+button[data-modal='modal-add-item'].large {
+  line-height: 0.9;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 35rem;
+}
+
+button[data-modal='modal-add-category']:hover,
+button[data-modal='modal-add-item']:hover,
+button[data-modal='modal-add-category'].large:hover,
+button[data-modal='modal-add-item'].large:hover {
+  background-color: var(--secondary-color-half);
+  color: var(--main-color);
+}
+
 /* MODALS */
 
 .dashboard-container dialog {
@@ -764,13 +803,8 @@ input[type='search']::-moz-clear {
   color: var(--font-secondary-color);
 }
 
-.dashboard-main dialog h3 span {
-  font-weight: 600;
-  font-size: 2rem;
-}
-
 #modal-add-category {
-  width: 30%;
+  width: 35%;
   height: 70%;
   max-height: 60rem;
   transition: height 200ms ease-in-out;
@@ -782,6 +816,12 @@ dialog label {
   margin-bottom: 0.5rem;
 }
 
+.add-category-error-message {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #402400;
+}
+
 .category-completed-container {
   height: 100%;
   display: flex;
@@ -790,16 +830,21 @@ dialog label {
   justify-content: center;
 }
 
+.category-completed-container > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
 .category-completed-container svg {
   font-size: 3rem;
   margin-bottom: 2rem;
 }
 
-.category-completed-container > h3 {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.category-completed-container p {
+  font-size: 1.6rem;
+  font-weight: 500;
   text-align: center;
 }
 
@@ -808,12 +853,15 @@ dialog label {
   display: flex;
   align-items: center;
   gap: 2rem;
-  margin-top: 3rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 }
 
 .category-completed-action-btns button {
   background-color: inherit;
   flex-grow: 1;
+  padding: 1rem 2rem;
+  font-weight: 500;
 }
 
 .category-completed-action-btns button:hover {
@@ -827,16 +875,27 @@ dialog label {
   margin-top: 1rem;
 }
 
-#modal-category-options,
-#modal-item-options {
-  width: 30%;
+#modal-update-category,
+#modal-item-options,
+#modal-update-item,
+#modal-delete-item {
+  width: 35%;
   height: 70%;
 }
 
-#modal-category-options h5,
-#modal-item-options h5 {
+#modal-update-category h3,
+#modal-add-item h3,
+#modal-update-item h3 {
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 500;
+}
+
+#modal-update-category h5,
+#modal-item-options h5,
+#modal-add-item h5,
+#modal-update-item h5 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 .dashboard-menu-options-container {
@@ -859,7 +918,6 @@ dialog label {
 }
 
 .dashboard-menu-option-group > div:last-child {
-  margin-top: 0.5rem;
   font-size: 1.6rem;
 }
 
@@ -884,8 +942,7 @@ dialog label {
 .dashboard-action-btns-container {
   display: flex;
   gap: 2rem;
-  /* margin-top: auto; */
-  padding-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 
 .dashboard-action-btns-container button {
@@ -904,7 +961,7 @@ dialog label {
 #modal-delete-category,
 #modal-delete-item {
   width: 30%;
-  height: 70%;
+  height: 50%;
 }
 
 #modal-delete-category > div:not(.modal-spinner),
@@ -913,6 +970,7 @@ dialog label {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 4.5rem;
 }
 
 #modal-delete-category > div span,
@@ -925,17 +983,7 @@ dialog label {
   justify-content: center !important;
 }
 
-#modal-delete-category .dashboard-action-btns-container,
-#modal-delete-item .dashboard-action-btns-container {
-  padding-bottom: 0;
-}
-
 #modal-add-item {
   width: 30%;
   height: 70%;
-}
-
-#modal-add-item h3 {
-  /* font-size: 1.2rem; */
-  /* font-weight: 600; */
 }

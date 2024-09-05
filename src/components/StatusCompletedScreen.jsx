@@ -19,10 +19,12 @@ const StatusCompletedScreen = ({
 
   return (
     <div className='category-completed-container'>
-      <FaCheckCircle />
-      <h4>
-        {passedName || ''} se {actionMessage(action)} correctamente.
-      </h4>
+      <div>
+        <FaCheckCircle />
+        <p>
+          {passedName || ''} se {actionMessage(action)} correctamente.
+        </p>
+      </div>
 
       {action === 'add' && (
         <div className='category-completed-action-btns'>
@@ -33,7 +35,7 @@ const StatusCompletedScreen = ({
               setStatus('idle');
             }}
           >
-            Añadir {type === 'category' ? 'otra categoría' : 'otro item'}
+            Añadir {type === 'category' ? 'otra' : 'otro'}
           </button>
           <button
             className='dashboard-btn'

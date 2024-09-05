@@ -309,7 +309,10 @@ const DashboardBookings = () => {
         loading={loading}
       />
 
-      <DashboardBookingModal selectedBooking={selectedBooking} />
+      <DashboardBookingModal
+        selectedBooking={selectedBooking}
+        viewportWidth={viewportWidth}
+      />
     </div>
   );
 };
