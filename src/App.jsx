@@ -31,6 +31,7 @@ import DashboardNotifications from './components/DashboardNotifications';
 import DashboardBookings from './components/DashboardBookings';
 import DashboardMenu from './components/DashboardMenu';
 import DashboardMenuItems from './components/DashboardMenuItems';
+import NotFound from './pages/NotFound';
 
 function App() {
   useOpenModalOnBtnClick();
@@ -63,6 +64,7 @@ function App() {
               <Route path='menu' element={<DashboardMenu />} />
               <Route path='menu/:category' element={<DashboardMenuItems />} />
             </Route>
+            <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

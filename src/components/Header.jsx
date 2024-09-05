@@ -103,7 +103,7 @@ const Header = ({ telNumber }) => {
       </div>
 
       <div className='mobile-header'>
-        <p>{currentPage(pathname)}</p>
+        <p>{currentPage(pathname) || '404'}</p>
         <span className='nav-signature'>Éclat Étoilé</span>
         <button className='open-mobile-nav-btn' data-modal='mobile-nav'>
           <HiBars3 />
