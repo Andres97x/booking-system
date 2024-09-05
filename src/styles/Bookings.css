@@ -1,7 +1,10 @@
 .bookings-container {
   margin-top: var(--header-height); /* to compensate fixed header */
+  min-height: calc(100vh - var(--header-height));
   background-color: var(--main-color);
   padding: 10rem 0;
+  /* display: flex; */
+  /* flex-direction: column; */
 }
 
 .bookings-container *:focus {
@@ -16,6 +19,15 @@
 .booking-pagination {
   margin-top: 0;
   min-height: 5rem;
+}
+
+.booking-pagination button:last-child {
+  background-color: var(--secondary-color);
+  color: var(--font-main-color);
+}
+
+.booking-pagination button:last-child svg {
+  transform: scale(1.1);
 }
 
 .booking-pagination button.hidden {
@@ -35,15 +47,16 @@
   height: unset;
   padding: 1.2rem 2rem;
   font-size: 1.6rem;
-  background-color: var(--main-color);
-  color: var(--font-secondary-color);
+  background-color: var(--secondary-color);
+  color: var(--font-main-color);
   border: 1.5px solid var(--font-secondary-color);
   border-radius: 2px;
+  font-weight: 500;
 }
 
 .booking-pagination button.complete-booking:hover {
-  background-color: var(--secondary-color);
-  color: var(--font-main-color);
+  background-color: var(--main-color);
+  color: var(--secondary-color);
 }
 
 .bookings-info {
@@ -62,7 +75,7 @@
 }
 
 .bookings-slider {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   overflow: hidden;
@@ -73,13 +86,19 @@
   flex-grow: 0;
   width: 100%;
   transition: transform 350ms ease-in-out;
+  padding: 0 1rem;
   /* transform: translateX(calc(var(--slider-index) * -100%)); */
 }
 
-/* COMMON STYLES */
+.zones-grid {
+  padding: 2rem 0;
+}
 
+.booking-pagination,
 .zones-container > div,
-.calendar-container > div {
+.calendar-container > div,
+.times-container > div,
+.form-container > div {
   max-width: 50rem;
   margin: 0 auto;
 }
@@ -87,7 +106,6 @@
 /* CALENDAR */
 .calendar-container {
   width: 100%;
-  padding: 1rem;
   border-radius: 2px;
   color: var(--font-secondary-color);
   background-color: var(--main-color);
@@ -251,8 +269,7 @@ abbr[title] {
 
 .zones-container {
   flex-grow: 1;
-
-  padding: 1rem;
+  display: flex;
   background-color: var(--main-color);
 
   .zones-grid {
@@ -325,16 +342,6 @@ abbr[title] {
 
 /* TIMES */
 
-.times-container {
-  padding: 1rem;
-  background-color: var(--main-color);
-}
-
-.times-container > div {
-  max-width: 50rem;
-  margin: 0 auto;
-}
-
 .times-grid {
   display: grid;
   place-items: center;
@@ -353,6 +360,7 @@ abbr[title] {
   padding: 1rem 2rem;
   border-radius: 2px;
   transition: all 0.1s ease-in-out;
+  width: max-content;
 }
 
 .time:hover {
@@ -371,18 +379,12 @@ abbr[title] {
 
 /* FORM */
 
-.form-container {
-  padding: 1rem;
-}
-
 .form-container *:focus {
   outline: 2px solid var(--secondary-color);
   outline-offset: 0.2rem;
 }
 
 .form-container > div {
-  max-width: 50rem;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -406,7 +408,7 @@ abbr[title] {
 .form-container select {
   width: 100%;
   margin-top: 0.5rem;
-  border: 2px solid var(--font-main-color);
+  border: 1.5px solid var(--font-main-color);
   background-color: var(--main-color);
   border-radius: 2px;
   font-size: 1.6rem;

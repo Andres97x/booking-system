@@ -63,7 +63,7 @@ const Bookings = () => {
               disabled={sliderIndex !== 3}
               onClick={onClickComplete}
             >
-              Completar reserva
+              Completar
             </button>
           </>
         )}

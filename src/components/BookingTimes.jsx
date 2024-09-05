@@ -21,12 +21,13 @@ const BookingTimes = () => {
     setTimesStatus,
     timesError,
     setTimesError,
+    setSubmitError,
   } = useContext(BookingContext);
 
   const [bookingsOnThisDayAndZone, setBookingsOnThisDayAndZone] = useState([]);
 
   useEffect(() => {
-    if (!booking.justDate || !booking.zone) return;
+    if (!booking.justDate || !booking.zone || sliderIndex === 3) return;
 
     const fetchBookings = async () => {
       const q = query(
@@ -45,6 +46,7 @@ const BookingTimes = () => {
         }));
 
         setBookingsOnThisDayAndZone(retrievedData);
+        setSubmitError(null);
       } catch (err) {
         console.error(err);
         setTimesError(

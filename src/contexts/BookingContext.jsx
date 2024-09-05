@@ -195,6 +195,7 @@ const BookingContextWrapper = ({ children }) => {
         onFormChange,
         submitStatus,
         submitError,
+        setSubmitError,
         submittedBookingId,
         resetBooking,
         timesStatus,

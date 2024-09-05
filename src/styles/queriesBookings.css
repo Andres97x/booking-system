@@ -1,0 +1,43 @@
+@media (max-width: 1000px) {
+  .calendar-container > div {
+    max-width: 45rem;
+  }
+
+  .react-calendar__navigation .react-calendar__navigation__label {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 815px) {
+  .times-grid {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+}
+
+@media (max-width: 459px) {
+  .bookings-slider > div {
+    padding: 0 2rem;
+  }
+
+  .booking-pagination,
+  .zones-container > div,
+  .calendar-container > div,
+  .times-container > div,
+  .form-container > div {
+    max-width: 95%;
+  }
+
+  .booking-pagination {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 385px) {
+  .bookings-slider {
+    margin-top: 3.5rem;
+  }
+
+  .booking-pagination {
+    margin-top: 3.5rem;
+  }
+}
