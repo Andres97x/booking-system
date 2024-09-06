@@ -41,7 +41,7 @@ const DashboardBookingModal = ({ selectedBooking, viewportWidth }) => {
       );
     } else if (status === 'confirmation') {
       return (
-        <div>
+        <div className='confirmation-container'>
           <p>Seguro quieres eliminar esta reserva?</p>
           <div className='modal-delete-bookings-btns'>
             <button
@@ -69,15 +69,8 @@ const DashboardBookingModal = ({ selectedBooking, viewportWidth }) => {
       return <Spinner />;
     } else {
       return (
-        <div
-          style={{
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <p style={{ fontWeight: '600' }}>La reserva ha sido eliminida</p>
+        <div className='delete-booking-success-message'>
+          <p>La reserva ha sido eliminida</p>
         </div>
       );
     }

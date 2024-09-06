@@ -7,7 +7,7 @@ import ErrorMessage from '../components/utils/ErrorMessage';
 
 const Menu = () => {
   const [categoriesData, setCategoriesData] = useState([]);
-  const [status, setStatus] = useState('loading');
+  const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
   useFetchMenu({

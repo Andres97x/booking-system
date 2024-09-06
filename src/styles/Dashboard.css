@@ -434,16 +434,24 @@
   height: 48rem;
 }
 
-#booking-modal > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
 #booking-modal h5 {
   font-size: 1.6rem;
   margin-bottom: 1.8rem;
+}
+
+.confirmation-container {
+  margin-top: 16rem;
+}
+
+.delete-booking-success-message {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-booking-success-message > p {
+  font-weight: 600;
 }
 
 .search-id-input-container {
