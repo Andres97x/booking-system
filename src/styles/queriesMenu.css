@@ -102,9 +102,11 @@
   .product-modal {
     flex-direction: column;
     width: 100vw;
-    height: 90vh;
+    height: fit-content;
+    max-height: 75vh;
     padding: 6rem 4rem;
     bottom: 0;
+    top: unset;
     max-width: unset;
   }
 
@@ -120,11 +122,13 @@
 
   .product-detail-img-container {
     padding: 0;
+    height: unset;
+    width: 100%;
+    margin-right: 0;
   }
 
   .product-detail-img {
-    aspect-ratio: 1 / 0.6;
-    padding: 3rem;
+    width: 100%;
   }
 }
 
@@ -192,11 +196,14 @@
 
   .product-detail-img {
     aspect-ratio: 1/0.7;
-    padding: 0;
   }
 }
 
 @media (max-width: 459px) {
+  .product-modal {
+    padding: 4rem 2.5rem;
+  }
+
   .product-detail-img {
     aspect-ratio: 1/1;
   }

@@ -712,6 +712,10 @@
     padding: 0 4rem;
   }
 
+  .not-found-content {
+    padding: 0 2rem;
+  }
+
   .not-found-content > span {
     font-size: 16rem;
   }
