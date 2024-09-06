@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Spinner from '../components/Spinner';
-import ErrorMessage from '../components/ErrorMessage';
 import useFetchMenu from '../hooks/useFetchMenu';
+import Spinner from '../components/utils/Spinner';
+import ErrorMessage from '../components/utils/ErrorMessage';
 
 const Menu = () => {
   const [categoriesData, setCategoriesData] = useState([]);

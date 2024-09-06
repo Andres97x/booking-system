@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
 
-import ProductDetailModal from '../components/ProductDetailModal';
-import SubCategoriesNav from '../components/SubCategoriesNav';
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
-import { formatPrice } from '../utils';
 import useFetchMenu from '../hooks/useFetchMenu';
-import Spinner from '../components/Spinner';
-import ErrorMessage from '../components/ErrorMessage';
 import useCloseModalOnClickOutside from '../hooks/useCloseModalOnClickOutside';
+import { formatPrice } from '../utils';
+import ProductDetailModal from '../components/menu-items/ProductDetailModal';
+import SubCategoriesNav from '../components/menu-items/SubCategoriesNav';
+import Spinner from '../components/utils/Spinner';
+import ErrorMessage from '../components/utils/ErrorMessage';
 
 const MenuItems = () => {
   const { category } = useParams();

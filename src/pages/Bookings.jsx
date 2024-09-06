@@ -5,10 +5,10 @@ import { BsFillCaretLeftFill } from 'react-icons/bs';
 
 import { BookingContext } from '../contexts/BookingContext';
 
-import BookingCalendar from '../components/BookingCalendar';
-import BookingZones from '../components/BookingZones';
-import BookingTimes from '../components/BookingTimes';
-import BookingForm from '../components/BookingForm';
+import BookingCalendar from '../components/bookings/BookingCalendar';
+import BookingZones from '../components/bookings/BookingZones';
+import BookingTimes from '../components/bookings/BookingTimes';
+import BookingForm from '../components/bookings/BookingForm';
 
 const Bookings = () => {
   const {

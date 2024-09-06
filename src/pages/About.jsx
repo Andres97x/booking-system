@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import aboutUs from '../assets/about-us.webp';
 
 const About = () => {

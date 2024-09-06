@@ -26,12 +26,6 @@
   }
 }
 
-@media (max-width: 1000px) {
-  #booking-modal {
-    width: 65vw;
-  }
-}
-
 @media (max-width: 815px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
@@ -60,9 +54,9 @@
     padding: 1rem 3rem;
   }
 
-  /* .dashboard-bookings-grid {
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  } */
+  #booking-modal {
+    width: 60vw;
+  }
 }
 
 @media (max-width: 660px) {
@@ -123,6 +117,7 @@
   #booking-modal h5,
   #booking-modal span,
   #booking-modal p,
+  #booking-modal a,
   #booking-modal .delete-booking-btn,
   .modal-delete-bookings-btns button,
   #modal-delete-bookings p,
@@ -147,8 +142,20 @@
     max-width: unset;
     top: unset;
     bottom: 0;
-    height: fit-content;
-    max-height: 70vh;
+    max-height: unset;
+  }
+
+  #booking-modal {
+    height: 52vh;
+    /* max-height: 75vh; */
+  }
+
+  #modal-delete-bookings {
+    height: 30vh;
+  }
+
+  #booking-modal[open] {
+    display: block;
   }
 }
 

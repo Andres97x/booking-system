@@ -19,18 +19,17 @@ import { BookingContextWrapper } from './contexts/BookingContext';
 import useCloseModalOnClickOutside from './hooks/useCloseModalOnClickOutside';
 import useOpenModalOnBtnClick from './hooks/useOpenModalOnBtnClick';
 
-import PageLayout from './components/PageLayout';
+import PageLayout from './components/layouts/PageLayout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Bookings from './pages/Bookings';
 import Menu from './pages/Menu';
 import MenuItemsComponent from './pages/MenuItems';
-import DashboardLayout from './pages/DashboardLayout';
-import DashboardMessage from './components/DashboardMessage';
-import DashboardNotifications from './components/DashboardNotifications';
-import DashboardBookings from './components/DashboardBookings';
-import DashboardMenu from './components/DashboardMenu';
-import DashboardMenuItems from './components/DashboardMenuItems';
+import DashboardBookings from './pages/DashboardBookings';
+import DashboardMenu from './pages/DashboardMenu';
+import DashboardMenuItems from './pages/DashboardMenuItems';
+import DashboardLayout from './components/layouts/DashboardLayout';
+import DashboardMessage from './components/dashboard/DashboardMessage';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -56,10 +55,6 @@ function App() {
             <Route path='menu/:category' element={<MenuItemsComponent />} />
             <Route path='dashboard' element={<DashboardLayout />}>
               <Route index element={<DashboardMessage />} />
-              <Route
-                path='notifications'
-                element={<DashboardNotifications />}
-              />
               <Route path='bookings' element={<DashboardBookings />} />
               <Route path='menu' element={<DashboardMenu />} />
               <Route path='menu/:category' element={<DashboardMenuItems />} />
