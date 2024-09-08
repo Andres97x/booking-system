@@ -20,7 +20,13 @@ const ProductDetailModal = ({ items, productId, handleClose }) => {
   if (!selectedItem) return null;
 
   return (
-    <Modal className='product-modal' handleClose={handleClose} ref={dialogRef}>
+    <Modal
+      className='product-modal'
+      handleClose={handleClose}
+      ref={dialogRef}
+      isHistoryStackReplaced={true}
+      targetSP='productId'
+    >
       <div className='product-detail-content'>
         <h4>{selectedItem.name}</h4>
         {selectedItem.description && <p>{selectedItem.description}</p>}

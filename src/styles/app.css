@@ -41,7 +41,7 @@ body,
 button,
 input,
 select {
-  font-family: 'Open Sans', Inter, sans-serif;
+  font-family: 'Open Sans', Segoe UI, sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-  font-family: 'Marcellus', serif;
+  font-family: 'Marcellus', serif, Georgia;
   font-weight: 400;
   font-style: normal;
 
@@ -111,7 +111,7 @@ h5 {
     url('../assets/hero-img.webp');
   background-size: cover;
   background-position: center;
-
+  height: 100svh;
   position: relative;
 }
 
@@ -225,7 +225,7 @@ header a:link:not(.reservation-link) {
   font-size: 4rem;
   width: max-content;
 
-  font-family: 'WindSong', cursive;
+  font-family: 'WindSong', serif;
   font-weight: 800;
   font-style: normal;
   color: var(--font-secondary-color);
@@ -496,6 +496,7 @@ dialog::backdrop {
 }
 
 dialog .modal-close {
+  color: #343a40;
   border: 0;
   background-color: #f1f3f5;
   position: absolute;

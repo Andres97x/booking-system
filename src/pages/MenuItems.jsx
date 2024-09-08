@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
 
 import useHandleSearchParams from '../hooks/useHandleSearchParams';
@@ -12,8 +12,10 @@ import Spinner from '../components/utils/Spinner';
 import ErrorMessage from '../components/utils/ErrorMessage';
 
 const MenuItems = () => {
+  const navigate = useNavigate();
   const { category } = useParams();
-  const { searchParams, handleSearchParams } = useHandleSearchParams();
+  const { searchParams, handleSearchParams, getNewSearchParamString } =
+    useHandleSearchParams();
   const productId = searchParams.get('productId');
   const subCategory = searchParams.get('sub-category');
 
@@ -28,7 +30,13 @@ const MenuItems = () => {
     handleSearchParams('productId', null);
   };
 
-  useCloseModalOnClickOutside('.product-modal', closeProductModal, [productId]);
+  const handleClickOutsideModal = () => {
+    navigate(`.`, { replace: true });
+  };
+
+  useCloseModalOnClickOutside('.product-modal', handleClickOutsideModal, [
+    productId,
+  ]);
 
   useFetchMenu({
     type: 'items',
@@ -44,12 +52,11 @@ const MenuItems = () => {
 
   const menuItemsEl = displayedItems.map((item, i) => {
     return (
-      <button
+      <Link
         key={`menu-item-${i}`}
         className='menu-item'
-        onClick={() => {
-          handleSearchParams('productId', item.id);
-        }}
+        to={getNewSearchParamString('productId', item.id)}
+        replace={true}
       >
         <img src={item.image} alt={`imagen de ${item.name}`} />
         <div className='menu-item-content'>
@@ -57,7 +64,7 @@ const MenuItems = () => {
           {item.description && <p>{item.description}</p>}
           {item.price && <span>{formatPrice(item.price)}</span>}
         </div>
-      </button>
+      </Link>
     );
   });
 

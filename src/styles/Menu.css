@@ -142,6 +142,7 @@
   border: none;
   background-color: var(--main-color);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .menu-item img {

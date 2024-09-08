@@ -1,7 +1,7 @@
 /* HERO */
 
 .section-hero {
-  height: 100dvh;
+  height: 100svh;
   padding-top: var(--header-height); /* to compensate fixed header */
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   font-size: 10rem;
   text-transform: uppercase;
 
-  font-family: 'Rosarivo', cursive;
+  font-family: 'Rosarivo', serif;
   font-weight: 400;
   font-style: normal;
 }

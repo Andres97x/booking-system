@@ -9,13 +9,13 @@ const useNavbarEffect = () => {
       const header = headerRef.current;
       const scrollTop = window.scrollY;
       const scrollingDown = scrollTop > lastScrollTop;
-      const isScrolledPast50 = scrollTop > 50;
+      const isScrolledPast60 = scrollTop > 60;
 
       // Update navbar visibility
-      header.classList.toggle('navbar-hidden', scrollingDown);
+      header.classList.toggle('navbar-hidden', scrollingDown && scrollTop > 40);
 
       // Update navbar style based on scroll position
-      header.classList.toggle('navbar-scrolled', isScrolledPast50);
+      header.classList.toggle('navbar-scrolled', isScrolledPast60);
 
       // Update box-shadow
       header.classList.toggle(
