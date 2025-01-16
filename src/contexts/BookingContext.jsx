@@ -123,9 +123,10 @@ const BookingContextWrapper = ({ children }) => {
       // resetBooking();
     } catch (err) {
       console.log(err);
-      setError(
+      setSubmitError(
         'Hubo un problema al realizar la reserva, por favor reporta este fallo.'
       );
+      setSubmitStatus('idle');
     }
   };
 
